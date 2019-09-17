@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card max-width="500" class="mx-auto">
+    <v-card max-width="500" class="mx-auto" width="950">
       <v-container fluid>
         <h2>Brightness</h2>
         <v-row>
@@ -50,7 +50,7 @@ export default {
       font: null,
       language: null,
       timedisplay: null,
-      displatitems: null
+      displayitems: null
     };
   }
 };

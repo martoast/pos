@@ -100,6 +100,11 @@ export default {
         },
         {
           icon: "mdi-chart-bubble",
+          title: "Devices",
+          to: "/Settings/Devices"
+        },
+        {
+          icon: "mdi-chart-bubble",
           title: "Restaurant Profile",
           to: "/Settings/RestaurantProfile"
         },
