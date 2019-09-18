@@ -20,9 +20,10 @@
           <v-btn icon>
             <v-icon>mdi-heart</v-icon>
           </v-btn>
-          <v-btn text to="employee.id">Click</v-btn>
-
-          <v-btn outlined @click="tryme">Click</v-btn>
+          <!-- <v-btn text to="employee.id">Click</v-btn> -->
+          <nuxt-link to="/Settings/Users/">
+            <v-btn outlined @click="tryme">Click</v-btn>
+          </nuxt-link>
         </v-card-actions>
         <br />
       </v-card>
