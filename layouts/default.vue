@@ -1,8 +1,9 @@
 <template>
+
   <v-app dark>
+    // Menu Navigation card start
     <v-navigation-drawer
       v-model="drawer"
-      :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
       app
@@ -29,28 +30,20 @@
       fixed
       app
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
 
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
       <v-btn
         icon
-        @click.stop="rightDrawer = !rightDrawer"
+        @click.stop="leftDrawer = !leftDrawer"
       >
         <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-content>
+
+    <v-container>
+      <nuxt />
+    </v-container>
+
+    // Main Navigation card
     <v-card
       class="mx-auto"
       height="400"
@@ -59,10 +52,11 @@
       <v-navigation-drawer
         class="deep-purple accent-4"
         dark
-        v-model="rightDrawer"
-        :right="right"
+        v-model="leftDrawer"
+        :left="left"
         temporary
         fixed
+        app
       >
         <v-list>
           <v-list-item
@@ -105,6 +99,7 @@ export default {
   data() {
     return {
       clipped: true,
+      Maindrawer: true,
       drawer: true,
       fixed: false,
       items: [
@@ -141,9 +136,9 @@ export default {
           to: "/DessertsMenu"
         }
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
+      left: true,
+
+      leftDrawer: false,
       title: this.$route.path
     };
   }

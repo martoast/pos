@@ -57,3 +57,10 @@ the component renders.
 Only one can be ON at a time
 
 \*\*Check the react code that the dude made me a collaborator of on github
+
+[] make the left nav drawer in the default layout not be expandable, Remove all the left nav drawer stuff
+[] Use the logic of the right drawer on a new and second left drawer
+
+\*Essentially im thinink we have two left drawers, one to do all page switching with in the menu and
+
+the menu navigation bar needs to be a component
