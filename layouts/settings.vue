@@ -6,6 +6,7 @@
       :clipped="clipped"
       fixed
       app
+      class="primary"
     >
       <v-list>
         <v-list-item
@@ -28,6 +29,7 @@
       :clipped-left="clipped"
       fixed
       app
+      class="secondary"
     >
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <v-btn
@@ -51,45 +53,7 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-card
-      class="mx-auto"
-      height="400"
-      width="256"
-    >
-      <v-navigation-drawer
-        src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-        dark
-        v-model="rightDrawer"
-        :right="right"
-        temporary
-        fixed
-      >
-        <v-list>
-          <v-list-item
-            v-for="option in options"
-            :key="option.title"
-            link
-            :to="option.to"
-            router
-            exact
-          >
-            <v-list-item-icon>
-              <v-icon>{{ option.icon }}</v-icon>
-            </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ option.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-
-        <template v-slot:append>
-          <div class="pa-2">
-            <v-btn block>Logout</v-btn>
-          </div>
-        </template>
-      </v-navigation-drawer>
-    </v-card>
     <v-footer
       :fixed="fixed"
       app

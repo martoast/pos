@@ -19,10 +19,7 @@
               >
                 {{n}}{{"----"}}{{price}}
                 <v-scroll-y-transition>
-                  <div
-                    v-if="active"
-                    class="display-3 flex-grow-1 text-center"
-                  >Item Selected</div>
+                  <div v-if="active">Item Selected</div>
                 </v-scroll-y-transition>
               </v-card>
             </v-item>

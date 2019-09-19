@@ -1,7 +1,7 @@
 <template>
 
-  <v-app dark>
-    <v-container>
+  <v-app light>
+    <v-container class="primary">
       // Main Navigation card
 
       <v-navigation-drawer
@@ -50,6 +50,7 @@
 
       // Menu Navigation card shit
       <v-navigation-drawer
+        class="primary"
         v-model="drawer"
         :clipped="clipped"
         fixed
@@ -74,6 +75,7 @@
       </v-navigation-drawer>
       <v-app-bar
         :clipped-left="clipped"
+        class="secondary"
         fixed
         app
       >
