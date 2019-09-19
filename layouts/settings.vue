@@ -57,7 +57,7 @@
       width="256"
     >
       <v-navigation-drawer
-        class="deep-purple accent-4"
+        src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
         dark
         v-model="rightDrawer"
         :right="right"

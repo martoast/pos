@@ -1,5 +1,8 @@
 <template>
   <div>
-    <v-autocomplete label="Test custom filters" filled></v-autocomplete>
+    <v-autocomplete
+      label="Search Menu Item"
+      filled
+    ></v-autocomplete>
   </div>
 </template>

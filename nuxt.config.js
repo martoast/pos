@@ -51,6 +51,10 @@ export default {
     theme: {
       dark: true,
       themes: {
+        light: {
+          primary: '#b71c1c',
+
+        },
         dark: {
           primary: colors.blue.darken2,
           accent: colors.grey.darken3,
@@ -70,7 +74,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
   }
 }

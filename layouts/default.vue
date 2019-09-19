@@ -1,57 +1,11 @@
 <template>
 
   <v-app dark>
-    // Menu Navigation card start
-    <v-navigation-drawer
-      v-model="drawer"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
-
-      <v-btn
-        icon
-        @click.stop="leftDrawer = !leftDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
-
     <v-container>
-      <nuxt />
-    </v-container>
+      // Main Navigation card
 
-    // Main Navigation card
-    <v-card
-      class="mx-auto"
-      height="400"
-      width="256"
-    >
       <v-navigation-drawer
-        class="deep-purple accent-4"
-        dark
+        src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
         v-model="leftDrawer"
         :left="left"
         temporary
@@ -59,6 +13,16 @@
         app
       >
         <v-list>
+          <v-list-item-avatar color="grey darken-3">
+            <v-img
+              class="elevation-6"
+              src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            ></v-img>
+          </v-list-item-avatar>
+          <v-list-item-title class="title">
+            IN-N-OUT
+          </v-list-item-title>
+          <v-divider></v-divider>
           <v-list-item
             v-for="option in options"
             :key="option.title"
@@ -83,7 +47,47 @@
           </div>
         </template>
       </v-navigation-drawer>
-    </v-card>
+
+      // Menu Navigation card shit
+      <v-navigation-drawer
+        v-model="drawer"
+        :clipped="clipped"
+        fixed
+        app
+      >
+        <v-list>
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            :to="item.to"
+            router
+            exact
+          >
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title" />
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+      <v-app-bar
+        :clipped-left="clipped"
+        fixed
+        app
+      >
+
+        <v-btn
+          icon
+          @click.stop="leftDrawer = !leftDrawer"
+        >
+          <v-icon>mdi-menu</v-icon>
+        </v-btn>
+      </v-app-bar>
+
+      <nuxt />
+    </v-container>
 
     <v-footer
       :fixed="fixed"
@@ -121,19 +125,39 @@ export default {
       ],
       options: [
         {
+          icon: "mdi-chart-bubble",
+          title: "Sales Register",
+          to: "/"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Cash Drawer",
+          to: "/CashDrawer"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Order Queue",
+          to: "/OrderQueue"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Calls",
+          to: "/Calls"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Transactions",
+          to: "/Transactions"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Business Dashboard",
+          to: "/BusinessDash"
+        },
+        {
           icon: "mdi-apps",
           title: "Settings",
           to: "/Settings/Display"
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Drinks",
-          to: "/drinksmenu"
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Desserts",
-          to: "/DessertsMenu"
         }
       ],
       left: true,

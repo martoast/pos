@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-app>
-      <SearchBar full-width="1260" />
 
       <!-- Sizes your content based upon application components -->
       <v-content>
@@ -9,8 +8,9 @@
 
         <v-container fluid>
           <!-- If using vue-router -->
+          <SearchBar full-width="600" />
           <Desserts />
-          <router-view></router-view>
+
         </v-container>
       </v-content>
 
