@@ -1,8 +1,20 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
+    <v-navigation-drawer
+      v-model="drawer"
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      fixed
+      app
+    >
       <v-list>
-        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -12,15 +24,25 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
+    <v-app-bar
+      :clipped-left="clipped"
+      fixed
+      app
+    >
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
+      <v-btn
+        icon
+        @click.stop="miniVariant = !miniVariant"
+      >
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
 
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
+      <v-btn
+        icon
+        @click.stop="rightDrawer = !rightDrawer"
+      >
         <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-app-bar>
@@ -29,7 +51,11 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-card class="mx-auto" height="400" width="256">
+    <v-card
+      class="mx-auto"
+      height="400"
+      width="256"
+    >
       <v-navigation-drawer
         class="deep-purple accent-4"
         dark
@@ -64,7 +90,10 @@
         </template>
       </v-navigation-drawer>
     </v-card>
-    <v-footer :fixed="fixed" app>
+    <v-footer
+      :fixed="fixed"
+      app
+    >
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>
@@ -139,7 +168,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: this.$route.name
+      title: this.$route.path
     };
   }
 };
