@@ -1,73 +1,45 @@
 <template>
   <div>
     <div>
+      <h2>Delivery Orders:</h2>
       <v-row>
-        <v-col
-          v-for="Delivery in Deliveries"
-          :key="Delivery.id"
-          cols="12"
-          md="4"
-        >
-          <v-card
-            class="mx-auto"
-            max-width="344"
-            outlined
-          >
+        <v-col v-for="Delivery in Deliveries" :key="Delivery.id" cols="12" md="4">
+          <v-card class="mx-auto" max-width="344" outlined>
             <v-list-item three-line>
               <v-list-item-content>
                 <div class="overline mb-4">Delivery</div>
                 <v-list-item-title class="headline mb-1">{{Delivery.name}}</v-list-item-title>
                 <v-list-item-subtitle>Order ID:{{Delivery.id}}</v-list-item-subtitle>
               </v-list-item-content>
-              <v-avatar
-                tile
-                color="blue"
-              >
+              <v-avatar tile color="blue">
                 <v-icon dark>mdi-alarm</v-icon>
               </v-avatar>
             </v-list-item>
-            <pre>
-            {{Delivery.order}}
-          </pre>
 
             <v-card-actions>
-              <v-btn text>View Details</v-btn>
+              <v-btn :to="'/OrderQueue/' + Delivery.id" text>View Details</v-btn>
               <v-btn text>Send to Kitchen</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
-
     </div>
+    <v-divider></v-divider>
+    <h2>Pick-Up Orders:</h2>
     <div>
       <v-row>
-        <v-col
-          v-for="PickUp in PickUps"
-          :key="PickUp.id"
-          cols="12"
-          md="4"
-        >
-          <v-card
-            class="mx-auto"
-            max-width="344"
-            outlined
-          >
+        <v-col v-for="PickUp in PickUps" :key="PickUp.id" cols="12" md="4">
+          <v-card class="mx-auto" max-width="344" outlined>
             <v-list-item three-line>
               <v-list-item-content>
                 <div class="overline mb-4">PickUp</div>
                 <v-list-item-title class="headline mb-1">{{PickUp.name}}</v-list-item-title>
                 <v-list-item-subtitle>Order ID:{{PickUp.id}}</v-list-item-subtitle>
               </v-list-item-content>
-              <v-avatar
-                tile
-                color="blue"
-              >
+              <v-avatar tile color="blue">
                 <v-icon dark>mdi-alarm</v-icon>
               </v-avatar>
             </v-list-item>
-            <pre>
-            {{PickUp.order}}
-          </pre>
 
             <v-card-actions>
               <v-btn text>View Details</v-btn>
@@ -76,10 +48,8 @@
           </v-card>
         </v-col>
       </v-row>
-
     </div>
   </div>
-
 </template>
 <script>
 export default {

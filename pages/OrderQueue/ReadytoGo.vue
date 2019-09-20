@@ -111,7 +111,7 @@ export default {
       keys: ["Pizza", "Soda", "Salad", "Name", "Tax", "ID"],
       items: [
         {
-          name: "Frozen Yogurt",
+          name: "Torta",
           id: "2134",
           total: "23.95",
           pizza: "12.99",
@@ -207,7 +207,7 @@ export default {
           ]
         },
         {
-          name: "Frozen Yogurt",
+          name: "Taco",
           id: "7163",
           total: "23.95",
           pizza: "12.99",
@@ -231,8 +231,7 @@ export default {
           ]
         },
         {
-          name: "Frozen Yogurt",
-          id: "2134",
+          name: "Burger",
           total: "23.95",
           pizza: "12.99",
           soda: "3.95",

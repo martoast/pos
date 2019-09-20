@@ -1,20 +1,8 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :clipped="clipped"
-      fixed
-      app
-      class="primary"
-    >
+    <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app class="primary">
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
+        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -24,23 +12,14 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-      class="secondary"
-    >
+    <v-app-bar :clipped-left="clipped" fixed app class="secondary">
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-      <v-btn
-        icon
-        @click.stop="leftDrawer = !leftDrawer"
-      >
+      <v-btn icon @click.stop="leftDrawer = !leftDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
 
       <v-toolbar-title v-text="title" />
       <v-spacer />
-
     </v-app-bar>
     <v-content>
       <v-container>
@@ -49,13 +28,18 @@
     </v-content>
     <v-navigation-drawer
       src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-      dark
       v-model="leftDrawer"
       :left="left"
       temporary
       fixed
+      app
     >
       <v-list>
+        <v-list-item-avatar color="grey darken-3">
+          <v-img class="elevation-6" src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
+        </v-list-item-avatar>
+        <v-list-item-title class="title">IN-N-OUT</v-list-item-title>
+        <v-divider></v-divider>
         <v-list-item
           v-for="option in options"
           :key="option.title"
@@ -80,7 +64,6 @@
         </div>
       </template>
     </v-navigation-drawer>
-
   </v-app>
 </template>
 
@@ -135,19 +118,39 @@ export default {
       ],
       options: [
         {
-          icon: "mdi-apps",
-          title: "Menu",
+          icon: "mdi-chart-bubble",
+          title: "Sales Register",
           to: "/"
         },
         {
           icon: "mdi-chart-bubble",
-          title: "shit",
-          to: "/drinksmenu"
+          title: "Cash Drawer",
+          to: "/CashDrawer"
         },
         {
           icon: "mdi-chart-bubble",
-          title: "Desserts",
-          to: "/DessertsMenu"
+          title: "Order Queue",
+          to: "/OrderQueue/OnlineOrders"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Calls",
+          to: "/Calls"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Transactions",
+          to: "/Transactions"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Business Dashboard",
+          to: "/BusinessDash"
+        },
+        {
+          icon: "mdi-apps",
+          title: "Settings",
+          to: "/Settings/Display"
         }
       ],
       left: true,
