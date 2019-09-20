@@ -1,9 +1,7 @@
 <template>
-
   <v-app light>
     <v-container class="primary">
       // Main Navigation card
-
       <v-navigation-drawer
         src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
         v-model="leftDrawer"
@@ -19,9 +17,7 @@
               src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             ></v-img>
           </v-list-item-avatar>
-          <v-list-item-title class="title">
-            IN-N-OUT
-          </v-list-item-title>
+          <v-list-item-title class="title">IN-N-OUT</v-list-item-title>
           <v-divider></v-divider>
           <v-list-item
             v-for="option in options"
@@ -48,50 +44,25 @@
         </template>
       </v-navigation-drawer>
 
-      <v-app-bar
-        :clipped-left="clipped"
-        class="secondary"
-        fixed
-        app
-      >
-
-        <v-btn
-          icon
-          @click.stop="leftDrawer = !leftDrawer"
-        >
+      <v-app-bar :clipped-left="clipped" class="secondary" fixed app>
+        <v-btn icon @click.stop="leftDrawer = !leftDrawer">
           <v-icon>mdi-menu</v-icon>
         </v-btn>
         <v-container>
           <div>
-            <v-tabs
-              fixed-tabs
-              background-color="#1b50aa"
-              dark
-            >
-
-              <v-tab to="/OrderQueue/OnlineOrders">
-                Online Orders
-              </v-tab>
-              <v-tab to="/OrderQueue/InKitchen">
-                In Kitchen
-              </v-tab>
-              <v-tab>
-                Ready to-GO
-              </v-tab>
+            <v-tabs fixed-tabs background-color="#1b50aa" dark>
+              <v-tab to="/OrderQueue/OnlineOrders">Online Orders</v-tab>
+              <v-tab to="/OrderQueue/InKitchen">In Kitchen</v-tab>
+              <v-tab to="/OrderQueue/ReadytoGo">Ready to-GO</v-tab>
             </v-tabs>
-
           </div>
         </v-container>
-
       </v-app-bar>
 
       <nuxt />
     </v-container>
 
-    <v-footer
-      :fixed="fixed"
-      app
-    >
+    <v-footer :fixed="fixed" app>
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>
