@@ -19,16 +19,12 @@
                 <v-list-item-title class="headline mb-1">{{Delivery.name}}</v-list-item-title>
                 <v-list-item-subtitle>Order ID:{{Delivery.id}}</v-list-item-subtitle>
               </v-list-item-content>
-              <v-icon
-                large
-                color="teal darken-2"
-              >mdi-email</v-icon>
-
-              <v-list-item-avatar
+              <v-avatar
                 tile
-                size="80"
-                color="grey"
-              ></v-list-item-avatar>
+                color="blue"
+              >
+                <v-icon dark>mdi-alarm</v-icon>
+              </v-avatar>
             </v-list-item>
             <pre>
             {{Delivery.order}}
@@ -62,16 +58,12 @@
                 <v-list-item-title class="headline mb-1">{{PickUp.name}}</v-list-item-title>
                 <v-list-item-subtitle>Order ID:{{PickUp.id}}</v-list-item-subtitle>
               </v-list-item-content>
-              <v-icon
-                large
-                color="green darken-2"
-              >mdi-domain</v-icon>
-
-              <v-list-item-avatar
+              <v-avatar
                 tile
-                size="80"
-                color="grey"
-              ></v-list-item-avatar>
+                color="blue"
+              >
+                <v-icon dark>mdi-alarm</v-icon>
+              </v-avatar>
             </v-list-item>
             <pre>
             {{PickUp.order}}
