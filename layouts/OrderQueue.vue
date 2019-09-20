@@ -48,31 +48,6 @@
         </template>
       </v-navigation-drawer>
 
-      // Menu Navigation card shit
-      <v-navigation-drawer
-        class="primary"
-        v-model="drawer"
-        :clipped="clipped"
-        fixed
-        app
-      >
-        <v-list>
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            :to="item.to"
-            router
-            exact
-          >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
       <v-app-bar
         :clipped-left="clipped"
         class="secondary"
@@ -86,6 +61,28 @@
         >
           <v-icon>mdi-menu</v-icon>
         </v-btn>
+        <v-container>
+          <div>
+            <v-tabs
+              fixed-tabs
+              background-color="#1b50aa"
+              dark
+            >
+
+              <v-tab to="/OrderQueue/OnlineOrders">
+                Online Orders
+              </v-tab>
+              <v-tab to="/OrderQueue/InKitchen">
+                In Kitchen
+              </v-tab>
+              <v-tab>
+                Ready to-GO
+              </v-tab>
+            </v-tabs>
+
+          </div>
+        </v-container>
+
       </v-app-bar>
 
       <nuxt />
@@ -108,23 +105,7 @@ export default {
       Maindrawer: true,
       drawer: true,
       fixed: false,
-      items: [
-        {
-          icon: "mdi-apps",
-          title: "Food",
-          to: "/"
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Drinks",
-          to: "/drinksmenu"
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Desserts",
-          to: "/DessertsMenu"
-        }
-      ],
+
       options: [
         {
           icon: "mdi-chart-bubble",

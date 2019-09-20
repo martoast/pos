@@ -2,7 +2,6 @@
   <v-app dark>
     <v-navigation-drawer
       v-model="drawer"
-      :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
       app
@@ -34,32 +33,54 @@
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <v-btn
         icon
-        @click.stop="miniVariant = !miniVariant"
+        @click.stop="leftDrawer = !leftDrawer"
       >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
+        <v-icon>mdi-menu</v-icon>
       </v-btn>
 
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+
     </v-app-bar>
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-
-    <v-footer
-      :fixed="fixed"
-      app
+    <v-navigation-drawer
+      src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+      dark
+      v-model="leftDrawer"
+      :left="left"
+      temporary
+      fixed
     >
-      <span>&copy; 2019</span>
-    </v-footer>
+      <v-list>
+        <v-list-item
+          v-for="option in options"
+          :key="option.title"
+          link
+          :to="option.to"
+          router
+          exact
+        >
+          <v-list-item-icon>
+            <v-icon>{{ option.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ option.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn block>Logout</v-btn>
+        </div>
+      </template>
+    </v-navigation-drawer>
+
   </v-app>
 </template>
 
@@ -129,9 +150,8 @@ export default {
           to: "/DessertsMenu"
         }
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
+      left: true,
+      leftDrawer: false,
       title: this.$route.path
     };
   }
