@@ -1,18 +1,18 @@
 <template>
   <div>
-    <v-item-group>
+    <v-item-group multiple>
       <v-container>
         <v-row>
-          <v-col v-for="n in MenuItems" :key="n" cols="12" md="4">
+          <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
             <v-item v-slot:default="{ active, toggle }">
               <v-card
                 :color="active ? 'primary' : ''"
                 class="d-flex align-center"
                 dark
                 height="150"
-                @click="toggle"
+                @click="AddtoCart"
               >
-                {{n}}{{"----"}}{{price}}
+                {{item.name}}{{"----"}}{{item.price}}
                 <v-scroll-y-transition>
                   <div v-if="active" class="display-3 flex-grow-1 text-center">Item Selected</div>
                 </v-scroll-y-transition>
@@ -29,18 +29,26 @@ export default {
   data() {
     return {
       MenuItems: [
-        "Pizza",
-        "Burger",
-        "HotDog",
-        "Taco",
-        "Carne - asada",
-        "Salad",
-        "Curry",
-        "Poke",
-        "Greek Yogurt"
+        { name: "Pizza", price: 7.99, id: 1 },
+        { name: "Burger", price: 15.95, id: 2 },
+        { name: "HotDog", price: 5.95, id: 3 },
+        { name: "Taco", price: 2.99, id: 4 },
+        { name: "Carne - asada", price: 22.99, id: 5 },
+        { name: "Salad", price: 9.99, id: 6 },
+        { name: "Poke", price: 13.99, id: 7 },
+        { name: "Greek Yogurt", price: 7.99, id: 8 }
       ],
       price: "$9.99"
     };
+  },
+  methods: {
+    AddtoCart() {
+      this.message = Date();
+      console.log(this.message);
+
+      this.$nuxt.$emit("test", this.price);
+      this.$nuxt.$emit("test2", this.name);
+    }
   }
 };
 </script>

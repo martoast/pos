@@ -2,10 +2,7 @@
   <div>
     <div>
       <v-col cols="12">
-        <v-row
-          :align="alignment"
-          :justify="justify"
-        >
+        <v-row :align="alignment" :justify="justify">
           <v-card
             v-for="employee in employees"
             v-bind:key="employee.id"
@@ -18,7 +15,7 @@
             :raised="raised"
             :to="'/Settings/user/' + employee.id"
             :items="alignmentsAvailable"
-            @click="tryme"
+            @click="RouteToEmployeeID"
           >
             <v-list-item>
               <v-list-item-avatar color="grey"></v-list-item-avatar>
@@ -29,15 +26,12 @@
             </v-list-item>
 
             <v-card-actions>
-
               <div class="flex-grow-1"></div>
-
             </v-card-actions>
           </v-card>
         </v-row>
       </v-col>
     </div>
-
   </div>
 </template>
 <script>
@@ -97,7 +91,7 @@ export default {
     alignmentsAvailable: ["start", "center", "end", "baseline", "stretch"]
   }),
   methods: {
-    tryme() {
+    RouteToEmployeeID() {
       this.message = Date();
       console.log(this.message);
     }

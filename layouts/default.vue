@@ -1,7 +1,11 @@
 <template>
   <v-app light>
     <v-container class="primary">
-      // Main Navigation card
+      <v-app-bar :clipped-left="clipped" class="secondary" fixed app>
+        <v-btn icon @click.stop="leftDrawer = !leftDrawer">
+          <v-icon>mdi-menu</v-icon>
+        </v-btn>
+      </v-app-bar>// Main Navigation card
       <v-navigation-drawer
         src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
         v-model="leftDrawer"
@@ -52,11 +56,47 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <v-app-bar :clipped-left="clipped" class="secondary" fixed app>
-        <v-btn icon @click.stop="leftDrawer = !leftDrawer">
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
-      </v-app-bar>
+      <v-navigation-drawer
+        class="primary"
+        v-model="drawer"
+        :clipped="clipped"
+        width="445"
+        absolute
+        permanent
+        right
+        app
+      >
+        <v-card width="450" max-height="1000" class="mx-auto">
+          <v-simple-table>
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-left">Item</th>
+                  <th class="text-left">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in ShoppingCart" :key="item.name">
+                  <td>{{ item.name }}</td>
+                  <td>${{ item.price }}</td>
+                </tr>
+                <tr>
+                  <td>tax: 13%</td>
+                </tr>
+              </tbody>
+              <tr>
+                <v-divider></v-divider>
+              </tr>
+
+              <tfoot>
+                <tr>
+                  <h4>Total: ${{total}}</h4>
+                </tr>
+              </tfoot>
+            </template>
+          </v-simple-table>
+        </v-card>
+      </v-navigation-drawer>
 
       <nuxt />
     </v-container>
@@ -124,6 +164,11 @@ export default {
           to: "/BusinessDash"
         },
         {
+          icon: "mdi-chart-bubble",
+          title: "Invoice",
+          to: "/Invoice"
+        },
+        {
           icon: "mdi-apps",
           title: "Settings",
           to: "/Settings/Display"
@@ -132,8 +177,32 @@ export default {
       left: true,
 
       leftDrawer: false,
-      title: this.$route.path
+      title: this.$route.path,
+      ShoppingCart: [
+        {
+          name: "Frozen Yogurt",
+          price: 9.95
+        },
+        {
+          name: "Ice cream sandwich",
+          price: 5.95
+        },
+        {
+          name: "Eclair",
+          price: 13.95
+        }
+      ],
+      total: ""
     };
+  },
+  created() {
+    this.$nuxt.$on("test", data => {
+      console.log(data + " emitted");
+      this.total = data;
+    });
+  },
+  computed: {
+    CartTotal() {}
   }
 };
 </script>
