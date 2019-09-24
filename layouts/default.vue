@@ -29,7 +29,7 @@
               alt="John"
             />
           </v-avatar>
-          <v-list-item-title class="title">IN-N-OUT</v-list-item-title>
+          <v-list-item-title class="title">Alex POS</v-list-item-title>
           <v-divider></v-divider>
           <v-list-item
             v-for="option in options"
@@ -160,7 +160,7 @@ export default {
           to: "/"
         },
         {
-          icon: "mdi-coffee",
+          icon: "mdi-beer",
           title: "Drinks",
           to: "/drinksmenu"
         },

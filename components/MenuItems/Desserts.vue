@@ -3,18 +3,27 @@
     <v-item-group multiple>
       <v-container>
         <v-row>
-          <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
+          <v-col
+            v-for="item in MenuItems"
+            :key="item.id"
+            cols="12"
+            md="4"
+          >
             <v-item v-slot:default="{ active, toggle }">
               <v-card
                 :color="active ? 'primary' : ''"
-                class="d-flex align-center"
-                dark
+                class="rounded-card"
+                light
                 height="150"
                 @click="AddtoCart"
               >
-                {{item.name}}{{"----"}}{{item.price}}
+                <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
+                <v-list-item-subtitle>{{item.price}}</v-list-item-subtitle>
                 <v-scroll-y-transition>
-                  <div v-if="active" class="display-3 flex-grow-1 text-center">Item Selected</div>
+                  <div
+                    v-if="active"
+                    class="display-3 flex-grow-1 text-center"
+                  >Item Selected</div>
                 </v-scroll-y-transition>
               </v-card>
             </v-item>
@@ -34,17 +43,27 @@ export default {
         { name: "Ice Cream", price: 5.95, id: 3 },
         { name: "Brownies", price: 22.99, id: 5 }
       ],
-      price: "$9.99"
+      price: "$7.99",
+      name: "Chocolate Cake"
     };
   },
   methods: {
-    AddtoCart() {
-      this.message = Date();
-      console.log(this.message);
+    AddtoCart(item) {
+      // this.message = Date();
+      // console.log(this.message);
 
-      this.$nuxt.$emit("test", this.price);
-      this.$nuxt.$emit("test2", this.name);
+      // this.$nuxt.$emit("test", this.price);
+      this.$nuxt.$emit("test", {
+        name: this.name,
+        price: this.price
+      });
     }
   }
 };
 </script>
+<style scoped>
+.rounded-card {
+  border-radius: 50px;
+  text-align: center;
+}
+</style>

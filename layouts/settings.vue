@@ -1,8 +1,20 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app class="primary">
+    <v-navigation-drawer
+      v-model="drawer"
+      :clipped="clipped"
+      fixed
+      app
+      class="primary"
+    >
       <v-list>
-        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -12,9 +24,17 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app class="secondary">
+    <v-app-bar
+      :clipped-left="clipped"
+      fixed
+      app
+      class="secondary"
+    >
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-      <v-btn icon @click.stop="leftDrawer = !leftDrawer">
+      <v-btn
+        icon
+        @click.stop="leftDrawer = !leftDrawer"
+      >
         <v-icon>mdi-menu</v-icon>
       </v-btn>
 
@@ -36,7 +56,11 @@
     >
       <v-list>
         <v-list-item-avatar color="grey darken-3">
-          <v-img class="elevation-6" src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
+          <v-img
+            class="elevation-6"
+            src="https://cdn.vuetifyjs.com/images/john.jpg"
+            alt="John"
+          ></v-img>
         </v-list-item-avatar>
         <v-list-item-title class="title">IN-N-OUT</v-list-item-title>
         <v-divider></v-divider>
@@ -76,27 +100,27 @@ export default {
       fixed: true,
       items: [
         {
-          icon: "mdi-apps",
+          icon: "mdi-weather-sunny",
           title: "Display",
           to: "/Settings/Display"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-credit-card",
           title: "Payment Option",
           to: "/Settings/PaymentOption"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-account",
           title: "Users",
           to: "/Settings/Users"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-account-key",
           title: "Permissions",
           to: "/Settings/Permissions"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-android",
           title: "Devices",
           to: "/Settings/Devices"
         },
@@ -106,49 +130,54 @@ export default {
           to: "/Settings/RestaurantProfile"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-content-copy",
           title: "Printing",
           to: "/Settings/Printing"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-alarm-multiple",
           title: "Notifications",
           to: "/Settings/Notifications"
         }
       ],
       options: [
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-relative-scale",
           title: "Sales Register",
           to: "/"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-cash-usd",
           title: "Cash Drawer",
           to: "/CashDrawer"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-database",
           title: "Order Queue",
           to: "/OrderQueue/OnlineOrders"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-phone-incoming",
           title: "Calls",
           to: "/Calls"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-chart-line",
           title: "Transactions",
           to: "/Transactions"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-bank",
           title: "Business Dashboard",
           to: "/BusinessDash"
         },
         {
-          icon: "mdi-apps",
+          icon: "mdi-chart-bubble",
+          title: "Invoice",
+          to: "/Invoice"
+        },
+        {
+          icon: "mdi-settings",
           title: "Settings",
           to: "/Settings/Display"
         }
