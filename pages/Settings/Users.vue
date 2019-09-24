@@ -2,7 +2,10 @@
   <div>
     <div>
       <v-col cols="12">
-        <v-row :align="alignment" :justify="justify">
+        <v-row
+          :align="alignment"
+          :justify="justify"
+        >
           <v-card
             v-for="employee in employees"
             v-bind:key="employee.id"
@@ -18,7 +21,12 @@
             @click="RouteToEmployeeID"
           >
             <v-list-item>
-              <v-list-item-avatar color="grey"></v-list-item-avatar>
+              <v-list-item-avatar
+                color="grey"
+                size="62"
+              >
+                <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+              </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="headline">{{employee.name}}</v-list-item-title>
                 <v-list-item-subtitle>ID: {{employee.id}}</v-list-item-subtitle>

@@ -120,7 +120,7 @@
 
               <tfoot>
                 <tr>
-                  <h4 v-if="!items.length">Total: {{CartTotal}}</h4>
+                  <h4 v-if="items.length">Total: {{CartTotal}}</h4>
                 </tr>
               </tfoot>
             </template>
