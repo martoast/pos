@@ -1,8 +1,16 @@
 <template>
   <v-app light>
     <v-container class="primary">
-      <v-app-bar :clipped-left="clipped" class="secondary" fixed app>
-        <v-btn icon @click.stop="leftDrawer = !leftDrawer">
+      <v-app-bar
+        :clipped-left="clipped"
+        class="secondary"
+        fixed
+        app
+      >
+        <v-btn
+          icon
+          @click.stop="leftDrawer = !leftDrawer"
+        >
           <v-icon>mdi-menu</v-icon>
         </v-btn>
       </v-app-bar>// Main Navigation card
@@ -16,7 +24,10 @@
       >
         <v-list>
           <v-avatar>
-            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+            <img
+              src="https://cdn.vuetifyjs.com/images/john.jpg"
+              alt="John"
+            />
           </v-avatar>
           <v-list-item-title class="title">IN-N-OUT</v-list-item-title>
           <v-divider></v-divider>
@@ -44,9 +55,21 @@
           </div>
         </template>
       </v-navigation-drawer>// Menu Navigation card shit
-      <v-navigation-drawer class="primary" v-model="drawer" :clipped="clipped" fixed app>
+      <v-navigation-drawer
+        class="primary"
+        v-model="drawer"
+        :clipped="clipped"
+        fixed
+        app
+      >
         <v-list>
-          <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            :to="item.to"
+            router
+            exact
+          >
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
@@ -58,15 +81,19 @@
       </v-navigation-drawer>
       <v-navigation-drawer
         class="primary"
-        v-model="drawer"
-        :clipped="clipped"
         width="445"
         absolute
         permanent
         right
         app
       >
-        <v-card width="450" max-height="1000" class="mx-auto">
+
+        <v-card
+          width="450"
+          max-height="1000"
+          class="mx-auto"
+          :elevation="5"
+        >
           <v-simple-table>
             <template v-slot:default>
               <thead>
@@ -76,11 +103,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in ShoppingCart" :key="item.name">
+                <tr
+                  v-for="item in testList"
+                  :key="item.name"
+                >
                   <td>{{ item.name }}</td>
-                  <td>${{ item.price }}</td>
+                  <td>{{ item.price }}</td>
                 </tr>
-                <tr>
+                <tr v-if="items.length">
                   <td>tax: 13%</td>
                 </tr>
               </tbody>
@@ -90,19 +120,27 @@
 
               <tfoot>
                 <tr>
-                  <h4>Total: ${{total}}</h4>
+                  <h4 v-if="!items.length">Total: {{CartTotal}}</h4>
                 </tr>
               </tfoot>
             </template>
           </v-simple-table>
         </v-card>
+        <template v-slot:append>
+          <div class="pa-2">
+            <v-btn block>CheckOut</v-btn>
+          </div>
+        </template>
       </v-navigation-drawer>
 
       <nuxt />
     </v-container>
 
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2019</span>
+    <v-footer
+      :fixed="fixed"
+      app
+    >
+      <span>&copy; Alex Martos</span>
     </v-footer>
   </v-app>
 </template>
@@ -117,49 +155,49 @@ export default {
       fixed: false,
       items: [
         {
-          icon: "mdi-apps",
+          icon: "mdi-food",
           title: "Food",
           to: "/"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-coffee",
           title: "Drinks",
           to: "/drinksmenu"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-food",
           title: "Desserts",
           to: "/DessertsMenu"
         }
       ],
       options: [
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-relative-scale",
           title: "Sales Register",
           to: "/"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-cash-usd",
           title: "Cash Drawer",
           to: "/CashDrawer"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-database",
           title: "Order Queue",
           to: "/OrderQueue/OnlineOrders"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-phone-incoming",
           title: "Calls",
           to: "/Calls"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-chart-line",
           title: "Transactions",
           to: "/Transactions"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-bank",
           title: "Business Dashboard",
           to: "/BusinessDash"
         },
@@ -169,7 +207,7 @@ export default {
           to: "/Invoice"
         },
         {
-          icon: "mdi-apps",
+          icon: "mdi-settings",
           title: "Settings",
           to: "/Settings/Display"
         }
@@ -192,17 +230,22 @@ export default {
           price: 13.95
         }
       ],
-      total: ""
+      total: "",
+      testList: []
     };
   },
   created() {
     this.$nuxt.$on("test", data => {
-      console.log(data + " emitted");
-      this.total = data;
+      // console.log(data + " emitted");
+      // this.total = data;
+      this.testList.push(data);
+      console.log(this.testList);
     });
   },
   computed: {
-    CartTotal() {}
+    CartTotal() {
+      return this.testList.reduce((acc, item) => acc + item.price, 0);
+    }
   }
 };
 </script>
