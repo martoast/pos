@@ -3,28 +3,20 @@
     <v-item-group multiple>
       <v-container>
         <v-row>
-          <v-col
-            v-for="item in MenuItems"
-            :key="item.id"
-            cols="12"
-            md="4"
-          >
+          <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
             <v-item v-slot:default="{ active, toggle }">
               <v-card
                 :color="active ? 'primary' : ''"
                 light
                 height="150"
-                @click="AddtoCart"
+                @click="AddtoCart(item)"
                 class="rounded-card"
               >
                 <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
                 <v-list-item-subtitle>{{item.price}}</v-list-item-subtitle>
 
                 <v-scroll-y-transition>
-                  <div
-                    v-if="active"
-                    class="display-1 flex-grow-1 text-center"
-                  >Item Selected</div>
+                  <div v-if="active" class="display-1 flex-grow-1 text-center">Item Selected</div>
                 </v-scroll-y-transition>
               </v-card>
             </v-item>
@@ -54,13 +46,13 @@ export default {
   },
   methods: {
     AddtoCart(item) {
+      console.log(item.name);
       // this.message = Date();
       // console.log(this.message);
 
-      // this.$nuxt.$emit("test", this.price);
       this.$nuxt.$emit("test", {
-        name: this.name,
-        price: this.price
+        name: item.name,
+        price: item.price
       });
     }
   }
