@@ -19,15 +19,10 @@
                   @click.stop="dialog = true"
                   class="rounded-card"
                 >
-                  <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
-                  <v-list-item-subtitle>{{item.price}}</v-list-item-subtitle>
 
-                  <v-scroll-y-transition>
-                    <div
-                      v-if="active"
-                      class="display-1 flex-grow-1 text-center"
-                    >Item Selected</div>
-                  </v-scroll-y-transition>
+                  <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
+                  <!-- <v-list-item-subtitle>{{item.price}}</v-list-item-subtitle> -->
+
                 </v-card>
               </v-item>
             </v-col>
@@ -325,5 +320,8 @@ export default {
 .rounded-card {
   border-radius: 50px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

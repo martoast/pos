@@ -1,148 +1,215 @@
 <template>
-  <v-app light>
-    <v-container class="primary">
-      <v-app-bar
-        :clipped-left="clipped"
-        class="secondary"
-        fixed
-        app
-      >
-        <v-btn
-          icon
-          @click.stop="leftDrawer = !leftDrawer"
-        >
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
-      </v-app-bar>// Main Navigation card
-      <v-navigation-drawer
-        src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-        v-model="leftDrawer"
-        :left="left"
-        temporary
-        fixed
-        app
-      >
-        <v-list>
-          <v-avatar>
-            <img
-              src="https://cdn.vuetifyjs.com/images/john.jpg"
-              alt="John"
-            />
-          </v-avatar>
-          <v-list-item-title class="title">Alex POS</v-list-item-title>
-          <v-divider></v-divider>
-          <v-list-item
-            v-for="option in options"
-            :key="option.title"
-            link
-            :to="option.to"
-            router
-            exact
+  <div>
+    <div>
+      <v-app light>
+        <v-container class="primary">
+          <v-app-bar
+            :clipped-left="clipped"
+            class="secondary"
+            fixed
+            app
           >
-            <v-list-item-icon>
-              <v-icon>{{ option.icon }}</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title>{{ option.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-
-        <template v-slot:append>
-          <div class="pa-2">
-            <v-btn block>Logout</v-btn>
-          </div>
-        </template>
-      </v-navigation-drawer>// Menu Navigation card shit
-      <v-navigation-drawer
-        class="primary"
-        v-model="drawer"
-        :clipped="clipped"
-        fixed
-        app
-      >
-        <v-list>
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            :to="item.to"
-            router
-            exact
+            <v-btn
+              icon
+              @click.stop="leftDrawer = !leftDrawer"
+            >
+              <v-icon>mdi-menu</v-icon>
+            </v-btn>
+          </v-app-bar>// Main Navigation card
+          <v-navigation-drawer
+            src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+            v-model="leftDrawer"
+            :left="left"
+            temporary
+            fixed
+            app
           >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-      <v-navigation-drawer
-        class="primary"
-        width="445"
-        absolute
-        permanent
-        right
-        app
-      >
+            <v-list>
+              <v-avatar>
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
+                />
+              </v-avatar>
+              <v-list-item-title class="title">Alex POS</v-list-item-title>
+              <v-divider></v-divider>
+              <v-list-item
+                v-for="option in options"
+                :key="option.title"
+                link
+                :to="option.to"
+                router
+                exact
+              >
+                <v-list-item-icon>
+                  <v-icon>{{ option.icon }}</v-icon>
+                </v-list-item-icon>
 
-        <v-card
-          width="450"
-          max-height="1000"
-          class="mx-auto"
-          :elevation="5"
-        >
-          <v-simple-table>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">Item</th>
-                  <th class="text-left">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="item in testList"
-                  :key="item.name"
-                >
-                  <td @click="DeleteItem(item)">{{ item.name }}</td>
-                  <td>{{ item.price }}</td>
-                </tr>
-                <tr v-if="items.length">
-                  <td>tax: 13%</td>
-                </tr>
-              </tbody>
-              <tr>
-                <v-divider></v-divider>
-              </tr>
+                <v-list-item-content>
+                  <v-list-item-title>{{ option.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
 
-              <tfoot>
-                <tr>
-                  <h4 v-if="items.length">Total: {{CartTotal}}</h4>
-                </tr>
-              </tfoot>
+            <template v-slot:append>
+              <div class="pa-2">
+                <v-btn block>Logout</v-btn>
+              </div>
             </template>
-          </v-simple-table>
-        </v-card>
-        <template v-slot:append>
-          <div class="pa-2">
-            <v-btn block>CheckOut</v-btn>
-          </div>
-        </template>
-      </v-navigation-drawer>
+          </v-navigation-drawer>// Menu Navigation card shit
+          <v-navigation-drawer
+            class="primary"
+            v-model="drawer"
+            :clipped="clipped"
+            fixed
+            app
+          >
+            <v-list>
+              <v-list-item
+                v-for="(item, i) in items"
+                :key="i"
+                :to="item.to"
+                router
+                exact
+              >
+                <v-list-item-action>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.title" />
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-navigation-drawer>
+          <v-navigation-drawer
+            class="primary"
+            width="445"
+            absolute
+            permanent
+            right
+            app
+          >
 
-      <nuxt />
-    </v-container>
+            <v-card
+              width="450"
+              max-height="1000"
+              class="mx-auto"
+              :elevation="5"
+            >
+              <v-simple-table>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">Item</th>
+                      <th class="text-left">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      v-for="item in testList"
+                      :key="item.name"
+                    >
+                      <td @click="DeleteItem(item)">{{ item.name }}</td>
+                      <td>{{ item.price }}</td>
+                    </tr>
+                    <tr v-if="items.length">
+                      <td>tax: 13%</td>
+                    </tr>
+                  </tbody>
+                  <tr>
+                    <v-divider></v-divider>
+                  </tr>
 
-    <v-footer
-      :fixed="fixed"
-      app
-    >
-      <span>&copy; Alex Martos</span>
-    </v-footer>
-  </v-app>
+                  <tfoot>
+                    <tr>
+                      <h4 v-if="items.length">Total: $ {{CartTotal}}</h4>
+                    </tr>
+                  </tfoot>
+                </template>
+              </v-simple-table>
+            </v-card>
+            <template v-slot:append>
+              <div class="pa-2">
+                <v-btn
+                  block
+                  color="success"
+                  @click.stop="dialog = true"
+                >CheckOut</v-btn>
+              </div>
+            </template>
+          </v-navigation-drawer>
+
+          <nuxt />
+        </v-container>
+
+        <v-footer
+          :fixed="fixed"
+          app
+        >
+          <span>&copy; Alex Martos</span>
+        </v-footer>
+      </v-app>
+    </div>
+    <template>
+      <v-row justify="center">
+        <v-dialog
+          v-model="dialog"
+          fullscreen
+          hide-overlay
+          transition="dialog-bottom-transition"
+        >
+
+          <v-card>
+            <v-toolbar
+              dark
+              class="secondary"
+            >
+              <v-btn
+                icon
+                dark
+                @click="dialog = false"
+              >
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+              <v-toolbar-title>Checkout</v-toolbar-title>
+              <div class="flex-grow-1"></div>
+
+            </v-toolbar>
+            <v-card>
+              <h1 class="center">Total to Pay: $ {{CartTotal}}</h1>
+              <v-row>
+
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+                >
+                  <v-text-field label="Sign here*"></v-text-field>
+                  <small>*indicates required field</small>
+                  <div class="my-2">
+                    <v-btn
+                      x-large
+                      color="error"
+                      dark
+                    >Clear Sinature</v-btn>
+                    <v-btn
+                      x-large
+                      color="success"
+                      dark
+                      @click="dialog = false"
+                    >Done Signing</v-btn>
+                  </div>
+                </v-col>
+
+              </v-row>
+
+            </v-card>
+
+          </v-card>
+        </v-dialog>
+      </v-row>
+    </template>
+  </div>
 </template>
 
 <script>
@@ -218,7 +285,11 @@ export default {
       title: this.$route.path,
 
       total: "",
-      testList: []
+      testList: [],
+      dialog: false,
+      notifications: false,
+      sound: true,
+      widgets: false
     };
   },
   created() {
@@ -241,3 +312,14 @@ export default {
   }
 };
 </script>
+<style scoped>
+.checkout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.center {
+  justify-content: center;
+}
+</style>
