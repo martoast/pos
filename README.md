@@ -47,3 +47,8 @@ I need to find a way to emmit the item.price or item.name from MenuItems
 
 The way im imagining it is that the default layout will have 4 things: the top tool bar, 2 left navbars for navigation
 and 1 permanent right nav bar with a card on it being updated from the menu components
+
+@click.stop="dialog = true"
+
+to put the drawer on the modal I would need to make the modal its own component so that it can render it's own layout with
+the fixed drawer

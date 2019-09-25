@@ -107,7 +107,7 @@
                   v-for="item in testList"
                   :key="item.name"
                 >
-                  <td>{{ item.name }}</td>
+                  <td @click="DeleteItem(item)">{{ item.name }}</td>
                   <td>{{ item.price }}</td>
                 </tr>
                 <tr v-if="items.length">
@@ -216,20 +216,7 @@ export default {
 
       leftDrawer: false,
       title: this.$route.path,
-      ShoppingCart: [
-        {
-          name: "Frozen Yogurt",
-          price: 9.95
-        },
-        {
-          name: "Ice cream sandwich",
-          price: 5.95
-        },
-        {
-          name: "Eclair",
-          price: 13.95
-        }
-      ],
+
       total: "",
       testList: []
     };
@@ -241,6 +228,11 @@ export default {
       this.testList.push(data);
       console.log(this.testList);
     });
+  },
+  methods: {
+    DeleteItem(item) {
+      this.testList.splice(item, 1);
+    }
   },
   computed: {
     CartTotal() {
