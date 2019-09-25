@@ -1,36 +1,75 @@
 <template>
   <div>
-    <v-item-group multiple>
-      <v-container>
-        <v-row>
-          <v-col
-            v-for="item in MenuItems"
-            :key="item.id"
-            cols="12"
-            md="4"
-          >
-            <v-item v-slot:default="{ active, toggle }">
-              <v-card
-                :color="active ? 'primary' : ''"
-                class="rounded-card"
-                dark
-                height="150"
-                @click="AddtoCart"
+    <div>
+      <v-item-group multiple>
+        <v-container>
+          <v-row>
+            <v-col
+              v-for="item in MenuItems"
+              :key="item.id"
+              cols="12"
+              md="4"
+            >
+              <v-item v-slot:default="{ active, toggle }">
+                <v-card
+                  :color="active ? 'primary' : ''"
+                  class="rounded-card"
+                  dark
+                  height="150"
+                  @click="AddtoCart(item)"
+                  @click.stop="dialog = true"
+                >
+                  <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
+                  <v-list-item-subtitle>{{item.price}}</v-list-item-subtitle>
+                  <v-scroll-y-transition>
+                    <div
+                      v-if="active"
+                      class="display-3 flex-grow-1 text-center"
+                    >Item Selected</div>
+                  </v-scroll-y-transition>
+                </v-card>
+              </v-item>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-item-group>
+    </div>
+    <div>
+      <v-row justify="center">
+        <v-dialog
+          v-model="dialog"
+          max-width="290"
+        >
+          <v-card>
+            <v-card-title class="headline">Use Google's location service?</v-card-title>
+
+            <v-card-text>
+              Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+            </v-card-text>
+
+            <v-card-actions>
+              <div class="flex-grow-1"></div>
+
+              <v-btn
+                color="green darken-1"
+                text
+                @click="dialog = false"
               >
-                <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
-                <v-list-item-subtitle>{{item.price}}</v-list-item-subtitle>
-                <v-scroll-y-transition>
-                  <div
-                    v-if="active"
-                    class="display-3 flex-grow-1 text-center"
-                  >Item Selected</div>
-                </v-scroll-y-transition>
-              </v-card>
-            </v-item>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-item-group>
+                Disagree
+              </v-btn>
+
+              <v-btn
+                color="green darken-1"
+                text
+                @click="dialog = false"
+              >
+                Agree
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+    </div>
   </div>
 </template>
 <script>
@@ -45,8 +84,7 @@ export default {
         { name: "Smoothie", price: 22.99, id: 5 },
         { name: "Jamaica", price: 9.99, id: 6 }
       ],
-      price: "$2.95",
-      name: "Coca-Cola Regular"
+      dialog: false
     };
   },
   methods: {
@@ -56,8 +94,8 @@ export default {
 
       // this.$nuxt.$emit("test", this.price);
       this.$nuxt.$emit("test", {
-        name: this.name,
-        price: this.price
+        name: item.name,
+        price: item.price
       });
     }
   }

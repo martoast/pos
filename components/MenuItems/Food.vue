@@ -1,29 +1,76 @@
 <template>
   <div>
-    <v-item-group multiple>
-      <v-container>
-        <v-row>
-          <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
-            <v-item v-slot:default="{ active, toggle }">
-              <v-card
-                :color="active ? 'primary' : ''"
-                light
-                height="150"
-                @click="AddtoCart(item)"
-                class="rounded-card"
-              >
-                <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
-                <v-list-item-subtitle>{{item.price}}</v-list-item-subtitle>
+    <div>
+      <v-item-group multiple>
+        <v-container>
+          <v-row>
+            <v-col
+              v-for="item in MenuItems"
+              :key="item.id"
+              cols="12"
+              md="4"
+            >
+              <v-item v-slot:default="{ active, toggle }">
+                <v-card
+                  :color="active ? 'primary' : ''"
+                  light
+                  height="150"
+                  @click="AddtoCart(item)"
+                  @click.stop="dialog = true"
+                  class="rounded-card"
+                >
+                  <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
+                  <v-list-item-subtitle>{{item.price}}</v-list-item-subtitle>
 
-                <v-scroll-y-transition>
-                  <div v-if="active" class="display-1 flex-grow-1 text-center">Item Selected</div>
-                </v-scroll-y-transition>
-              </v-card>
-            </v-item>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-item-group>
+                  <v-scroll-y-transition>
+                    <div
+                      v-if="active"
+                      class="display-1 flex-grow-1 text-center"
+                    >Item Selected</div>
+                  </v-scroll-y-transition>
+                </v-card>
+              </v-item>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-item-group>
+    </div>
+    <div>
+      <v-row justify="center">
+        <v-dialog
+          v-model="dialog"
+          max-width="290"
+        >
+          <v-card>
+            <v-card-title class="headline">Use Google's location service?</v-card-title>
+
+            <v-card-text>
+              Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+            </v-card-text>
+
+            <v-card-actions>
+              <div class="flex-grow-1"></div>
+
+              <v-btn
+                color="green darken-1"
+                text
+                @click="dialog = false"
+              >
+                Disagree
+              </v-btn>
+
+              <v-btn
+                color="green darken-1"
+                text
+                @click="dialog = false"
+              >
+                Agree
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+    </div>
   </div>
 </template>
 <script>
@@ -40,8 +87,7 @@ export default {
         { name: "Poke", price: 13.99, id: 7 },
         { name: "Greek Yogurt", price: 7.99, id: 8 }
       ],
-      price: "$9.99",
-      name: "DoubleCheese Burger"
+      dialog: false
     };
   },
   methods: {
