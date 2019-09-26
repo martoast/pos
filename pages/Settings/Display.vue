@@ -1,11 +1,17 @@
 <template>
   <div>
-    <v-card max-width="500" class="mx-auto" width="950">
+    <v-card width="950">
       <v-container fluid>
         <h2>Brightness</h2>
         <v-row>
           <v-col cols="12">
-            <v-slider v-model="brightness" inverse-label label="Brightness" value="30"></v-slider>
+            <v-slider
+              v-model="brightness"
+              inverse-label
+              label="Brightness"
+              value="30"
+              color="purple"
+            ></v-slider>
           </v-col>
         </v-row>
         <hr />
@@ -52,8 +58,16 @@ export default {
       language: "",
       timedisplay: null,
       displayitems: null,
-      brightness: null
+      brightness: 25
     };
   }
 };
 </script>
+<style scoped>
+.center {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

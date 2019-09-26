@@ -4,7 +4,6 @@
       <v-card
         v-for="employee in employees"
         v-bind:key="employee"
-        class="mx-auto"
         :flat="flat"
         :loading="loading"
         :outlined="outlined"
@@ -28,7 +27,6 @@
     </div>
     <div>
       <v-card
-        class="mx-auto"
         :flat="flat"
         :loading="loading"
         :outlined="outlined"

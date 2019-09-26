@@ -1,44 +1,37 @@
 <template>
   <div>
     <div>
-      <v-col cols="12">
-        <v-row
-          :align="alignment"
-          :justify="justify"
-        >
-          <v-card
-            v-for="employee in employees"
-            v-bind:key="employee.id"
-            max-width="344"
-            class="mx-auto"
-            :flat="flat"
-            :loading="loading"
-            :outlined="outlined"
-            :elevation="elevation"
-            :raised="raised"
-            :to="'/Settings/user/' + employee.id"
-            :items="alignmentsAvailable"
-            @click="RouteToEmployeeID"
-          >
-            <v-list-item>
-              <v-list-item-avatar
-                color="grey"
-                size="62"
-              >
-                <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="headline">{{employee.name}}</v-list-item-title>
-                <v-list-item-subtitle>ID: {{employee.id}}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+      <v-item-group multiple>
+        <v-container>
+          <v-row>
+            <v-col v-for="employee in employees" v-bind:key="employee.id" cols="12" md="4">
+              <v-item>
+                <v-card
+                  :flat="flat"
+                  :loading="loading"
+                  :outlined="outlined"
+                  :elevation="elevation"
+                  :raised="raised"
+                  :to="'/Settings/user/' + employee.id"
+                  :items="alignmentsAvailable"
+                  @click="RouteToEmployeeID"
+                >
+                  <v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title class="headline">{{employee.name}}</v-list-item-title>
+                      <v-list-item-subtitle>ID: {{employee.id}}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
 
-            <v-card-actions>
-              <div class="flex-grow-1"></div>
-            </v-card-actions>
-          </v-card>
-        </v-row>
-      </v-col>
+                  <v-card-actions>
+                    <div class="flex-grow-1"></div>
+                  </v-card-actions>
+                </v-card>
+              </v-item>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-item-group>
     </div>
   </div>
 </template>
@@ -82,6 +75,16 @@ export default {
         name: "Angela",
         id: 9873,
         isActive: true
+      },
+      {
+        name: "Fred",
+        id: 3567,
+        isActive: false
+      },
+      {
+        name: "Josh",
+        id: 40763,
+        isActive: true
       }
     ],
     flat: false,
@@ -111,3 +114,18 @@ export default {
   width: 100%;
 }
 </style>
+
+<v-item-group multiple>
+        <v-container>
+          <v-row>
+            <v-col
+              v-for="employee in employees"
+            v-bind:key="employee.id"
+              cols="12"
+              md="4"
+            >
+              
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-item-group>

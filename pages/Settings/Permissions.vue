@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-card max-width="500" class="mx-auto">
-      <v-container fluid>
+    <v-card>
+      <v-container fluid class="center">
         <h2>Active Permission List</h2>
         <p>{{ selected }}</p>
         <v-checkbox v-model="selected" label="Access Sales Trasactions" value="SalesTransactions"></v-checkbox>
@@ -39,3 +39,11 @@ export default {
   }
 };
 </script>
+<style scoped>
+.center {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
