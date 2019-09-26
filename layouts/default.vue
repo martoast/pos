@@ -148,6 +148,9 @@
                 </v-btn>
                 <v-toolbar-title>CheckOut</v-toolbar-title>
               </v-toolbar>
+              <v-row>
+                <v-card class="mx-auto" max-width="800" style="margin-top: -64px;"></v-card>
+              </v-row>
 
               <v-card class="mx-auto" max-width="800" style="margin-top: -64px;">
                 <v-tabs fixed-tabs background-color="indigo" dark height="64" v-model="tab">
@@ -216,8 +219,6 @@
                     <v-tab-item>
                       <v-card-text style="height: 200px;"></v-card-text>
                       <v-card>
-                        <h1 class="center">Total to Pay: $ {{CartTotal}}</h1>
-
                         <v-text-field label="Sign here*"></v-text-field>
                         <small>*indicates required field</small>
                         <div class="my-2">
