@@ -3,16 +3,8 @@
     <div>
       <v-app light>
         <v-container class="primary">
-          <v-app-bar
-            :clipped-left="clipped"
-            class="secondary"
-            fixed
-            app
-          >
-            <v-btn
-              icon
-              @click.stop="leftDrawer = !leftDrawer"
-            >
+          <v-app-bar :clipped-left="clipped" class="secondary" fixed app>
+            <v-btn icon @click.stop="leftDrawer = !leftDrawer">
               <v-icon>mdi-menu</v-icon>
             </v-btn>
           </v-app-bar>// Main Navigation card
@@ -26,10 +18,7 @@
           >
             <v-list>
               <v-avatar>
-                <img
-                  src="https://cdn.vuetifyjs.com/images/john.jpg"
-                  alt="John"
-                />
+                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
               </v-avatar>
               <v-list-item-title class="title">Alex POS</v-list-item-title>
               <v-divider></v-divider>
@@ -57,21 +46,9 @@
               </div>
             </template>
           </v-navigation-drawer>// Menu Navigation card shit
-          <v-navigation-drawer
-            class="primary"
-            v-model="drawer"
-            :clipped="clipped"
-            fixed
-            app
-          >
+          <v-navigation-drawer class="primary" v-model="drawer" :clipped="clipped" fixed app>
             <v-list>
-              <v-list-item
-                v-for="(item, i) in items"
-                :key="i"
-                :to="item.to"
-                router
-                exact
-              >
+              <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
                 <v-list-item-action>
                   <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-action>
@@ -81,21 +58,8 @@
               </v-list-item>
             </v-list>
           </v-navigation-drawer>
-          <v-navigation-drawer
-            class="primary"
-            width="445"
-            absolute
-            permanent
-            right
-            app
-          >
-
-            <v-card
-              width="450"
-              max-height="1000"
-              class="mx-auto"
-              :elevation="5"
-            >
+          <v-navigation-drawer class="primary" width="445" absolute permanent right app>
+            <v-card width="450" max-height="1000" class="mx-auto" :elevation="5">
               <v-simple-table>
                 <template v-slot:default>
                   <thead>
@@ -105,10 +69,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr
-                      v-for="item in testList"
-                      :key="item.name"
-                    >
+                    <tr v-for="item in testList" :key="item.name">
                       <td @click="DeleteItem(item)">{{ item.name }}</td>
                       <td>{{ item.price }}</td>
                     </tr>
@@ -130,11 +91,7 @@
             </v-card>
             <template v-slot:append>
               <div class="pa-2">
-                <v-btn
-                  block
-                  color="success"
-                  @click.stop="dialog = true"
-                >CheckOut</v-btn>
+                <v-btn block color="success" @click.stop="dialog = true">CheckOut</v-btn>
               </div>
             </template>
           </v-navigation-drawer>
@@ -142,69 +99,139 @@
           <nuxt />
         </v-container>
 
-        <v-footer
-          :fixed="fixed"
-          app
-        >
+        <v-footer :fixed="fixed" app>
           <span>&copy; Alex Martos</span>
         </v-footer>
       </v-app>
     </div>
     <template>
       <v-row justify="center">
-        <v-dialog
-          v-model="dialog"
-          fullscreen
-          hide-overlay
-          transition="dialog-bottom-transition"
-        >
+        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+          <v-navigation-drawer class="primary" width="445" absolute permanent right app>
+            <v-card width="450" max-height="1000" class="mx-auto" :elevation="5">
+              <v-simple-table>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">Item</th>
+                      <th class="text-left">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in testList" :key="item.name">
+                      <td @click="DeleteItem(item)">{{ item.name }}</td>
+                      <td>{{ item.price }}</td>
+                    </tr>
+                    <tr v-if="items.length">
+                      <td>tax: 13%</td>
+                    </tr>
+                  </tbody>
+                  <tr>
+                    <v-divider></v-divider>
+                  </tr>
 
-          <v-card>
-            <v-toolbar
-              dark
-              class="secondary"
-            >
-              <v-btn
-                icon
-                dark
-                @click="dialog = false"
-              >
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-              <v-toolbar-title>Checkout</v-toolbar-title>
-              <div class="flex-grow-1"></div>
-
-            </v-toolbar>
-            <v-card>
-              <h1 class="center">Total to Pay: $ {{CartTotal}}</h1>
-              <v-row>
-
-                <v-col
-                  cols="12"
-                  sm="6"
-                  md="4"
-                >
-                  <v-text-field label="Sign here*"></v-text-field>
-                  <small>*indicates required field</small>
-                  <div class="my-2">
-                    <v-btn
-                      x-large
-                      color="error"
-                      dark
-                    >Clear Sinature</v-btn>
-                    <v-btn
-                      x-large
-                      color="success"
-                      dark
-                      @click="dialog = false"
-                    >Done Signing</v-btn>
-                  </div>
-                </v-col>
-
-              </v-row>
-
+                  <tfoot>
+                    <tr></tr>
+                  </tfoot>
+                </template>
+              </v-simple-table>
             </v-card>
+            <template v-slot:append>
+              <h1 v-if="items.length" class="center">Total: $ {{CartTotal}}</h1>
+            </template>
+          </v-navigation-drawer>
+          <v-card>
+            <v-card flat>
+              <v-toolbar color="secondary" dark extended flat>
+                <v-btn icon dark @click="dialog = false">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+                <v-toolbar-title>CheckOut</v-toolbar-title>
+              </v-toolbar>
 
+              <v-card class="mx-auto" max-width="800" style="margin-top: -64px;">
+                <v-tabs fixed-tabs background-color="indigo" dark height="64" v-model="tab">
+                  <v-tab>Pay with Cash</v-tab>
+                  <v-tab>Pay with Card</v-tab>
+                  <v-tabs-items v-model="tab">
+                    <v-tab-item>
+                      <v-card elevation="12">
+                        <h3 class="center">Choose Amount</h3>
+                        <v-row class="center">
+                          <v-btn x-large class="ma-2" tile outlined color="success" value="5">$5.00</v-btn>
+                          <v-btn
+                            x-large
+                            class="ma-2"
+                            tile
+                            outlined
+                            color="success"
+                            v-bind="PaidAmount"
+                            value="10"
+                            @click="test"
+                          >$10.00</v-btn>
+                          <v-btn
+                            x-large
+                            class="ma-2"
+                            tile
+                            outlined
+                            color="success"
+                            v-bind="PaidAmount"
+                            value="15"
+                          >$20.00</v-btn>
+                          <v-btn
+                            x-large
+                            class="ma-2"
+                            tile
+                            outlined
+                            color="success"
+                            v-bind="PaidAmount"
+                            value="20"
+                          >Exact</v-btn>
+                        </v-row>
+                        <v-row class="center">
+                          <v-col cols="12" sm="6">
+                            <v-text-field v-bind="PaidAmount" outlined></v-text-field>
+                          </v-col>
+                        </v-row>
+                        <v-item-group>
+                          <v-container>
+                            <v-row>
+                              <v-col v-for="n in 9" :key="n" cols="12" md="4">
+                                <v-item outlined color="success">
+                                  <v-card
+                                    :color="primary"
+                                    class="d-flex align-center"
+                                    light
+                                    height="150"
+                                  >
+                                    <v-list-item-title class="center">{{n}}</v-list-item-title>
+                                  </v-card>
+                                </v-item>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                        </v-item-group>
+                      </v-card>
+                    </v-tab-item>
+                    <v-tab-item>
+                      <v-card-text style="height: 200px;"></v-card-text>
+                      <v-card>
+                        <h1 class="center">Total to Pay: $ {{CartTotal}}</h1>
+
+                        <v-text-field label="Sign here*"></v-text-field>
+                        <small>*indicates required field</small>
+                        <div class="my-2">
+                          <v-btn x-large color="error" dark>Clear Sinature</v-btn>
+                          <v-btn x-large color="success" dark @click="dialog = false">Done Signing</v-btn>
+                        </div>
+                      </v-card>
+                    </v-tab-item>
+                  </v-tabs-items>
+                </v-tabs>
+
+                <v-divider></v-divider>
+              </v-card>
+            </v-card>
           </v-card>
         </v-dialog>
       </v-row>
@@ -289,7 +316,9 @@ export default {
       dialog: false,
       notifications: false,
       sound: true,
-      widgets: false
+      widgets: false,
+      tab: null,
+      PaidAmount: ""
     };
   },
   created() {
@@ -303,6 +332,9 @@ export default {
   methods: {
     DeleteItem(item) {
       this.testList.splice(item, 1);
+    },
+    test() {
+      console.log(this.PaidAmount);
     }
   },
   computed: {
@@ -321,5 +353,7 @@ export default {
 }
 .center {
   justify-content: center;
+  text-align: center;
+  font-size: 2.5em;
 }
 </style>
