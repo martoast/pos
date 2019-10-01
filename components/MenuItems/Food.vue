@@ -4,11 +4,14 @@
       <v-item-group multiple>
         <v-container>
           <v-row>
-            <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
+            <v-col
+              v-for="item in MenuItems"
+              :key="item.id"
+              cols="12"
+              md="4"
+            >
               <v-item v-slot:default="{ active, toggle }">
                 <v-card
-                  :color="active ? 'primary' : ''"
-                  light
                   height="150"
                   @click="AddtoCart(item)"
                   @click.stop="dialog = true"
@@ -24,11 +27,25 @@
       </v-item-group>
     </div>
     <div>
-      <v-row align="center" justify="center">
-        <v-dialog v-model="dialog" persistent max-width="800px">
+      <v-row
+        align="center"
+        justify="center"
+      >
+        <v-dialog
+          v-model="dialog"
+          persistent
+          max-width="800px"
+        >
           <v-card color="basil">
-            <v-tabs v-model="tab" background-color="indigo" grow>
-              <v-tab v-for="item in items" :key="item">{{ item }}</v-tab>
+            <v-tabs
+              v-model="tab"
+              background-color="indigo"
+              grow
+            >
+              <v-tab
+                v-for="item in items"
+                :key="item"
+              >{{ item }}</v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab">
@@ -39,11 +56,24 @@
                   </v-card-title>
                   <v-card-text>
                     <v-container>
-                      <v-row align="center" justify="center">
-                        <v-col cols="12" sm="6">
-                          <v-select :items="['Small', 'Medium', 'Large']" label="Size*" required></v-select>
+                      <v-row
+                        align="center"
+                        justify="center"
+                      >
+                        <v-col
+                          cols="12"
+                          sm="6"
+                        >
+                          <v-select
+                            :items="['Small', 'Medium', 'Large']"
+                            label="Size*"
+                            required
+                          ></v-select>
                         </v-col>
-                        <v-col cols="12" sm="6">
+                        <v-col
+                          cols="12"
+                          sm="6"
+                        >
                           <v-autocomplete
                             :items="['No meat', 'No Onion', 'No tomatoes', 'No Mustard', 'No Pickles']"
                             label="autocomplete"
@@ -56,8 +86,16 @@
                   </v-card-text>
                   <v-card-actions>
                     <div class="flex-grow-1"></div>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="dialog = false"
+                    >Close</v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="dialog = false"
+                    >Save</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-tab-item>
@@ -70,9 +108,21 @@
                   <v-item-group multiple>
                     <v-container>
                       <v-row>
-                        <v-col v-for="n in 9" :key="n" cols="12" md="4">
-                          <v-item outlined color="success">
-                            <v-card :color="primary" class="d-flex align-center" light height="150">
+                        <v-col
+                          v-for="n in 9"
+                          :key="n"
+                          cols="12"
+                          md="4"
+                        >
+                          <v-item
+                            outlined
+                            color="success"
+                          >
+                            <v-card
+                              class="d-flex align-center"
+                              light
+                              height="150"
+                            >
                               <v-list-item-title class="center">{{n}}</v-list-item-title>
                             </v-card>
                           </v-item>
@@ -82,8 +132,16 @@
                   </v-item-group>
                   <v-card-actions>
                     <div class="flex-grow-1"></div>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="dialog = false"
+                    >Close</v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="dialog = false"
+                    >Save</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-tab-item>
@@ -93,17 +151,35 @@
                     <span class="headline">Notes for Kitchen</span>
                   </v-card-title>
                   <v-container fluid>
-                    <v-row align="center" justify="center">
-                      <v-col cols="12" md="6">
-                        <v-textarea solo name="input-7-4" label="Enter a Note"></v-textarea>
+                    <v-row
+                      align="center"
+                      justify="center"
+                    >
+                      <v-col
+                        cols="12"
+                        md="6"
+                      >
+                        <v-textarea
+                          solo
+                          name="input-7-4"
+                          label="Enter a Note"
+                        ></v-textarea>
                       </v-col>
                     </v-row>
                   </v-container>
 
                   <v-card-actions>
                     <div class="flex-grow-1"></div>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="dialog = false"
+                    >Close</v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="dialog = false"
+                    >Save</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-tab-item>
@@ -222,6 +298,7 @@ export default {
       console.log(item.name);
       // this.message = Date();
       // console.log(this.message);
+      this.$nuxt.$emit("ItemName", [item.name]);
 
       this.$nuxt.$emit("test", {
         name: item.name,

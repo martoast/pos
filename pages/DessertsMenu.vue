@@ -25,14 +25,12 @@
 import Receipt from "~/components/Receipt.vue";
 import SearchBar from "~/components/SearchBar.vue";
 import Desserts from "~/components/MenuItems/Desserts.vue";
-import MenuSelect from "~/components/MenuSelect.vue";
 
 export default {
   components: {
     SearchBar,
     Desserts,
-    Receipt,
-    MenuSelect
+    Receipt
   }
 };
 </script>
