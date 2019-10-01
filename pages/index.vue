@@ -29,16 +29,6 @@ export default {
     return {
       states: []
     };
-  },
-  created() {
-    // this.$nuxt.$on("test", data => {
-    //   // console.log(data + " emitted");
-    //   // this.total = data;
-    //   for (item in data) {
-    //     this.states.push(item.name);
-    //   }
-    //   console.log(this.states);
-    // });
   }
 };
 </script>

@@ -289,8 +289,20 @@ export default {
       model: null,
       tab: null,
       items: ["Modifiers", "Extras", "Notes"],
-      text: "hey"
+      text: "hey",
+      Food: [
+        "Pizza",
+        "Burger",
+        "HotDog",
+        "Salad",
+        "Taco",
+        "Poke",
+        "Greek Yogurt"
+      ]
     };
+  },
+  created() {
+    this.$nuxt.$emit("ItemName", this.Food);
   },
 
   methods: {
@@ -298,7 +310,6 @@ export default {
       console.log(item.name);
       // this.message = Date();
       // console.log(this.message);
-      this.$nuxt.$emit("ItemName", [item.name]);
 
       this.$nuxt.$emit("test", {
         name: item.name,

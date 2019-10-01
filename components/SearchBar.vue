@@ -1,26 +1,26 @@
 <template>
-  <v-toolbar
-    dark
-    color="teal"
-  >
-    <v-toolbar-title>State selection</v-toolbar-title>
-    <v-autocomplete
-      v-model="select"
-      :loading="loading"
-      :items="items"
-      :search-input.sync="search"
-      cache-items
-      class="mx-4"
-      flat
-      hide-no-data
-      hide-details
-      label="What state are you from?"
-      solo-inverted
-    ></v-autocomplete>
-    <v-btn icon>
-      <v-icon>mdi-dots-vertical</v-icon>
-    </v-btn>
-  </v-toolbar>
+  <v-layout justify-center>
+    <v-toolbar
+      class="primary"
+      max-width="750"
+    >
+
+      <v-autocomplete
+        v-model="select"
+        :loading="loading"
+        :items="items"
+        :search-input.sync="search"
+        cache-items
+        class="mx-4"
+        flat
+        hide-no-data
+        hide-details
+        label="Search Menu"
+        solo-inverted
+      ></v-autocomplete>
+
+    </v-toolbar>
+  </v-layout>
 </template>
 <script>
 export default {
@@ -32,6 +32,12 @@ export default {
       select: null,
       states: []
     };
+  },
+  created() {
+    this.$nuxt.$on("ItemName", data => {
+      this.states = data;
+      console.log(this.states);
+    });
   },
 
   watch: {
