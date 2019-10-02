@@ -258,7 +258,7 @@
                             tile
                             outlined
                             color="success"
-                            value="5"
+                            v-on:click="PaidAmount += 5"
                           >$5.00</v-btn>
                           <v-btn
                             x-large
@@ -266,9 +266,7 @@
                             tile
                             outlined
                             color="success"
-                            v-bind="PaidAmount"
-                            value="10"
-                            @click="test"
+                            v-on:click="PaidAmount += 10"
                           >$10.00</v-btn>
                           <v-btn
                             x-large
@@ -276,8 +274,7 @@
                             tile
                             outlined
                             color="success"
-                            v-bind="PaidAmount"
-                            value="15"
+                            v-on:click="PaidAmount += 20"
                           >$20.00</v-btn>
                           <v-btn
                             x-large
@@ -285,8 +282,7 @@
                             tile
                             outlined
                             color="success"
-                            v-bind="PaidAmount"
-                            value="20"
+                            v-on:click="PaidAmount += CartTotal"
                           >Exact</v-btn>
                         </v-row>
                         <v-row class="center">
@@ -294,10 +290,8 @@
                             cols="12"
                             sm="6"
                           >
-                            <v-text-field
-                              v-bind="PaidAmount"
-                              outlined
-                            ></v-text-field>
+                            <h1>{{PaidAmount}}</h1>
+                            <v-text-field outlined></v-text-field>
                           </v-col>
                         </v-row>
                         <v-item-group>
@@ -432,14 +426,14 @@ export default {
       leftDrawer: false,
       title: this.$route.path,
 
-      total: "",
+      total: null,
       MenuItems: [],
       dialog: false,
       notifications: false,
       sound: true,
       widgets: false,
       tab: null,
-      PaidAmount: ""
+      PaidAmount: null
     };
   },
   created() {
