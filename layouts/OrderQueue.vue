@@ -12,7 +12,11 @@
       >
         <v-list>
           <v-list-item-avatar color="grey darken-3">
-            <v-img class="elevation-6" src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
+            <v-img
+              class="elevation-6"
+              src="https://cdn.vuetifyjs.com/images/john.jpg"
+              alt="John"
+            ></v-img>
           </v-list-item-avatar>
           <v-list-item-title class="title">IN-N-OUT</v-list-item-title>
           <v-divider></v-divider>
@@ -41,13 +45,24 @@
         </template>
       </v-navigation-drawer>
 
-      <v-app-bar :clipped-left="clipped" class="secondary" fixed app>
-        <v-btn icon @click.stop="leftDrawer = !leftDrawer">
+      <v-app-bar
+        :clipped-left="clipped"
+        class="secondary"
+        fixed
+      >
+        <v-btn
+          icon
+          @click.stop="leftDrawer = !leftDrawer"
+        >
           <v-icon>mdi-menu</v-icon>
         </v-btn>
         <v-container>
           <div>
-            <v-tabs fixed-tabs background-color="#1b50aa" dark>
+            <v-tabs
+              fixed-tabs
+              background-color="#1b50aa"
+              dark
+            >
               <v-tab to="/OrderQueue/OnlineOrders">Online Orders</v-tab>
               <v-tab to="/OrderQueue/InKitchen">In Kitchen</v-tab>
               <v-tab to="/OrderQueue/ReadytoGo">Ready to-GO</v-tab>
@@ -59,7 +74,10 @@
       <nuxt />
     </v-container>
 
-    <v-footer :fixed="fixed" app>
+    <v-footer
+      :fixed="fixed"
+      app
+    >
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>
