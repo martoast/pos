@@ -11,14 +11,13 @@
         app
       >
         <v-list>
-          <v-list-item-avatar color="grey darken-3">
-            <v-img
-              class="elevation-6"
+          <v-avatar>
+            <img
               src="https://cdn.vuetifyjs.com/images/john.jpg"
               alt="John"
-            ></v-img>
-          </v-list-item-avatar>
-          <v-list-item-title class="title">IN-N-OUT</v-list-item-title>
+            />
+          </v-avatar>
+          <v-list-item-title class="title">Alex POS</v-list-item-title>
           <v-divider></v-divider>
           <v-list-item
             v-for="option in options"
@@ -97,37 +96,42 @@ export default {
 
       options: [
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-relative-scale",
           title: "Sales Register",
           to: "/"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-cash-usd",
           title: "Cash Drawer",
           to: "/CashDrawer"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-database",
           title: "Order Queue",
           to: "/OrderQueue/OnlineOrders"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-phone-incoming",
           title: "Calls",
           to: "/Calls"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-chart-line",
           title: "Transactions",
           to: "/Transactions"
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-bank",
           title: "Business Dashboard",
           to: "/BusinessDash"
         },
         {
-          icon: "mdi-apps",
+          icon: "mdi-chart-bubble",
+          title: "Invoice",
+          to: "/Invoice"
+        },
+        {
+          icon: "mdi-settings",
           title: "Settings",
           to: "/Settings/Display"
         }
