@@ -1,6 +1,7 @@
 
 <template>
   <div>
+
     <v-container fluid>
       <v-data-iterator
         :items="items"
@@ -314,3 +315,10 @@ export default {
   }
 };
 </script>
+<style scoped>
+.paddingTop {
+  padding: 40px;
+
+  justify-content: center;
+}
+</style>

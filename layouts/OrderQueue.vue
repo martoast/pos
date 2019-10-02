@@ -68,11 +68,14 @@
               <v-tab to="/OrderQueue/ReadytoGo">Ready to-GO</v-tab>
             </v-tabs>
           </div>
+
         </v-container>
+
       </v-app-bar>
 
-      <nuxt />
     </v-container>
+
+    <nuxt />
 
     <v-footer
       :fixed="fixed"
