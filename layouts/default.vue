@@ -236,7 +236,7 @@
               <v-card
                 class="mx-auto"
                 max-width="800"
-                style="margin-top: -64px;"
+                style="margin-top: 64px;"
               >
                 <v-tabs
                   fixed-tabs
@@ -304,35 +304,25 @@
 
                           </v-col>
                         </v-row>
-                        <v-item-group>
-                          <v-container>
-                            <v-row>
-                              <v-col
-                                v-for="n in calculator"
-                                :key="n"
-                                cols="12"
-                                md="4"
-                              >
-                                <v-item
-                                  outlined
-                                  color="success"
-                                >
-                                  <v-card
-                                    class="d-flex align-center"
-                                    light
-                                    height="150"
-                                  >
-                                    <v-list-item-title class="center">{{n}}</v-list-item-title>
-                                  </v-card>
-                                </v-item>
-                              </v-col>
-                            </v-row>
-                          </v-container>
-                        </v-item-group>
+                        <div>
+                          <v-card-actions>
+                            <v-spacer />
+
+                            <v-btn
+                              x-large
+                              right
+                              color="success"
+                              dark
+                              @click="dialog = false"
+                            >Pay Now</v-btn>
+                          </v-card-actions>
+
+                        </div>
+
                       </v-card>
                     </v-tab-item>
                     <v-tab-item>
-                      <v-card-text style="height: 200px;"></v-card-text>
+                      <v-card-text style="height: 50px;"></v-card-text>
                       <v-card>
                         <v-text-field label="Sign here*"></v-text-field>
                         <small>*indicates required field</small>
