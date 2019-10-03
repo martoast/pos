@@ -291,14 +291,24 @@
                             sm="6"
                           >
                             <h1>{{PaidAmount}}</h1>
-                            <v-text-field outlined></v-text-field>
+                            <v-row>
+                              <v-text-field outlined></v-text-field>
+                              <div class="text-center">
+                                <v-btn
+                                  class="display"
+                                  @click="DeletePaidAmount"
+                                >Delete</v-btn>
+                              </div>
+
+                            </v-row>
+
                           </v-col>
                         </v-row>
                         <v-item-group>
                           <v-container>
                             <v-row>
                               <v-col
-                                v-for="n in 9"
+                                v-for="n in calculator"
                                 :key="n"
                                 cols="12"
                                 md="4"
@@ -433,7 +443,8 @@ export default {
       sound: true,
       widgets: false,
       tab: null,
-      PaidAmount: null
+      PaidAmount: null,
+      calculator: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     };
   },
   created() {
@@ -450,6 +461,9 @@ export default {
     },
     test() {
       console.log(this.PaidAmount);
+    },
+    DeletePaidAmount() {
+      this.PaidAmount = null;
     }
   },
   computed: {
@@ -470,5 +484,13 @@ export default {
   justify-content: center;
   text-align: center;
   font-size: 2.5em;
+}
+.display {
+  color: #a3a3a3;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 15px;
+  overflow: hidden;
+  text-overflow: clip;
+  margin-left: 20px;
 }
 </style>
