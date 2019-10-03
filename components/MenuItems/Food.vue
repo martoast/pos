@@ -200,21 +200,14 @@ export default {
       model: null,
       tab: null,
       items: ["Modifiers", "Extras", "Notes"],
-      text: "hey",
-      Food: [
-        "Pizza",
-        "Burger",
-        "HotDog",
-        "Salad",
-        "Taco",
-        "Poke",
-        "Greek Yogurt"
-      ]
+
+      Food: ["pizza"]
     };
   },
   created() {
     this.$nuxt.$emit("ItemName", this.Food);
   },
+  computed: {},
 
   methods: {
     AddtoCart(item) {
