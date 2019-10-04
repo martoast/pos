@@ -5,6 +5,7 @@
         <v-container class="light">
           <v-app-bar
             :clipped-left="clipped"
+            height="80"
             class="secondary"
             fixed
             app
@@ -15,7 +16,46 @@
             >
               <v-icon>mdi-menu</v-icon>
             </v-btn>
+            <div class="flex-grow-1"></div>
+            <v-btn
+              icon
+              @click.stop="dialog2 = true"
+            >
+              <v-icon>mdi-plus-circle</v-icon>
+            </v-btn>
           </v-app-bar>// Main Navigation card
+          <v-dialog
+            v-model="dialog2"
+            max-width="290"
+          >
+            <v-card>
+              <v-card-title class="headline">Use Google's location service?</v-card-title>
+
+              <v-card-text>
+                Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+              </v-card-text>
+
+              <v-card-actions>
+                <div class="flex-grow-1"></div>
+
+                <v-btn
+                  color="green darken-1"
+                  text
+                  @click="dialog = false"
+                >
+                  Disagree
+                </v-btn>
+
+                <v-btn
+                  color="green darken-1"
+                  text
+                  @click="dialog = false"
+                >
+                  Agree
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
           <v-navigation-drawer
             src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
             v-model="leftDrawer"
@@ -397,6 +437,7 @@ export default {
       total: null,
       MenuItems: [],
       dialog: false,
+      dialog2: false,
       notifications: false,
       sound: true,
       widgets: false,

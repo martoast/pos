@@ -52,3 +52,5 @@ and 1 permanent right nav bar with a card on it being updated from the menu comp
 
 to put the drawer on the modal I would need to make the modal its own component so that it can render it's own layout with
 the fixed drawer
+
+What is the out put and what is the input???

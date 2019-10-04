@@ -1,6 +1,6 @@
 export const state = () => ({
   Food: [{
-    name: "Pizza",
+    name: "AssPickle",
     price: 7.99,
     id: 1,
     modifier: [
