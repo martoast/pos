@@ -5,30 +5,7 @@
         <v-container class="light">
           <MainAppBar />
 
-          <v-navigation-drawer
-            class="light"
-            v-model="drawer"
-            :clipped="clipped"
-            fixed
-            app
-          >
-            <v-list>
-              <v-list-item
-                v-for="(item, i) in items"
-                :key="i"
-                :to="item.to"
-                router
-                exact
-              >
-                <v-list-item-action>
-                  <v-icon>{{ item.icon }}</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.title" />
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-navigation-drawer>
+          <MenuNav />
           <v-navigation-drawer
             class="light"
             width="445"
@@ -312,9 +289,11 @@
 </template>
 <script>
 import MainAppBar from "~/components/MainAppBar.vue";
+import MenuNav from "~/components/MenuNav.vue";
 export default {
   components: {
-    MainAppBar
+    MainAppBar,
+    MenuNav
   },
   data() {
     return {
