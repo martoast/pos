@@ -258,6 +258,14 @@
                             tile
                             outlined
                             color="success"
+                            v-on:click="PaidAmount += 1"
+                          >$1.00</v-btn>
+                          <v-btn
+                            x-large
+                            class="ma-2"
+                            tile
+                            outlined
+                            color="success"
                             v-on:click="PaidAmount += 5"
                           >$5.00</v-btn>
                           <v-btn
@@ -291,6 +299,7 @@
                             sm="6"
                           >
                             <h1>{{PaidAmount}}</h1>
+                            <h4>change due: {{ChangeDue}}</h4>
                             <v-row>
                               <v-text-field outlined></v-text-field>
                               <div class="text-center">
@@ -393,6 +402,7 @@ export default {
       widgets: false,
       tab: null,
       PaidAmount: null,
+
       calculator: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     };
   },
@@ -418,6 +428,11 @@ export default {
   computed: {
     CartTotal() {
       return this.MenuItems.reduce((acc, item) => acc + item.price, 0);
+    },
+    ChangeDue() {
+      if (this.PaidAmount) {
+        return (this.ChangeDue = this.CartTotal - this.PaidAmount);
+      }
     }
   }
 };
