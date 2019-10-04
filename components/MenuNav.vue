@@ -47,7 +47,8 @@ export default {
           title: "Desserts",
           to: "/DessertsMenu"
         }
-      ]
+      ],
+      drawer: true
     };
   }
 };

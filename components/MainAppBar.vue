@@ -65,42 +65,19 @@
         </template>
       </v-navigation-drawer>
     </div>
-    <v-dialog
-      v-model="dialog2"
-      max-width="290"
-    >
+    <v-dialog v-model="dialog2">
       <v-card>
-        <v-card-title class="headline">Use Google's location service?</v-card-title>
-
-        <v-card-text>
-          Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
-        </v-card-text>
-
-        <v-card-actions>
-          <div class="flex-grow-1"></div>
-
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = false"
-          >
-            Disagree
-          </v-btn>
-
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = false"
-          >
-            Agree
-          </v-btn>
-        </v-card-actions>
+        <CreateOrder />
       </v-card>
     </v-dialog>
   </div>
 </template>
 <script>
+import CreateOrder from "~/components/CreateOrder.vue";
 export default {
+  components: {
+    CreateOrder
+  },
   data() {
     return {
       dialog2: false,
