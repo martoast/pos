@@ -1,24 +1,18 @@
 <template>
   <v-layout justify-center>
-    <v-toolbar
-      class="primary"
-      max-width="750"
-    >
-
+    <v-toolbar width="700">
       <v-autocomplete
         v-model="select"
         :loading="loading"
         :items="items"
         :search-input.sync="search"
         cache-items
-        class="mx-4"
         flat
         hide-no-data
         hide-details
         label="Search Menu"
         solo-inverted
       ></v-autocomplete>
-
     </v-toolbar>
   </v-layout>
 </template>
@@ -30,14 +24,8 @@ export default {
       items: [],
       search: null,
       select: null,
-      states: []
+      states: this.$store.state.MenuItems.Food.name
     };
-  },
-  created() {
-    this.$nuxt.$on("ItemName", data => {
-      this.states = data;
-      console.log(this.states);
-    });
   },
 
   watch: {
@@ -50,9 +38,8 @@ export default {
       this.loading = true;
       // Simulated ajax query
       setTimeout(() => {
-        this.items = this.states.filter(e => {
-          return (e || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
-        });
+        this.items = this.states;
+        console.log(this.states);
         this.loading = false;
       }, 500);
     }

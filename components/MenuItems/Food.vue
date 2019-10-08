@@ -1,6 +1,7 @@
 <template>
   <div>
     <section class="section has-text-centered">
+      <SearchBar />
       <div>
         <v-item-group multiple>
           <v-container>
@@ -115,7 +116,11 @@
   </div>
 </template>
 <script>
+import SearchBar from "~/components/SearchBar.vue";
 export default {
+  components: {
+    SearchBar
+  },
   data() {
     return {
       MenuItems: this.$store.state.MenuItems.Food,
