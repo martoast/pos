@@ -1,26 +1,14 @@
 <template>
   <div>
-    <v-app-bar
-      :clipped-left="clipped"
-      height="80"
-      class="secondary"
-      fixed
-      app
-    >
-      <v-btn
-        icon
-        @click.stop="leftDrawer = !leftDrawer"
-      >
+    <v-app-bar :clipped-left="clipped" height="80" class="secondary" fixed app>
+      <v-btn icon @click.stop="leftDrawer = !leftDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
       <div class="flex-grow-1"></div>
-      <v-btn
-        icon
-        @click.stop="dialog2 = true"
-      >
+      <v-btn icon @click.stop="dialog2 = true">
         <v-icon>mdi-plus-circle</v-icon>
       </v-btn>
-
+      <MainReceiptPreview />
     </v-app-bar>
     <div>
       <v-navigation-drawer
@@ -33,10 +21,7 @@
       >
         <v-list>
           <v-avatar>
-            <img
-              src="https://cdn.vuetifyjs.com/images/john.jpg"
-              alt="John"
-            />
+            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
           </v-avatar>
           <v-list-item-title class="title">Alex POS</v-list-item-title>
           <v-divider></v-divider>
@@ -74,9 +59,11 @@
 </template>
 <script>
 import CreateOrder from "~/components/CreateOrder.vue";
+import MainReceiptPreview from "~/components/MainReceiptPreview.vue";
 export default {
   components: {
-    CreateOrder
+    CreateOrder,
+    MainReceiptPreview
   },
   data() {
     return {
@@ -84,8 +71,7 @@ export default {
       leftDrawer: false,
       options: this.$store.state.NavOptions.options,
       left: true,
-      clipped: true,
-      dialog: false
+      clipped: true
     };
   }
 };
