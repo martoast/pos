@@ -24,8 +24,14 @@ export default {
       items: [],
       search: null,
       select: null,
-      states: this.$store.state.MenuItems.Food.name
+      states: [],
+      Fooditems: this.$store.state.MenuItems.Food
     };
+  },
+  created() {
+    for (this.items in this.Fooditems) {
+      this.states.push(this.item);
+    }
   },
 
   watch: {
@@ -38,8 +44,9 @@ export default {
       this.loading = true;
       // Simulated ajax query
       setTimeout(() => {
-        this.items = this.states;
-        console.log(this.states);
+        this.items = this.states.filter(e => {
+          return (e || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
+        });
         this.loading = false;
       }, 500);
     }

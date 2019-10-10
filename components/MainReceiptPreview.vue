@@ -1,40 +1,60 @@
 <template>
   <div>
     <v-card width="450" height="500" :elevation="5" style="margin-top: 500px;">
-      <v-toolbar>
-        <v-card width="450" :elevation="5" style="margin-top: 300px;">
-          <v-simple-table>
-            <thead>
-              <tr>
-                <th class="text-left">Item</th>
-                <th class="text-left">Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in MenuItems" :key="item.name">
-                <td @click="DeleteItem(item)">{{ item.name }}</td>
-                <td>{{ item.price }}</td>
-              </tr>
-              <tr>
-                <td>tax: 13%</td>
-              </tr>
-            </tbody>
+      <v-card width="450" :elevation="5" style="margin-top: 300px;">
+        <v-card-title class="blue white--text">
+          <span class="headline">
+            {{OrderType}}
+            <v-icon large>{{icon}}</v-icon>
+          </span>
+
+          <div class="flex-grow-1"></div>
+
+          <v-menu bottom left>
+            <template v-slot:activator="{ on }">
+              <v-btn dark icon v-on="on">
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+
+            <v-list>
+              <v-list-item v-for="(option, i) in options" :key="i" @click="selected(option)">
+                <v-list-item-title>{{option.title}}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-card-title>
+        <v-simple-table>
+          <thead>
             <tr>
-              <v-divider></v-divider>
+              <th class="text-left">Item</th>
+              <th class="text-left">Price</th>
             </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in MenuItems" :key="item.name">
+              <td @click="DeleteItem(item)">{{ item.name }}</td>
+              <td>{{ item.price }}</td>
+            </tr>
+            <tr>
+              <td>tax: 13%</td>
+            </tr>
+          </tbody>
+          <tr>
+            <v-divider></v-divider>
+          </tr>
 
-            <tfoot>
-              <tr>
-                <h4>Total: $ {{CartTotal}}</h4>
-              </tr>
-            </tfoot>
+          <tfoot>
+            <tr>
+              <h4>Total: $ {{CartTotal}}</h4>
+            </tr>
+          </tfoot>
+        </v-simple-table>
+      </v-card>
 
-            <div class="pa-2">
-              <v-btn block color="success" @click.stop="dialog = true">CheckOut</v-btn>
-            </div>
-          </v-simple-table>
-        </v-card>
-      </v-toolbar>
+      <div class="pa-2">
+        <v-btn block color="success" @click.stop="dialog = true">CheckOut</v-btn>
+      </div>
     </v-card>
     <template>
       <v-row justify="center">
@@ -160,7 +180,15 @@ export default {
       MenuItems: [],
       dialog: false,
       tab: null,
-      PaidAmount: null
+      PaidAmount: null,
+      OrderType: "Dine-In",
+      icon: "mdi-food-fork-drink",
+
+      options: [
+        { title: "Dine-In", icon: "mdi-food-fork-drink" },
+        { title: "Take-Out", icon: "mdi-walk" },
+        { title: "Delivery", icon: "mdi-bike" }
+      ]
     };
   },
   created() {
@@ -175,8 +203,10 @@ export default {
     DeleteItem(item) {
       this.MenuItems.splice(item, 1);
     },
-    test() {
-      console.log(this.PaidAmount);
+    selected(option) {
+      console.log(option.title);
+      this.OrderType = option.title;
+      this.icon = option.icon;
     },
     DeletePaidAmount() {
       this.PaidAmount = null;
