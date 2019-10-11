@@ -24,6 +24,7 @@
             </v-list>
           </v-menu>
         </v-card-title>
+
         <v-simple-table>
           <thead>
             <tr>
@@ -36,13 +37,7 @@
               <td @click="DeleteItem(item)">{{ item.name }}</td>
               <td>{{ item.price }}</td>
             </tr>
-            <tr>
-              <td>tax: 13%</td>
-            </tr>
           </tbody>
-          <tr>
-            <v-divider></v-divider>
-          </tr>
 
           <tfoot>
             <tr>
