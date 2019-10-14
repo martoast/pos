@@ -9,6 +9,14 @@ export const state = () => ({
         {
           name: 'Extra Peperoni',
           price: '2.99'
+        },
+        {
+          name: 'Extra Cheese',
+          price: '3.99'
+        },
+        {
+          name: 'Extra Sauce',
+          price: '1.99'
         }
       ]
     },
@@ -20,6 +28,14 @@ export const state = () => ({
       modifier: [
         {
           name: 'Extra Bacon',
+          price: '2.99'
+        },
+        {
+          name: 'Extra Ketchup',
+          price: '0.99'
+        },
+        {
+          name: 'Extra Meat',
           price: '3.99'
         }
       ]
@@ -33,6 +49,14 @@ export const state = () => ({
         {
           name: 'Extra Veggies',
           price: '2.99'
+        },
+        {
+          name: 'Extra Onion',
+          price: '0.99'
+        },
+        {
+          name: 'Cheese',
+          price: '2.99'
         }
       ]
     },
@@ -44,6 +68,10 @@ export const state = () => ({
       modifier: [
         {
           name: 'Extra Meat',
+          price: '2.99'
+        },
+        {
+          name: 'Extra veggies',
           price: '2.99'
         }
       ]
@@ -57,7 +85,11 @@ export const state = () => ({
         {
           name: 'Extra Sauce',
           price: '2.99'
-        }
+        },
+        {
+          name: 'Extra Corn',
+          price: '2.99'
+        },
       ]
     },
     {
@@ -68,6 +100,10 @@ export const state = () => ({
       modifier: [
         {
           name: 'Extra Sauce',
+          price: '2.99'
+        },
+        {
+          name: 'Extra Tomato',
           price: '2.99'
         }
       ]
@@ -81,6 +117,10 @@ export const state = () => ({
         {
           name: 'Extra Scoop',
           price: '4.99'
+        },
+        {
+          name: 'Extra Avacodo',
+          price: '2.99'
         }
       ]
     },
@@ -92,6 +132,11 @@ export const state = () => ({
       modifier: [
         {
           name: 'Extra Granola',
+          price: '2.99',
+
+        },
+        {
+          name: 'Extra Blueberries',
           price: '2.99'
         }
       ]
