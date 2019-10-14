@@ -2,7 +2,12 @@
   <v-item-group multiple>
     <v-container>
       <v-row>
-        <v-col v-for="n in modifiers" :key="n" cols="12" md="4">
+        <v-col
+          v-for="n in modifiers"
+          :key="n"
+          cols="12"
+          md="4"
+        >
           <v-item v-slot:default="{ active, toggle }">
             <v-card
               :color="active ? 'primary' : ''"
@@ -12,7 +17,10 @@
               @click="toggle"
             >
               <v-scroll-y-transition>
-                <div v-if="active" class="display-3 flex-grow-1 text-center">Active</div>
+                <div
+                  v-if="active"
+                  class="display-3 flex-grow-1 text-center"
+                >Active</div>
               </v-scroll-y-transition>
             </v-card>
           </v-item>
@@ -28,13 +36,6 @@ export default {
       modifiers: null
     };
   },
-  created() {
-    this.$nuxt.$on("test2", data => {
-      // console.log(data + " emitted");
-      // this.total = data;
-      this.modifiers = data;
-      console.log(this.modifiers);
-    });
-  }
+  created() {}
 };
 </script>

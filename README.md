@@ -54,3 +54,5 @@ to put the drawer on the modal I would need to make the modal its own component 
 the fixed drawer
 
 What is the out put and what is the input???
+
+What im trying to do is handle the sum of the modifiers added to the item seperatly
