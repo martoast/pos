@@ -76,39 +76,9 @@
                       >{{modifier.name}}</v-checkbox>
 
                     </v-container>
-                    <v-item-group>
-                      <v-container>
-                        <v-row>
-                          <v-col
-                            v-for="modifier in this.FoodModifiers"
-                            :key="modifier.name"
-                            cols="12"
-                            md="4"
-                          >
-                            <v-item v-slot:default="{ active, toggle }">
-                              <v-card
-                                :color="active ? 'secondary' : ''"
-                                class="rounded-card"
-                                dark
-                                height="200"
-                                @click="handleModifiers(modifier)"
-                              >
-                                <v-list-item-title class="headline mb-1">{{modifier.name}}</v-list-item-title>
-                                <v-scroll-y-transition>
-                                  <div
-                                    v-if="active"
-                                    class="display-3 flex-grow-1 text-center"
-                                  >
-                                    Active
-                                  </div>
-                                </v-scroll-y-transition>
-                              </v-card>
-                            </v-item>
-                          </v-col>
-                        </v-row>
-                      </v-container>
-                    </v-item-group>
-                    <ItemAddOn FoodModifiers />
+
+                    <ItemAddOn v-bind:FoodModifiers="FoodModifiers" />
+
                   </v-container>
                   <small>*indicates required field</small>
                 </v-card-text>
@@ -178,10 +148,10 @@ export default {
     handleResize() {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
-    },
-    handleModifiers(modifier) {
-      this.$nuxt.$emit("test2", modifier);
     }
+    // handleModifiers(modifier) {
+    //   this.$nuxt.$emit("test2", modifier);
+    // }
   }
 };
 </script>

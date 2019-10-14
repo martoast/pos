@@ -3,24 +3,27 @@
     <v-container>
       <v-row>
         <v-col
-          v-for="n in modifiers"
-          :key="n"
+          v-for="modifier in FoodModifiers"
+          :key="modifier.name"
           cols="12"
           md="4"
         >
           <v-item v-slot:default="{ active, toggle }">
             <v-card
-              :color="active ? 'primary' : ''"
-              class="d-flex align-center"
+              :color="active ? 'secondary' : ''"
+              class="rounded-card"
               dark
               height="200"
-              @click="toggle"
+              @click="handleModifiers(modifier)"
             >
+              <v-list-item-title class="headline mb-1">{{modifier.name}}</v-list-item-title>
               <v-scroll-y-transition>
                 <div
                   v-if="active"
                   class="display-3 flex-grow-1 text-center"
-                >Active</div>
+                >
+                  Active
+                </div>
               </v-scroll-y-transition>
             </v-card>
           </v-item>
@@ -31,11 +34,12 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      modifiers: null
-    };
-  },
-  created() {}
+  props: ["FoodModifiers"],
+
+  methods: {
+    handleModifiers(modifier) {
+      this.$nuxt.$emit("test2", modifier);
+    }
+  }
 };
 </script>
