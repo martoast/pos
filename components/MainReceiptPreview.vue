@@ -60,7 +60,12 @@
               <td @click="DeleteItem(item)">{{ item.name }}</td>
               <td>{{ item.price }}</td>
             </tr>
-            <tr>
+            <tr
+              v-for="modifier in FoodModifiers"
+              :key="modifier.name"
+            >
+              <td @click="DeleteModifier(modifier)">{{ modifier.name }}</td>
+              <td>{{ modifier.price }}</td>
 
             </tr>
           </tbody>
@@ -246,7 +251,7 @@ export default {
   data() {
     return {
       MenuItems: [],
-      FoodModifiers: null,
+      FoodModifiers: [],
       dialog: false,
       tab: null,
       PaidAmount: null,
@@ -268,7 +273,7 @@ export default {
       console.log(this.MenuItems);
     });
     this.$nuxt.$on("test2", data => {
-      this.FoodModifiers = data;
+      this.FoodModifiers.push(data);
       console.log("GOT the GOODS: ");
       console.log(this.FoodModifiers);
     });
@@ -276,6 +281,9 @@ export default {
   methods: {
     DeleteItem(item) {
       this.MenuItems.splice(item, 1);
+    },
+    DeleteModifier(modifier) {
+      this.FoodModifiers.splice(modifier, 1);
     },
     selected(option) {
       console.log(option.title);
