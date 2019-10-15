@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="section has-text-centered">
-      <SearchBar />
+      <!-- <SearchBar /> -->
       <div>
         <v-item-group multiple>
           <v-container>
@@ -38,7 +38,7 @@
               persistent
               max-width="1000px"
             >
-              <v-card color="basil">
+              <v-card class="primary">
                 <v-card-title>
                   <span class="headline">{{FoodItem}}</span>
                 </v-card-title>
@@ -67,15 +67,6 @@
                         ></v-select>
                       </v-col>
                     </v-row>
-                    <v-container fluid>
-                      <p>{{ selected }}</p>
-                      <v-checkbox
-                        v-for="modifier in this.FoodModifiers"
-                        :key="modifier.name"
-                        v-model="selected"
-                      >{{modifier.name}}</v-checkbox>
-
-                    </v-container>
 
                     <ItemAddOn v-bind:FoodModifiers="FoodModifiers" />
 
@@ -128,6 +119,7 @@ export default {
       }
     };
   },
+  created() {},
 
   computed: {
     ModifierTotal() {}

@@ -43,3 +43,26 @@ export default {
   }
 };
 </script>
+<style scoped>
+.rounded-card {
+  border-radius: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+html,
+body,
+#app,
+section.section {
+  height: 100%;
+  width: 80%;
+}
+
+section.section {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>

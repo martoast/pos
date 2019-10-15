@@ -77,7 +77,9 @@
           </tfoot>
         </v-simple-table>
       </v-card>
+      <v-text-field>
 
+      </v-text-field>
       <div class="pa-2">
         <v-btn
           block
@@ -85,6 +87,7 @@
           @click.stop="dialog = true"
         >CheckOut</v-btn>
       </div>
+
     </v-card>
     <template>
       <v-row justify="center">
@@ -252,6 +255,7 @@ export default {
     return {
       MenuItems: [],
       FoodModifiers: [],
+      Total: [],
       dialog: false,
       tab: null,
       PaidAmount: null,
@@ -270,20 +274,24 @@ export default {
       // console.log(data + " emitted");
       // this.total = data;
       this.MenuItems.push(data);
-      console.log(this.MenuItems);
+      // console.log(this.MenuItems);
     });
     this.$nuxt.$on("test2", data => {
       this.FoodModifiers.push(data);
-      console.log("GOT the GOODS: ");
-      console.log(this.FoodModifiers);
+      // console.log("GOT the GOODS: ");
+      // console.log(this.FoodModifiers);
+      this.Total = this.MenuItems.concat(this.FoodModifiers);
+      console.log(this.Total);
     });
   },
   methods: {
     DeleteItem(item) {
       this.MenuItems.splice(item, 1);
+      this.Total.splice(item, 1);
     },
     DeleteModifier(modifier) {
       this.FoodModifiers.splice(modifier, 1);
+      this.Total.splice(modifier, 1);
     },
     selected(option) {
       console.log(option.title);
@@ -296,7 +304,7 @@ export default {
   },
   computed: {
     CartTotal() {
-      return this.MenuItems.reduce((acc, item) => acc + item.price, 0);
+      return this.Total.reduce((acc, item) => acc + item.price, 0);
     },
     ChangeDue() {
       if (this.PaidAmount) {
