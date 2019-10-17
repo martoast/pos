@@ -2,13 +2,16 @@
   <div>
     <div>
       <v-app light>
-        <MainAppBar CartTotal="this.total" v-bind="this.MenuItems" />
+        <MainAppBar />
 
         <MenuNav />
 
         <nuxt />
 
-        <v-footer :fixed="fixed" app>
+        <v-footer
+          :fixed="fixed"
+          app
+        >
           <span>&copy; Alex Martos</span>
         </v-footer>
       </v-app>
@@ -58,24 +61,24 @@ export default {
 
       calculator: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     };
-  },
-  created() {
-    this.$nuxt.$on("test", data => {
-      // console.log(data + " emitted");
-      // this.total = data;
-      this.MenuItems.push(data);
-    });
-  },
-  methods: {
-    DeleteItem(item) {
-      this.MenuItems.splice(item, 1);
-    }
-  },
-  computed: {
-    CartTotal() {
-      return this.MenuItems.reduce((acc, item) => acc + item.price, 0);
-    }
   }
+  // created() {
+  //   this.$nuxt.$on("test", data => {
+  //     // console.log(data + " emitted");
+  //     // this.total = data;
+  //     this.MenuItems.push(data);
+  //   });
+  // },
+  // methods: {
+  //   DeleteItem(item) {
+  //     this.MenuItems.splice(item, 1);
+  //   }
+  // },
+  // computed: {
+  //   CartTotal() {
+  //     return this.MenuItems.reduce((acc, item) => acc + item.price, 0);
+  //   }
+  // }
 };
 </script>
 <style scoped>

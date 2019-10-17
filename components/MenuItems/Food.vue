@@ -106,42 +106,53 @@ export default {
     return {
       MenuItems: this.$store.state.MenuItems.Food,
       FoodItem: null,
+      SelectedModifiers: [],
       FoodModifiers: null,
+      Total: null,
       selected: ["John"],
       dialog: false,
       text: "center",
       model: null,
       tab: null,
-      items: ["Modifiers", "Extras", "Notes"],
+      items: ["FoodModifiers", "Extras", "Notes"],
       window: {
         width: 0,
         height: 0
       }
     };
   },
-  created() {},
+  created() {
+    this.$nuxt.$on("test2", data => {
+      this.SelectedModifiers = data;
+      // console.log(this.SelectedModifiers);
+    });
+  },
 
   computed: {
-    ModifierTotal() {}
+    // ModifierTotal() {
+    //   for (modifier in this.FoodModifiers) {
+    //     modifier.price += 0;
+    //     return modifier.price;
+    //   }
+    // }
   },
 
   methods: {
     AddtoCart(item) {
-      // console.log("Adding " + item.name + " to cart..");
       this.FoodModifiers = item.modifier;
-      // console.log("Available Modifiers");
-      // console.log(this.FoodModifiers);
+
       this.$nuxt.$emit("test", {
         name: item.name,
         price: item.price,
-        id: item.id
+        id: item.id,
+        FoodModifiers: this.SelectedModifiers
       });
     },
     handleResize() {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
     }
-    // handleModifiers(modifier) {
+    // handleFoodModifiers(modifier) {
     //   this.$nuxt.$emit("test2", modifier);
     // }
   }

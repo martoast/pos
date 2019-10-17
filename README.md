@@ -43,16 +43,32 @@ TODO LIST
 [X] emitt and event from the food menu when an item is clicked
 [X] v-model the total amount in the layout from the emitted event
 
-I need to find a way to emmit the item.price or item.name from MenuItems
+IM trying to emmit a single object which contains the item and its modifiers and a new data property Total which is the sum
+of the
 
-The way im imagining it is that the default layout will have 4 things: the top tool bar, 2 left navbars for navigation
-and 1 permanent right nav bar with a card on it being updated from the menu components
+[{
+id: item.id,
+name: item.name,
+price: item.price,
+FoodModifiers: [{
+id: modifier.id,
+name: modifier.name,
+price: modifier.price
+}]
+}]
 
-@click.stop="dialog = true"
+for item in items {
+for modifier in item.FoodModifiers {
+return item.price +
+}
+}
 
-to put the drawer on the modal I would need to make the modal its own component so that it can render it's own layout with
-the fixed drawer
+right now im emmiting 2 objects and then concatinating the 2 lists in MainReceibt
+thats why I get them showing up as all the items first
 
-What is the out put and what is the input???
+have 2 different states in the store, one with everything and another of just the object that will be sent to the receipt
 
-What im trying to do is handle the sum of the modifiers added to the item seperatly
+the food component sets the baseitem and the ItemAddOn component pushes the selected modifiers to an array and then we set that array in the store for FoodModifiers.
+
+The ItemAddOn Component emmits an array of the selected modifiers, However the Food Component listening to that is setting the data
+in a in the created lifcycle and therefore it is not receiving the modifiers array
