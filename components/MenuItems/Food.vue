@@ -68,24 +68,59 @@
                       </v-col>
                     </v-row>
 
-                    <ItemAddOn v-bind:FoodModifiers="FoodModifiers" />
-
                   </v-container>
                   <small>*indicates required field</small>
                 </v-card-text>
-                <v-card-actions>
-                  <div class="flex-grow-1"></div>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="dialog = false"
-                  >Close</v-btn>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="dialog = false"
-                  >Save</v-btn>
-                </v-card-actions>
+                <div>
+                  <div>
+                    <v-item-group multiple>
+                      <v-container>
+                        <v-row>
+                          <v-col
+                            v-for="Modifier in FoodModifiers"
+                            :key="Modifier.name"
+                            cols="12"
+                            md="4"
+                          >
+                            <v-item v-slot:default="{ active, toggle }">
+                              <v-card
+                                :color="active ? 'secondary' : ''"
+                                class="rounded-card"
+                                dark
+                                height="200"
+                                @click="AddModifierToList(Modifier)"
+                              >
+                                <v-list-item-title class="headline mb-1">{{Modifier.name}}</v-list-item-title>
+                                <v-scroll-y-transition>
+                                  <div
+                                    v-if="active"
+                                    class="display-3 flex-grow-1 text-center"
+                                  >
+                                    Active
+                                  </div>
+                                </v-scroll-y-transition>
+                              </v-card>
+                            </v-item>
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                    </v-item-group>
+                  </div>
+                  <v-card-actions>
+                    <div class="flex-grow-1"></div>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="SendModifiers()"
+                    >Close</v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="SendModifiers()"
+                    >Save</v-btn>
+                  </v-card-actions>
+                </div>
+
               </v-card>
             </v-dialog>
           </v-row>
@@ -96,11 +131,10 @@
 </template>
 <script>
 import SearchBar from "~/components/SearchBar.vue";
-import ItemAddOn from "~/components/ItemAddOn.vue";
+
 export default {
   components: {
-    SearchBar,
-    ItemAddOn
+    SearchBar
   },
   data() {
     return {
@@ -108,7 +142,9 @@ export default {
       FoodItem: null,
       SelectedModifiers: [],
       FoodModifiers: null,
+      ModifierList: [],
       Total: null,
+      Cart: [],
       selected: ["John"],
       dialog: false,
       text: "center",
@@ -121,12 +157,7 @@ export default {
       }
     };
   },
-  created() {
-    this.$nuxt.$on("test2", data => {
-      this.SelectedModifiers = data;
-      // console.log(this.SelectedModifiers);
-    });
-  },
+  mounted() {},
 
   computed: {
     // ModifierTotal() {
@@ -140,21 +171,31 @@ export default {
   methods: {
     AddtoCart(item) {
       this.FoodModifiers = item.modifier;
+      // console.log(this.FoodModifiers);
+      this.FoodItem = item;
 
-      this.$nuxt.$emit("test", {
-        name: item.name,
-        price: item.price,
-        id: item.id,
-        FoodModifiers: this.SelectedModifiers
+      //SET STATE WITH CART OBJECT
+    },
+    AddModifierToList(Modifier) {
+      this.ModifierList.push(Modifier);
+      // console.log("Adding Modifier to ModifierList");
+      // console.log(this.ModifierList);
+    },
+    SendModifiers() {
+      this.Cart.push({
+        name: this.FoodItem.name,
+        price: this.FoodItem.price,
+        id: this.FoodItem.id,
+        FoodModifiers: this.ModifierList
       });
+      console.log(this.Cart);
+      // this.$nuxt.$emit("test", this.Cart);
+      this.dialog = false;
     },
     handleResize() {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
     }
-    // handleFoodModifiers(modifier) {
-    //   this.$nuxt.$emit("test2", modifier);
-    // }
   }
 };
 </script>
