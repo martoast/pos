@@ -132,7 +132,10 @@ export default {
   },
   computed: {
     CartTotal() {
-      return this.Total.reduce((acc, item) => acc + item.price, 0);
+      return this.CartItems.reduce(
+        (acc, item) => acc + item.price + item.FoodModifiers.price,
+        0
+      );
     },
     ChangeDue() {
       if (this.PaidAmount) {
@@ -146,5 +149,6 @@ export default {
 .card-actions {
   position: absolute;
   bottom: 0;
+  text-align: center;
 }
 </style>
