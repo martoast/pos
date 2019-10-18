@@ -51,29 +51,30 @@
         </thead>
         <tbody>
           <tr
-            v-for="item in MenuItems"
+            v-for="item in CartItems"
             :key="item.name"
           >
             <td @click="DeleteItem(item)">{{ item.name }}</td>
             <td>{{ item.price }}</td>
-            <!-- <td>{{item.FoodModifiers}}</td> -->
+
           </tr>
 
           <tr
-            v-for="item in MenuItems"
-            :key="item.name"
+            v-for="item in CartItems"
+            :key="item.price"
           >
-            <td>{{item.name}}</td>
-            <td>{{ item.price }}</td>
+            <td>{{item.FoodModifiers.name}}</td>
+            <td>{{ item.FoodModifiers.price }}</td>
           </tr>
         </tbody>
 
-        <tfoot>
-          <tr>
-            <h4>Total: $ {{CartTotal}}</h4>
-          </tr>
-        </tfoot>
       </v-simple-table>
+      <v-card-actions class="card-actions">
+
+        <div>
+          <h2>Total: $ {{CartTotal}}</h2>
+        </div>
+      </v-card-actions>
 
     </v-card>
 
@@ -91,7 +92,8 @@ export default {
   },
   data() {
     return {
-      MenuItems: null,
+      CartItems: [],
+      Test: [],
 
       Total: [],
 
@@ -108,17 +110,18 @@ export default {
   created() {
     this.$nuxt.$on("test", data => {
       // this.total = data;
-      this.MenuItems = data;
-      console.log(this.MenuItems);
+      this.CartItems.push(data);
+      // this.FoodModifiers = this.CartItems.FoodModifiers;
+      console.log(this.CartItems);
     });
   },
   methods: {
     DeleteItem(item) {
-      // this.MenuItems.splice(item, 1);
-      // this.Total.splice(item, 1);
+      this.CartItems.splice(item, 1);
+      this.Total.splice(item, 1);
     },
     DeleteModifier(modifier) {
-      // this.MenuItems.splice(item, 1);
+      // this.CartItems.splice(item, 1);
       // this.Total.splice(item, 1);
     },
     selected(option) {
@@ -139,3 +142,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+.card-actions {
+  position: absolute;
+  bottom: 0;
+}
+</style>

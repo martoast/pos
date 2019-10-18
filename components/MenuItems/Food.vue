@@ -144,7 +144,7 @@ export default {
       FoodModifiers: null,
       ModifierList: [],
       Total: null,
-      Cart: [],
+      Cart: null,
       selected: ["John"],
       dialog: false,
       text: "center",
@@ -157,16 +157,6 @@ export default {
       }
     };
   },
-  mounted() {},
-
-  computed: {
-    // ModifierTotal() {
-    //   for (modifier in this.FoodModifiers) {
-    //     modifier.price += 0;
-    //     return modifier.price;
-    //   }
-    // }
-  },
 
   methods: {
     AddtoCart(item) {
@@ -178,18 +168,19 @@ export default {
     },
     AddModifierToList(Modifier) {
       this.ModifierList.push(Modifier);
+      // console.log(Modifier.name);
       // console.log("Adding Modifier to ModifierList");
-      // console.log(this.ModifierList);
+      // console.log(this.ModifierList[0]);
     },
     SendModifiers() {
-      this.Cart.push({
+      this.Cart = {
         name: this.FoodItem.name,
         price: this.FoodItem.price,
         id: this.FoodItem.id,
-        FoodModifiers: this.ModifierList
-      });
-      console.log(this.Cart);
-      // this.$nuxt.$emit("test", this.Cart);
+        FoodModifiers: this.ModifierList[0]
+      };
+
+      this.$nuxt.$emit("test", this.Cart);
       this.dialog = false;
     },
     handleResize() {
