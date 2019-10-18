@@ -162,7 +162,7 @@ export default {
     AddtoCart(item) {
       this.FoodModifiers = item.modifier;
       // console.log(this.FoodModifiers);
-      this.FoodItem = item;
+      this.FoodItem = item.name;
 
       //SET STATE WITH CART OBJECT
     },

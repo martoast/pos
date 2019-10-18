@@ -78,7 +78,12 @@
 
     </v-card>
 
-    <CheckOutModal />
+    <v-btn
+      height="50"
+      block
+      color="success"
+      :to="'/CheckOut'"
+    >CheckOut</v-btn>
 
   </div>
 </template>
@@ -136,6 +141,7 @@ export default {
         (acc, item) => acc + item.price + item.FoodModifiers.price,
         0
       );
+      this.$nuxt.$emit("total", CartTotal);
     },
     ChangeDue() {
       if (this.PaidAmount) {
