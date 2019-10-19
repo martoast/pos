@@ -4,27 +4,19 @@ export const state = () => ({
 })
 
 export const mutations = {
-  SET_MENUS(state, MENU) {
+  SET_MENU(state, MENU) {
     state.Food = MENU
-  },
-  SET_RECIPE(state, recipe) {
-    state.recipe = recipe
   }
+
 
 }
 export const actions = {
   fetchMenus({
     commit
   }) {
-    return MenuService.getMenus().then(response => {
-      commit('SET_MENUS', response.data)
+    return MenuService.getMenu().then(response => {
+      commit('SET_MENU', response.data)
     })
   },
-  fetchRecipe({
-    commit
-  }, id) {
-    return MenuService.getMenus(id).then(function (response) {
-      commit('SET_RECIPE', response.data)
-    })
-  },
+
 }

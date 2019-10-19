@@ -139,7 +139,7 @@ export default {
   },
   data() {
     return {
-      // MenuItems: this.$store.state.MenuItems.Food,
+      MenuItems: null,
       FoodItem: null,
       SelectedModifiers: [],
       FoodModifiers: null,
@@ -158,27 +158,39 @@ export default {
       }
     };
   },
+  created() {
+    fetch("http://localhost:3002/food")
+      .then(response => response.json())
+      .then(response => {
+        // this.MenuItems = response.data;
+        console.log(response);
+        this.MenuItems = response;
+      });
+  },
+
+  // async fetch({ store, error }) {
+  //   try {
+  //     await store.dispatch("MenuItems/fetchMenus");
+  //   } catch (e) {
+  //     error({
+  //       statusCode: 503,
+  //       message: "Unable to fetch Menu at this time."
+  //     });
+  //   }
+  // },
+
   computed: {
-    ...mapState({
-      MenuItems: state => state.MenuItems.Food
-    }),
-    async fetch({ store, error }) {
-      try {
-        await store.dispatch("MenuService/fetchMenus");
-      } catch (e) {
-        error({
-          statusCode: 503,
-          message: "Unable to fetch Menu at this time."
-        });
-      }
-    }
+    // ...mapState({
+    //   MenuItems: state => state.MenuItems.Food
+    // })
   },
 
   methods: {
     AddtoCart(item) {
+      // console.log(item);
       this.FoodModifiers = item.modifier;
       // console.log(this.FoodModifiers);
-      this.FoodItem = item.name;
+      this.FoodItem = item;
 
       //SET STATE WITH CART OBJECT
     },
