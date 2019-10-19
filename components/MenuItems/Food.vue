@@ -131,6 +131,7 @@
 </template>
 <script>
 import SearchBar from "~/components/SearchBar.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -138,7 +139,7 @@ export default {
   },
   data() {
     return {
-      MenuItems: this.$store.state.MenuItems.Food,
+      // MenuItems: this.$store.state.MenuItems.Food,
       FoodItem: null,
       SelectedModifiers: [],
       FoodModifiers: null,
@@ -156,6 +157,21 @@ export default {
         height: 0
       }
     };
+  },
+  computed: {
+    ...mapState({
+      MenuItems: state => state.MenuItems.Food
+    }),
+    async fetch({ store, error }) {
+      try {
+        await store.dispatch("MenuService/fetchMenus");
+      } catch (e) {
+        error({
+          statusCode: 503,
+          message: "Unable to fetch Menu at this time."
+        });
+      }
+    }
   },
 
   methods: {

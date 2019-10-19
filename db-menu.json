@@ -1,0 +1,79 @@
+{
+  "Food": [{
+      "name": "AssPickle",
+      "price": 7.99,
+      "id": 1,
+      "size": ["small", "medium", "large"],
+      "modifier": [{
+          "id": 21345,
+          "name": "Extra Peperoni",
+          "price": 2.99
+        },
+        {
+          "id": 234561,
+          "name": "Extra Cheese",
+          "price": 3.99
+        },
+        {
+          "id": 2356783,
+          "name": "Extra Peperoni",
+          "price": 2.99
+        }
+
+      ]
+
+    },
+    {
+      "name": "Pizza",
+      "price": 13.99,
+      "id": 2,
+      "size": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "modifier": [{
+          "id": 21324356,
+          "name": "Extra Peperoni",
+          "price": 2.99
+        },
+        {
+          "id": 2345612365,
+          "name": "Extra Cheese",
+          "price": 3.99
+        },
+        {
+          "id": 2356783,
+          "name": "Extra Sauce",
+          "price": 2.99
+        }
+      ]
+    },
+    {
+      "name": "Burger",
+      "price": 15.99,
+      "id": 3,
+      "size": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "modifier": [{
+          "id": 223456,
+          "name": "Extra Meat",
+          "price": 2.99
+        },
+        {
+          "id": 2345526,
+          "name": "Extra Cheese",
+          "price": 3.99
+        },
+        {
+          "id": 2356732456,
+          "name": "Extra Fries",
+          "price": 2.99
+        }
+      ]
+    }
+  ]
+}
