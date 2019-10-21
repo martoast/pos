@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="section has-text-centered">
-      <!-- <SearchBar /> -->
+      <SearchBar />
       <div>
         <v-item-group multiple>
           <v-container>
@@ -40,7 +40,7 @@
             >
               <v-card class="primary">
                 <v-card-title>
-                  <span class="headline">{{FoodItem}}</span>
+                  <span class="headline">{{this.FoodItemName}}</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
@@ -50,68 +50,69 @@
                         sm="6"
                       >
                         <v-select
-                          :items="['Small', 'Medium', 'Large']"
+                          :items="this.ItemSizes"
                           label="Size*"
                           required
+                          v-model="selectedSize"
                         ></v-select>
+
+                        <div>
+                          <v-item-group multiple>
+                            <v-container>
+                              <v-row>
+                                <v-col
+                                  v-for="Modifier in FoodModifiers"
+                                  :key="Modifier.name"
+                                >
+                                  <v-item v-slot:default="{ active, toggle }">
+                                    <v-card
+                                      :color="active ? 'secondary' : ''"
+                                      class="rounded-card"
+                                      dark
+                                      height="200"
+                                      @click="AddModifierToList(Modifier)"
+                                    >
+                                      <v-list-item-title class="headline mb-1">{{Modifier.name}}</v-list-item-title>
+                                      <v-scroll-y-transition>
+                                        <div
+                                          v-if="active"
+                                          class="display-3 flex-grow-1 text-center"
+                                        >
+                                          Active
+                                        </div>
+                                      </v-scroll-y-transition>
+                                    </v-card>
+                                  </v-item>
+                                </v-col>
+                              </v-row>
+                            </v-container>
+                          </v-item-group>
+                        </div>
                       </v-col>
 
-                      <v-col
-                        cols="12"
-                        sm="6"
-                      >
-                        <v-select
-                          :items="['Small', 'Medium', 'Large']"
-                          label="Size*"
-                          required
-                        ></v-select>
-                      </v-col>
+                      <v-textarea
+                        filled
+                        auto-grow
+                        label="Notes for Kitchen"
+                        rows="4"
+                        row-height="30"
+                        shaped
+                        v-model="KitchenNotes"
+                      ></v-textarea>
+
                     </v-row>
 
                   </v-container>
                   <small>*indicates required field</small>
                 </v-card-text>
                 <div>
-                  <div>
-                    <v-item-group multiple>
-                      <v-container>
-                        <v-row>
-                          <v-col
-                            v-for="Modifier in FoodModifiers"
-                            :key="Modifier.name"
-                            cols="12"
-                            md="4"
-                          >
-                            <v-item v-slot:default="{ active, toggle }">
-                              <v-card
-                                :color="active ? 'secondary' : ''"
-                                class="rounded-card"
-                                dark
-                                height="200"
-                                @click="AddModifierToList(Modifier)"
-                              >
-                                <v-list-item-title class="headline mb-1">{{Modifier.name}}</v-list-item-title>
-                                <v-scroll-y-transition>
-                                  <div
-                                    v-if="active"
-                                    class="display-3 flex-grow-1 text-center"
-                                  >
-                                    Active
-                                  </div>
-                                </v-scroll-y-transition>
-                              </v-card>
-                            </v-item>
-                          </v-col>
-                        </v-row>
-                      </v-container>
-                    </v-item-group>
-                  </div>
+
                   <v-card-actions>
                     <div class="flex-grow-1"></div>
                     <v-btn
                       color="blue darken-1"
                       text
-                      @click="SendModifiers()"
+                      @click="dialog = false"
                     >Close</v-btn>
                     <v-btn
                       color="blue darken-1"
@@ -141,9 +142,13 @@ export default {
     return {
       MenuItems: null,
       FoodItem: null,
+      FoodItemName: null,
       SelectedModifiers: [],
       FoodModifiers: null,
       ModifierList: [],
+      KitchenNotes: "",
+      selectedSize: null,
+      ItemSizes: null,
       Total: null,
       Cart: null,
       selected: ["John"],
@@ -189,14 +194,17 @@ export default {
     AddtoCart(item) {
       // console.log(item);
       this.FoodModifiers = item.modifier;
+      this.ItemSizes = item.size;
       // console.log(this.FoodModifiers);
       this.FoodItem = item;
+      this.FoodItemName = item.name;
+      console.log(this.FoodItemName);
 
       //SET STATE WITH CART OBJECT
     },
     AddModifierToList(Modifier) {
       this.ModifierList.push(Modifier);
-      // console.log(Modifier.name);
+      // console.log(this.KitchenNotes);
       // console.log("Adding Modifier to ModifierList");
       // console.log(this.ModifierList[0]);
     },
@@ -205,7 +213,9 @@ export default {
         name: this.FoodItem.name,
         price: this.FoodItem.price,
         id: this.FoodItem.id,
-        FoodModifiers: this.ModifierList[0]
+        FoodModifiers: this.ModifierList[0],
+        Notes: this.KitchenNotes,
+        size: this.selectedSize
       };
 
       this.$nuxt.$emit("test", this.Cart);

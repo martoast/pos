@@ -58,6 +58,13 @@
             <td>{{ item.price }}</td>
 
           </tr>
+          <tr
+            v-for="item in CartItems"
+            :key="item.id"
+          >
+            <td>{{item.size}}</td>
+            <!-- <td>{{ item.FoodModifiers.price }}</td> -->
+          </tr>
 
           <tr
             v-for="item in CartItems"
@@ -66,6 +73,7 @@
             <td>{{item.FoodModifiers.name}}</td>
             <td>{{ item.FoodModifiers.price }}</td>
           </tr>
+
         </tbody>
 
       </v-simple-table>

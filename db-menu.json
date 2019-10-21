@@ -74,6 +74,56 @@
           "price": 2.99
         }
       ]
+    },
+    {
+      "name": "Caldo Tlalpeno",
+      "price": 13.95,
+      "id": 4,
+      "size": [
+        "medium",
+        "large"
+      ],
+      "modifier": [{
+          "id": 22334567,
+          "name": "Extra Chicken",
+          "price": 4.99
+        },
+        {
+          "id": 34567245,
+          "name": "Extra Chipotle",
+          "price": 0.99
+        },
+        {
+          "id": 235673243652,
+          "name": "Extra Tortillas",
+          "price": 2.99
+        }
+      ]
+    },
+    {
+      "name": "Sandwich",
+      "price": 8.95,
+      "id": 5,
+      "size": [
+        "Half",
+        "Full"
+      ],
+      "modifier": [{
+          "id": 234562,
+          "name": "Extra Turkey",
+          "price": 4.99
+        },
+        {
+          "id": 34567945,
+          "name": "Extra Avocado",
+          "price": 3.99
+        },
+        {
+          "id": 23465457,
+          "name": "Toasted",
+          "price": 0.00
+        }
+      ]
     }
   ]
 }
