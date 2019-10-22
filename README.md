@@ -72,3 +72,5 @@ the food component sets the baseitem and the ItemAddOn component pushes the sele
 
 The ItemAddOn Component emmits an array of the selected modifiers, However the Food Component listening to that is setting the data
 in a in the created lifcycle and therefore it is not receiving the modifiers array
+
+gonna switch back to having the checkout button be the switch for a modal

@@ -85,13 +85,146 @@
       </v-card-actions>
 
     </v-card>
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="600px"
+    >
+      <template v-slot:activator="{ on }">
 
-    <v-btn
-      height="50"
-      block
-      color="success"
-      :to="'/CheckOut'"
-    >CheckOut</v-btn>
+        <v-btn
+          height="50"
+          block
+          color="success"
+          @click="SendTotal()"
+          v-on="on"
+        >CheckOut</v-btn>
+      </template>
+      <v-card>
+        <v-card flat>
+
+          <v-tabs
+            fixed-tabs
+            background-color="indigo"
+            dark
+            height="64"
+            v-model="tab"
+          >
+            <v-tab>Pay with Cash</v-tab>
+            <v-tab>Pay with Card</v-tab>
+            <v-tabs-items v-model="tab">
+              <v-tab-item>
+                <v-card elevation="12">
+                  <h3 class="center">Choose Amount</h3>
+                  <v-row class="center">
+                    <v-btn
+                      x-large
+                      class="ma-2"
+                      tile
+                      outlined
+                      color="success"
+                      v-on:click="PaidAmount += 1"
+                    >$1.00</v-btn>
+                    <v-btn
+                      x-large
+                      class="ma-2"
+                      tile
+                      outlined
+                      color="success"
+                      v-on:click="PaidAmount += 5"
+                    >$5.00</v-btn>
+                    <v-btn
+                      x-large
+                      class="ma-2"
+                      tile
+                      outlined
+                      color="success"
+                      v-on:click="PaidAmount += 10"
+                    >$10.00</v-btn>
+                    <v-btn
+                      x-large
+                      class="ma-2"
+                      tile
+                      outlined
+                      color="success"
+                      v-on:click="PaidAmount += 20"
+                    >$20.00</v-btn>
+                    <v-btn
+                      x-large
+                      class="ma-2"
+                      tile
+                      outlined
+                      color="success"
+                      v-on:click="PaidAmount += CartTotal"
+                    >Exact</v-btn>
+                  </v-row>
+                  <v-row justify="center">
+
+                    <v-col
+                      cols="12"
+                      sm="6"
+                    >
+
+                      <v-text-field
+                        v-model="PaidAmount"
+                        filled
+                        label="Enter Amount"
+                        clearable
+                      ></v-text-field>
+
+                    </v-col>
+                  </v-row>
+
+                  <v-row justify="center">
+
+                    <h2>
+                      Change Due: ${{ChangeDue}}
+                    </h2>
+                  </v-row>
+
+                  <div>
+                    <v-card-actions>
+                      <v-spacer />
+
+                      <v-btn
+                        x-large
+                        right
+                        color="success"
+                        dark
+                        :to="'/'"
+                        @click="OrderFinish()"
+                      >Pay ${{PaidAmount}}</v-btn>
+                    </v-card-actions>
+                  </div>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item>
+                <v-card-text></v-card-text>
+                <v-card>
+                  <v-text-field label="Sign here*"></v-text-field>
+                  <small>*indicates required field</small>
+                  <v-card-actions>
+                    <v-spacer />
+
+                    <v-btn
+                      x-large
+                      right
+                      color="success"
+                      dark
+                      @click="dialog = false"
+                    >Pay ${{PaidAmount}}</v-btn>
+
+                  </v-card-actions>
+                </v-card>
+              </v-tab-item>
+            </v-tabs-items>
+          </v-tabs>
+
+          <v-divider></v-divider>
+        </v-card>
+
+      </v-card>
+    </v-dialog>
 
   </div>
 </template>
@@ -107,6 +240,9 @@ export default {
     return {
       CartItems: [],
       Test: [],
+      dialog: false,
+      PaidAmount: null,
+      tab: null,
 
       Total: [],
 
@@ -141,19 +277,30 @@ export default {
       console.log(option.title);
       this.OrderType = option.title;
       this.icon = option.icon;
+    },
+    SendTotal() {
+      alert("Cheking out");
+      this.$nuxt.$emit("total", this.CartItems);
+    },
+    OrderFinish() {
+      this.dialog = false;
+      this.CartItems = [];
+      console.log(this.CartItems);
     }
   },
+
   computed: {
     CartTotal() {
       return this.CartItems.reduce(
         (acc, item) => acc + item.price + item.FoodModifiers.price,
         0
       );
-      this.$nuxt.$emit("total", CartTotal);
     },
     ChangeDue() {
-      if (this.PaidAmount) {
-        return (this.ChangeDue = this.CartTotal - this.PaidAmount);
+      if (this.PaidAmount > this.CartTotal) {
+        return (this.PaidAmount - this.CartTotal).toFixed(2);
+      } else {
+        return "0.00";
       }
     }
   }

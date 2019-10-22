@@ -1,6 +1,6 @@
 {
   "Food": [{
-      "name": "AssPickle",
+      "name": "Pickle",
       "price": 7.99,
       "id": 1,
       "size": ["small", "medium", "large"],
@@ -123,6 +123,90 @@
           "name": "Toasted",
           "price": 0.00
         }
+      ]
+    },
+    {
+      "name": "Hot Dog",
+      "price": 5.95,
+      "id": 6,
+      "size": [
+        "half",
+        "Full"
+      ],
+      "modifier": [{
+          "id": 234534563,
+          "name": "Extra Sausage",
+          "price": 4.99
+        },
+        {
+          "id": 34567945,
+          "name": "Extra Onion",
+          "price": 3.99
+        }
+
+      ]
+    },
+    {
+      "name": "Sopa Pho",
+      "price": 13.95,
+      "id": 7,
+      "size": [
+        "half",
+        "Full"
+      ],
+      "modifier": [{
+          "id": 234534563,
+          "name": "Extra Meat",
+          "price": 4.99
+        },
+        {
+          "id": 34567345945,
+          "name": "Extra Noodles",
+          "price": 3.99
+        }
+
+      ]
+    },
+    {
+      "name": "Flan",
+      "price": 8.95,
+      "id": 8,
+      "size": [
+        "half",
+        "Full"
+      ],
+      "modifier": [{
+          "id": 234534563345,
+          "name": "Extra Caramel",
+          "price": 4.99
+        },
+        {
+          "id": 345679445345,
+          "name": "Ice Cream",
+          "price": 3.99
+        }
+
+      ]
+    },
+    {
+      "name": "Chocolate Cake",
+      "price": 5.95,
+      "id": 9,
+      "size": [
+        "half",
+        "Full"
+      ],
+      "modifier": [{
+          "id": 234345534563,
+          "name": "Extra Chocolate",
+          "price": 4.99
+        },
+        {
+          "id": 34563457945,
+          "name": "Ice Cream",
+          "price": 3.99
+        }
+
       ]
     }
   ]

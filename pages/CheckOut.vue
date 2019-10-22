@@ -143,14 +143,16 @@
                     <small>*indicates required field</small>
                     <v-card-actions>
                       <v-spacer />
+                      <template v-slot:activator="{ on }">
 
-                      <v-btn
-                        x-large
-                        right
-                        color="success"
-                        dark
-                        :to="'/'"
-                      >Pay Now</v-btn>
+                        <v-btn
+                          x-large
+                          right
+                          color="success"
+                          dark
+                          :to="'/'"
+                        >Pay Now</v-btn>
+                      </template>
                     </v-card-actions>
                   </v-card>
                 </v-tab-item>
@@ -177,7 +179,9 @@ export default {
   },
   created() {
     this.$nuxt.$on("total", data => {
+      console.log("tesign");
       this.Total = data;
+      console.log(this.Total);
     });
   },
   methods: {

@@ -36,7 +36,7 @@
             <v-dialog
               v-model="dialog"
               persistent
-              max-width="1000px"
+              max-width="400px"
             >
               <v-card class="primary">
                 <v-card-title>
@@ -45,50 +45,46 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                      >
-                        <v-select
-                          :items="this.ItemSizes"
-                          label="Size*"
-                          required
-                          v-model="selectedSize"
-                        ></v-select>
 
-                        <div>
-                          <v-item-group multiple>
-                            <v-container>
-                              <v-row>
-                                <v-col
-                                  v-for="Modifier in FoodModifiers"
-                                  :key="Modifier.name"
-                                >
-                                  <v-item v-slot:default="{ active, toggle }">
-                                    <v-card
-                                      :color="active ? 'secondary' : ''"
-                                      class="rounded-card"
-                                      dark
-                                      height="200"
-                                      @click="AddModifierToList(Modifier)"
-                                    >
-                                      <v-list-item-title class="headline mb-1">{{Modifier.name}}</v-list-item-title>
-                                      <v-scroll-y-transition>
-                                        <div
-                                          v-if="active"
-                                          class="display-3 flex-grow-1 text-center"
-                                        >
-                                          Active
-                                        </div>
-                                      </v-scroll-y-transition>
-                                    </v-card>
-                                  </v-item>
-                                </v-col>
-                              </v-row>
-                            </v-container>
-                          </v-item-group>
-                        </div>
-                      </v-col>
+                      <v-select
+                        :items="this.ItemSizes"
+                        label="Size*"
+                        required
+                        v-model="selectedSize"
+                      ></v-select>
+
+                      <div>
+                        <v-item-group multiple>
+                          <v-container>
+                            <v-row>
+                              <v-col
+                                v-for="Modifier in FoodModifiers"
+                                :key="Modifier.name"
+                              >
+                                <v-item v-slot:default="{ active, toggle }">
+                                  <v-card
+                                    :color="active ? 'secondary' : ''"
+                                    class="rounded-card"
+                                    dark
+                                    height="100"
+                                    @click="AddModifierToList(Modifier)"
+                                  >
+                                    <v-list-item-title class="headline mb-1">{{Modifier.name}}</v-list-item-title>
+                                    <v-scroll-y-transition>
+                                      <div
+                                        v-if="active"
+                                        class="display-3 flex-grow-1 text-center"
+                                      >
+                                        Active
+                                      </div>
+                                    </v-scroll-y-transition>
+                                  </v-card>
+                                </v-item>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                        </v-item-group>
+                      </div>
 
                       <v-textarea
                         filled
