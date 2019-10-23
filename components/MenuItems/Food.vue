@@ -149,17 +149,6 @@ export default {
       });
   },
 
-  // async fetch({ store, error }) {
-  //   try {
-  //     await store.dispatch("MenuItems/fetchMenus");
-  //   } catch (e) {
-  //     error({
-  //       statusCode: 503,
-  //       message: "Unable to fetch Menu at this time."
-  //     });
-  //   }
-  // },
-
   computed: {
     Total() {}
   },
@@ -173,14 +162,9 @@ export default {
       this.FoodItem = item;
       this.FoodItemName = item.name;
       console.log(this.FoodItemName);
-
-      //SET STATE WITH CART OBJECT
     },
     AddModifierToList(Modifier) {
       this.ModifierList.push(Modifier);
-      // console.log(this.KitchenNotes);
-      // console.log("Adding Modifier to ModifierList");
-      // console.log(this.ModifierList[0]);
     },
     SendModifiers() {
       let ModifiersTotal = this.ModifierList.reduce(

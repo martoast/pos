@@ -70,7 +70,7 @@
             v-for="item in FoodModifiers"
             :key="item.price"
           >
-            <td>{{item.name}}</td>
+            <td @click="DeleteModifier(item)">{{item.name}}</td>
             <td>
               {{ item.price }}
             </td>
@@ -273,10 +273,10 @@ export default {
   methods: {
     DeleteItem(item) {
       this.CartItems.splice(item, 1);
-      this.Total.splice(item, 1);
+      this.FoodModifiers = null;
     },
-    DeleteModifier(modifier) {
-      // this.CartItems.splice(item, 1);
+    DeleteModifier(item) {
+      this.FoodModifiers.splice(item, 1);
       // this.Total.splice(item, 1);
     },
     selected(option) {
