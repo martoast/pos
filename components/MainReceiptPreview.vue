@@ -67,11 +67,13 @@
           </tr>
 
           <tr
-            v-for="item in CartItems"
+            v-for="item in FoodModifiers"
             :key="item.price"
           >
-            <td>{{item.FoodModifiers.name}}</td>
-            <td>{{ item.FoodModifiers.price }}</td>
+            <td>{{item.name}}</td>
+            <td>
+              {{ item.price }}
+            </td>
           </tr>
 
         </tbody>
@@ -239,6 +241,7 @@ export default {
   data() {
     return {
       CartItems: [],
+      FoodModifiers: null,
       Test: [],
       dialog: false,
       PaidAmount: null,
@@ -259,9 +262,12 @@ export default {
   created() {
     this.$nuxt.$on("test", data => {
       // this.total = data;
+      console.log(data.FoodModifiers);
+      this.FoodModifiers = data.FoodModifiers;
       this.CartItems.push(data);
       // this.FoodModifiers = this.CartItems.FoodModifiers;
-      console.log(this.CartItems);
+      // console.log(this.CartItems);
+      // console.log(this.CartItems.FoodModifiers);
     });
   },
   methods: {
@@ -291,10 +297,11 @@ export default {
 
   computed: {
     CartTotal() {
-      return this.CartItems.reduce(
-        (acc, item) => acc + item.price + item.FoodModifiers.price,
-        0
-      );
+      var Modifiers = this.FoodModifiers;
+      // return this.CartItems.reduce(
+      //   (acc, item) => acc + item.price + item.FoodModifiers.price,
+      //   0
+      // );
     },
     ChangeDue() {
       if (this.PaidAmount > this.CartTotal) {

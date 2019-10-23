@@ -52,38 +52,18 @@
                         required
                         v-model="selectedSize"
                       ></v-select>
-
                       <div>
-                        <v-item-group multiple>
-                          <v-container>
-                            <v-row>
-                              <v-col
-                                v-for="Modifier in FoodModifiers"
-                                :key="Modifier.name"
-                              >
-                                <v-item v-slot:default="{ active, toggle }">
-                                  <v-card
-                                    :color="active ? 'secondary' : ''"
-                                    class="rounded-card"
-                                    dark
-                                    height="100"
-                                    @click="AddModifierToList(Modifier)"
-                                  >
-                                    <v-list-item-title class="headline mb-1">{{Modifier.name}}</v-list-item-title>
-                                    <v-scroll-y-transition>
-                                      <div
-                                        v-if="active"
-                                        class="display-3 flex-grow-1 text-center"
-                                      >
-                                        Active
-                                      </div>
-                                    </v-scroll-y-transition>
-                                  </v-card>
-                                </v-item>
-                              </v-col>
-                            </v-row>
-                          </v-container>
-                        </v-item-group>
+                        <v-container
+                          v-for="Modifier in FoodModifiers"
+                          :key="Modifier.name"
+                        >
+
+                          <v-checkbox
+                            v-model="ModifierList"
+                            :label=Modifier.name
+                            :value=Modifier
+                          ></v-checkbox>
+                        </v-container>
                       </div>
 
                       <v-textarea
@@ -147,7 +127,7 @@ export default {
       ItemSizes: null,
       Total: null,
       Cart: null,
-      selected: ["John"],
+
       dialog: false,
       text: "center",
       model: null,
@@ -209,7 +189,7 @@ export default {
         name: this.FoodItem.name,
         price: this.FoodItem.price,
         id: this.FoodItem.id,
-        FoodModifiers: this.ModifierList[0],
+        FoodModifiers: this.ModifierList,
         Notes: this.KitchenNotes,
         size: this.selectedSize
       };
