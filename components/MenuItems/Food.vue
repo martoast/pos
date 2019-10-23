@@ -125,7 +125,7 @@ export default {
       KitchenNotes: "",
       selectedSize: null,
       ItemSizes: null,
-      Total: null,
+
       Cart: null,
 
       dialog: false,
@@ -161,9 +161,7 @@ export default {
   // },
 
   computed: {
-    // ...mapState({
-    //   MenuItems: state => state.MenuItems.Food
-    // })
+    Total() {}
   },
 
   methods: {
@@ -185,16 +183,22 @@ export default {
       // console.log(this.ModifierList[0]);
     },
     SendModifiers() {
+      let ModifiersTotal = this.ModifierList.reduce(
+        (acc, item) => acc + item.price,
+        0
+      );
       this.Cart = {
         name: this.FoodItem.name,
         price: this.FoodItem.price,
         id: this.FoodItem.id,
         FoodModifiers: this.ModifierList,
         Notes: this.KitchenNotes,
-        size: this.selectedSize
+        size: this.selectedSize,
+        ModifiersTotal: ModifiersTotal
       };
 
       this.$nuxt.$emit("test", this.Cart);
+      this.ModifierList = [];
       this.dialog = false;
     },
     handleResize() {

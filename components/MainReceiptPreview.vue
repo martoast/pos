@@ -262,11 +262,11 @@ export default {
   created() {
     this.$nuxt.$on("test", data => {
       // this.total = data;
-      console.log(data.FoodModifiers);
+      // console.log(data.FoodModifiers);
       this.FoodModifiers = data.FoodModifiers;
       this.CartItems.push(data);
       // this.FoodModifiers = this.CartItems.FoodModifiers;
-      // console.log(this.CartItems);
+      console.log(this.CartItems);
       // console.log(this.CartItems.FoodModifiers);
     });
   },
@@ -297,11 +297,10 @@ export default {
 
   computed: {
     CartTotal() {
-      var Modifiers = this.FoodModifiers;
-      // return this.CartItems.reduce(
-      //   (acc, item) => acc + item.price + item.FoodModifiers.price,
-      //   0
-      // );
+      return this.CartItems.reduce(
+        (acc, item) => acc + item.price + item.ModifiersTotal,
+        0
+      );
     },
     ChangeDue() {
       if (this.PaidAmount > this.CartTotal) {
