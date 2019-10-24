@@ -171,7 +171,7 @@ export default {
         (acc, item) => acc + item.price,
         0
       );
-      this.Cart = {
+      const order = {
         name: this.FoodItem.name,
         price: this.FoodItem.price,
         id: this.FoodItem.id,
@@ -181,7 +181,9 @@ export default {
         ModifiersTotal: ModifiersTotal
       };
 
-      this.$nuxt.$emit("test", this.Cart);
+      this.$nuxt.$emit("test", order);
+      const messageRef = this.$fireStore.collection("orders").doc("order");
+      messageRef.set(order);
       this.ModifierList = [];
       this.dialog = false;
     },

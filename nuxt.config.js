@@ -41,6 +41,48 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    [
+      'nuxt-fire',
+      {
+        // Required:
+        config: {
+          development: {
+            apiKey: "AIzaSyCV24nB2g3dfjCec3MsiqoSxne_uyRMqmw",
+            authDomain: "pos-system-b026b.firebaseapp.com",
+            databaseURL: "https://pos-system-b026b.firebaseio.com",
+            projectId: "pos-system-b026b",
+            storageBucket: "pos-system-b026b.appspot.com",
+            messagingSenderId: "742181668926",
+            appId: "1:742181668926:web:cdc027ffbe0572469d296f",
+            measurementId: "G-R54P1TH9TJ"
+
+          },
+          production: {
+            apiKey: "AIzaSyCV24nB2g3dfjCec3MsiqoSxne_uyRMqmw",
+            authDomain: "pos-system-b026b.firebaseapp.com",
+            databaseURL: "https://pos-system-b026b.firebaseio.com",
+            projectId: "pos-system-b026b",
+            storageBucket: "pos-system-b026b.appspot.com",
+            messagingSenderId: "742181668926",
+            appId: "1:742181668926:web:cdc027ffbe0572469d296f",
+            measurementId: "G-R54P1TH9TJ"
+          }
+        },
+        // The following options are optional:
+        useOnly: ['auth', 'firestore', 'functions', 'storage', 'realtimeDb', 'messaging', 'performance', 'analytics', 'remoteConfig'],
+        customEnv: false,
+        functionsLocation: 'us-central1',
+        remoteConfig: {
+          settings: {
+            fetchTimeoutMillis: 60000,
+            minimumFetchIntervalMillis: 43200000,
+          },
+          defaultConfig: {
+            'welcome_message': 'Welcome'
+          }
+        }
+      }
+    ]
   ],
   /*
   ** vuetify module configuration
