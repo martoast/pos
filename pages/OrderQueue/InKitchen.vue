@@ -143,9 +143,10 @@
             <v-btn
               color="green darken-1"
               text
-              @click="dialog = false"
+              @click="OrderReady()"
+              to="/OrderQueue/InKitchen"
             >
-              Send to Kitchen
+              Order Ready
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -167,7 +168,8 @@ export default {
       itemsPerPage: 4,
       sortBy: "name",
       keys: ["Pizza", "Soda", "Salad", "Name", "Tax", "ID"],
-      items: []
+      items: [],
+      order: null
     };
   },
   created() {
@@ -202,7 +204,18 @@ export default {
       this.itemsPerPage = number;
     },
     motal(item) {
-      console.log(item);
+      // console.log(item.id);
+      this.order = item;
+    },
+    OrderReady() {
+      console.log(this.order.id);
+      const messageRef = this.$fireStore
+        .collection("ready-to-go")
+        .doc(this.order.id);
+      messageRef.set(this.order);
+      const orderRef = this.$fireStore.collection("orders").doc(this.order.id);
+      orderRef.delete();
+      this.dialog = false;
     }
   }
 };
