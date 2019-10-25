@@ -213,16 +213,20 @@ export default {
       let OrderTotal = ModifiersTotal + this.FoodItem.price;
       OrderTotal = OrderTotal.toFixed(2);
       // console.log(OrderTotal);
-      this.$nuxt.$on("OrderType", data => {
-        console.log(data);
-        this.OrderType = data;
-      });
+      // this.$nuxt.$on("OrderType", data => {
+      //   console.log(data);
+      //   this.OrderType = data;
+      // });
+      let OrderID = Math.random()
+        .toString(36)
+        .substr(2, 9);
       const order = {
+        id: OrderID,
         OrderTotal: OrderTotal,
         OrderType: this.OrderType,
         name: this.FoodItem.name,
         price: this.FoodItem.price,
-        id: this.FoodItem.id,
+        Foodid: this.FoodItem.id,
         FoodModifiers: this.ModifierList,
         Notes: this.KitchenNotes,
         size: this.selectedSize,
@@ -230,7 +234,7 @@ export default {
       };
 
       this.$nuxt.$emit("test", order);
-      const messageRef = this.$fireStore.collection("orders").doc("order");
+      const messageRef = this.$fireStore.collection("orders").doc(OrderID);
       messageRef.set(order);
       this.ModifierList = [];
       this.dialog = false;
