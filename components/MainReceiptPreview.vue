@@ -82,7 +82,7 @@
       <v-card-actions class="card-actions">
 
         <div>
-          <h2>Total: $ {{CartTotal}}</h2>
+          <h2>Total: $ {{this.CartTotal}}</h2>
         </div>
       </v-card-actions>
 
@@ -98,7 +98,6 @@
           height="50"
           block
           color="success"
-          @click="SendTotal()"
           v-on="on"
         >CheckOut</v-btn>
       </template>
@@ -157,7 +156,7 @@
                       tile
                       outlined
                       color="success"
-                      v-on:click="PaidAmount += CartTotal"
+                      v-on:click="PaidAmount += this.CartTotal"
                     >Exact</v-btn>
                   </v-row>
                   <v-row justify="center">
@@ -246,6 +245,7 @@ export default {
       dialog: false,
       PaidAmount: null,
       tab: null,
+      CartTotal: null,
 
       Total: [],
 
@@ -264,9 +264,11 @@ export default {
       // this.total = data;
       // console.log(data.FoodModifiers);
       this.FoodModifiers = data.FoodModifiers;
+      this.CartTotal = data.OrderTotal;
+      console.log(this.CartTotal);
       this.CartItems.push(data);
       // this.FoodModifiers = this.CartItems.FoodModifiers;
-      console.log(this.CartItems);
+      // console.log(this.CartItems);
       // console.log(this.CartItems.FoodModifiers);
     });
   },
@@ -280,14 +282,12 @@ export default {
       // this.Total.splice(item, 1);
     },
     selected(option) {
-      console.log(option.title);
-      this.OrderType = option.title;
-      this.icon = option.icon;
+      // console.log(option.title);
+      this.$nuxt.$emit("OrderType", option);
+      // this.OrderType = option.title;
+      // this.icon = option.icon;
     },
-    SendTotal() {
-      alert("Cheking out");
-      this.$nuxt.$emit("total", this.CartItems);
-    },
+
     OrderFinish() {
       this.dialog = false;
       this.CartItems = [];
@@ -296,12 +296,6 @@ export default {
   },
 
   computed: {
-    CartTotal() {
-      return this.CartItems.reduce(
-        (acc, item) => acc + item.price + item.ModifiersTotal,
-        0
-      );
-    },
     ChangeDue() {
       if (this.PaidAmount > this.CartTotal) {
         return (this.PaidAmount - this.CartTotal).toFixed(2);

@@ -1,246 +1,216 @@
 <template>
   <div>
-    <div>
-      <v-row>
-        <v-col
-          v-for="Delivery in Deliveries"
-          :key="Delivery.id"
-          cols="12"
-          md="4"
-        >
-          <v-card
-            class="mx-auto"
-            max-width="344"
-            outlined
-          >
-            <v-list-item three-line>
-              <v-list-item-content>
-                <div class="overline mb-4">Delivery</div>
-                <v-list-item-title class="headline mb-1">Order ID: #{{Delivery.id}}</v-list-item-title>
-                <v-list-item-subtitle>Order ID:{{Delivery.id}}</v-list-item-subtitle>
-              </v-list-item-content>
-              <v-avatar
-                tile
-                color="blue"
+
+    <v-container fluid>
+      <v-data-iterator
+        :items="items"
+        :items-per-page.sync="itemsPerPage"
+        :page="page"
+        :search="search"
+        :sort-by="sortBy.toLowerCase()"
+        :sort-desc="sortDesc"
+        hide-default-footer
+      >
+
+        <template v-slot:default="props">
+          <v-row class="ma-10 pa-10">
+            <v-col
+              v-for="item in items"
+              :key="item.id"
+              cols="12"
+              sm="6"
+              md="4"
+              lg="3"
+            >
+              <v-card
+                @click="motal(item)"
+                @click.stop="dialog = true"
               >
-                <v-icon dark>mdi-alarm</v-icon>
-              </v-avatar>
-            </v-list-item>
-            <pre>
-            {{Delivery.order}}
-          </pre>
+                <v-card-title class="subheading font-weight-bold">Order ID: #{{ item.id }}</v-card-title>
 
-            <v-card-actions>
-              <v-btn text>View Details</v-btn>
-              <v-btn text>Ready To-Go</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
+                <v-divider></v-divider>
 
-    </div>
-    <div>
-      <v-row>
-        <v-col
-          v-for="PickUp in PickUps"
-          :key="PickUp.id"
-          cols="12"
-          md="4"
-        >
-          <v-card
-            class="mx-auto"
-            max-width="344"
-            outlined
+                <!-- <v-list dense>
+                  <v-list-item
+                    v-for="(key, index) in filteredKeys"
+                    :key="index"
+                    :color="sortBy === key ? `blue lighten-4` : `white`"
+                  >
+                    <v-list-item-content>{{ key }}:</v-list-item-content>
+                    <v-list-item-content class="align-end">{{ item[key.toLowerCase()] }}</v-list-item-content>
+                  </v-list-item>
+                </v-list> -->
+                <v-simple-table>
+
+                  <tbody>
+                    <tr>
+                      <td>
+                        {{item.name}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{item.size}}
+                      </td>
+                    </tr>
+                    <tr
+                      v-for="Modifier in item.FoodModifiers"
+                      v-bind:key="Modifier.id"
+                    >
+                      <td>
+                        {{Modifier.name}}
+                      </td>
+                    </tr>
+                  </tbody>
+
+                </v-simple-table>
+                <v-divider></v-divider>
+                <v-card-title class="subheading font-weight-bold">Notes: {{ item.Notes }}</v-card-title>
+
+              </v-card>
+            </v-col>
+          </v-row>
+
+        </template>
+
+        <template v-slot:footer>
+          <v-row
+            class="mt-2"
+            align="center"
+            justify="center"
           >
-            <v-list-item three-line>
-              <v-list-item-content>
-                <div class="overline mb-4">PickUp</div>
-                <v-list-item-title class="headline mb-1">{{PickUp.name}}</v-list-item-title>
-                <v-list-item-subtitle>Order ID:{{PickUp.id}}</v-list-item-subtitle>
-              </v-list-item-content>
-              <v-avatar
-                tile
-                color="blue"
-              >
-                <v-icon dark>mdi-alarm</v-icon>
-              </v-avatar>
-            </v-list-item>
-            <pre>
-            {{PickUp.order}}
-          </pre>
 
-            <v-card-actions>
-              <v-btn text>View Details</v-btn>
-              <v-btn text>Send to Kitchen</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
+            <v-menu offset-y>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  dark
+                  text
+                  color="primary"
+                  class="ml-2"
+                  v-on="on"
+                >
+                  {{ itemsPerPage }}
+                  <v-icon>mdi-chevron-down</v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item
+                  v-for="(number, index) in itemsPerPageArray"
+                  :key="index"
+                  @click="updateItemsPerPage(number)"
+                >
+                  <v-list-item-title>{{ number }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
 
+            <div class="flex-grow-1"></div>
+
+            <span class="mr-4 grey--text">Page {{ page }} of {{ numberOfPages }}</span>
+            <v-btn
+              fab
+              dark
+              color="blue darken-3"
+              class="mr-1"
+              @click="formerPage"
+            >
+              <v-icon>mdi-chevron-left</v-icon>
+            </v-btn>
+            <v-btn
+              fab
+              dark
+              color="blue darken-3"
+              class="ml-1"
+              @click="nextPage"
+            >
+              <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
+          </v-row>
+        </template>
+      </v-data-iterator>
+    </v-container>
+    <div class="text-center">
+      <v-dialog
+        v-model="dialog"
+        max-width="290"
+      >
+        <v-card>
+          <v-card-title class="headline">Order Completed?</v-card-title>
+
+          <v-card-actions>
+            <div class="flex-grow-1"></div>
+
+            <v-btn
+              color="green darken-1"
+              text
+              @click="dialog = false"
+            >
+              Send to Kitchen
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </div>
-
 </template>
 <script>
 export default {
   layout: "OrderQueue",
-  components: {},
-  data: () => ({
-    Deliveries: [
-      {
-        name: "Alejandro",
-        id: "1337",
-        order: [
-          {
-            item: "bread sticks",
-            price: "3.99"
-          },
-          {
-            item: "pizza",
-            price: "9.99"
-          },
-          {
-            item: "soda",
-            price: "5.99"
-          }
-        ]
-      },
-      {
-        name: "Erick",
-        id: "2134",
-        order: [
-          {
-            item: "Salad",
-            price: "7.95"
-          },
-          {
-            item: "Pasta",
-            price: "12.99"
-          },
-          {
-            item: "soda",
-            price: "3.99"
-          }
-        ]
-      },
-      {
-        name: "Annette",
-        id: "6345",
-        order: [
-          {
-            item: "nachos",
-            price: "7.99"
-          },
-          {
-            item: "burger",
-            price: "14.99"
-          },
-          {
-            item: "soda",
-            price: "5.99"
-          }
-        ]
-      },
-      {
-        name: "Nick",
-        id: "74356",
-        order: [
-          {
-            item: "Cereal",
-            price: "6.99"
-          },
-          {
-            item: "buffalo wings",
-            price: "14.99"
-          },
-          {
-            item: "soda",
-            price: "5.99"
-          }
-        ]
-      }
-    ],
-    PickUps: [
-      {
-        name: "Alejandro",
-        id: "1337",
-        order: [
-          {
-            item: "bread sticks",
-            price: "3.99"
-          },
-          {
-            item: "pizza",
-            price: "9.99"
-          },
-          {
-            item: "soda",
-            price: "5.99"
-          }
-        ]
-      },
-      {
-        name: "Erick",
-        id: "2134",
-        order: [
-          {
-            item: "Salad",
-            price: "7.95"
-          },
-          {
-            item: "Pasta",
-            price: "12.99"
-          },
-          {
-            item: "soda",
-            price: "3.99"
-          }
-        ]
-      },
-      {
-        name: "Annette",
-        id: "6345",
-        order: [
-          {
-            item: "nachos",
-            price: "7.99"
-          },
-          {
-            item: "burger",
-            price: "14.99"
-          },
-          {
-            item: "soda",
-            price: "5.99"
-          }
-        ]
-      },
-      {
-        name: "Nick",
-        id: "74356",
-        order: [
-          {
-            item: "Cereal",
-            price: "6.99"
-          },
-          {
-            item: "buffalo wings",
-            price: "14.99"
-          },
-          {
-            item: "soda",
-            price: "5.99"
-          }
-        ]
-      }
-    ]
-  }),
-  methods: {
-    tryme() {
-      this.message = Date();
-      console.log(this.message);
+  data() {
+    return {
+      itemsPerPageArray: [4, 8, 12],
+      dialog: false,
+      search: "",
+      filter: {},
+      sortDesc: false,
+      page: 1,
+      itemsPerPage: 4,
+      sortBy: "name",
+      keys: ["Pizza", "Soda", "Salad", "Name", "Tax", "ID"],
+      items: []
+    };
+  },
+  created() {
+    let ordersRef = this.$fireStore.collection("orders");
+    let allOrders = ordersRef
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          this.items.push(doc.data());
+        });
+      })
+      .catch(err => {
+        console.log("Error getting documents", err);
+      });
+  },
+  computed: {
+    numberOfPages() {
+      return Math.ceil(this.items.length / this.itemsPerPage);
+    },
+    filteredKeys() {
+      return this.keys.filter(key => key !== `Name`);
     }
   },
-  computed: {}
+  methods: {
+    nextPage() {
+      if (this.page + 1 <= this.numberOfPages) this.page += 1;
+    },
+    formerPage() {
+      if (this.page - 1 >= 1) this.page -= 1;
+    },
+    updateItemsPerPage(number) {
+      this.itemsPerPage = number;
+    },
+    motal(item) {
+      console.log(item);
+    }
+  }
 };
 </script>
+<style scoped>
+.paddingTop {
+  padding: 40px;
+
+  justify-content: center;
+}
+</style>

@@ -39,9 +39,37 @@
               max-width="400px"
             >
               <v-card class="primary">
-                <v-card-title>
-                  <span class="headline">{{this.FoodItemName}}</span>
-                </v-card-title>
+                <v-row>
+                  <v-card-title>
+                    <span class="headline">{{this.FoodItemName}}</span>
+                  </v-card-title>
+
+                  <v-card-text>
+                    <v-row
+                      align="center"
+                      justify="center"
+                    >
+
+                      <v-btn-toggle
+                        v-model="toggle_exclusive"
+                        multiple
+                      >
+                        <v-btn>
+                          <v-icon>mdi-food-fork-drink</v-icon>
+                        </v-btn>
+                        <v-btn>
+                          <v-icon>mdi-walk</v-icon>
+                        </v-btn>
+                        <v-btn>
+                          <v-icon>mdi-bike</v-icon>
+                        </v-btn>
+
+                      </v-btn-toggle>
+
+                    </v-row>
+                  </v-card-text>
+
+                </v-row>
                 <v-card-text>
                   <v-container>
                     <v-row>
@@ -125,6 +153,8 @@ export default {
       KitchenNotes: "",
       selectedSize: null,
       ItemSizes: null,
+      toggle_exclusive: [],
+      OrderType: null,
 
       Cart: null,
 
@@ -161,17 +191,35 @@ export default {
       // console.log(this.FoodModifiers);
       this.FoodItem = item;
       this.FoodItemName = item.name;
-      console.log(this.FoodItemName);
+      // console.log(this.FoodItemName);
     },
     AddModifierToList(Modifier) {
       this.ModifierList.push(Modifier);
     },
     SendModifiers() {
+      // if ((this.toggle_exclusive = 0)) {
+      //   let OrderType = "Dine-in";
+      // }
+      // if ((this.toggle_exclusive = 1)) {
+      //   let OrderType = "to-go";
+      // }
+      // if ((this.toggle_exclusive = 2)) {
+      //   let OrderType = "delivery";
+      // }
       let ModifiersTotal = this.ModifierList.reduce(
         (acc, item) => acc + item.price,
         0
       );
+      let OrderTotal = ModifiersTotal + this.FoodItem.price;
+      OrderTotal = OrderTotal.toFixed(2);
+      // console.log(OrderTotal);
+      this.$nuxt.$on("OrderType", data => {
+        console.log(data);
+        this.OrderType = data;
+      });
       const order = {
+        OrderTotal: OrderTotal,
+        OrderType: this.OrderType,
         name: this.FoodItem.name,
         price: this.FoodItem.price,
         id: this.FoodItem.id,
