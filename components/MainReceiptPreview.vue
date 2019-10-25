@@ -291,6 +291,8 @@ export default {
     OrderFinish() {
       this.dialog = false;
       this.CartItems = [];
+      this.FoodModifiers = [];
+      this.CartTotal = null;
       console.log(this.CartItems);
     }
   },

@@ -44,7 +44,7 @@
                     <span class="headline">{{this.FoodItemName}}</span>
                   </v-card-title>
 
-                  <v-card-text>
+                  <!-- <v-card-text>
                     <v-row
                       align="center"
                       justify="center"
@@ -67,7 +67,7 @@
                       </v-btn-toggle>
 
                     </v-row>
-                  </v-card-text>
+                  </v-card-text> -->
 
                 </v-row>
                 <v-card-text>
