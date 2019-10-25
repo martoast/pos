@@ -1,137 +1,122 @@
 <template>
   <div>
-    <section class="section has-text-centered">
-      <SearchBar />
-      <div>
-        <v-item-group multiple>
-          <v-container>
-            <v-row>
-              <v-col
-                v-for="item in MenuItems"
-                :key="item.id"
-                cols="12"
-                md="4"
-              >
-                <v-item v-slot:default="{ active, toggle }">
-                  <v-card
-                    height="150"
-                    @click="AddtoCart(item)"
-                    @click.stop="dialog = true"
-                    class="rounded-card"
-                  >
-                    <v-list-item-title class="headline mb-1">{{item.name}}</v-list-item-title>
-                    <!-- <v-list-item-subtitle>{{item.price}}</v-list-item-subtitle> -->
-                  </v-card>
-                </v-item>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-item-group>
 
-        <div>
-          <v-row
-            align="center"
-            justify="center"
-          >
-            <v-dialog
-              v-model="dialog"
-              persistent
-              max-width="400px"
+    <v-row>
+      <v-col
+        cols="12"
+        sm="6"
+        offset-sm="2"
+      >
+
+        <v-container fluid>
+          <SearchBar />
+          <v-row>
+            <v-col
+              v-for="item in MenuItems"
+              :key="item.id"
+              class="d-flex child-flex"
+              cols="4"
             >
-              <v-card class="primary">
-                <v-row>
-                  <v-card-title>
-                    <span class="headline">{{this.FoodItemName}}</span>
-                  </v-card-title>
+              <v-card
+                flat
+                tile
+                @click="AddtoCart(item)"
+                @click.stop="dialog = true"
+                class="rounded-card"
+              >
+                <v-img
+                  :src=item.img
+                  aspect-ratio="1"
+                  class="grey lighten-2"
+                >
 
-                  <!-- <v-card-text>
-                    <v-row
-                      align="center"
-                      justify="center"
+                </v-img>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+
+      </v-col>
+    </v-row>
+
+    <div>
+      <v-row
+        align="center"
+        justify="center"
+      >
+        <v-dialog
+          v-model="dialog"
+          persistent
+          max-width="400px"
+        >
+          <v-card class="primary">
+            <v-row>
+              <v-card-title>
+                <span class="headline">{{this.FoodItemName}}</span>
+              </v-card-title>
+
+            </v-row>
+            <v-card-text>
+              <v-container>
+                <v-row>
+
+                  <v-select
+                    :items="this.ItemSizes"
+                    label="Size*"
+                    required
+                    v-model="selectedSize"
+                  ></v-select>
+                  <div>
+                    <v-container
+                      v-for="Modifier in FoodModifiers"
+                      :key="Modifier.name"
                     >
 
-                      <v-btn-toggle
-                        v-model="toggle_exclusive"
-                        multiple
-                      >
-                        <v-btn>
-                          <v-icon>mdi-food-fork-drink</v-icon>
-                        </v-btn>
-                        <v-btn>
-                          <v-icon>mdi-walk</v-icon>
-                        </v-btn>
-                        <v-btn>
-                          <v-icon>mdi-bike</v-icon>
-                        </v-btn>
+                      <v-checkbox
+                        v-model="ModifierList"
+                        :label=Modifier.name
+                        :value=Modifier
+                      ></v-checkbox>
+                    </v-container>
+                  </div>
 
-                      </v-btn-toggle>
-
-                    </v-row>
-                  </v-card-text> -->
+                  <v-textarea
+                    filled
+                    auto-grow
+                    label="Notes for Kitchen"
+                    rows="4"
+                    row-height="30"
+                    shaped
+                    v-model="KitchenNotes"
+                  ></v-textarea>
 
                 </v-row>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
 
-                      <v-select
-                        :items="this.ItemSizes"
-                        label="Size*"
-                        required
-                        v-model="selectedSize"
-                      ></v-select>
-                      <div>
-                        <v-container
-                          v-for="Modifier in FoodModifiers"
-                          :key="Modifier.name"
-                        >
+              </v-container>
+              <small>*indicates required field</small>
+            </v-card-text>
+            <div>
 
-                          <v-checkbox
-                            v-model="ModifierList"
-                            :label=Modifier.name
-                            :value=Modifier
-                          ></v-checkbox>
-                        </v-container>
-                      </div>
+              <v-card-actions>
+                <div class="flex-grow-1"></div>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="dialog = false"
+                >Close</v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="SendModifiers()"
+                >Save</v-btn>
+              </v-card-actions>
+            </div>
 
-                      <v-textarea
-                        filled
-                        auto-grow
-                        label="Notes for Kitchen"
-                        rows="4"
-                        row-height="30"
-                        shaped
-                        v-model="KitchenNotes"
-                      ></v-textarea>
+          </v-card>
+        </v-dialog>
+      </v-row>
+    </div>
 
-                    </v-row>
-
-                  </v-container>
-                  <small>*indicates required field</small>
-                </v-card-text>
-                <div>
-
-                  <v-card-actions>
-                    <div class="flex-grow-1"></div>
-                    <v-btn
-                      color="blue darken-1"
-                      text
-                      @click="dialog = false"
-                    >Close</v-btn>
-                    <v-btn
-                      color="blue darken-1"
-                      text
-                      @click="SendModifiers()"
-                    >Save</v-btn>
-                  </v-card-actions>
-                </div>
-
-              </v-card>
-            </v-dialog>
-          </v-row>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 <script>
@@ -267,5 +252,8 @@ section.section {
   flex-flow: column;
   justify-content: center;
   align-items: center;
+}
+img {
+  border-radius: 50%;
 }
 </style>
