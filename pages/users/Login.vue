@@ -96,6 +96,8 @@ export default {
           this.$router.push("/register/" + email);
           console.log("success");
         }
+      } else {
+        //make button different color green
       }
     }
   }
