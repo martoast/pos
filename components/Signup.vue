@@ -1,64 +1,76 @@
 <template>
-  <v-row align="center">
-    <v-col
-      cols="12"
-      sm="6"
-      offset-sm="2"
-    >
-      <v-form
-        ref="form"
-        v-model="valid"
-        lazy-validation
+  <v-card>
+    <v-row align="center">
+      <v-col>
+        <v-form
+          ref="form"
+          v-model="valid"
+          lazy-validation
+        >
+          <v-col cols="12">
+            <v-text-field
+              label="Email*"
+              required
+              v-model="email"
+              :rules="emailRules"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+
+            <v-text-field
+              v-model="password"
+              :counter="10"
+              :rules="nameRules"
+              label="Password*"
+              required
+            ></v-text-field>
+          </v-col>
+
+          <v-checkbox
+            v-model="checkbox"
+            :rules="[v => !!v || 'You must agree to continue!']"
+            label="Do you agree?"
+            required
+          ></v-checkbox>
+          <small>*indicates required field</small>
+
+          <!-- <v-btn
+            :disabled="!valid"
+            color="success"
+            class="mr-4"
+            @click="createUser"
+          >
+            Validate
+          </v-btn>
+
+          <v-btn
+            color="error"
+            class="mr-4"
+            @click="reset"
+          >
+            Reset Form
+          </v-btn> -->
+
+        </v-form>
+      </v-col>
+    </v-row>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn
+        text
+        @click="dialog = false"
+      >Cancel</v-btn>
+      <v-btn
+        :disabled="!valid"
+        color="secondary"
+        @click="createUser"
+        to="/Register/"
       >
-        <v-text-field
-          v-model="name"
-          :counter="10"
-          :rules="nameRules"
-          label="Name"
-          required
-        ></v-text-field>
+        Create Account
+      </v-btn>
 
-        <v-text-field
-          v-model="email"
-          :rules="emailRules"
-          label="E-mail"
-          required
-        ></v-text-field>
-        <v-text-field
-          v-model="password"
-          :counter="10"
-          :rules="nameRules"
-          label="password"
-          required
-        ></v-text-field>
-
-        <v-checkbox
-          v-model="checkbox"
-          :rules="[v => !!v || 'You must agree to continue!']"
-          label="Do you agree?"
-          required
-        ></v-checkbox>
-
-        <v-btn
-          :disabled="!valid"
-          color="success"
-          class="mr-4"
-          @click="createUser"
-        >
-          Validate
-        </v-btn>
-
-        <v-btn
-          color="error"
-          class="mr-4"
-          @click="reset"
-        >
-          Reset Form
-        </v-btn>
-
-      </v-form>
-    </v-col>
-  </v-row>
+    </v-card-actions>
+  </v-card>
 </template>
 <script>
 export default {
@@ -67,7 +79,7 @@ export default {
     valid: true,
     name: "",
     nameRules: [
-      v => !!v || "Name is required",
+      v => !!v || "Password is required",
       v => (v && v.length <= 10) || "Name must be less than 10 characters"
     ],
     email: "",
@@ -94,6 +106,7 @@ export default {
           this.email,
           this.password
         );
+        alert("Account Created, Please Log in");
       } catch (e) {
         alert(e);
       }
