@@ -22,8 +22,9 @@
                     class="white--text"
                   >
 
-                    <!-- <h1 class="white--text mb-2 display-1 text-center">EazyPOS</h1> -->
                     <div class="white--text mb-2 display-1 text-center">El Sistema Diseñado para Los Restaurantes Innovadores de México</div>
+                    <!-- <h1 class="white--text mb-2 display-1 text-center">Comience su demo gratis!</h1> -->
+                    <!-- <img src=""> -->
                     <LandingModal />
 
                   </v-layout>
@@ -51,7 +52,7 @@
                 <div class="text-center">
                   <h2 class="headline">Facilita las operaciones de tu restaurante.</h2>
                   <span class="subheading">
-                    Diseñado para hacer que las operaciones de tu restaurante sean más fáciles y mejores, TouchBistro te da más tiempo para enfocarte en la razón que te motivó a abrir tu restaurante.
+                    Diseñado para hacer que las operaciones de tu restaurante sean más fáciles y mejores, EazyPOS te da más tiempo para enfocarte en la razón que te motivó a abrir tu restaurante.
                   </span>
                 </div>
               </v-flex>

@@ -10,31 +10,45 @@
 
         <v-container fluid>
           <SearchBar />
-          <v-row>
-            <v-col
-              v-for="item in MenuItems"
-              :key="item.id"
-              class="d-flex child-flex"
-              cols="4"
-            >
-              <v-card
-                flat
-                tile
-                @click="AddtoCart(item)"
-                @click.stop="dialog = true"
-                class="rounded-card"
-              >
-                <v-img
-                  :src=item.img
-                  aspect-ratio="1"
-                  class="grey lighten-2"
-                >
 
-                </v-img>
-              </v-card>
-            </v-col>
-          </v-row>
         </v-container>
+        <v-item-group>
+          <v-container fluid>
+            <v-row>
+              <v-col
+                v-for="item in MenuItems"
+                :key="item.id"
+                class="d-flex child-flex"
+                cols="4"
+              >
+                <v-item v-slot:default="{ active, toggle }">
+                  <v-card
+                    :color="active ? 'primary' : ''"
+                    class="rounded-card"
+                    dark
+                    height="200"
+                    @click="AddtoCart(item)"
+                    @click.stop="dialog = true"
+                  >
+                    <v-card-title>
+                      <h1>
+                        {{item.name}}
+                      </h1>
+                    </v-card-title>
+                    <v-scroll-y-transition>
+                      <div
+                        v-if="active"
+                        class="display-3 flex-grow-1 text-center"
+                      >
+                        Active
+                      </div>
+                    </v-scroll-y-transition>
+                  </v-card>
+                </v-item>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-item-group>
 
       </v-col>
     </v-row>

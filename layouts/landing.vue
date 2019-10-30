@@ -14,11 +14,11 @@
           <v-btn
             text
             to="/users/Login"
-          >Log in</v-btn>
-          <v-btn
+          >iniciar sesión</v-btn>
+          <!-- <v-btn
             text
             to="/users/Signup"
-          >Register</v-btn>
+          >Registrar Cuenta</v-btn> -->
 
         </v-toolbar-items>
 
