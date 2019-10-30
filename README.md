@@ -74,3 +74,5 @@ The ItemAddOn Component emmits an array of the selected modifiers, However the F
 in a in the created lifcycle and therefore it is not receiving the modifiers array
 
 gonna switch back to having the checkout button be the switch for a modal
+
+The layout for the tables componetn would be just a bunch of squares with an id on it so that when you select that you will be 'dining in' you have to select a tabvle from the availabe stack.
