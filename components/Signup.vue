@@ -63,7 +63,7 @@
       <v-btn
         :disabled="!valid"
         color="secondary"
-        @click="createUser"
+        @click="createUser()"
         to="/Register/"
       >
         Create Account

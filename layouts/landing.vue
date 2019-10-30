@@ -7,7 +7,7 @@
         color="indigo"
       >
 
-        <v-toolbar-title>Application</v-toolbar-title>
+        <v-toolbar-title>Eazy POS</v-toolbar-title>
         <v-spacer></v-spacer>
 
         <v-toolbar-items>

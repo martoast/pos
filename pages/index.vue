@@ -10,18 +10,28 @@
               height="400"
               src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
             >
-              <v-layout
-                column
-                align-center
-                justify-center
-                class="white--text"
+              <v-row
+                justify="center"
+                align="center"
               >
+                <v-col>
+                  <v-layout
+                    column
+                    align-center
+                    justify-center
+                    class="white--text"
+                  >
 
-                <h1 class="white--text mb-2 display-1 text-center">Parallax Template</h1>
-                <div class="subheading mb-4 text-center">Powered by Vuetify</div>
-                <LandingModal />
+                    <!-- <h1 class="white--text mb-2 display-1 text-center">EazyPOS</h1> -->
+                    <div class="white--text mb-2 display-1 text-center">El Sistema Diseñado para Los Restaurantes Innovadores de México</div>
+                    <LandingModal />
 
-              </v-layout>
+                  </v-layout>
+
+                </v-col>
+
+              </v-row>
+
             </v-parallax>
 
           </section>
@@ -39,9 +49,9 @@
                 class="my-4"
               >
                 <div class="text-center">
-                  <h2 class="headline">The best way to start developing</h2>
+                  <h2 class="headline">Facilita las operaciones de tu restaurante.</h2>
                   <span class="subheading">
-                    Cras facilisis mi vitae nunc
+                    Diseñado para hacer que las operaciones de tu restaurante sean más fáciles y mejores, TouchBistro te da más tiempo para enfocarte en la razón que te motivó a abrir tu restaurante.
                   </span>
                 </div>
               </v-flex>
@@ -64,18 +74,16 @@
                           <v-icon
                             x-large
                             class="blue--text text--lighten-2"
-                          >mdi-palette</v-icon>
+                          >mdi-food</v-icon>
                         </v-card-text>
                         <v-card-title
                           primary-title
                           class="layout justify-center"
                         >
-                          <div class="headline text-center">Material Design</div>
+                          <div class="headline text-center">Administra tu menú</div>
                         </v-card-title>
                         <v-card-text>
-                          Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                          Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                          Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
+                          Personaliza tus menús y explota los modificadores para aumentar tu ticket promedio. Usa fotos de tus elementos más vistosos para enamorar a tus comensales en la mesa.
                         </v-card-text>
                       </v-card>
                     </v-flex>
@@ -98,12 +106,11 @@
                           primary-title
                           class="layout justify-center"
                         >
-                          <div class="headline">Fast development</div>
+                          <div class="headline">Acelera las compras</div>
                         </v-card-title>
                         <v-card-text>
-                          Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                          Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                          Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
+                          Envía las órdenes ala cocina más rápido y con menos errores.
+                          especificaciones de pedido y complementos totalmente personalizables.
                         </v-card-text>
                       </v-card>
                     </v-flex>
@@ -125,12 +132,10 @@
                           primary-title
                           class="layout justify-center"
                         >
-                          <div class="headline text-center">Completely Open Sourced</div>
+                          <div class="headline text-center">Analíticos en tiempo real</div>
                         </v-card-title>
                         <v-card-text>
-                          Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                          Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                          Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
+                          Vea qué ventas se han realizado desde cualquier lugar donde esté utilizando su inicio de sesión de administrador especial para ayudar a su negocio tomar decisiones mas rapido.
                         </v-card-text>
                       </v-card>
                     </v-flex>
@@ -160,12 +165,11 @@
                     primary-title
                     class="layout justify-center"
                   >
-                    <div class="headline">Company info</div>
+                    <div class="headline">
+                      Información General</div>
                   </v-card-title>
                   <v-card-text>
-                    Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
-                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
+                    Somos una empresa que cree que es hora de que las soluciones de software lleguen a México. Vemos el potencial de aportar valor a su negocio ahorrándole tiempo y dinero en sistemas obsoletos. Ofrecemos una solución confiable y económica a un problema de logística que el desarrollo de software ahora puede ayudar a resolver.
                   </v-card-text>
                 </v-card>
               </v-flex>
@@ -185,7 +189,7 @@
                     <div class="headline">Contact us</div>
                   </v-card-title>
                   <v-card-text>
-                    Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
+                    Si tiene alguna pregunta o inquietud, llámenos para que podamos atenderlo personalmente
                   </v-card-text>
                   <v-list class="transparent">
                     <v-list-item>
@@ -193,7 +197,7 @@
                         <v-icon class="blue--text text--lighten-2">mdi-phone</v-icon>
                       </v-list-item-action>
                       <v-list-item-content>
-                        <v-list-item-title>777-867-5309</v-list-item-title>
+                        <v-list-item-title>619-888-5248</v-list-item-title>
                       </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
@@ -201,7 +205,7 @@
                         <v-icon class="blue--text text--lighten-2">mdi-map-marker</v-icon>
                       </v-list-item-action>
                       <v-list-item-content>
-                        <v-list-item-title>Chicago, US</v-list-item-title>
+                        <v-list-item-title>Tijuana, MX</v-list-item-title>
                       </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
@@ -209,7 +213,7 @@
                         <v-icon class="blue--text text--lighten-2">mdi-email</v-icon>
                       </v-list-item-action>
                       <v-list-item-content>
-                        <v-list-item-title>john@vuetifyjs.com</v-list-item-title>
+                        <v-list-item-title>alexmartos96@gmail.com</v-list-item-title>
                       </v-list-item-content>
                     </v-list-item>
                   </v-list>

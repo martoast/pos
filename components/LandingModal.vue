@@ -10,7 +10,7 @@
           color="blue lighten-2"
           dark
           v-on="on"
-        >Get Started</v-btn>
+        >Empezar</v-btn>
       </template>
       <v-stepper v-model="e1">
         <v-stepper-header>
@@ -99,7 +99,7 @@
                         sm="6"
                       >
                         <v-autocomplete
-                          :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
+                          :items="['Bar', 'Fast Food', 'Chain', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
                           label="Restaurant Type"
                           multiple
                         ></v-autocomplete>
