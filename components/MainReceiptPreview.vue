@@ -15,6 +15,12 @@
         </span>
 
         <div class="flex-grow-1"></div>
+        <span class="headline">
+          <v-spacer></v-spacer>
+          {{this.CurrentDate}}
+          {{this.id}}
+
+        </span>
 
         <v-menu
           bottom
@@ -117,6 +123,9 @@
               <v-tab-item>
                 <v-card elevation="12">
                   <h3 class="center">Choose Amount</h3>
+                  <h2 class="center"> {{this.id}}</h2>
+                  <h2 class="center"> {{this.CurrentDate}}</h2>
+
                   <v-row class="center">
                     <v-btn
                       x-large
@@ -246,6 +255,8 @@ export default {
       PaidAmount: null,
       tab: null,
       CartTotal: null,
+      CurrentDate: null,
+      id: null,
 
       Total: [],
 
@@ -264,6 +275,8 @@ export default {
       // this.total = data;
       // console.log(data.FoodModifiers);
       this.FoodModifiers = data.FoodModifiers;
+      this.id = data.id;
+      this.CurrentDate = data.date;
       this.CartTotal = data.OrderTotal;
       console.log(this.CartTotal);
       this.CartItems.push(data);

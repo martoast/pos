@@ -30,7 +30,7 @@
                     @click="AddtoCart(item)"
                     @click.stop="dialog = true"
                   >
-                    <v-card-title>
+                    <v-card-title class="headline">
                       <h1>
                         {{item.name}}
                       </h1>
@@ -219,8 +219,13 @@ export default {
       let OrderID = Math.random()
         .toString(36)
         .substr(2, 9);
+      var currentDateWithFormat = new Date()
+        .toJSON()
+        .slice(0, 10)
+        .replace(/-/g, "/");
       const order = {
         id: OrderID,
+        date: currentDateWithFormat,
         OrderTotal: OrderTotal,
         OrderType: this.OrderType,
         name: this.FoodItem.name,

@@ -79,7 +79,7 @@
       ]
     },
     {
-      "name": "Caldo Tlalpeno",
+      "name": "Sopa",
       "img": "https://www.vips.com.mx/img/2019/menusept/platos/CaldoTlalpeno.png",
       "price": 13.95,
       "id": 4,
@@ -197,7 +197,7 @@
       ]
     },
     {
-      "name": "Chocolate Cake",
+      "name": "Cake",
       "img": "https://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Cakes-PNG/Slice_of_Chocolate_Cake_PNG_Picture.png?m=1434276657",
       "price": 5.95,
       "id": 9,
