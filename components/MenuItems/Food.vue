@@ -18,19 +18,19 @@
               <v-col
                 v-for="item in MenuItems"
                 :key="item.id"
-                class="d-flex child-flex"
-                cols="4"
+                cols="12"
+                md="4"
               >
                 <v-item v-slot:default="{ active, toggle }">
                   <v-card
                     :color="active ? 'primary' : ''"
                     class="rounded-card"
                     dark
-                    height="200"
+                    height="150"
                     @click="AddtoCart(item)"
                     @click.stop="dialog = true"
                   >
-                    <v-card-title class="headline">
+                    <v-card-title class="headline mb-1">
                       <h1>
                         {{item.name}}
                       </h1>
