@@ -13,7 +13,7 @@
         <v-toolbar-items>
           <v-btn
             text
-            to="/users/Login"
+            @click.stop="dialog = true"
           >iniciar sesión</v-btn>
           <!-- <v-btn
             text
@@ -23,6 +23,11 @@
         </v-toolbar-items>
 
       </v-app-bar>
+      <v-dialog v-model="dialog">
+
+        <LoginModal />
+
+      </v-dialog>
       <Nuxt />
 
       <v-footer
@@ -35,3 +40,16 @@
     </v-app>
   </div>
 </template>
+<script>
+import LoginModal from "~/components/LoginModal";
+export default {
+  components: {
+    LoginModal
+  },
+  data() {
+    return {
+      dialog: false
+    };
+  }
+};
+</script>

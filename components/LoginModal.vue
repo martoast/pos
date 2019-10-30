@@ -1,10 +1,7 @@
 <template>
   <div>
 
-    <v-container
-      class="fill-height"
-      fluid
-    >
+    <v-container>
       <v-row
         align="center"
         justify="center"
@@ -20,15 +17,15 @@
               dark
               flat
             >
-              <v-toolbar-title>Login form</v-toolbar-title>
+              <v-toolbar-title>Login</v-toolbar-title>
               <v-spacer></v-spacer>
 
             </v-toolbar>
             <v-card-text>
               <v-form>
                 <v-text-field
-                  label="Login"
-                  name="login"
+                  label="Email"
+                  name="email"
                   v-model="email"
                   type="text"
                 ></v-text-field>
