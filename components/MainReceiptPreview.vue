@@ -2,6 +2,7 @@
   <div>
     <v-card
       width="450"
+      min-width="200"
       height="750"
       :elevation="5"
       style="margin-top: 800px;"
@@ -122,9 +123,14 @@
             <v-tabs-items v-model="tab">
               <v-tab-item>
                 <v-card elevation="12">
-                  <h3 class="center">Choose Amount</h3>
-                  <h2 class="center"> {{this.id}}</h2>
-                  <h2 class="center"> {{this.CurrentDate}}</h2>
+                  <v-row justify="center">
+                    <h2 class="center">Choose Amount</h2>
+
+                  </v-row>
+                  <v-row justify="center">
+                    <h2 class="center"> Order ID: # {{this.id}}</h2>
+
+                  </v-row>
 
                   <v-row class="center">
                     <v-btn

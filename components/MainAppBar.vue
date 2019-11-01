@@ -1,13 +1,20 @@
 <template>
   <div>
-    <v-app-bar :clipped-left="clipped" height="80" class="secondary" fixed app>
-      <v-btn icon @click.stop="leftDrawer = !leftDrawer">
+    <v-app-bar
+      :clipped-left="clipped"
+      height="80"
+      class="secondary"
+      fixed
+      app
+    >
+      <v-btn
+        icon
+        @click.stop="leftDrawer = !leftDrawer"
+      >
         <v-icon>mdi-menu</v-icon>
       </v-btn>
       <div class="flex-grow-1"></div>
-      <v-btn icon @click.stop="dialog2 = true">
-        <v-icon>mdi-plus-circle</v-icon>
-      </v-btn>
+
       <MainReceiptPreview />
     </v-app-bar>
     <div>
@@ -21,7 +28,10 @@
       >
         <v-list>
           <v-avatar>
-            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+            <img
+              src="https://cdn.vuetifyjs.com/images/john.jpg"
+              alt="John"
+            />
           </v-avatar>
           <v-list-item-title class="title">Alex POS</v-list-item-title>
           <v-divider></v-divider>
