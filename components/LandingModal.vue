@@ -19,7 +19,61 @@
               <v-card-title>
                 <span class="headline">Create Account</span>
               </v-card-title>
-              <Signup />
+              <v-card>
+                <v-row align="center">
+                  <v-col>
+                    <v-form ref="form" v-model="valid" lazy-validation>
+                      <v-col cols="12">
+                        <v-text-field label="Email*" required v-model="email" :rules="emailRules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          v-model="password"
+                          :counter="10"
+                          :rules="nameRules"
+                          label="Password*"
+                          required
+                        ></v-text-field>
+                      </v-col>
+
+                      <v-checkbox
+                        v-model="checkbox"
+                        :rules="[v => !!v || 'You must agree to continue!']"
+                        label="Do you agree?"
+                        required
+                      ></v-checkbox>
+                      <small>*indicates required field</small>
+
+                      <!-- <v-btn
+            :disabled="!valid"
+            color="success"
+            class="mr-4"
+            @click="createUser"
+          >
+            Validate
+          </v-btn>
+
+          <v-btn
+            color="error"
+            class="mr-4"
+            @click="reset"
+          >
+            Reset Form
+                      </v-btn>-->
+                    </v-form>
+                  </v-col>
+                </v-row>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn text @click="dialog = false">Cancel</v-btn>
+                  <v-btn
+                    :disabled="!valid"
+                    color="secondary"
+                    @click="createUser();e1 = 2"
+                  >Create Account</v-btn>
+                </v-card-actions>
+              </v-card>
+              <!-- <Signup /> -->
             </v-form>
           </v-stepper-content>
           <v-stepper-content step="2">
@@ -81,7 +135,7 @@
                     to="/Register/"
                   >Save</v-btn>-->
                   <v-btn text @click="dialog = false">Cancel</v-btn>
-                  <v-btn color="secondary" @click="e1 = 2" to="/Register/">Continue</v-btn>
+                  <v-btn color="secondary" to="/Register/">Continue</v-btn>
                 </v-card-actions>
               </v-card>
             </v-form>
@@ -110,15 +164,34 @@ export default {
       v => (v && v.length <= 10) || "Name must be less than 10 characters"
     ],
     select: null,
-    e1: 0
+    e1: 0,
+
+    email: "",
+    emailRules: [
+      v => !!v || "E-mail is required",
+      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+    ],
+    select: null,
+    password: null,
+
+    checkbox: false
   }),
   methods: {
     validate() {
-      while (this.name != "") {
-        if (this.$refs.form.validate()) {
-          console.log(this.name);
-          this.dialog = false;
-        }
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+        console.log(this.name);
+      }
+    },
+    async createUser() {
+      try {
+        await this.$fireAuth.createUserWithEmailAndPassword(
+          this.email,
+          this.password
+        );
+        alert("Account Created, Please Log in");
+      } catch (e) {
+        alert(e);
       }
     }
     // async createUser() {
