@@ -1,43 +1,29 @@
 <template>
   <v-row justify="center">
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="600px"
-    >
+    <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn
-          color="blue lighten-2"
-          dark
-          v-on="on"
-        >Empezar</v-btn>
+        <v-btn color="blue lighten-2" dark v-on="on">Empezar</v-btn>
       </template>
       <v-stepper v-model="e1">
         <v-stepper-header>
-          <v-stepper-step
-            :complete="e1 > 1"
-            step="1"
-            color="secondary"
-          >Basic info</v-stepper-step>
+          <v-stepper-step :complete="e1 > 1" step="1" color="secondary">Register</v-stepper-step>
 
           <v-divider></v-divider>
-
-          <v-stepper-step
-            :complete="e1 > 2"
-            step="2"
-            color="secondary"
-          >Register</v-stepper-step>
+          <v-stepper-step :complete="e1 > 2" step="2" color="secondary">Basic info</v-stepper-step>
 
           <v-divider></v-divider>
-
         </v-stepper-header>
         <v-stepper-items>
           <v-stepper-content step="1">
-            <v-form
-              ref="form"
-              v-model="valid"
-              lazy-validation
-            >
+            <v-form>
+              <v-card-title>
+                <span class="headline">Create Account</span>
+              </v-card-title>
+              <Signup />
+            </v-form>
+          </v-stepper-content>
+          <v-stepper-content step="2">
+            <v-form ref="form" v-model="valid" lazy-validation>
               <v-card>
                 <v-card-title>
                   <span class="headline">User Info</span>
@@ -46,11 +32,7 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4"
-                      >
+                      <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Legal first name*"
                           required
@@ -58,21 +40,10 @@
                           v-model="name"
                         ></v-text-field>
                       </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4"
-                      >
-                        <v-text-field
-                          label="Legal Last Name"
-                          hint="not required"
-                        ></v-text-field>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field label="Legal Last Name" hint="not required"></v-text-field>
                       </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4"
-                      >
+                      <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Contact Number*"
                           persistent-hint
@@ -81,23 +52,11 @@
                         ></v-text-field>
                       </v-col>
 
-                      <v-col cols="12">
-
+                      <v-col cols="12"></v-col>
+                      <v-col cols="12" sm="6">
+                        <v-select :items="['0-17', '18-29', '30-54', '54+']" label="Age*" required></v-select>
                       </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                      >
-                        <v-select
-                          :items="['0-17', '18-29', '30-54', '54+']"
-                          label="Age*"
-                          required
-                        ></v-select>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                      >
+                      <v-col cols="12" sm="6">
                         <v-autocomplete
                           :items="['Bar', 'Fast Food', 'Chain', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
                           label="Restaurant Type"
@@ -120,29 +79,11 @@
                     text
                     @click="validate()"
                     to="/Register/"
-                  >Save</v-btn> -->
-                  <v-btn
-                    text
-                    @click="dialog = false"
-                  >Cancel</v-btn>
-                  <v-btn
-                    color="secondary"
-                    @click="e1 = 2"
-                  >
-                    Continue
-                  </v-btn>
-
+                  >Save</v-btn>-->
+                  <v-btn text @click="dialog = false">Cancel</v-btn>
+                  <v-btn color="secondary" @click="e1 = 2" to="/Register/">Continue</v-btn>
                 </v-card-actions>
               </v-card>
-            </v-form>
-
-          </v-stepper-content>
-          <v-stepper-content step="2">
-            <v-form>
-              <v-card-title>
-                <span class="headline">Create Account</span>
-              </v-card-title>
-              <Signup />
             </v-form>
           </v-stepper-content>
         </v-stepper-items>
@@ -173,9 +114,11 @@ export default {
   }),
   methods: {
     validate() {
-      if (this.$refs.form.validate()) {
-        console.log(this.name);
-        this.dialog = false;
+      while (this.name != "") {
+        if (this.$refs.form.validate()) {
+          console.log(this.name);
+          this.dialog = false;
+        }
       }
     }
     // async createUser() {

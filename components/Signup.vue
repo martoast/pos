@@ -2,21 +2,11 @@
   <v-card>
     <v-row align="center">
       <v-col>
-        <v-form
-          ref="form"
-          v-model="valid"
-          lazy-validation
-        >
+        <v-form ref="form" v-model="valid" lazy-validation>
           <v-col cols="12">
-            <v-text-field
-              label="Email*"
-              required
-              v-model="email"
-              :rules="emailRules"
-            ></v-text-field>
+            <v-text-field label="Email*" required v-model="email" :rules="emailRules"></v-text-field>
           </v-col>
           <v-col cols="12">
-
             <v-text-field
               v-model="password"
               :counter="10"
@@ -49,26 +39,14 @@
             @click="reset"
           >
             Reset Form
-          </v-btn> -->
-
+          </v-btn>-->
         </v-form>
       </v-col>
     </v-row>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn
-        text
-        @click="dialog = false"
-      >Cancel</v-btn>
-      <v-btn
-        :disabled="!valid"
-        color="secondary"
-        @click="createUser()"
-        to="/Register/"
-      >
-        Create Account
-      </v-btn>
-
+      <v-btn text @click="dialog = false">Cancel</v-btn>
+      <v-btn :disabled="!valid" color="secondary" @click="createUser()">Create Account</v-btn>
     </v-card-actions>
   </v-card>
 </template>

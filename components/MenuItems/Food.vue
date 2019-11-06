@@ -1,26 +1,16 @@
 <template>
   <div>
-
     <v-row>
-      <v-col
-        cols="12"
-        sm="6"
-        offset-sm="2"
-      >
-
+      <v-col cols="12" sm="6" offset-sm="2">
         <v-container fluid>
           <SearchBar />
-
         </v-container>
+        <MenuConfig />
+
         <v-item-group>
           <v-container fluid>
             <v-row>
-              <v-col
-                v-for="item in MenuItems"
-                :key="item.id"
-                cols="12"
-                md="4"
-              >
+              <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
                 <v-item v-slot:default="{ active, toggle }">
                   <v-card
                     :color="active ? 'primary' : ''"
@@ -31,17 +21,10 @@
                     @click.stop="dialog = true"
                   >
                     <v-card-title class="headline mb-1">
-                      <h1>
-                        {{item.name}}
-                      </h1>
+                      <h1>{{item.name}}</h1>
                     </v-card-title>
                     <v-scroll-y-transition>
-                      <div
-                        v-if="active"
-                        class="display-3 flex-grow-1 text-center"
-                      >
-                        Active
-                      </div>
+                      <div v-if="active" class="display-3 flex-grow-1 text-center">Active</div>
                     </v-scroll-y-transition>
                   </v-card>
                 </v-item>
@@ -49,49 +32,26 @@
             </v-row>
           </v-container>
         </v-item-group>
-
       </v-col>
     </v-row>
 
     <div>
-      <v-row
-        align="center"
-        justify="center"
-      >
+      <v-row align="center" justify="center">
         <v-container>
-          <v-dialog
-            v-model="dialog"
-            persistent
-            max-width="400px"
-          >
+          <v-dialog v-model="dialog" persistent max-width="400px">
             <v-card class="primary">
               <v-row justify="center">
                 <v-card-title>
                   <span class="headline">{{this.FoodItemName}}</span>
                 </v-card-title>
-
               </v-row>
               <v-card-text>
                 <v-container>
                   <v-row>
-
-                    <v-select
-                      :items="this.ItemSizes"
-                      label="Size*"
-                      required
-                      v-model="selectedSize"
-                    ></v-select>
+                    <v-select :items="this.ItemSizes" label="Size*" required v-model="selectedSize"></v-select>
                     <div>
-                      <v-container
-                        v-for="Modifier in FoodModifiers"
-                        :key="Modifier.name"
-                      >
-
-                        <v-checkbox
-                          v-model="ModifierList"
-                          :label=Modifier.name
-                          :value=Modifier
-                        ></v-checkbox>
+                      <v-container v-for="Modifier in FoodModifiers" :key="Modifier.name">
+                        <v-checkbox v-model="ModifierList" :label="Modifier.name" :value="Modifier"></v-checkbox>
                       </v-container>
                     </div>
 
@@ -104,44 +64,33 @@
                       shaped
                       v-model="KitchenNotes"
                     ></v-textarea>
-
                   </v-row>
-
                 </v-container>
                 <small>*indicates required field</small>
               </v-card-text>
               <div>
-
                 <v-card-actions>
                   <div class="flex-grow-1"></div>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="dialog = false"
-                  >Close</v-btn>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="SendModifiers()"
-                  >Save</v-btn>
+                  <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                  <v-btn color="blue darken-1" text @click="SendModifiers()">Save</v-btn>
                 </v-card-actions>
               </div>
-
             </v-card>
           </v-dialog>
         </v-container>
       </v-row>
     </div>
-
   </div>
 </template>
 <script>
 import SearchBar from "~/components/SearchBar.vue";
+import MenuConfig from "~/components/configure/Menu.vue";
 import { mapState } from "vuex";
 
 export default {
   components: {
-    SearchBar
+    SearchBar,
+    MenuConfig
   },
   data() {
     return {
@@ -160,6 +109,7 @@ export default {
       Cart: null,
 
       dialog: false,
+
       text: "center",
       model: null,
       tab: null,
@@ -171,13 +121,13 @@ export default {
     };
   },
   created() {
-    fetch("http://localhost:3002/food")
-      .then(response => response.json())
-      .then(response => {
-        // this.MenuItems = response.data;
-        console.log(response);
-        this.MenuItems = response;
-      });
+    // fetch("http://localhost:3002/food")
+    //   .then(response => response.json())
+    //   .then(response => {
+    //     // this.MenuItems = response.data;
+    //     console.log(response);
+    //     this.MenuItems = response;
+    //   });
   },
 
   computed: {
