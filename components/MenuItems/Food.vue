@@ -3,7 +3,8 @@
     <v-col cols="12" sm="6" offset-sm="2">
       <v-row justify="center" align="center">
         <div v-if="MenuItems == null">
-          <MenuConfig />
+          <!-- <MenuConfig /> -->
+          <v-btn to="/Settings/MenuConfig"></v-btn>
         </div>
         <div v-else>
           <v-container fluid>
@@ -125,13 +126,13 @@ export default {
     };
   },
   created() {
-    fetch("http://localhost:3002/food")
-      .then(response => response.json())
-      .then(response => {
-        // this.MenuItems = response.data;
-        console.log(response);
-        this.MenuItems = response;
-      });
+    // fetch("http://localhost:3002/food")
+    //   .then(response => response.json())
+    //   .then(response => {
+    //     // this.MenuItems = response.data;
+    //     console.log(response);
+    //     this.MenuItems = response;
+    //   });
   },
 
   computed: {
