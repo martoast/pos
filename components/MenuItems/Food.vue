@@ -1,39 +1,43 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols="12" sm="6" offset-sm="2">
-        <v-container fluid>
-          <SearchBar />
-        </v-container>
-        <MenuConfig />
-
-        <v-item-group>
+    <v-col cols="12" sm="6" offset-sm="2">
+      <v-row justify="center" align="center">
+        <div v-if="MenuItems == null">
+          <MenuConfig />
+        </div>
+        <div v-else>
           <v-container fluid>
-            <v-row>
-              <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
-                <v-item v-slot:default="{ active, toggle }">
-                  <v-card
-                    :color="active ? 'primary' : ''"
-                    class="rounded-card"
-                    dark
-                    height="150"
-                    @click="AddtoCart(item)"
-                    @click.stop="dialog = true"
-                  >
-                    <v-card-title class="headline mb-1">
-                      <h1>{{item.name}}</h1>
-                    </v-card-title>
-                    <v-scroll-y-transition>
-                      <div v-if="active" class="display-3 flex-grow-1 text-center">Active</div>
-                    </v-scroll-y-transition>
-                  </v-card>
-                </v-item>
-              </v-col>
-            </v-row>
+            <SearchBar />
           </v-container>
-        </v-item-group>
-      </v-col>
-    </v-row>
+
+          <v-item-group>
+            <v-container fluid>
+              <v-row>
+                <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
+                  <v-item v-slot:default="{ active, toggle }">
+                    <v-card
+                      :color="active ? 'primary' : ''"
+                      class="rounded-card"
+                      dark
+                      height="150"
+                      @click="AddtoCart(item)"
+                      @click.stop="dialog = true"
+                    >
+                      <v-card-title class="headline mb-1">
+                        <h1>{{item.name}}</h1>
+                      </v-card-title>
+                      <v-scroll-y-transition>
+                        <div v-if="active" class="display-3 flex-grow-1 text-center">Active</div>
+                      </v-scroll-y-transition>
+                    </v-card>
+                  </v-item>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-item-group>
+        </div>
+      </v-row>
+    </v-col>
 
     <div>
       <v-row align="center" justify="center">
@@ -121,13 +125,13 @@ export default {
     };
   },
   created() {
-    // fetch("http://localhost:3002/food")
-    //   .then(response => response.json())
-    //   .then(response => {
-    //     // this.MenuItems = response.data;
-    //     console.log(response);
-    //     this.MenuItems = response;
-    //   });
+    fetch("http://localhost:3002/food")
+      .then(response => response.json())
+      .then(response => {
+        // this.MenuItems = response.data;
+        console.log(response);
+        this.MenuItems = response;
+      });
   },
 
   computed: {
