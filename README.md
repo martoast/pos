@@ -18,3 +18,9 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
+
+I want to have a state with an empty email and empty menuitems array
+
+when the user account is created, mutate the state so email is set
+
+in MenuConfig make a getter get the value of email to use to set Menu in DB

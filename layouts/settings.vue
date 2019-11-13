@@ -146,5 +146,21 @@ export default {
       title: this.$route.path
     };
   }
+  // created() {
+  //   this.$fireAuth.onAuthStateChanged(function(user) {
+  //     if (user) {
+  //       // User is signed in.
+
+  //       var email = user.email;
+
+  //       var uid = user.uid;
+  //       console.log(email);
+  //     } else {
+  //       // User is signed out.
+  //       // ...
+  //       console.log("No user  ");
+  //     }
+  //   });
+  // }
 };
 </script>

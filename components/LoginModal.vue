@@ -84,7 +84,7 @@ export default {
         } catch (e) {
           alert(e);
         } finally {
-          this.$router.push("/register/" + email);
+          this.$router.push("/register/");
           console.log("success");
         }
       } else {

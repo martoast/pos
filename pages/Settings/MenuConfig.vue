@@ -4,7 +4,11 @@
       <v-row>
         <v-card-title>Menu Config</v-card-title>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog2" persistent max-width="600px">
+        <v-dialog
+          v-model="dialog2"
+          persistent
+          max-width="600px"
+        >
           <template v-slot:activator="{ on }">
             <v-btn v-on="on">Add Menu Item</v-btn>
           </template>
@@ -15,11 +19,22 @@
             <v-card-text>
               <v-container>
                 <v-row justify="center">
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Item name*" v-model="ItemName" required></v-text-field>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      label="Item name*"
+                      v-model="ItemName"
+                      required
+                    ></v-text-field>
                   </v-col>
 
-                  <v-col cols="12" sm="6">
+                  <v-col
+                    cols="12"
+                    sm="6"
+                  >
                     <v-select
                       :items="['Food', 'Drink', 'Dessert']"
                       label="Type*"
@@ -27,23 +42,45 @@
                       required
                     ></v-select>
                   </v-col>
-                  <v-col cols="12" sm="6">
-                    <v-text-field label="Price*" v-model="ItemPrice" required></v-text-field>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                  >
+                    <v-text-field
+                      label="Price*"
+                      v-model="ItemPrice"
+                      required
+                    ></v-text-field>
                   </v-col>
-                  <v-btn color="secondary" dark @click="dialog3 = true">Add Modifier</v-btn>
+                  <v-btn
+                    color="secondary"
+                    dark
+                    @click="dialog3 = true"
+                  >Add Modifier</v-btn>
                 </v-row>
               </v-container>
               <small>*indicates required field</small>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog2 = false">Close</v-btn>
-              <v-btn color="blue darken-1" text @click="SaveItem()">Save</v-btn>
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="dialog2 = false"
+              >Close</v-btn>
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="SaveItem()"
+              >Save</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-row>
-      <v-simple-table fixed-header height="300px">
+      <v-simple-table
+        fixed-header
+        height="300px"
+      >
         <thead>
           <tr>
             <th class="text-left">Name</th>
@@ -51,7 +88,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in MenuItems" :key="item.name">
+          <tr
+            v-for="item in MenuItems"
+            :key="item.name"
+          >
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
           </tr>
@@ -59,7 +99,11 @@
       </v-simple-table>
     </v-card>
     <v-row justify="center">
-      <v-dialog v-model="dialog3" persistent max-width="600px">
+      <v-dialog
+        v-model="dialog3"
+        persistent
+        max-width="600px"
+      >
         <v-card>
           <v-card-title>
             <span class="headline">Add Modifier</span>
@@ -67,11 +111,26 @@
           <v-card-text>
             <v-container>
               <v-row justify="center">
-                <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Item name*" v-model="ModifierName" required></v-text-field>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+                >
+                  <v-text-field
+                    label="Item name*"
+                    v-model="ModifierName"
+                    required
+                  ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6">
-                  <v-text-field label="Price*" v-model="ModifierPrice" required></v-text-field>
+                <v-col
+                  cols="12"
+                  sm="6"
+                >
+                  <v-text-field
+                    label="Price*"
+                    v-model="ModifierPrice"
+                    required
+                  ></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
@@ -79,8 +138,16 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog3 = false">Close</v-btn>
-            <v-btn color="blue darken-1" text @click="SaveModifier()">Save</v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="dialog3 = false"
+            >Close</v-btn>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="SaveModifier()"
+            >Save</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -100,9 +167,12 @@ export default {
       ItemType: null,
       ItemPrice: null,
       ModifiersList: [],
-      MenuItems: []
+      MenuItems: [],
+      email: null,
+      uid: {}
     };
   },
+  created() {},
   methods: {
     SaveModifier() {
       this.dialog3 = false;
@@ -136,8 +206,30 @@ export default {
       };
       this.MenuItems.push(item);
       console.log(this.MenuItems);
-      // const messageRef = this.$fireStore.collection("users").doc(OrderID);
-      // messageRef.set(order);
+
+      this.$fireAuth.onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+
+          var email = user.email;
+          this.email = email;
+          // console.log(this.email);
+
+          // this.uid == user.uid;
+          // console.log(this.email);
+          console.log(email);
+          const messageRef = this.$fireStore.collection("users").doc(email);
+          messageRef.set(this.MenuItems);
+        } else {
+          // User is signed out.
+          // ...
+          console.log("No user shit ");
+        }
+      });
+
+      // this.$fireStore.collection("users").add({
+      //   MenuItems: this.MenuItems
+      // });
     }
   }
 };

@@ -1,7 +1,14 @@
 <template>
   <div>
-    <v-col cols="12" sm="6" offset-sm="2">
-      <v-row justify="center" align="center">
+    <v-col
+      cols="12"
+      sm="6"
+      offset-sm="2"
+    >
+      <v-row
+        justify="center"
+        align="center"
+      >
         <div v-if="MenuItems == null">
           <!-- <MenuConfig /> -->
           <v-btn to="/Settings/MenuConfig"></v-btn>
@@ -14,7 +21,12 @@
           <v-item-group>
             <v-container fluid>
               <v-row>
-                <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
+                <v-col
+                  v-for="item in MenuItems"
+                  :key="item.id"
+                  cols="12"
+                  md="4"
+                >
                   <v-item v-slot:default="{ active, toggle }">
                     <v-card
                       :color="active ? 'primary' : ''"
@@ -28,7 +40,10 @@
                         <h1>{{item.name}}</h1>
                       </v-card-title>
                       <v-scroll-y-transition>
-                        <div v-if="active" class="display-3 flex-grow-1 text-center">Active</div>
+                        <div
+                          v-if="active"
+                          class="display-3 flex-grow-1 text-center"
+                        >Active</div>
                       </v-scroll-y-transition>
                     </v-card>
                   </v-item>
@@ -41,9 +56,16 @@
     </v-col>
 
     <div>
-      <v-row align="center" justify="center">
+      <v-row
+        align="center"
+        justify="center"
+      >
         <v-container>
-          <v-dialog v-model="dialog" persistent max-width="400px">
+          <v-dialog
+            v-model="dialog"
+            persistent
+            max-width="400px"
+          >
             <v-card class="primary">
               <v-row justify="center">
                 <v-card-title>
@@ -53,10 +75,22 @@
               <v-card-text>
                 <v-container>
                   <v-row>
-                    <v-select :items="this.ItemSizes" label="Size*" required v-model="selectedSize"></v-select>
+                    <v-select
+                      :items="this.ItemSizes"
+                      label="Size*"
+                      required
+                      v-model="selectedSize"
+                    ></v-select>
                     <div>
-                      <v-container v-for="Modifier in FoodModifiers" :key="Modifier.name">
-                        <v-checkbox v-model="ModifierList" :label="Modifier.name" :value="Modifier"></v-checkbox>
+                      <v-container
+                        v-for="Modifier in FoodModifiers"
+                        :key="Modifier.name"
+                      >
+                        <v-checkbox
+                          v-model="ModifierList"
+                          :label="Modifier.name"
+                          :value="Modifier"
+                        ></v-checkbox>
                       </v-container>
                     </div>
 
@@ -76,8 +110,16 @@
               <div>
                 <v-card-actions>
                   <div class="flex-grow-1"></div>
-                  <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                  <v-btn color="blue darken-1" text @click="SendModifiers()">Save</v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="dialog = false"
+                  >Close</v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="SendModifiers()"
+                  >Save</v-btn>
                 </v-card-actions>
               </div>
             </v-card>
