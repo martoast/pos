@@ -92,11 +92,19 @@
             v-for="item in MenuItems"
             :key="item.name"
           >
-            <td>{{ item.name }}</td>
-            <td>{{ item.price }}</td>
+            <td>{{ item.Name }}</td>
+            <td>{{ item.Price }}</td>
           </tr>
         </tbody>
       </v-simple-table>
+      <v-card-actions>
+        <v-btn
+          class="secondary"
+          @click="SaveMenu()"
+        >
+          Save Menu
+        </v-btn>
+      </v-card-actions>
     </v-card>
     <v-row justify="center">
       <v-dialog
@@ -206,30 +214,21 @@ export default {
       };
       this.MenuItems.push(item);
       console.log(this.MenuItems);
+    },
+    SaveMenu() {
+      var user = this.$fireAuth.currentUser;
 
-      this.$fireAuth.onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-
-          var email = user.email;
-          this.email = email;
-          // console.log(this.email);
-
-          // this.uid == user.uid;
-          // console.log(this.email);
-          console.log(email);
-          const messageRef = this.$fireStore.collection("users").doc(email);
-          messageRef.set(this.MenuItems);
-        } else {
-          // User is signed out.
-          // ...
-          console.log("No user shit ");
-        }
-      });
-
-      // this.$fireStore.collection("users").add({
-      //   MenuItems: this.MenuItems
-      // });
+      if (user) {
+        // User is signed in.
+        console.log(user.email);
+        this.$fireStore
+          .collection("users")
+          .doc(user.email)
+          .set({ Menu: this.MenuItems });
+      } else {
+        // No user is signed in.
+        alert("Only Registered Users can create a Menu.");
+      }
     }
   }
 };
