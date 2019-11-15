@@ -152,6 +152,7 @@ export default {
       ItemSizes: null,
       toggle_exclusive: [],
       OrderType: null,
+      email: null,
 
       Cart: null,
 
@@ -175,10 +176,42 @@ export default {
     //     console.log(response);
     //     this.MenuItems = response;
     //   });
+    this.$fireAuth.onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        alert(`Logged in with ${user.email}`);
+        this.email = user.email;
+        // console.log(this.email);
+
+        try {
+          this.$fireStore
+            .collection("users")
+            .doc(user.email)
+            .get();
+        } catch (e) {
+          alert(e);
+          console.log("No Menu Created");
+          return;
+        }
+      } else {
+        // No user is signed in.
+        alert("no user is signed in...");
+      }
+    });
   },
 
   computed: {
-    Total() {}
+    // async ReadMenuFromFirestore() {
+    //   var user = this.$fireAuth.currentUser;
+    //   const messageRef = this.$fireStore.collection("user").doc(user.email);
+    //   try {
+    //     const messageDoc = await messageRef.get();
+    //     alert(messageDoc.data().message);
+    //   } catch (e) {
+    //     alert(e);
+    //     return;
+    //   }
+    // }
   },
 
   methods: {

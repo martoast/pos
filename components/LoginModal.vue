@@ -1,55 +1,51 @@
 <template>
   <div>
 
-    <v-container>
-      <v-row
-        align="center"
-        justify="center"
+    <v-row
+      align="center"
+      justify="center"
+    >
+
+      <v-card
+        class="elevation-12"
+        width="400"
       >
-        <v-col
-          cols="12"
-          sm="8"
-          md="4"
+        <v-toolbar
+          color="secondary"
+          dark
+          flat
         >
-          <v-card class="elevation-12">
-            <v-toolbar
-              color="secondary"
-              dark
-              flat
-            >
-              <v-toolbar-title>Login</v-toolbar-title>
-              <v-spacer></v-spacer>
+          <v-toolbar-title>Login</v-toolbar-title>
 
-            </v-toolbar>
-            <v-card-text>
-              <v-form>
-                <v-text-field
-                  label="Email"
-                  name="email"
-                  v-model="email"
-                  type="text"
-                ></v-text-field>
+        </v-toolbar>
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              label="Email"
+              name="email"
+              v-model="email"
+              type="text"
+            ></v-text-field>
 
-                <v-text-field
-                  id="password"
-                  label="Password"
-                  v-model="password"
-                  name="password"
-                  type="password"
-                ></v-text-field>
-              </v-form>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="green"
-                @click="loginUser(email,password)"
-              >Login</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+            <v-text-field
+              id="password"
+              label="Password"
+              v-model="password"
+              name="password"
+              type="password"
+            ></v-text-field>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="green"
+            @click="loginUser(email,password)"
+          >Login</v-btn>
+        </v-card-actions>
+      </v-card>
+
+    </v-row>
 
   </div>
 
@@ -57,7 +53,6 @@
 
 <script>
 export default {
-  layout: "landing",
   data() {
     return {
       email: null,
@@ -73,6 +68,7 @@ export default {
               if (user) {
                 // User is signed in.
                 alert(`Logged in with ${user.uid}`);
+                this.$router.push("/register/");
 
                 // this.$router.push("/user/" + this.userId);
               } else {
@@ -84,7 +80,6 @@ export default {
         } catch (e) {
           alert(e);
         } finally {
-          this.$router.push("/register/");
           console.log("success");
         }
       } else {

@@ -98,12 +98,16 @@
         </tbody>
       </v-simple-table>
       <v-card-actions>
-        <v-btn
-          class="secondary"
-          @click="SaveMenu()"
-        >
-          Save Menu
-        </v-btn>
+        <v-row justify="center">
+          <v-btn
+            class="secondary"
+            @click="SaveMenu()"
+          >
+            Save Menu
+          </v-btn>
+
+        </v-row>
+
       </v-card-actions>
     </v-card>
     <v-row justify="center">
@@ -180,7 +184,30 @@ export default {
       uid: {}
     };
   },
-  created() {},
+  created() {
+    this.$fireAuth.onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        alert(`Logged in with ${user.email}`);
+        this.email = user.email;
+        // console.log(this.email);
+
+        try {
+          console.log(
+            this.$fireStore
+              .collection("users")
+              .doc(user.email)
+              .get()
+          );
+        } catch {
+          console.log("No Menu Created");
+          return;
+        }
+      } else {
+        // No user is signed in.
+      }
+    });
+  },
   methods: {
     SaveModifier() {
       this.dialog3 = false;
@@ -227,7 +254,7 @@ export default {
           .set({ Menu: this.MenuItems });
       } else {
         // No user is signed in.
-        alert("Only Registered Users can create a Menu.");
+        console.log("Only Registered Users can create a Menu.");
       }
     }
   }

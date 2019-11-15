@@ -7,13 +7,14 @@
         color="indigo"
       >
 
-        <v-toolbar-title>Eazy POS</v-toolbar-title>
+        <v-toolbar-title class="white--text">Eazy POS</v-toolbar-title>
         <v-spacer></v-spacer>
 
         <v-toolbar-items>
           <v-btn
             text
             @click.stop="dialog = true"
+            class="white--text"
           >iniciar sesión</v-btn>
           <!-- <v-btn
             text
