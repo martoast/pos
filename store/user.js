@@ -1,5 +1,5 @@
 export const state = () => ({
-  MenuItems: [],
+  MenuItems: null,
   user: {
     email: "",
 
@@ -9,8 +9,8 @@ export const state = () => ({
 
 
 export const mutations = {
-  add(state, text) {
-    state.MenuItems.push(MenuItems)
+  add(state, MenuItems) {
+    state.MenuItems = MenuItems
   },
   remove(state, { item }) {
     state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
