@@ -10,7 +10,7 @@
         align="center"
       >
         <div v-if="MenuItems == null">
-          <!-- <MenuConfig /> -->
+
           <v-btn to="/Settings/MenuConfig"></v-btn>
         </div>
         <div v-else>
@@ -131,13 +131,12 @@
 </template>
 <script>
 import SearchBar from "~/components/SearchBar.vue";
-import MenuConfig from "~/components/configure/Menu.vue";
+
 import { mapState } from "vuex";
 
 export default {
   components: {
-    SearchBar,
-    MenuConfig
+    SearchBar
   },
   data() {
     return {

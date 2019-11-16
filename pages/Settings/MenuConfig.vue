@@ -167,7 +167,11 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
 export default {
+  async fetch({ store, params }) {
+    await store.dispatch("GET_MENU");
+  },
   layout: "settings",
   data() {
     return {
@@ -185,28 +189,47 @@ export default {
     };
   },
   created() {
-    this.$fireAuth.onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        alert(`Logged in with ${user.email}`);
-        this.email = user.email;
-        // console.log(this.email);
+    var user = this.$fireAuth.currentUser;
+    console.log(user);
+    // get menu from store to fill table
 
-        try {
-          console.log(
-            this.$fireStore
-              .collection("users")
-              .doc(user.email)
-              .get()
-          );
-        } catch {
-          console.log("No Menu Created");
-          return;
-        }
-      } else {
-        // No user is signed in.
-      }
-    });
+    // this.MenuItems = this.$store.state.user.MenuItems;
+    // console.log(
+    //   this.$fireStore
+    //     .collection("users")
+    //     .doc(user.email)
+    //     .get()
+    // );
+    // if (user) {
+    //   console.log(
+    //     this.$fireStore
+    //       .collection("users")
+    //       .doc(user.email)
+    //       .get()
+    //   );
+    // }
+    // this.$fireAuth.onAuthStateChanged(function(user) {
+    //   if (user) {
+    //     // User is signed in.
+    //     alert(`Logged in with ${user.email}`);
+    //     this.email = user.email;
+    //     // console.log(this.email);
+
+    //     try {
+    //       console.log(
+    //         this.$fireStore
+    //           .collection("users")
+    //           .doc(user.email)
+    //           .get()
+    //       );
+    //     } catch {
+    //       console.log("No Menu Created");
+    //       return;
+    //     }
+    //   } else {
+    //     // No user is signed in.
+    //   }
+    // });
   },
   methods: {
     SaveModifier() {
@@ -244,6 +267,7 @@ export default {
     },
     SaveMenu() {
       var user = this.$fireAuth.currentUser;
+      addTodo();
 
       if (user) {
         // User is signed in.
@@ -256,7 +280,13 @@ export default {
         // No user is signed in.
         console.log("Only Registered Users can create a Menu.");
       }
-    }
+    },
+    addTodo() {
+      this.$store.commit("user/add", this.MenuItems);
+    },
+    ...mapMutations({
+      toggle: "user/toggle"
+    })
   }
 };
 </script>

@@ -1,22 +1,24 @@
 export const state = () => ({
   MenuItems: [],
   user: {
-    Email: "",
+    email: "",
 
   }
 })
 
+
+
 export const mutations = {
   add(state, text) {
-    state.MenuItems.push({
-      text,
-      done: false
-    })
+    state.MenuItems.push(MenuItems)
   },
-  remove(state, { todo }) {
-    state.MenuItems.splice(state.MenuItems.indexOf(todo), 1)
+  remove(state, { item }) {
+    state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
   },
-  toggle(state, todo) {
-    todo.done = !todo.done
+  updateMessage(state, message) {
+    state.user.email = message
+
+
   }
+
 }

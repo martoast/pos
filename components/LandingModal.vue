@@ -49,6 +49,7 @@
                           required
                           v-model="email"
                           :rules="emailRules"
+                          @input="updateMessage"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
@@ -211,6 +212,7 @@
 <script>
 import Signup from "~/components/Signup.vue";
 import { METHODS } from "http";
+import { mapState } from "vuex";
 export default {
   components: {
     Signup
@@ -239,13 +241,22 @@ export default {
 
     checkbox: false
   }),
+  computed: {
+    // ...mapState({
+    //   message: state => state.user.email
+    // })
+  },
   methods: {
+    updateMessage(e) {
+      this.$store.commit("user/updateMessage", e);
+    },
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
         console.log(this.name);
       }
     },
+
     async createUser() {
       try {
         await this.$fireAuth.createUserWithEmailAndPassword(
@@ -253,6 +264,7 @@ export default {
           this.password
         );
         alert("Account Created");
+        this.$store.commit("user/updateMessage", this.email);
       } catch (e) {
         alert(e);
       }
