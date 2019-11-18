@@ -277,7 +277,7 @@ export default {
     };
   },
   created() {
-    this.$nuxt.$on("test", data => {
+    this.$nuxt.$on("order", data => {
       // this.total = data;
       // console.log(data.FoodModifiers);
       this.FoodModifiers = data.FoodModifiers;

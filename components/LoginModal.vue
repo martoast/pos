@@ -67,8 +67,8 @@ export default {
             this.$fireAuth.onAuthStateChanged(function(user) {
               if (user) {
                 // User is signed in.
-                alert(`Logged in with ${user.uid}`);
-                this.$router.push("/register/");
+                alert(`Logged in with ${user.email}`);
+                $nuxt._router.push("/Register");
 
                 // this.$router.push("/user/" + this.userId);
               } else {

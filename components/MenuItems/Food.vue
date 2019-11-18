@@ -178,40 +178,32 @@ export default {
     this.$fireAuth.onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        alert(`Logged in with ${user.email}`);
+        alert(`Fetching Menu`);
         this.email = user.email;
-        // console.log(this.email);
-
-        try {
-          this.$fireStore
-            .collection("users")
-            .doc(user.email)
-            .get();
-        } catch (e) {
-          alert(e);
-          console.log("No Menu Created");
-          return;
-        }
+        console.log(this.email);
+        var FetchedMenu = this.$fireStore
+          .collection("users")
+          .doc(this.email)
+          .get();
       } else {
         // No user is signed in.
         alert("no user is signed in...");
       }
     });
-  },
-
-  computed: {
-    // async ReadMenuFromFirestore() {
-    //   var user = this.$fireAuth.currentUser;
-    //   const messageRef = this.$fireStore.collection("user").doc(user.email);
-    //   try {
-    //     const messageDoc = await messageRef.get();
-    //     alert(messageDoc.data().message);
-    //   } catch (e) {
-    //     alert(e);
-    //     return;
-    //   }
+    // var user = this.$fireAuth.currentUser;
+    // console.log(user);
+    // if (user.email) {
+    //   var FetchedMenu = this.$fireStore
+    //     .collection("users")
+    //     .doc(user.email)
+    //     .get();
+    //   console.log(FetchedMenu);
+    // } else {
+    //   console.log("No menu");
     // }
   },
+
+  computed: {},
 
   methods: {
     AddtoCart(item) {
@@ -268,7 +260,7 @@ export default {
         ModifiersTotal: ModifiersTotal
       };
 
-      this.$nuxt.$emit("test", order);
+      this.$nuxt.$emit("order", order);
       const messageRef = this.$fireStore.collection("orders").doc(OrderID);
       messageRef.set(order);
       this.ModifierList = [];
