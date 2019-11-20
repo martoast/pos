@@ -1,19 +1,19 @@
 import menu from '~/services/MenuService'
 
 export const state = () => ({
-  MenuItems: [],
-  user: {
-    email: "",
+  MenuItems: null,
 
-  }
 })
 
 export const actions = {
-  GETMENU({ commit }) {
-    menu.getMenu(items => {
-      commit('setMenu', items)
+
+  fetchMenu({
+    commit
+  }) {
+    return menu.getMenu().then(response => {
+      commit('setMenu', response)
     })
-  }
+  },
 
 }
 
@@ -21,7 +21,9 @@ export const actions = {
 
 export const mutations = {
   setMenu(state, items) {
+    console.log("test")
     state.MenuItems = items
+    console.log(state.MenuItems)
   },
 
   decrementProductInventory(state, { id }) {
@@ -29,4 +31,9 @@ export const mutations = {
     item.inventory--
   }
 
+}
+export const getters = {
+  getMenu(state) {
+    return state.MenuItems
+  }
 }

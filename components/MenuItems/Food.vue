@@ -9,14 +9,14 @@
         justify="center"
         align="center"
       >
-        <div v-if="MenuItems == null">
+        <!-- <div v-if="MenuItems == null">
 
           <v-btn to="/Settings/MenuConfig"></v-btn>
-        </div>
-        <div v-else>
-          <v-container fluid>
+        </div> -->
+        <div>
+          <!-- <v-container fluid>
             <SearchBar />
-          </v-container>
+          </v-container> -->
 
           <v-item-group>
             <v-container fluid>
@@ -133,6 +133,8 @@
 import SearchBar from "~/components/SearchBar.vue";
 
 import { mapState } from "vuex";
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -167,6 +169,9 @@ export default {
       }
     };
   },
+  // async fetch({ store, params }) {
+  //   await store.dispatch("GETMENU");
+  // },
   created() {
     // fetch("http://localhost:3002/food")
     //   .then(response => response.json())
@@ -175,37 +180,36 @@ export default {
     //     console.log(response);
     //     this.MenuItems = response;
     //   });
-    this.$fireAuth.onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        alert(`Fetching Menu`);
-        this.email = user.email;
-        console.log(this.email);
-        var FetchedMenu = this.$fireStore
-          .collection("users")
-          .doc(this.email)
-          .get();
-      } else {
-        // No user is signed in.
-        alert("no user is signed in...");
-      }
-    });
-    // var user = this.$fireAuth.currentUser;
-    // console.log(user);
-    // if (user.email) {
-    //   var FetchedMenu = this.$fireStore
-    //     .collection("users")
-    //     .doc(user.email)
-    //     .get();
-    //   console.log(FetchedMenu);
+    // this.$fireAuth.onAuthStateChanged(function(user) {
+    //   if (user) {
+    // User is signed in.
+    // this.$store.commit("user/updateMessage", user.email);
+    // alert(`Fetching Menu`);
+    // this.email = user.email;
+    // console.log(this.email);
+    // var FetchedMenu = this.$fireStore
+    //   .collection("users")
+    //   .doc(this.email)
+    //   .get();
     // } else {
-    //   console.log("No menu");
-    // }
+    // No user is signed in.
+    //     alert("no user is signed in...");
+    //   }
+    // });
+
+    this.$store.dispatch("menu/fetchMenu");
   },
 
-  computed: {},
+  computed: {
+    Menuitems() {
+      return this.$store.getters.getMenu;
+    }
+  },
 
   methods: {
+    // getMenu() {
+    //   this.$store.dispatch("menu/GETMENU");
+    // },
     AddtoCart(item) {
       // console.log(item);
       this.FoodModifiers = item.modifier;

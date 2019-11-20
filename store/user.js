@@ -1,5 +1,5 @@
 export const state = () => ({
-  MenuItems: null,
+
   user: {
     email: "",
 
