@@ -9,10 +9,11 @@
         justify="center"
         align="center"
       >
-        <!-- <div v-if="MenuItems == null">
+        <div v-if="MenuItems == null">
 
-          <v-btn to="/Settings/MenuConfig"></v-btn>
-        </div> -->
+          <!-- <v-btn to="/Settings/MenuConfig"></v-btn> -->
+          <v-btn @click="readFromFirestore()"></v-btn>
+        </div>
         <div>
           <!-- <v-container fluid>
             <SearchBar />
@@ -207,6 +208,19 @@ export default {
   },
 
   methods: {
+    async readFromFirestore() {
+      const messageRef = this.$fireStore
+        .collection("users")
+        .doc("oscar@gmail.com");
+      try {
+        const messageDoc = await messageRef.get();
+        console.log(messageDoc.data());
+        this.MenuItems = messageDoc.data();
+      } catch (e) {
+        alert(e);
+        return;
+      }
+    },
     // getMenu() {
     //   this.$store.dispatch("menu/GETMENU");
     // },

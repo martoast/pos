@@ -19,10 +19,11 @@ export default {
     }
 
     MenuItems.push(menu)
-    console.log(MenuItems)
+    // console.log(MenuItems)
 
     // const firebaseMenu = this.$fireStore.collection('users').doc("oscar@gmail.com").get()
     // MenuItems.push(firebaseMenu)
+
 
     return MenuItems
 
@@ -30,6 +31,7 @@ export default {
 
 
 
-  }
+  },
+
 
 }
