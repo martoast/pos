@@ -91,11 +91,54 @@
           <tr
             v-for="item in MenuItems"
             :key="item.name"
+            @click="this.dialog4 = true"
           >
-            <td>{{ item.Name }}</td>
-            <td>{{ item.Price }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
           </tr>
         </tbody>
+        <div class="text-center">
+          <v-dialog
+            v-model="dialog4"
+            width="500"
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                color="red lighten-2"
+                dark
+                v-on="on"
+              >
+                Click Me
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-title
+                class="headline grey lighten-2"
+                primary-title
+              >
+                Privacy Policy
+              </v-card-title>
+
+              <v-card-text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialog4 = false"
+                >
+                  I accept
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
       </v-simple-table>
       <v-card-actions>
         <v-row justify="center">
@@ -146,6 +189,9 @@
                 </v-col>
               </v-row>
             </v-container>
+            <v-btn>
+              Add Modifier
+            </v-btn>
             <small>*indicates required field</small>
           </v-card-text>
           <v-card-actions>
@@ -177,6 +223,7 @@ export default {
     return {
       dialog2: false,
       dialog3: false,
+      dialog4: false,
       ModifierName: "",
       ModifierPrice: null,
       ItemName: "",
@@ -238,30 +285,38 @@ export default {
         .toString(36)
         .substr(2, 9);
       let modifier = {
-        mame,
+        name,
         price,
         modifierID
       };
 
-      this.ModifiersList.push(Modifier);
+      this.ModifiersList.push(modifier);
       console.log(this.ModifiersList);
+      this.ModifierName = null;
+      this.ModifierPrice = null;
     },
     SaveItem() {
       this.dialog2 = false;
       var name = this.ItemName;
       var price = this.ItemPrice;
+      var type = this.ItemType;
       let modifiers = this.ModifiersList;
       let itemID = Math.random()
         .toString(36)
         .substr(2, 9);
       let item = {
         itemID,
+        type,
         name,
         price,
         modifiers
       };
       this.MenuItems.push(item);
       console.log(this.MenuItems);
+      this.ItemName = null;
+      this.ItemPrice = null;
+      this.ModifiersList = null;
+      this.ItemType = null;
     },
     SaveMenu() {
       this.$store.commit("user/add", this.MenuItems);

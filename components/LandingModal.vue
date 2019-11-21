@@ -198,7 +198,7 @@
                   >Cancel</v-btn>
                   <v-btn
                     color="secondary"
-                    to="/Register/"
+                    to="/Settings/MenuConfig"
                   >Continue</v-btn>
                 </v-card-actions>
               </v-card>
