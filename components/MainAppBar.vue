@@ -55,7 +55,11 @@
 
         <template v-slot:append>
           <div class="pa-2">
-            <v-btn block>Logout</v-btn>
+            <v-btn
+              block
+              @click="Logout()"
+              to="/"
+            >Logout</v-btn>
           </div>
         </template>
       </v-navigation-drawer>
@@ -83,6 +87,17 @@ export default {
       left: true,
       clipped: true
     };
+  },
+  methods: {
+    async Logout() {
+      try {
+        await this.$fireAuth.signOut();
+        // signed out
+        alert("Signed Out");
+      } catch (e) {
+        // an error
+      }
+    }
   }
 };
 </script>

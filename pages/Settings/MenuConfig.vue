@@ -189,10 +189,9 @@ export default {
     };
   },
   created() {
-    var user = this.$fireAuth.currentUser;
-    console.log(user);
+    // var user = this.$fireAuth.currentUser;
+    // console.log(user);
     // get menu from store to fill table
-
     // this.MenuItems = this.$store.state.user.MenuItems;
     // console.log(
     //   this.$fireStore
@@ -214,7 +213,6 @@ export default {
     //     alert(`Logged in with ${user.email}`);
     //     this.email = user.email;
     //     // console.log(this.email);
-
     //     try {
     //       console.log(
     //         this.$fireStore
@@ -234,15 +232,15 @@ export default {
   methods: {
     SaveModifier() {
       this.dialog3 = false;
-      var Name = this.ModifierName;
-      var Price = this.ModifierPrice;
-      let ModifierID = Math.random()
+      var name = this.ModifierName;
+      var price = this.ModifierPrice;
+      let modifierID = Math.random()
         .toString(36)
         .substr(2, 9);
-      let Modifier = {
-        Name,
-        Price,
-        ModifierID
+      let modifier = {
+        mame,
+        price,
+        modifierID
       };
 
       this.ModifiersList.push(Modifier);
@@ -250,36 +248,36 @@ export default {
     },
     SaveItem() {
       this.dialog2 = false;
-      var Name = this.ItemName;
-      var Price = this.ItemPrice;
-      let Modifiers = this.ModifiersList;
-      let ItemID = Math.random()
+      var name = this.ItemName;
+      var price = this.ItemPrice;
+      let modifiers = this.ModifiersList;
+      let itemID = Math.random()
         .toString(36)
         .substr(2, 9);
       let item = {
-        ItemID,
-        Name,
-        Price,
-        Modifiers
+        itemID,
+        name,
+        price,
+        modifiers
       };
       this.MenuItems.push(item);
       console.log(this.MenuItems);
     },
     SaveMenu() {
       this.$store.commit("user/add", this.MenuItems);
-      // var user = this.$fireAuth.currentUser;
+      var user = this.$fireAuth.currentUser;
 
-      // if (user) {
-      //   // User is signed in.
-      //   console.log(user.email);
-      //   this.$fireStore
-      //     .collection("users")
-      //     .doc(user.email)
-      //     .set({ Menu: this.MenuItems });
-      // } else {
-      //   // No user is signed in.
-      //   console.log("Only Registered Users can create a Menu.");
-      // }
+      if (user) {
+        // User is signed in.
+        console.log(user.email);
+        this.$fireStore
+          .collection("users")
+          .doc(user.email)
+          .set({ Menu: this.MenuItems });
+      } else {
+        // No user is signed in.
+        console.log("Only Registered Users can create a Menu.");
+      }
     }
   }
 };

@@ -12,7 +12,7 @@
         <div v-if="MenuItems == null">
 
           <!-- <v-btn to="/Settings/MenuConfig"></v-btn> -->
-          <v-btn @click="readFromFirestore()"></v-btn>
+          <v-btn @click="fetchMenu()"></v-btn>
         </div>
         <div>
           <!-- <v-container fluid>
@@ -208,17 +208,15 @@ export default {
   },
 
   methods: {
-    async readFromFirestore() {
-      const messageRef = this.$fireStore
-        .collection("users")
-        .doc("oscar@gmail.com");
-      try {
+    async fetchMenu() {
+      var user = this.$fireAuth.currentUser;
+      if (user) {
+        const messageRef = this.$fireStore.collection("users").doc(user.email);
         const messageDoc = await messageRef.get();
-        console.log(messageDoc.data());
-        this.MenuItems = messageDoc.data();
-      } catch (e) {
-        alert(e);
-        return;
+        console.log(messageDoc.data().Menu);
+        this.MenuItems = messageDoc.data().Menu;
+      } else {
+        console.log("No user");
       }
     },
     // getMenu() {
@@ -252,11 +250,7 @@ export default {
       );
       let OrderTotal = ModifiersTotal + this.FoodItem.price;
       OrderTotal = OrderTotal.toFixed(2);
-      // console.log(OrderTotal);
-      // this.$nuxt.$on("OrderType", data => {
-      //   console.log(data);
-      //   this.OrderType = data;
-      // });
+
       let OrderID = Math.random()
         .toString(36)
         .substr(2, 9);
