@@ -84,40 +84,34 @@
         <thead>
           <tr>
             <th class="text-left">Name</th>
-            <th class="text-left">Type</th>
+            <th class="text-left">Price</th>
           </tr>
         </thead>
         <tbody>
           <tr
             v-for="item in MenuItems"
             :key="item.name"
-            @click="this.dialog4 = true"
+            @click="DeleteItem(item)"
           >
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
           </tr>
         </tbody>
-        <div class="text-center">
+        <div
+          class="text-center"
+          v-if="this.dialog4"
+        >
           <v-dialog
             v-model="dialog4"
             width="500"
           >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                color="red lighten-2"
-                dark
-                v-on="on"
-              >
-                Click Me
-              </v-btn>
-            </template>
 
             <v-card>
               <v-card-title
                 class="headline grey lighten-2"
                 primary-title
               >
-                Privacy Policy
+                Edit Menu
               </v-card-title>
 
               <v-card-text>
@@ -319,7 +313,7 @@ export default {
       this.ItemType = null;
     },
     SaveMenu() {
-      this.$store.commit("user/add", this.MenuItems);
+      this.$store.commit("menu/add", this.MenuItems);
       var user = this.$fireAuth.currentUser;
 
       if (user) {
@@ -333,6 +327,11 @@ export default {
         // No user is signed in.
         console.log("Only Registered Users can create a Menu.");
       }
+    },
+    DeleteItem(item) {
+      // this.dialog4 = true;
+      this.MenuItems.splice(this.MenuItems.indexOf(item), 1);
+      console.log(this.MenuItems);
     }
   }
 };

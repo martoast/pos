@@ -197,8 +197,7 @@ export default {
     //     alert("no user is signed in...");
     //   }
     // });
-
-    this.$store.dispatch("menu/fetchMenu");
+    // this.$store.dispatch("menu/fetchMenu");
   },
 
   computed: {
@@ -213,8 +212,9 @@ export default {
       if (user) {
         const messageRef = this.$fireStore.collection("users").doc(user.email);
         const messageDoc = await messageRef.get();
-        console.log(messageDoc.data().Menu);
-        this.MenuItems = messageDoc.data().Menu;
+        console.log(messageDoc.data());
+
+        // this.MenuItems = messageDoc.data().Menu;
       } else {
         console.log("No user");
       }

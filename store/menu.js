@@ -29,7 +29,13 @@ export const mutations = {
   decrementProductInventory(state, { id }) {
     const item = state.MenuItems.find(item => item.id === id)
     item.inventory--
-  }
+  },
+  add(state, MenuItems) {
+    state.MenuItems = MenuItems
+  },
+  remove(state, { item }) {
+    state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
+  },
 
 }
 export const getters = {
