@@ -248,31 +248,27 @@ export default {
     //       .get()
     //   );
     // }
-    // this.$fireAuth.onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     // User is signed in.
-    //     alert(`Logged in with ${user.email}`);
-    //     this.email = user.email;
-    //     // console.log(this.email);
-    //     try {
-    //       console.log(
-    //         this.$fireStore
-    //           .collection("users")
-    //           .doc(user.email)
-    //           .get()
-    //       );
-    //     } catch {
-    //       console.log("No Menu Created");
-    //       return;
-    //     }
-    //   } else {
-    //     // No user is signed in.
-    //   }
-    // });
+    this.$fireAuth.onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        alert(`Logged in with ${user.email}`);
+        // this.email = user.email;
+        // console.log(this.email);
+        var self = this;
+
+        const messageRef = self.$fireStore.collection("users").doc(user.email);
+        const messageDoc = messageRef.get();
+        console.log(messageDoc.data().menu);
+      } else {
+        // No user is signed in.
+        console.log("No user is signed in");
+      }
+    });
   },
   methods: {
     SaveModifier() {
       this.dialog3 = false;
+      this.ModifiersList = this.ModifiersList || [];
       var name = this.ModifierName;
       var price = this.ModifierPrice;
       let modifierID = Math.random()
@@ -313,7 +309,7 @@ export default {
       this.ItemType = null;
     },
     SaveMenu() {
-      this.$store.commit("menu/add", this.MenuItems);
+      // this.$store.commit("menu/add", this.MenuItems);
       var user = this.$fireAuth.currentUser;
 
       if (user) {
