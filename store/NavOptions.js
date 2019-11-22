@@ -3,7 +3,7 @@ export const state = () => ({
     {
       icon: "mdi-relative-scale",
       title: "Sales Register",
-      to: "/"
+      to: "/Register"
     },
     {
       icon: "mdi-cash-usd",
