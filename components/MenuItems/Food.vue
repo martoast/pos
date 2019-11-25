@@ -214,7 +214,7 @@ export default {
         const messageDoc = await messageRef.get();
         console.log(messageDoc.data());
 
-        // this.MenuItems = messageDoc.data().Menu;
+        this.MenuItems = messageDoc.data().Menu;
       } else {
         console.log("No user");
       }

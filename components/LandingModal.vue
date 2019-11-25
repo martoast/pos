@@ -50,14 +50,16 @@
                           v-model="email"
                           :rules="emailRules"
                           @input="updateMessage"
+                          color="secondary"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
                         <v-text-field
                           v-model="password"
-                          :counter="10"
                           :rules="nameRules"
                           label="Password*"
+                          type="password"
+                          color="secondary"
                           required
                         ></v-text-field>
                       </v-col>
@@ -65,7 +67,7 @@
                       <v-checkbox
                         v-model="checkbox"
                         :rules="[v => !!v || 'You must agree to continue!']"
-                        label="Do you agree?"
+                        label="Agree with terms of service?"
                         required
                       ></v-checkbox>
                       <small>*indicates required field</small>
@@ -224,10 +226,7 @@ export default {
     valid: true,
     name: "",
 
-    nameRules: [
-      v => !!v || "Name is required",
-      v => (v && v.length <= 10) || "Name must be less than 10 characters"
-    ],
+    nameRules: [v => !!v || "Name is required"],
     select: null,
     e1: 0,
 
