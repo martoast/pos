@@ -20,15 +20,16 @@
             text
             to="/users/Signup"
           >Registrar Cuenta</v-btn> -->
+          <v-dialog v-model="dialog">
+
+            <LoginModal />
+
+          </v-dialog>
 
         </v-toolbar-items>
 
       </v-app-bar>
-      <v-dialog v-model="dialog">
 
-        <LoginModal />
-
-      </v-dialog>
       <Nuxt />
 
       <v-footer

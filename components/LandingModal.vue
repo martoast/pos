@@ -210,7 +210,7 @@
                   <v-btn
                     color="secondary"
                     to="/Settings/MenuConfig"
-                    @click="SaveUserData"
+                    @click="SaveUserData(name,PhoneNumber,LastName,Age)"
                   >Continue</v-btn>
                 </v-card-actions>
               </v-card>
@@ -263,13 +263,13 @@ export default {
     updateMessage(e) {
       this.$store.commit("user/updateMessage", e);
     },
-    SaveUserData() {
+    SaveUserData(name, PhoneNumber, LastName, Age) {
       let user = {
-        Name: this.name,
-        LastName: this.LastName,
-        PhoneNumber: this.PhoneNumber,
-        Age: this.Age,
-        RestaurantType: this.RestaurantType
+        Name: name,
+        LastName: LastName,
+        PhoneNumber: PhoneNumber,
+        Age: Age,
+        RestaurantType: RestaurantType
       };
       this.$store.commit("user/SaveUserData", user);
     },

@@ -4,7 +4,8 @@ export const state = () => ({
     email: "",
     Name: "",
     PhoneNumber: null,
-    Age: null
+    Age: null,
+    LastName: ""
 
   }
 })
@@ -20,6 +21,7 @@ export const mutations = {
     state.user.name = message.name
     state.user.PhoneNumber = message.PhoneNumber
     state.user.Age = message.Age
+    state.user.LastName = message.LastName
 
   }
 
