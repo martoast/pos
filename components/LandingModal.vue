@@ -131,6 +131,7 @@
                           required
                           :rules="nameRules"
                           v-model="name"
+                          color="secondary"
                         ></v-text-field>
                       </v-col>
                       <v-col
@@ -140,7 +141,10 @@
                       >
                         <v-text-field
                           label="Legal Last Name"
-                          hint="not required"
+                          v-model="LastName"
+                          required
+                          :rules="nameRules"
+                          color="secondary"
                         ></v-text-field>
                       </v-col>
                       <v-col
@@ -152,7 +156,10 @@
                           label="Contact Number*"
                           persistent-hint
                           hint="(xxx)xxx-xxxx"
+                          :rules="phoneRules"
+                          color="secondary"
                           required
+                          v-model="PhoneNumber"
                         ></v-text-field>
                       </v-col>
 
@@ -164,6 +171,7 @@
                         <v-select
                           :items="['0-17', '18-29', '30-54', '54+']"
                           label="Age*"
+                          v-model="Age"
                           required
                         ></v-select>
                       </v-col>
@@ -172,8 +180,9 @@
                         sm="6"
                       >
                         <v-autocomplete
-                          :items="['Bar', 'Fast Food', 'Chain', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
+                          :items="['Bar', 'Fast Food', 'Casual Dining','Fine Dining']"
                           label="Restaurant Type"
+                          v-model="RestaurantType"
                           multiple
                         ></v-autocomplete>
                       </v-col>
@@ -201,6 +210,7 @@
                   <v-btn
                     color="secondary"
                     to="/Settings/MenuConfig"
+                    @click="SaveUserData"
                   >Continue</v-btn>
                 </v-card-actions>
               </v-card>
@@ -223,14 +233,18 @@ export default {
     dialog: false,
 
     name: "",
+    LastName: "",
+    PhoneNumber: "",
+    Age: null,
+    RestaurantType: "",
     valid: true,
-    name: "",
 
     nameRules: [v => !!v || "Name is required"],
     select: null,
     e1: 0,
 
     email: "",
+    phoneRules: [v => !!v || "Phone is required"],
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -249,11 +263,15 @@ export default {
     updateMessage(e) {
       this.$store.commit("user/updateMessage", e);
     },
-    validate() {
-      if (this.$refs.form.validate()) {
-        this.snackbar = true;
-        console.log(this.name);
-      }
+    SaveUserData() {
+      let user = {
+        Name: this.name,
+        LastName: this.LastName,
+        PhoneNumber: this.PhoneNumber,
+        Age: this.Age,
+        RestaurantType: this.RestaurantType
+      };
+      this.$store.commit("user/SaveUserData", user);
     },
 
     async createUser() {
