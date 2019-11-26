@@ -100,6 +100,7 @@
                   <v-btn
                     :disabled="!valid"
                     color="secondary"
+                    :loading="loading"
                     @click="createUser();e1 = 2"
                   >Create Account</v-btn>
                 </v-card-actions>
@@ -231,12 +232,13 @@ export default {
   },
   data: () => ({
     dialog: false,
+    loading: false,
 
     name: "",
     LastName: "",
     PhoneNumber: "",
     Age: null,
-    RestaurantType: "",
+    RestaurantType: [],
     valid: true,
 
     nameRules: [v => !!v || "Name is required"],
@@ -263,7 +265,7 @@ export default {
     updateMessage(e) {
       this.$store.commit("user/updateMessage", e);
     },
-    SaveUserData(name, PhoneNumber, LastName, Age) {
+    SaveUserData(name, PhoneNumber, LastName, Age, RestaurantType) {
       let user = {
         Name: name,
         LastName: LastName,
@@ -276,10 +278,12 @@ export default {
 
     async createUser() {
       try {
+        this.loading = true;
         await this.$fireAuth.createUserWithEmailAndPassword(
           this.email,
           this.password
         );
+        this.loading = false;
         alert("Account Created");
         this.$store.commit("user/updateMessage", this.email);
       } catch (e) {

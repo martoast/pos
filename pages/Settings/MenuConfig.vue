@@ -77,63 +77,8 @@
           </v-card>
         </v-dialog>
       </v-row>
-      <v-simple-table
-        fixed-header
-        height="300px"
-      >
-        <thead>
-          <tr>
-            <th class="text-left">Name</th>
-            <th class="text-left">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="item in MenuItems"
-            :key="item.name"
-            @click="DeleteItem(item)"
-          >
-            <td>{{ item.name }}</td>
-            <td>{{ item.price }}</td>
-          </tr>
-        </tbody>
-        <div
-          class="text-center"
-          v-if="this.dialog4"
-        >
-          <v-dialog
-            v-model="dialog4"
-            width="500"
-          >
+      <MenuTable />
 
-            <v-card>
-              <v-card-title
-                class="headline grey lighten-2"
-                primary-title
-              >
-                Edit Menu
-              </v-card-title>
-
-              <v-card-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </v-card-text>
-
-              <v-divider></v-divider>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                  color="primary"
-                  text
-                  @click="dialog4 = false"
-                >
-                  I accept
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </div>
-      </v-simple-table>
       <v-card-actions>
         <v-row justify="center">
           <v-btn
@@ -208,63 +153,34 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
+import MenuTable from "~/components/MenuConfigTable";
 export default {
   // async fetch({ store, params }) {
   //   await store.dispatch("GET_MENU");
   // },
   layout: "settings",
+  components: {
+    MenuTable
+  },
   data() {
     return {
       dialog2: false,
       dialog3: false,
-      dialog4: false,
+
       ModifierName: "",
       ModifierPrice: null,
       ItemName: "",
       ItemType: null,
       ItemPrice: null,
       ModifiersList: [],
-      MenuItems: [],
+      // MenuItems: null,
+      // MenuItems: this.$store.state["menu/MenuItems"],
       email: null,
       uid: {}
     };
   },
-  created() {
-    // var user = this.$fireAuth.currentUser;
-    // console.log(user);
-    // get menu from store to fill table
-    // this.MenuItems = this.$store.state.user.MenuItems;
-    // console.log(
-    //   this.$fireStore
-    //     .collection("users")
-    //     .doc(user.email)
-    //     .get()
-    // );
-    // if (user) {
-    //   console.log(
-    //     this.$fireStore
-    //       .collection("users")
-    //       .doc(user.email)
-    //       .get()
-    //   );
-    // }
-    this.$fireAuth.onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        alert(`Logged in with ${user.email}`);
-        // this.email = user.email;
-        // console.log(this.email);
-        var self = this;
+  created() {},
 
-        const messageRef = self.$fireStore.collection("users").doc(user.email);
-        const messageDoc = messageRef.get();
-        console.log(messageDoc.data().menu);
-      } else {
-        // No user is signed in.
-        console.log("No user is signed in");
-      }
-    });
-  },
   methods: {
     SaveModifier() {
       this.dialog3 = false;
@@ -301,33 +217,34 @@ export default {
         price,
         modifiers
       };
-      this.MenuItems.push(item);
-      console.log(this.MenuItems);
+      this.$store.commit("menu/add", item);
+      // Reset values
       this.ItemName = null;
       this.ItemPrice = null;
       this.ModifiersList = null;
       this.ItemType = null;
     },
     SaveMenu() {
-      // this.$store.commit("menu/add", this.MenuItems);
-      var user = this.$fireAuth.currentUser;
-
-      if (user) {
-        // User is signed in.
-        console.log(user.email);
-        this.$fireStore
-          .collection("users")
-          .doc(user.email)
-          .set({ Menu: this.MenuItems });
-      } else {
-        // No user is signed in.
-        console.log("Only Registered Users can create a Menu.");
-      }
+      this.$fireAuth.onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          alert(`Logged in with ${user.email}`);
+          console.log(user.email);
+          this.$fireStore
+            .collection("users")
+            .doc(user.email)
+            .set({ Menu: this.MenuItems });
+        } else {
+          // No user is signed in.
+          console.log("Only Registered Users can create a Menu.");
+        }
+      });
     },
     DeleteItem(item) {
       // this.dialog4 = true;
-      this.MenuItems.splice(this.MenuItems.indexOf(item), 1);
-      console.log(this.MenuItems);
+      // this.MenuItems.splice(this.MenuItems.indexOf(item), 1);
+      // console.log(this.MenuItems);
+      this.$store.commit("menu/remove", item);
     }
   }
 };

@@ -1,7 +1,7 @@
 import menu from '~/services/MenuService'
 
 export const state = () => ({
-  MenuItems: null,
+  MenuItems: [],
 
 })
 
@@ -20,18 +20,14 @@ export const actions = {
 
 
 export const mutations = {
-  setMenu(state, items) {
-    console.log("test")
-    state.MenuItems = items
-    console.log(state.MenuItems)
-  },
 
   decrementProductInventory(state, { id }) {
     const item = state.MenuItems.find(item => item.id === id)
     item.inventory--
   },
   add(state, MenuItems) {
-    state.MenuItems = MenuItems
+    this.self = this
+    state.MenuItems.push(MenuItems)
   },
   remove(state, { item }) {
     state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
@@ -40,6 +36,18 @@ export const mutations = {
 }
 export const getters = {
   getMenu(state) {
+    console.log("shit")
+    console.log(state.MenuItems)
     return state.MenuItems
   }
+
 }
+
+// const getItems = (state) => {
+//   console.log("test")
+//   return state.MenuItems;
+// };
+
+// export default {
+//   getItems
+// };
