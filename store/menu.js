@@ -39,6 +39,7 @@ export const mutations = {
   add(state, MenuItems) {
     this.self = this
     state.MenuItems.push(MenuItems)
+    console.log(state.MenuItems)
   },
   remove(state, { item }) {
     state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
@@ -47,9 +48,16 @@ export const mutations = {
 }
 export const getters = {
   getMenu(state) {
-    console.log("called getter")
 
-    return state.MenuItems
+    if (state.MenuItems === undefined || state.MenuItems.length == 0) {
+      console.log("No Menu Created")
+      return;
+    } else {
+      return state.MenuItems
+
+    }
+
+
   }
 
 }
