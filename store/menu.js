@@ -14,12 +14,23 @@ export const actions = {
       commit('setMenu', response)
     })
   },
+  POST_MENU({
+    commit
+  }) {
+    this.$store.state["menu/MenuItems"].then(response => {
+      commit('setMenu', response)
+    })
+  }
 
 }
 
 
 
 export const mutations = {
+  setMenu(state, MenuItems) {
+    state.MenuItems = MenuItems
+
+  },
 
   decrementProductInventory(state, { id }) {
     const item = state.MenuItems.find(item => item.id === id)
@@ -36,8 +47,8 @@ export const mutations = {
 }
 export const getters = {
   getMenu(state) {
-    console.log("shit")
-    console.log(state.MenuItems)
+    console.log("called getter")
+
     return state.MenuItems
   }
 

@@ -233,18 +233,13 @@ export default {
           this.$fireStore
             .collection("users")
             .doc(user.email)
-            .set({ Menu: this.MenuItems });
+            .set({ Menu: this.$store.state["menu/MenuItems"] });
         } else {
           // No user is signed in.
           console.log("Only Registered Users can create a Menu.");
         }
       });
-    },
-    DeleteItem(item) {
-      // this.dialog4 = true;
-      // this.MenuItems.splice(this.MenuItems.indexOf(item), 1);
-      // console.log(this.MenuItems);
-      this.$store.commit("menu/remove", item);
+      // this.$store.dispatch("menu/POST_MENU");
     }
   }
 };

@@ -33,23 +33,29 @@ export default {
   data() {
     return {
       // MenuItems: this.$store.state["menu/MenuItems"]
-      MenuItems: [
-        {
-          name: "shit",
-          price: 2.99,
-          Type: "Food",
-          modifiers: null,
-          itemID: "sdf2345r"
-        }
-      ]
+      // MenuItems: [
+      //   {
+      //     name: "shit",
+      //     price: 2.99,
+      //     Type: "Food",
+      //     modifiers: null,
+      //     itemID: "sdf2345r"
+      //   }
+      // ]
     };
   },
   created() {},
   computed: {
-    // MenuItems() {
-    //   return this.$store.getters["menu/getItems"];
-    // }
+    MenuItems() {
+      return this.$store.getters["menu/getMenu"];
+    }
   },
-  mounted() {}
+  mounted() {},
+  methods: {
+    DeleteItem(item) {
+      console.log("deleting item...");
+      this.$store.commit("menu/remove", item);
+    }
+  }
 };
 </script>
