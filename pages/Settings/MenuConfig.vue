@@ -236,7 +236,7 @@ export default {
             .set({ Menu: this.$store.state["menu/MenuItems"] });
         } else {
           // No user is signed in.
-          console.log("Only Registered Users can create a Menu.");
+          console.log("Only Registered Users can save a Menu.");
         }
       });
       // this.$store.dispatch("menu/POST_MENU");

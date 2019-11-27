@@ -105,6 +105,11 @@ export default {
           to: "/Settings/Display"
         },
         {
+          icon: "mdi-book-open",
+          title: "Menu Configuration",
+          to: "/Settings/MenuConfig"
+        },
+        {
           icon: "mdi-credit-card",
           title: "Payment Option",
           to: "/Settings/PaymentOption"

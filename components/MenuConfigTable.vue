@@ -1,8 +1,6 @@
 <template>
   <div>
-    <pre>
-      {{MenuItems}}
-    </pre>
+
     <v-simple-table
       fixed-header
       height="300px"

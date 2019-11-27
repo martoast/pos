@@ -9,11 +9,11 @@
         justify="center"
         align="center"
       >
-        <div v-if="MenuItems == null">
+        <!-- <div v-if="MenuItems == null"> -->
 
-          <!-- <v-btn to="/Settings/MenuConfig"></v-btn> -->
-          <v-btn @click="fetchMenu()"></v-btn>
-        </div>
+        <!-- <v-btn to="/Settings/MenuConfig"></v-btn> -->
+        <!-- <v-btn @click="fetchMenu()"></v-btn>
+        </div> -->
         <div>
           <!-- <v-container fluid>
             <SearchBar />
@@ -143,7 +143,7 @@ export default {
   },
   data() {
     return {
-      MenuItems: null,
+      // MenuItems: null,
       FoodItem: null,
       FoodItemName: null,
       SelectedModifiers: [],
@@ -201,8 +201,8 @@ export default {
   },
 
   computed: {
-    Menuitems() {
-      return this.$store.getters.getMenu;
+    MenuItems() {
+      return this.$store.getters["menu/getMenu"];
     }
   },
 
