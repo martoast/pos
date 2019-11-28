@@ -94,25 +94,12 @@ export const mutations = {
 export const getters = {
   getMenu(state) {
 
-    // if (state.MenuItems === undefined || state.MenuItems.length == 0) {
-    //   console.log("No Menu Created")
-    //   return;
-    // } else {
-    //   this.$fireAuth.onAuthStateChanged(function (user) {
-    //     if (user) {
-
-    //       console.log(user.email);
-    //       return state.MenuItems
-
-    //     } else {
-    //       // No user is signed in.
-    //       alert("no user is signed in...");
-    //     }
-    //   });
-
-
-    // }
-
+    if (state.MenuItems === undefined || state.MenuItems.length == 0) {
+      console.log("No Menu Created")
+      return;
+    } else {
+      return state.MenuItems
+    }
 
   }
 
