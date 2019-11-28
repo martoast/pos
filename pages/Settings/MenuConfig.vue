@@ -29,9 +29,6 @@ import { mapMutations } from "vuex";
 import MenuTable from "~/components/MenuConfigTable";
 import ItemCreateModal from "~/components/ItemCreateModal";
 export default {
-  // async fetch({ store, params }) {
-  //   await store.dispatch("GET_MENU");
-  // },
   layout: "settings",
   components: {
     MenuTable,

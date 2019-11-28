@@ -183,21 +183,20 @@ export default {
     //   });
     // this.$fireAuth.onAuthStateChanged(function(user) {
     //   if (user) {
-    // User is signed in.
-    // this.$store.commit("user/updateMessage", user.email);
-    // alert(`Fetching Menu`);
-    // this.email = user.email;
-    // console.log(this.email);
-    // var FetchedMenu = this.$fireStore
-    //   .collection("users")
-    //   .doc(this.email)
-    //   .get();
-    // } else {
-    // No user is signed in.
+    //     // User is signed in.
+    //     // this.$store.commit("user/updateMessage", user.email);
+    //     alert(`Fetching Menu`);
+    //     // this.email = user.email;
+    //     console.log(user.email);
+    //     // this.$store.commit("user/fetchMenu", this.$store.state(user.email));
+    //     this.$store.dispatch("menu/fetchMenu");
+    //   } else {
+    //     // No user is signed in.
     //     alert("no user is signed in...");
     //   }
     // });
-    // this.$store.dispatch("menu/fetchMenu");
+
+    this.$store.dispatch("menu/test");
   },
 
   computed: {
