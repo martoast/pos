@@ -1,14 +1,7 @@
 <template>
   <div>
-    <v-col
-      cols="12"
-      sm="6"
-      offset-sm="2"
-    >
-      <v-row
-        justify="center"
-        align="center"
-      >
+    <v-col cols="12" sm="6" offset-sm="2">
+      <v-row justify="center" align="center">
         <!-- <div v-if="MenuItems == null"> -->
 
         <!-- <v-btn to="/Settings/MenuConfig"></v-btn> -->
@@ -38,13 +31,15 @@
                       @click.stop="dialog = true"
                     >
                       <v-card-title class="headline mb-1">
-                        <h1>{{item.name}}</h1>
+                        <h1>{{ item.name }}</h1>
                       </v-card-title>
                       <v-scroll-y-transition>
                         <div
                           v-if="active"
                           class="display-3 flex-grow-1 text-center"
-                        >Active</div>
+                        >
+                          Active
+                        </div>
                       </v-scroll-y-transition>
                     </v-card>
                   </v-item>
@@ -57,20 +52,13 @@
     </v-col>
 
     <div>
-      <v-row
-        align="center"
-        justify="center"
-      >
+      <v-row align="center" justify="center">
         <v-container>
-          <v-dialog
-            v-model="dialog"
-            persistent
-            max-width="400px"
-          >
+          <v-dialog v-model="dialog" persistent max-width="400px">
             <v-card class="primary">
               <v-row justify="center">
                 <v-card-title>
-                  <span class="headline">{{this.FoodItemName}}</span>
+                  <span class="headline">{{ this.FoodItemName }}</span>
                 </v-card-title>
               </v-row>
               <v-card-text>
@@ -111,16 +99,12 @@
               <div>
                 <v-card-actions>
                   <div class="flex-grow-1"></div>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="dialog = false"
-                  >Close</v-btn>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="SendModifiers()"
-                  >Save</v-btn>
+                  <v-btn color="blue darken-1" text @click="dialog = false"
+                    >Close</v-btn
+                  >
+                  <v-btn color="blue darken-1" text @click="SendModifiers()"
+                    >Save</v-btn
+                  >
                 </v-card-actions>
               </div>
             </v-card>
@@ -131,11 +115,11 @@
   </div>
 </template>
 <script>
-import SearchBar from "~/components/SearchBar.vue";
+import SearchBar from '~/components/SearchBar.vue'
 
-import { mapState } from "vuex";
-import { mapGetters } from "vuex";
-import { mapActions } from "vuex";
+import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -149,59 +133,60 @@ export default {
       SelectedModifiers: [],
       FoodModifiers: null,
       ModifierList: [],
-      KitchenNotes: "",
+      KitchenNotes: '',
       selectedSize: null,
       ItemSizes: null,
       toggle_exclusive: [],
       OrderType: null,
       email: null,
+      MenuItems: null,
 
       Cart: null,
 
       dialog: false,
 
-      text: "center",
+      text: 'center',
       model: null,
       tab: null,
-      items: ["FoodModifiers", "Extras", "Notes"],
+      items: ['FoodModifiers', 'Extras', 'Notes'],
       window: {
         width: 0,
         height: 0
       }
-    };
+    }
   },
   // async fetch({ store, params }) {
   //   await store.dispatch("GETMENU");
   // },
   created() {
-    // fetch("http://localhost:3002/food")
-    //   .then(response => response.json())
-    //   .then(response => {
-    //     // this.MenuItems = response.data;
-    //     console.log(response);
-    //     this.MenuItems = response;
-    //   });
+    fetch('http://localhost:3002/food')
+      .then(response => response.json())
+      .then(response => {
+        // this.MenuItems = response.data;
+        console.log(response)
+        this.MenuItems = response
+      })
 
-    this.$store.dispatch("menu/GET_FIREMENU");
+    // this.$store.dispatch("menu/GET_FIREMENU");
   },
 
   computed: {
-    MenuItems() {
-      return this.$store.getters["menu/getMenu"];
-    }
+    // MenuItems() {
+    //   return this.$store.getters['menu/getMenu']
+    // }
   },
 
   methods: {
     async fetchMenu() {
-      var user = this.$fireAuth.currentUser;
+      var user = this.$fireAuth.currentUser
       if (user) {
-        const messageRef = this.$fireStore.collection("users").doc(user.email);
-        const messageDoc = await messageRef.get();
-        console.log(messageDoc.data());
+        const messageRef = this.$fireStore.collection('users').doc(user.email)
+        const messageDoc = await messageRef.get()
+        console.log(messageDoc.data())
 
-        this.MenuItems = messageDoc.data().Menu;
+        this.MenuItems = messageDoc.data().Menu
       } else {
-        console.log("No user");
+        console.log('No user')
       }
     },
     // getMenu() {
@@ -209,15 +194,15 @@ export default {
     // },
     AddtoCart(item) {
       // console.log(item);
-      this.FoodModifiers = item.modifier;
-      this.ItemSizes = item.size;
+      this.FoodModifiers = item.modifier
+      this.ItemSizes = item.size
       // console.log(this.FoodModifiers);
-      this.FoodItem = item;
-      this.FoodItemName = item.name;
+      this.FoodItem = item
+      this.FoodItemName = item.name
       // console.log(this.FoodItemName);
     },
     AddModifierToList(Modifier) {
-      this.ModifierList.push(Modifier);
+      this.ModifierList.push(Modifier)
     },
     SendModifiers() {
       // if ((this.toggle_exclusive = 0)) {
@@ -232,17 +217,17 @@ export default {
       let ModifiersTotal = this.ModifierList.reduce(
         (acc, item) => acc + item.price,
         0
-      );
-      let OrderTotal = ModifiersTotal + this.FoodItem.price;
-      OrderTotal = OrderTotal.toFixed(2);
+      )
+      let OrderTotal = ModifiersTotal + this.FoodItem.price
+      OrderTotal = OrderTotal.toFixed(2)
 
       let OrderID = Math.random()
         .toString(36)
-        .substr(2, 9);
+        .substr(2, 9)
       var currentDateWithFormat = new Date()
         .toJSON()
         .slice(0, 10)
-        .replace(/-/g, "/");
+        .replace(/-/g, '/')
       const order = {
         id: OrderID,
         date: currentDateWithFormat,
@@ -255,20 +240,20 @@ export default {
         Notes: this.KitchenNotes,
         size: this.selectedSize,
         ModifiersTotal: ModifiersTotal
-      };
+      }
 
-      this.$nuxt.$emit("order", order);
-      const messageRef = this.$fireStore.collection("orders").doc(OrderID);
-      messageRef.set(order);
-      this.ModifierList = [];
-      this.dialog = false;
+      this.$nuxt.$emit('order', order)
+      const messageRef = this.$fireStore.collection('orders').doc(OrderID)
+      messageRef.set(order)
+      this.ModifierList = []
+      this.dialog = false
     },
     handleResize() {
-      this.window.width = window.innerWidth;
-      this.window.height = window.innerHeight;
+      this.window.width = window.innerWidth
+      this.window.height = window.innerHeight
     }
   }
-};
+}
 </script>
 <style scoped>
 .rounded-card {

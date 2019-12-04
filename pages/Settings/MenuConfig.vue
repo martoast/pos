@@ -75,19 +75,19 @@ export default {
       //   }
       // });
       this.$store.dispatch("menu/POST_MENU");
+    },
+    writeToFirestore() {
+      const messageRef = this.$fireStore.collection("users").doc(email);
+      try {
+        messageRef.set({
+          message: this.$store.state["menu/MenuItems"]
+        });
+      } catch (e) {
+        alert(e);
+        return;
+      }
+      alert("Success.");
     }
-  },
-  writeToFirestore() {
-    const messageRef = this.$fireStore.collection("users").doc(email);
-    try {
-      messageRef.set({
-        message: "Nuxt-Fire with Firestore rocks!"
-      });
-    } catch (e) {
-      alert(e);
-      return;
-    }
-    alert("Success.");
   }
 };
 </script>

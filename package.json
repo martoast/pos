@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "firebase": "^7.2.1",
+    "json-server": "^0.15.1",
     "nuxt": "^2.0.0",
     "nuxt-fire": "^2.3.0",
     "vue-receipt-component": "^1.0.6"
