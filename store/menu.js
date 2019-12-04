@@ -6,7 +6,7 @@ export const state = () => ({
 })
 
 export const actions = {
-  test({ commit }) {
+  GET_FIREMENU({ commit }) {
 
     setTimeout(() => {
       console.log("action called")
@@ -15,13 +15,13 @@ export const actions = {
         if (user) {
 
 
-          // const messageRef = this.$fireStore.collection("users").doc(user.email);
-          // const messageDoc = messageRef.get();
-          // console.log(messageDoc.data());
+          const messageRef = this.$fireStore.collection("users").doc(user.email);
+          const messageDoc = messageRef.get();
+          console.log(messageDoc.data());
 
-          // var MenuItems = messageDoc.data().Menu;
+          var MenuItems = messageDoc.data().Menu;
 
-          // commit("setMenu", MenuItems)
+          commit("setMenu", MenuItems)
 
 
 
@@ -37,7 +37,7 @@ export const actions = {
 
         } else {
           // No user is signed in.
-          // alert("no user is signed in...");
+          alert("no user is signed in...");
         }
       })
 
@@ -52,20 +52,32 @@ export const actions = {
 
   },
 
-  fetchMenu({
-    commit
-  }) {
-    menu.getMenu().then(response => {
-      commit('menu/setMenu', response)
-    })
-  },
-  POST_MENU({
-    commit
-  }) {
-    this.$store.state["menu/MenuItems"].then(response => {
-      commit('setMenu', response)
-    })
+  POST_MENU() {
+    this.$fireAuth.onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        alert(`Logged in with ${user.email}`);
+        console.log(user.email);
+        app.$fireStore
+          .collection("users")
+          .doc(user.email)
+          .set({ Menu: this.$store.state["menu/MenuItems"] });
+      } else {
+        // No user is signed in.
+        console.log("Only Registered Users can save a Menu.");
+      }
+    });
+
   }
+
+
+  // POST_MENU({
+  //   commit
+  // }) {
+  //   this.$store.state["menu/MenuItems"].then(response => {
+  //     commit('setMenu', response)
+  //   })
+  // }
 
 }
 
@@ -74,6 +86,7 @@ export const actions = {
 export const mutations = {
   setMenu(state, MenuItems) {
     state.MenuItems = MenuItems
+    console.log("SetMenu Success")
 
   },
 

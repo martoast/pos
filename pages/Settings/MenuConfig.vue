@@ -12,7 +12,7 @@
           <ItemCreateModal />
           <v-btn
             class="secondary"
-            @click="SaveMenu()"
+            @click="writeToFirestore()"
           >
             Save Menu
           </v-btn>
@@ -36,11 +36,23 @@ export default {
   },
   data() {
     return {
-      // MenuItems: null,
-      // MenuItems: this.$store.state["menu/MenuItems"],
+      MenuItems: { foo: "bar" }
+      // MenuItems: this.$store.state["menu/MenuItems"]
     };
   },
   created() {},
+  computed: {
+    email() {
+      this.$fireAuth.onAuthStateChanged(function(user) {
+        if (user) {
+          return user.email;
+        } else {
+          // No user is signed in.
+          console.log("No User logged in");
+        }
+      });
+    }
+  },
 
   methods: {
     SaveMenu() {
@@ -49,17 +61,33 @@ export default {
       //     // User is signed in.
       //     alert(`Logged in with ${user.email}`);
       //     console.log(user.email);
+      //     // app.$fireStore
+      //     //   .collection("users")
+      //     //   .doc(user.email)
+      //     //   .set({ Menu: this.MenuItems });
       //     this.$fireStore
       //       .collection("users")
       //       .doc(user.email)
-      //       .set({ Menu: this.$store.state["menu/MenuItems"] });
+      //       .set({ Menu: this.MenuItems });
       //   } else {
       //     // No user is signed in.
       //     console.log("Only Registered Users can save a Menu.");
       //   }
       // });
-      // this.$store.dispatch("menu/POST_MENU");
+      this.$store.dispatch("menu/POST_MENU");
     }
+  },
+  writeToFirestore() {
+    const messageRef = this.$fireStore.collection("users").doc(email);
+    try {
+      messageRef.set({
+        message: "Nuxt-Fire with Firestore rocks!"
+      });
+    } catch (e) {
+      alert(e);
+      return;
+    }
+    alert("Success.");
   }
 };
 </script>

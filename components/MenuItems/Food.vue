@@ -181,22 +181,8 @@ export default {
     //     console.log(response);
     //     this.MenuItems = response;
     //   });
-    // this.$fireAuth.onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     // User is signed in.
-    //     // this.$store.commit("user/updateMessage", user.email);
-    //     alert(`Fetching Menu`);
-    //     // this.email = user.email;
-    //     console.log(user.email);
-    //     // this.$store.commit("user/fetchMenu", this.$store.state(user.email));
-    //     this.$store.dispatch("menu/fetchMenu");
-    //   } else {
-    //     // No user is signed in.
-    //     alert("no user is signed in...");
-    //   }
-    // });
 
-    this.$store.dispatch("menu/test");
+    this.$store.dispatch("menu/GET_FIREMENU");
   },
 
   computed: {
