@@ -68,16 +68,16 @@ export const actions = {
       }
     });
 
+  },
+
+
+  SAVE_MENU({
+    commit
+  }) {
+    this.$store.state["menu/MenuItems"].then(response => {
+      commit('setMenu', response)
+    })
   }
-
-
-  // POST_MENU({
-  //   commit
-  // }) {
-  //   this.$store.state["menu/MenuItems"].then(response => {
-  //     commit('setMenu', response)
-  //   })
-  // }
 
 }
 
@@ -102,6 +102,14 @@ export const mutations = {
   remove(state, { item }) {
     state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
   },
+  edit(state, { item }) {
+    state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
+    state.MenuItems.push(item)
+  },
+  EDIT_CASE(state, payload) {
+    const item = state.objects.find(item => item.id === payload.recordId);
+    Object.assign(item, payload);
+  }
 
 }
 export const getters = {

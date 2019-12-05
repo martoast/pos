@@ -190,15 +190,18 @@ export default {
       var price = this.ItemPrice
       var type = this.ItemType
       let modifiers = this.ModifiersList
-      let itemID = Math.random()
+      let sizes = this.SelectedSizes
+
+      let id = Math.random()
         .toString(36)
         .substr(2, 9)
       let item = {
-        itemID,
+        id,
         type,
         name,
         price,
-        modifiers
+        modifiers,
+        sizes
       }
       this.$store.commit('menu/add', item)
       // Reset values

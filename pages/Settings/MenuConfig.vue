@@ -1,56 +1,54 @@
 <template>
   <div>
     <v-card>
-
-      <v-card-title>Create Your Menu!</v-card-title>
+      <v-card-title>Menu Configuration</v-card-title>
       <v-spacer></v-spacer>
 
       <MenuTable />
 
       <v-card-actions>
-        <v-row justify="center">
-          <ItemCreateModal />
-          <v-btn
-            class="secondary"
-            @click="writeToFirestore()"
-          >
+        <v-row justify="center" align="center">
+          <v-col cols="12" sm="6" class="d-flex">
+            <ItemCreateModal />
+          </v-col>
+
+          <v-btn class="secondary" @click="writeToFirestore()">
             Save Menu
           </v-btn>
-
         </v-row>
-
       </v-card-actions>
     </v-card>
-
   </div>
 </template>
 <script>
-import { mapMutations } from "vuex";
-import MenuTable from "~/components/MenuConfigTable";
-import ItemCreateModal from "~/components/ItemCreateModal";
+import { mapMutations } from 'vuex'
+import MenuTable from '~/components/MenuConfigTable'
+import ItemCreateModal from '~/components/ItemCreateModal'
 export default {
-  layout: "settings",
+  layout: 'settings',
   components: {
     MenuTable,
     ItemCreateModal
   },
   data() {
     return {
-      MenuItems: { foo: "bar" }
+      MenuItems: { foo: 'bar' }
+      // email: null
       // MenuItems: this.$store.state["menu/MenuItems"]
-    };
+    }
   },
   created() {},
   computed: {
     email() {
       this.$fireAuth.onAuthStateChanged(function(user) {
         if (user) {
-          return user.email;
+          // this.email = user.email
+          return user.email
         } else {
           // No user is signed in.
-          console.log("No User logged in");
+          console.log('No User logged in')
         }
-      });
+      })
     }
   },
 
@@ -74,20 +72,21 @@ export default {
       //     console.log("Only Registered Users can save a Menu.");
       //   }
       // });
-      this.$store.dispatch("menu/POST_MENU");
+      this.$store.dispatch('menu/POST_MENU')
     },
     writeToFirestore() {
-      const messageRef = this.$fireStore.collection("users").doc(email);
+      const messageRef = this.$fireStore.collection('users').doc(email)
       try {
         messageRef.set({
-          message: this.$store.state["menu/MenuItems"]
-        });
+          // message: this.$store.state['menu/MenuItems']
+          menu: this.MenuItems
+        })
       } catch (e) {
-        alert(e);
-        return;
+        alert(e)
+        return
       }
-      alert("Success.");
+      alert('Success.')
     }
   }
-};
+}
 </script>
