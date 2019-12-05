@@ -19,6 +19,14 @@
                         label="Item name*"
                         v-model="ItemName"
                         :rules="nameRules"
+                        color="secondary"
+                        required
+                      ></v-text-field>
+                      <v-text-field
+                        label="Price*"
+                        v-model="ItemPrice"
+                        :rules="priceRules"
+                        color="secondary"
                         required
                       ></v-text-field>
                     </v-col>
@@ -30,15 +38,17 @@
                         v-model="ItemType"
                         required
                       ></v-select>
-                    </v-col>
-                    <v-col cols="12" sm="6">
-                      <v-text-field
-                        label="Price*"
-                        v-model="ItemPrice"
-                        :rules="priceRules"
+                      <v-select
+                        v-model="SelectedSizes"
+                        :items="['Small', 'Medium', 'Large', 'Half', 'Full']"
+                        :rules="sizeRules"
                         required
-                      ></v-text-field>
+                        chips
+                        label="Sizes"
+                        multiple
+                      ></v-select>
                     </v-col>
+                    <v-col cols="12" sm="6"> </v-col>
                     <v-btn color="secondary" dark @click="dialog3 = true"
                       >Add Modifier</v-btn
                     >
@@ -132,8 +142,11 @@ export default {
         d => !!d || 'price required',
         d => /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/.test(d) || 'Invalid entry'
       ],
+      sizeRules: [v => !!v || 'At least one Size option is required'],
       loading: false,
-      valid: true
+      valid: true,
+
+      SelectedSizes: []
     }
   },
   methods: {

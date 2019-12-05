@@ -33,23 +33,23 @@ export default {
       clipped: true,
       items: [
         {
-          icon: "mdi-food",
-          title: "Food",
-          to: "/"
+          icon: 'mdi-food',
+          title: 'Food',
+          to: '/Register'
         },
         {
-          icon: "mdi-beer",
-          title: "Drinks",
-          to: "/drinksmenu"
+          icon: 'mdi-beer',
+          title: 'Drinks',
+          to: '/drinksmenu'
         },
         {
-          icon: "mdi-food",
-          title: "Desserts",
-          to: "/DessertsMenu"
+          icon: 'mdi-food',
+          title: 'Desserts',
+          to: '/DessertsMenu'
         }
       ],
       drawer: true
-    };
+    }
   }
-};
+}
 </script>
