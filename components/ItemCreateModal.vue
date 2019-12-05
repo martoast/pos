@@ -77,44 +77,59 @@
     <div>
       <v-row justify="center">
         <v-dialog v-model="dialog3" persistent max-width="600px">
-          <v-card>
-            <v-card-title>
-              <span class="headline">Add Modifier</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row justify="center">
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Item name*"
-                      v-model="ModifierName"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <v-text-field
-                      label="Price*"
-                      v-model="ModifierPrice"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-              <v-btn>
-                Add Modifier
-              </v-btn>
-              <small>*indicates required field</small>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog3 = false"
-                >Close</v-btn
-              >
-              <v-btn color="blue darken-1" text @click="SaveModifier()"
-                >Save</v-btn
-              >
-            </v-card-actions>
-          </v-card>
+          <v-form v-model="valid" lazy-validation>
+            <v-card>
+              <v-card-title>
+                <span class="headline">Add Modifier</span>
+              </v-card-title>
+              <v-card-text>
+                <v-container>
+                  <v-row justify="center">
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        label="Item name*"
+                        v-model="ModifierName"
+                        :rules="nameRules"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6">
+                      <v-text-field
+                        label="Price*"
+                        v-model="ModifierPrice"
+                        :rules="priceRules"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+                <v-btn>
+                  Add Modifier
+                </v-btn>
+                <small>*indicates required field</small>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="dialog3 = false"
+                  >Close</v-btn
+                >
+                <v-btn
+                  :disabled="!valid"
+                  color="secondary"
+                  :loading="loading"
+                  @click="SaveModifier()"
+                  >Save</v-btn
+                >
+                <!-- <v-btn
+                  :disabled="!valid"
+                  color="secondary"
+                  :loading="loading"
+                  @click="SaveModifier()
+                  >Save</v-btn
+                > -->
+              </v-card-actions>
+            </v-card>
+          </v-form>
         </v-dialog>
       </v-row>
     </div>
