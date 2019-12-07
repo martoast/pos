@@ -122,6 +122,20 @@ export default {
       // console.log(this.CartItems);
       // console.log(this.CartItems.FoodModifiers);
     })
+    this.$nuxt.$on('OrderComplete', data => {
+      console.log('test')
+      this.CartItems = []
+      this.CartTotal = null
+    })
+  },
+  computed: {
+    ListenForOrderComplete() {
+      // this.$nuxt.$on('OrderComplete', data => {
+      //   console.log('test')
+      //   this.CartItems = null
+      //   this.CartTotal = null
+      // })
+    }
   },
   methods: {
     DeleteItem(item) {
@@ -137,14 +151,6 @@ export default {
       this.$nuxt.$emit('OrderType', option)
       // this.OrderType = option.title;
       // this.icon = option.icon;
-    },
-
-    OrderFinish() {
-      this.dialog = false
-      this.CartItems = []
-      this.FoodModifiers = []
-      this.CartTotal = null
-      console.log(this.CartItems)
     }
   }
 }

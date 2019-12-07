@@ -102,7 +102,7 @@
                   <v-btn color="blue darken-1" text @click="dialog = false"
                     >Close</v-btn
                   >
-                  <v-btn color="blue darken-1" text @click="SendModifiers()"
+                  <v-btn color="blue darken-1" text @click="SaveOrder()"
                     >Save</v-btn
                   >
                 </v-card-actions>
@@ -206,7 +206,7 @@ export default {
     AddModifierToList(Modifier) {
       this.ModifierList.push(Modifier)
     },
-    SendModifiers() {
+    SaveOrder() {
       // if ((this.toggle_exclusive = 0)) {
       //   let OrderType = "Dine-in";
       // }

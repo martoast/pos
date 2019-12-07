@@ -97,7 +97,7 @@
                         right
                         color="success"
                         dark
-                        :to="'/'"
+                        :to="'/Register'"
                         @click="OrderFinish()"
                         >Pay ${{ PaidAmount }}</v-btn
                       >
@@ -139,7 +139,14 @@ export default {
     DeletePaidAmount() {
       this.PaidAmount = null
     },
-    CloseDialog() {}
+
+    OrderFinish() {
+      this.dialog = false
+
+      console.log('Order Complete')
+
+      this.$nuxt.$emit('OrderComplete')
+    }
   },
   computed: {
     ChangeDue() {
