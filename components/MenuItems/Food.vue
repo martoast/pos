@@ -133,6 +133,7 @@ export default {
       SelectedModifiers: [],
       FoodModifiers: null,
       ModifierList: [],
+      ItemsList: [],
       KitchenNotes: '',
       selectedSize: null,
       ItemSizes: null,
@@ -199,6 +200,7 @@ export default {
       // console.log(this.FoodModifiers);
       this.FoodItem = item
       this.FoodItemName = item.name
+      this.ItemsList.push(item)
       // console.log(this.FoodItemName);
     },
     AddModifierToList(Modifier) {
@@ -218,7 +220,8 @@ export default {
         (acc, item) => acc + item.price,
         0
       )
-      let OrderTotal = ModifiersTotal + this.FoodItem.price
+      let ItemsTotal = this.ItemsList.reduce((acc, item) => acc + item.price, 0)
+      let OrderTotal = ModifiersTotal + ItemsTotal
       OrderTotal = OrderTotal.toFixed(2)
 
       let OrderID = Math.random()
