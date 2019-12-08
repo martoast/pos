@@ -246,10 +246,14 @@ export default {
       }
 
       this.$nuxt.$emit('order', order)
-      const messageRef = this.$fireStore.collection('orders').doc(OrderID)
-      messageRef.set(order)
-      this.ModifierList = []
+      // const messageRef = this.$fireStore.collection('orders').doc(OrderID)
+      // messageRef.set(order)
       this.dialog = false
+      this.ModifierList = []
+      this.KitchenNotes = ''
+      this.selectedSize = null
+      this.FoodModifiers = null
+      this.ItemsList = []
     },
     handleResize() {
       this.window.width = window.innerWidth
