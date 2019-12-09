@@ -32,24 +32,23 @@ export default {
   },
   data() {
     return {
-      MenuItems: { foo: 'bar' }
-      // email: null
-      // MenuItems: this.$store.state["menu/MenuItems"]
+      // email: this.$store.getters['user/GetUserEmail'],
+      MenuItems: this.$store.state['menu/MenuItems']
     }
   },
   created() {},
   computed: {
-    email() {
-      this.$fireAuth.onAuthStateChanged(function(user) {
-        if (user) {
-          // this.email = user.email
-          return user.email
-        } else {
-          // No user is signed in.
-          console.log('No User logged in')
-        }
-      })
-    }
+    // email() {
+    //   this.$fireAuth.onAuthStateChanged(function(user) {
+    //     if (user) {
+    //       console.log(user.email)
+    //       return user.email
+    //     } else {
+    //       // No user is signed in.
+    //       console.log('No User logged in')
+    //     }
+    //   })
+    // }
   },
 
   methods: {
@@ -75,7 +74,7 @@ export default {
       this.$store.dispatch('menu/POST_MENU')
     },
     writeToFirestore() {
-      const messageRef = this.$fireStore.collection('users').doc(email)
+      const messageRef = this.$fireStore.collection('users').doc(this.email)
       try {
         messageRef.set({
           // message: this.$store.state['menu/MenuItems']

@@ -18,7 +18,6 @@
         <span class="headline">
           <v-spacer></v-spacer>
           {{ this.CurrentDate }}
-          {{ this.id }}
         </span>
 
         <v-menu bottom left>
@@ -33,6 +32,7 @@
               v-for="(option, i) in options"
               :key="i"
               @click="selected(option)"
+              v-model="OrderType"
             >
               <v-list-item-title>{{ option.title }}</v-list-item-title>
             </v-list-item>

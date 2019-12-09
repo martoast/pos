@@ -57,6 +57,9 @@ export default {
             measurementId: "G-R54P1TH9TJ"
 
           },
+          services: {
+            firestore: true
+          },
           production: {
             apiKey: "AIzaSyCV24nB2g3dfjCec3MsiqoSxne_uyRMqmw",
             authDomain: "pos-system-b026b.firebaseapp.com",
@@ -77,9 +80,7 @@ export default {
             fetchTimeoutMillis: 60000,
             minimumFetchIntervalMillis: 43200000,
           },
-          defaultConfig: {
-            'welcome_message': 'Welcome'
-          }
+
         }
       }
     ]

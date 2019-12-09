@@ -26,3 +26,29 @@ export const mutations = {
   }
 
 }
+export const getters = {
+  GetUserEmail() {
+
+
+    this.$fireAuth.onAuthStateChanged(function (user) {
+      if (user) {
+        console.log(user.email)
+        return user.email
+      } else {
+        // No user is signed in.
+        console.log('No User logged in')
+      }
+    })
+
+    // if (state.user.email) {
+    //   console.log(state.user.email)
+    //   return state.user.email
+    // } else {
+    //   console.log("No user signed in")
+
+    //   return;
+    // }
+
+  }
+
+}

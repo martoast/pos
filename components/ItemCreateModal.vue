@@ -77,7 +77,7 @@
     <div>
       <v-row justify="center">
         <v-dialog v-model="dialog3" persistent max-width="600px">
-          <v-form v-model="valid" lazy-validation>
+          <v-form v-model="valid2" lazy-validation>
             <v-card>
               <v-card-title>
                 <span class="headline">Add Modifier</span>
@@ -114,7 +114,7 @@
                   >Close</v-btn
                 >
                 <v-btn
-                  :disabled="!valid"
+                  :disabled="!valid2"
                   color="secondary"
                   :loading="loading"
                   @click="SaveModifier()"
@@ -160,6 +160,7 @@ export default {
       sizeRules: [v => !!v || 'At least one Size option is required'],
       loading: false,
       valid: true,
+      valid2: true,
 
       SelectedSizes: []
     }
@@ -205,10 +206,11 @@ export default {
       }
       this.$store.commit('menu/add', item)
       // Reset values
-      this.ItemName = null
-      this.ItemPrice = null
-      this.ModifiersList = null
-      this.ItemType = null
+      this.ItemName = ''
+      this.ItemPrice = ''
+      this.ModifiersList = []
+      this.ItemType = ''
+      this.SelectedSizes = []
     }
   }
 }

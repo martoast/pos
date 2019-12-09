@@ -112,19 +112,7 @@ export const mutations = {
   }
 
 }
-export const getters = {
-  getMenu(state) {
 
-    if (state.MenuItems === undefined || state.MenuItems.length == 0) {
-      console.log("No Menu Created")
-      return;
-    } else {
-      return state.MenuItems
-    }
-
-  }
-
-}
 
 // const getItems = (state) => {
 //   console.log("test")
