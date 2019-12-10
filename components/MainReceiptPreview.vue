@@ -126,7 +126,6 @@ export default {
       console.log('test')
       this.CartItems = []
       this.CartTotal = null
-      this.FoodModifiers = null
     })
   },
   computed: {
