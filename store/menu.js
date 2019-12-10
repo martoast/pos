@@ -106,9 +106,19 @@ export const mutations = {
     state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
     state.MenuItems.push(item)
   },
-  EDIT_CASE(state, payload) {
-    const item = state.objects.find(item => item.id === payload.recordId);
-    Object.assign(item, payload);
+
+
+}
+export const getters = {
+  getMenu(state) {
+
+    if (state.MenuItems === undefined || state.MenuItems.length == 0) {
+      console.log("No Menu Created")
+      return;
+    } else {
+      return state.MenuItems
+    }
+
   }
 
 }

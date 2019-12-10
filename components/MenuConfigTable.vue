@@ -103,7 +103,7 @@
                             :disabled="!valid"
                             color="secondary"
                             :loading="loading"
-                            @click="SaveItem()"
+                            @click="EditItem()"
                             >Save</v-btn
                           >
                         </v-card-actions>
@@ -152,11 +152,11 @@ export default {
       console.log('deleting item...')
       this.$store.commit('menu/remove', item)
     },
-    SaveItem() {
+    EditItem() {
       this.dialog = false
-      var name = this.ItemName
-      var price = this.ItemPrice
-      var type = this.ItemType
+      let name = this.ItemName
+      let price = this.ItemPrice
+      let type = this.ItemType
       let modifiers = this.ModifiersList
       let sizes = this.SelectedSizes
       let id = this.id
@@ -172,7 +172,7 @@ export default {
         modifiers,
         sizes
       }
-      this.$store.commit('menu/EDIT_CASE', item)
+      this.$store.commit('menu/edit', item)
     }
   }
 }

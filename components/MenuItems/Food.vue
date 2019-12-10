@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!isMobile()">
+    <!-- <div v-if="!isMobile()">
       <h1>
         desktop
       </h1>
@@ -10,7 +10,7 @@
       <h1>
         mobil
       </h1>
-    </div>
+    </div> -->
     <v-col cols="12" sm="6" offset-sm="2">
       <v-row justify="center" align="center">
         <!-- <div v-if="MenuItems == null"> -->
@@ -18,7 +18,7 @@
         <!-- <v-btn to="/Settings/MenuConfig"></v-btn> -->
         <!-- <v-btn @click="fetchMenu()"></v-btn>
         </div> -->
-        <div v-if="this.$store.getters['menu/getMenu']">
+        <div>
           <!-- <v-container fluid>
             <SearchBar />
           </v-container> -->
@@ -138,7 +138,7 @@ export default {
   },
   data() {
     return {
-      // MenuItems: null,
+      MenuItems: null,
       FoodItem: null,
       FoodItemName: null,
       SelectedModifiers: [],
@@ -171,13 +171,13 @@ export default {
   //   await store.dispatch("GETMENU");
   // },
   created() {
-    // fetch('http://localhost:3002/food')
-    //   .then(response => response.json())
-    //   .then(response => {
-    //     // this.MenuItems = response.data;
-    //     console.log(response)
-    //     this.MenuItems = response
-    //   })
+    fetch('http://localhost:3002/food')
+      .then(response => response.json())
+      .then(response => {
+        // this.MenuItems = response.data;
+        console.log(response)
+        this.MenuItems = response
+      })
     // this.$store.dispatch('menu/GET_FIREMENU')
     // this.$fireAuth.onAuthStateChanged(function(user) {
     //   if (user) {
@@ -192,9 +192,9 @@ export default {
   },
 
   computed: {
-    MenuItems() {
-      return this.$store.state['menu/MenuItems']
-    }
+    // MenuItems() {
+    //   return this.$store.state['menu/MenuItems']
+    // }
   },
 
   methods: {
