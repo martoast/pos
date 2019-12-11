@@ -53,20 +53,29 @@ export const actions = {
   },
 
   POST_MENU() {
-    this.$fireAuth.onAuthStateChanged(function (user) {
-      if (user) {
-        // User is signed in.
-        alert(`Logged in with ${user.email}`);
-        console.log(user.email);
-        app.$fireStore
-          .collection("users")
-          .doc(user.email)
-          .set({ Menu: this.$store.state["menu/MenuItems"] });
-      } else {
-        // No user is signed in.
-        console.log("Only Registered Users can save a Menu.");
-      }
-    });
+    // this.$fireAuth.onAuthStateChanged(function (user) {
+    //   if (user) {
+    //     // User is signed in.
+    //     alert(`Logged in with ${user.email}`);
+    //     console.log(user.email);
+    //     this.$fireStore
+    //       .collection("users")
+    //       .doc(user.email)
+    //       .set({ Menu: this.$store.state("MenuItems") });
+    //   } else {
+    //     // No user is signed in.
+    //     console.log("Only Registered Users can save a Menu.");
+    //   }
+    // });
+
+    // let email = this.$store.state("user/")
+
+    alert(`Logged in with ${email}`);
+    console.log(email);
+    // this.$fireStore
+    //   .collection("users")
+    //   .doc(email)
+    //   .set({ Menu: this.$store.state("MenuItems") });
 
   },
 

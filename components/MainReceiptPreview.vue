@@ -20,9 +20,16 @@
           {{ this.CurrentDate }}
         </span>
 
-        <v-menu bottom left>
+        <v-menu
+          bottom
+          left
+        >
           <template v-slot:activator="{ on }">
-            <v-btn dark icon v-on="on">
+            <v-btn
+              dark
+              icon
+              v-on="on"
+            >
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </template>
@@ -48,16 +55,25 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in CartItems" :key="item.name">
+          <tr
+            v-for="item in CartItems"
+            :key="item.name"
+          >
             <td @click="DeleteItem(item)">{{ item.name }}</td>
             <td>{{ item.price }}</td>
           </tr>
-          <tr v-for="item in CartItems" :key="item.id">
+          <tr
+            v-for="item in CartItems"
+            :key="item.id"
+          >
             <td>{{ item.size }}</td>
             <!-- <td>{{ item.FoodModifiers.price }}</td> -->
           </tr>
 
-          <tr v-for="item in FoodModifiers" :key="item.price">
+          <tr
+            v-for="item in FoodModifiers"
+            :key="item.price"
+          >
             <td @click="DeleteModifier(item)">{{ item.name }}</td>
             <td>
               {{ item.price }}
@@ -80,7 +96,7 @@
 </template>
 
 <script>
-import CheckOutModal from '~/components/CheckOutModal.vue'
+import CheckOutModal from "~/components/CheckOutModal.vue";
 export default {
   components: {
     CheckOutModal
@@ -98,62 +114,62 @@ export default {
 
       Total: [],
 
-      OrderType: 'Dine-In',
-      icon: 'mdi-food-fork-drink',
+      OrderType: "Dine-In",
+      icon: "mdi-food-fork-drink",
 
       options: [
-        { title: 'Dine-In', icon: 'mdi-food-fork-drink' },
-        { title: 'Take-Out', icon: 'mdi-walk' },
-        { title: 'Delivery', icon: 'mdi-bike' }
+        { title: "Dine-In", icon: "mdi-food-fork-drink" },
+        { title: "Take-Out", icon: "mdi-walk" },
+        { title: "Delivery", icon: "mdi-bike" }
       ]
-    }
+    };
   },
   created() {
-    this.$nuxt.$on('order', data => {
+    this.$store.dispatch("ShoppingCart/CalcTotal");
+    this.$nuxt.$on("order", data => {
       // this.total = data;
       // console.log(data.FoodModifiers);
-      this.FoodModifiers = data.FoodModifiers
-      this.id = data.id
-      this.CurrentDate = data.date
-      this.CartTotal = data.OrderTotal
-      console.log(this.CartTotal)
-      this.CartItems.push(data)
+      this.FoodModifiers = data.FoodModifiers;
+      this.id = data.id;
+      this.CurrentDate = data.date;
+      this.CartTotal = data.OrderTotal;
+      console.log(this.CartTotal);
+      this.CartItems.push(data);
       // this.FoodModifiers = this.CartItems.FoodModifiers;
       // console.log(this.CartItems);
       // console.log(this.CartItems.FoodModifiers);
-    })
-    this.$nuxt.$on('OrderComplete', data => {
-      console.log('test')
-      this.CartItems = []
-      this.CartTotal = null
-    })
+    });
+    this.$nuxt.$on("OrderComplete", data => {
+      console.log("test");
+      this.CartItems = [];
+      this.CartTotal = null;
+    });
   },
   computed: {
-    ListenForOrderComplete() {
-      // this.$nuxt.$on('OrderComplete', data => {
-      //   console.log('test')
-      //   this.CartItems = null
-      //   this.CartTotal = null
-      // })
+    CartTotal2() {
+      this.$store.getters("ShoppingCart/CartTotal");
+    },
+    CartItems() {
+      this.$store.getters("ShoppingCart/getCart");
     }
   },
   methods: {
     DeleteItem(item) {
-      this.CartItems.splice(item, 1)
-      this.FoodModifiers = null
+      this.CartItems.splice(item, 1);
+      this.FoodModifiers = null;
     },
     DeleteModifier(item) {
-      this.FoodModifiers.splice(item, 1)
+      this.FoodModifiers.splice(item, 1);
       // this.Total.splice(item, 1);
     },
     selected(option) {
       // console.log(option.title);
-      this.$nuxt.$emit('OrderType', option)
+      this.$nuxt.$emit("OrderType", option);
       // this.OrderType = option.title;
       // this.icon = option.icon;
     }
   }
-}
+};
 </script>
 <style scoped>
 .card-actions {
