@@ -14,7 +14,7 @@ export const actions = {
   GET_EMAIL({ commit }) {
     this.$fireAuth.onAuthStateChanged(function (user) {
       if (user) {
-        console.log(user.email)
+        // console.log(user.email)
         console.log("Action GET_EMAIL Fired")
         commit("SaveEmail", user.email)
 
@@ -46,27 +46,22 @@ export const mutations = {
 
 }
 export const getters = {
-  GetUserEmail() {
+  EmailGetter(state) {
+    // console.log("getter called")
+    // console.log(state.user.email)
+    // return state.user.email
+    if (state.user.email === undefined || state.user.email == '') {
+      return;
+
+    }
+    else {
+      return state.user.email
+
+    }
 
 
-    // this.$fireAuth.onAuthStateChanged(function (user) {
-    //   if (user) {
-    //     console.log(user.email)
-    //     return user.email
-    //   } else {
-    //     // No user is signed in.
-    //     console.log('No User logged in')
-    //   }
-    // })
 
-    // if (state.user.email) {
-    //   console.log(state.user.email)
-    //   return state.user.email
-    // } else {
-    //   console.log("No user signed in")
 
-    //   return;
-    // }
 
   }
 

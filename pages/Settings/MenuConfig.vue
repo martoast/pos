@@ -42,7 +42,7 @@ export default {
   },
   data() {
     return {
-      email: null,
+      // email: null,
       TestMenu: {
         name: "shit",
         price: 12.23
@@ -50,17 +50,28 @@ export default {
     };
   },
   created() {
-    this.email = this.$store.dispatch("user/GET_EMAIL");
+    this.$store.dispatch("user/GET_EMAIL");
+    // this.email = this.$store.getters["user/EmailGetter"];
   },
-  computed: {},
+  computed: {
+    email() {
+      return this.$store.getters["user/EmailGetter"];
+    },
+    menu() {
+      return this.$store.getters["menu/getMenu"];
+    }
+  },
 
   methods: {
     async writeToFirestore() {
       let email = this.email;
+      let menu = this.menu;
+      // console.log(email);
+      // console.log(menu);
       const messageRef = this.$fireStore.collection("users").doc(email);
       try {
         await messageRef.set({
-          menu: this.$store.getters("menu/getMenu")
+          menu: menu
         });
       } catch (e) {
         alert(e);
