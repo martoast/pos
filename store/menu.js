@@ -6,78 +6,30 @@ export const state = () => ({
 })
 
 export const actions = {
-  GET_FIREMENU({ commit }) {
 
-    setTimeout(() => {
-      console.log("action called")
+  async GET_FIREMENU({ commit }, email) {
+    console.log("GET_FIREMENU fired")
 
-      this.$fireAuth.onAuthStateChanged(function (user) {
-        if (user) {
+    console.log(email)
+    const messageRef = this.$fireStore.collection('users').doc(email)
+    try {
+      const messageDoc = await messageRef.get()
+      var MenuItems = messageDoc.data().menu;
 
+      console.log(MenuItems)
 
-          const messageRef = this.$fireStore.collection("users").doc(user.email);
-          const messageDoc = messageRef.get();
-          console.log(messageDoc.data());
+      commit("setMenu", MenuItems)
 
-          var MenuItems = messageDoc.data().Menu;
+    } catch (e) {
+      alert(e)
+      return
+    }
 
-          commit("setMenu", MenuItems)
-
-
-
-          console.log(user.email)
-
-
-          // let menu = {
-          //   name: "shit",
-          //   price: 12,
-
-          // }
-          // commit("setMenu", menu)
-
-        } else {
-          // No user is signed in.
-          alert("no user is signed in...");
-        }
-      })
-
-
-      // const messageRef = this.$fireStore.collection("users").doc("testing123@gmail.com");
-      // const messageDoc = messageRef.get();
-      // console.log(messageDoc.data().Menu);
-      // let menu = messageDoc.data().Menu
-      // commit("setMenu", menu)
-
-    }, 1000)
 
   },
 
-  POST_MENU() {
-    // this.$fireAuth.onAuthStateChanged(function (user) {
-    //   if (user) {
-    //     // User is signed in.
-    //     alert(`Logged in with ${user.email}`);
-    //     console.log(user.email);
-    //     this.$fireStore
-    //       .collection("users")
-    //       .doc(user.email)
-    //       .set({ Menu: this.$store.state("MenuItems") });
-    //   } else {
-    //     // No user is signed in.
-    //     console.log("Only Registered Users can save a Menu.");
-    //   }
-    // });
 
-    // let email = this.$store.state("user/")
 
-    alert(`Logged in with ${email}`);
-    console.log(email);
-    // this.$fireStore
-    //   .collection("users")
-    //   .doc(email)
-    //   .set({ Menu: this.$store.state("MenuItems") });
-
-  },
 
 
   SAVE_MENU({

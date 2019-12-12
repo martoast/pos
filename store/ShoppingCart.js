@@ -23,16 +23,16 @@ export const actions = {
 
 
 export const mutations = {
-  setMenu(state, MenuItems) {
-    state.MenuItems = MenuItems
-    console.log("SetMenu Success")
+  // setMenu(state, MenuItems) {
+  //   state.MenuItems = MenuItems
+  //   console.log("SetMenu Success")
 
-  },
+  // },
 
-  decrementProductInventory(state, { id }) {
-    const item = state.MenuItems.find(item => item.id === id)
-    item.inventory--
-  },
+  // decrementProductInventory(state, { id }) {
+  //   const item = state.MenuItems.find(item => item.id === id)
+  //   item.inventory--
+  // },
   add(state, Order) {
     this.self = this
     state.Cart.push(Order)

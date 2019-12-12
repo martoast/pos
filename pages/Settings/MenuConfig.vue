@@ -41,13 +41,7 @@ export default {
     ItemCreateModal
   },
   data() {
-    return {
-      // email: null,
-      TestMenu: {
-        name: "shit",
-        price: 12.23
-      }
-    };
+    return {};
   },
   created() {
     this.$store.dispatch("user/GET_EMAIL");
