@@ -7,7 +7,7 @@
 
         <v-container fluid>
           <!-- If using vue-router -->
-          <SearchBar full-width="600" />
+          <!-- <SearchBar full-width="600" /> -->
           <Drinks />
           <router-view></router-view>
         </v-container>

@@ -156,7 +156,7 @@ export default {
   },
   data() {
     return {
-      MenuItems: null,
+      // MenuItems: null,
       FoodItem: null,
       FoodItemName: null,
       SelectedModifiers: [],
@@ -168,7 +168,7 @@ export default {
       ItemSizes: null,
       toggle_exclusive: [],
       OrderType: null,
-      email: null,
+
       // MenuItems: null,
 
       Cart: null,
@@ -189,55 +189,28 @@ export default {
   //   await store.dispatch("GETMENU");
   // },
   created() {
-    fetch("http://localhost:3002/food")
-      .then(response => response.json())
-      .then(response => {
-        // this.MenuItems = response.data;
-        console.log(response);
-        this.MenuItems = response;
-      });
-    // this.$store.dispatch('menu/GET_FIREMENU')
-    // this.$fireAuth.onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     console.log(user.email)
-    //     this.$store.dispatch('user/SAVE_EMAIL')
-    //   } else {
-    //     // No user is signed in.
-    //     alert('no user is signed in...')
-    //   }
-    // })
-    // this.$store.dispatch('user/SAVE_EMAIL')
+    // fetch("http://localhost:3002/food")
+    //   .then(response => response.json())
+    //   .then(response => {
+    //     // this.MenuItems = response.data;
+    //     console.log(response);
+    //     this.MenuItems = response;
+    //   });
+
+    this.$store.dispatch("user/GET_EMAIL");
+    this.$store.dispatch("menu/GET_FIREMENU", this.email);
   },
 
   computed: {
-    // MenuItems() {
-    //   return this.$store.state['menu/MenuItems']
-    // }
+    MenuItems() {
+      return this.$store.getters["menu/getMenu"];
+    },
+    email() {
+      return this.$store.getters["user/EmailGetter"];
+    }
   },
 
   methods: {
-    async fetchMenu() {
-      this.$fireAuth.onAuthStateChanged(function(user) {
-        if (user) {
-          const messageRef = this.$fireStore
-            .collection("users")
-            .doc(user.email);
-          const messageDoc = messageRef.get();
-
-          var MenuItems = messageDoc.data().Menu;
-
-          console.log(MenuItems);
-
-          console.log(user.email);
-        } else {
-          // No user is signed in.
-          alert("no user is signed in...");
-        }
-      });
-    },
-    // getMenu() {
-    //   this.$store.dispatch("menu/GETMENU");
-    // },
     AddtoCart(item) {
       // console.log(item);
       this.FoodModifiers = item.modifier;
@@ -270,7 +243,7 @@ export default {
         0
       );
       let OrderTotal = ModifiersTotal + ItemsTotal;
-      OrderTotal = OrderTotal.toFixed(2);
+      OrderTotal = parseFloat(OrderTotal).toFixed(2);
 
       let OrderID = Math.random()
         .toString(36)
@@ -294,7 +267,7 @@ export default {
       };
 
       this.$nuxt.$emit("order", order);
-      this.$store.commit("ShoppingCart/add", order);
+      this.$store.dispatch("ShoppingCart/ADD_TO_CART", order);
       // const messageRef = this.$fireStore.collection("orders").doc(OrderID);
       // messageRef.set(order);
       this.ModifierList = [];

@@ -108,7 +108,7 @@ export default {
       Test: [],
       dialog: false,
 
-      CartTotal: null,
+      // CartTotal: null,
       CurrentDate: null,
       id: null,
 
@@ -127,31 +127,31 @@ export default {
   created() {
     this.$store.dispatch("ShoppingCart/CalcTotal");
     this.$nuxt.$on("order", data => {
-      // this.total = data;
+      this.total = data;
       // console.log(data.FoodModifiers);
       this.FoodModifiers = data.FoodModifiers;
       this.id = data.id;
       this.CurrentDate = data.date;
-      this.CartTotal = data.OrderTotal;
-      console.log(this.CartTotal);
+      // this.CartTotal = data.OrderTotal;
+      // console.log(this.CartTotal);
       this.CartItems.push(data);
-      // this.FoodModifiers = this.CartItems.FoodModifiers;
-      // console.log(this.CartItems);
-      // console.log(this.CartItems.FoodModifiers);
+      this.FoodModifiers = this.CartItems.FoodModifiers;
+      console.log(this.CartItems);
     });
+
     this.$nuxt.$on("OrderComplete", data => {
       console.log("test");
       this.CartItems = [];
-      this.CartTotal = null;
+      // this.CartTotal = null;
     });
   },
   computed: {
-    CartTotal2() {
-      this.$store.getters("ShoppingCart/CartTotal");
-    },
-    CartItems() {
-      this.$store.getters("ShoppingCart/getCart");
+    CartTotal() {
+      return this.$store.getters["ShoppingCart/GetTotal"];
     }
+    // CartItems() {
+    //   return this.$store.getters["ShoppingCart/getCart"];
+    // }
   },
   methods: {
     DeleteItem(item) {
