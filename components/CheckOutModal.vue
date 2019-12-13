@@ -1,8 +1,17 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="600px"
+    >
       <template v-slot:activator="{ on }">
-        <v-btn height="50" block color="success" v-on="on">CheckOut</v-btn>
+        <v-btn
+          height="50"
+          block
+          color="success"
+          v-on="on"
+        >CheckOut</v-btn>
       </template>
       <v-card>
         <v-card flat>
@@ -33,8 +42,7 @@
                       outlined
                       color="success"
                       v-on:click="PaidAmount += 1"
-                      >$1.00</v-btn
-                    >
+                    >$1.00</v-btn>
                     <v-btn
                       x-large
                       class="ma-2"
@@ -42,8 +50,7 @@
                       outlined
                       color="success"
                       v-on:click="PaidAmount += 5"
-                      >$5.00</v-btn
-                    >
+                    >$5.00</v-btn>
                     <v-btn
                       x-large
                       class="ma-2"
@@ -51,8 +58,7 @@
                       outlined
                       color="success"
                       v-on:click="PaidAmount += 10"
-                      >$10.00</v-btn
-                    >
+                    >$10.00</v-btn>
                     <v-btn
                       x-large
                       class="ma-2"
@@ -60,8 +66,7 @@
                       outlined
                       color="success"
                       v-on:click="PaidAmount += 20"
-                      >$20.00</v-btn
-                    >
+                    >$20.00</v-btn>
                     <v-btn
                       x-large
                       class="ma-2"
@@ -69,11 +74,13 @@
                       outlined
                       color="success"
                       v-on:click="PaidAmount += this.CartTotal"
-                      >Exact</v-btn
-                    >
+                    >Exact</v-btn>
                   </v-row>
                   <v-row justify="center">
-                    <v-col cols="12" sm="6">
+                    <v-col
+                      cols="12"
+                      sm="6"
+                    >
                       <v-text-field
                         v-model="PaidAmount"
                         filled
@@ -99,8 +106,7 @@
                         dark
                         :to="'/Register'"
                         @click="OrderFinish()"
-                        >Pay ${{ PaidAmount }}</v-btn
-                      >
+                      >Pay ${{ PaidAmount }}</v-btn>
                     </v-card-actions>
                   </div>
                 </v-card>
@@ -119,43 +125,43 @@
 </template>
 
 <script>
-import PayWithCard from '~/components/PayWithCard'
+import PayWithCard from "~/components/PayWithCard";
 export default {
   components: {
     PayWithCard
   },
   props: {
     id: String,
-    CartTotal: String
+    CartTotal: Number
   },
   data() {
     return {
       PaidAmount: null,
       tab: null,
       dialog: false
-    }
+    };
   },
   methods: {
     DeletePaidAmount() {
-      this.PaidAmount = null
+      this.PaidAmount = null;
     },
 
     OrderFinish() {
-      this.dialog = false
+      this.dialog = false;
 
-      console.log('Order Complete')
+      console.log("Order Complete");
 
-      this.$nuxt.$emit('OrderComplete')
+      this.$nuxt.$emit("OrderComplete");
     }
   },
   computed: {
     ChangeDue() {
       if (this.PaidAmount > this.CartTotal) {
-        return (this.PaidAmount - this.CartTotal).toFixed(2)
+        return (this.PaidAmount - this.CartTotal).toFixed(2);
       } else {
-        return '0.00'
+        return "0.00";
       }
     }
   }
-}
+};
 </script>

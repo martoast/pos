@@ -233,7 +233,8 @@ export default {
       // }
       // if ((this.toggle_exclusive = 2)) {
       //   let OrderType = "delivery";
-      // }
+      // // }
+
       let ModifiersTotal = this.ModifierList.reduce(
         (acc, item) => acc + item.price,
         0
@@ -271,6 +272,7 @@ export default {
       // const messageRef = this.$fireStore.collection("orders").doc(OrderID);
       // messageRef.set(order);
       this.ModifierList = [];
+      this.ItemsList = [];
       this.dialog = false;
     },
     handleResize() {

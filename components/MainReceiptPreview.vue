@@ -83,14 +83,14 @@
       </v-simple-table>
       <v-card-actions class="card-actions">
         <div v-if="this.CartItems.length >= 1">
-          <h2>Total: $ {{ this.CartTotal }}</h2>
+          <h2>Total: $ {{ CartTotal }}</h2>
         </div>
       </v-card-actions>
     </v-card>
     <CheckOutModal
       v-if="this.CartItems.length >= 1"
       :id="this.id"
-      :CartTotal="this.CartTotal"
+      :CartTotal="CartTotal"
     />
   </div>
 </template>
@@ -112,8 +112,6 @@ export default {
       CurrentDate: null,
       id: null,
 
-      Total: [],
-
       OrderType: "Dine-In",
       icon: "mdi-food-fork-drink",
 
@@ -125,9 +123,7 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("ShoppingCart/CalcTotal");
     this.$nuxt.$on("order", data => {
-      this.total = data;
       // console.log(data.FoodModifiers);
       this.FoodModifiers = data.FoodModifiers;
       this.id = data.id;
