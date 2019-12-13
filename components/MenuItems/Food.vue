@@ -1,16 +1,6 @@
 <template>
   <div>
-    <!-- <div v-if="!isMobile()">
-      <h1>
-        desktop
-      </h1>
-      <v-btn @click="fetchMenu()" color="red"></v-btn>
-    </div>
-    <div v-else>
-      <h1>
-        mobil
-      </h1>
-    </div> -->
+
     <v-col
       cols="12"
       sm="6"
@@ -20,11 +10,7 @@
         justify="center"
         align="center"
       >
-        <!-- <div v-if="MenuItems == null"> -->
 
-        <!-- <v-btn to="/Settings/MenuConfig"></v-btn> -->
-        <!-- <v-btn @click="fetchMenu()"></v-btn>
-        </div> -->
         <div>
           <!-- <v-container fluid>
             <SearchBar />
@@ -185,9 +171,7 @@ export default {
       }
     };
   },
-  // async fetch({ store, params }) {
-  //   await store.dispatch("GETMENU");
-  // },
+
   created() {
     // fetch("http://localhost:3002/food")
     //   .then(response => response.json())
@@ -203,7 +187,7 @@ export default {
 
   computed: {
     MenuItems() {
-      return this.$store.getters["menu/getMenu"];
+      return this.$store.getters["menu/getFoodMenu"];
     },
     email() {
       return this.$store.getters["user/EmailGetter"];

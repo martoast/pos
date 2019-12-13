@@ -80,16 +80,16 @@ export const getters = {
       return state.MenuItems
     }
 
+  },
+  getFoodMenu(state) {
+    if (state.MenuItems === undefined || state.MenuItems.length == 0) {
+      console.log("No Menu Created")
+      return;
+    } else {
+      var result = state.MenuItems.filter(item => item.type = "Food");
+      return result
+    }
+
   }
 
 }
-
-
-// const getItems = (state) => {
-//   console.log("test")
-//   return state.MenuItems;
-// };
-
-// export default {
-//   getItems
-// };
