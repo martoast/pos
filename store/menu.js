@@ -32,6 +32,8 @@ export const actions = {
 
 
 
+
+
   SAVE_MENU({
     commit
   }) {
@@ -62,6 +64,7 @@ export const mutations = {
   },
   remove(state, { item }) {
     state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
+    console.log("deleted menu item")
   },
   edit(state, { item }) {
     state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
@@ -73,11 +76,22 @@ export const mutations = {
 export const getters = {
   getMenu(state) {
 
+
     if (state.MenuItems === undefined || state.MenuItems.length == 0) {
       console.log("No Menu Created")
       return;
     } else {
       return state.MenuItems
+    }
+
+  },
+  GetFoodMenu(state) {
+    if (state.MenuItems === undefined || state.MenuItems.length == 0) {
+      console.log("No Menu Created")
+      return;
+
+    } else {
+      return state.MenuItems.filter(item => item.type = "Food")
     }
 
   }

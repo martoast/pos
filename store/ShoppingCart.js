@@ -31,6 +31,11 @@ export const mutations = {
   },
   remove(state, { Order }) {
     state.Cart.splice(state.Cart.indexOf(Order), 1)
+    console.log("item deleted")
+  },
+  removeModifier(state, { FoodModifiers }) {
+    state.Cart.splice(state.Cart.indexOf(FoodModifiers), 1)
+    console.log("Modifier Deleted")
   },
   ClearCart(state) {
     state.Cart = []

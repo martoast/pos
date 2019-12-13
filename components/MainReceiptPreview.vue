@@ -6,7 +6,7 @@
       height="750"
       :elevation="5"
       style="margin-top: 800px;"
-      class="mx-auto"
+      class="hidden-sm-and-down"
     >
       <v-card-title class="blue white--text">
         <span class="headline">
@@ -124,12 +124,9 @@ export default {
   },
   created() {
     this.$nuxt.$on("order", data => {
-      // console.log(data.FoodModifiers);
       this.FoodModifiers = data.FoodModifiers;
       this.id = data.id;
       this.CurrentDate = data.date;
-      // this.CartTotal = data.OrderTotal;
-      // console.log(this.CartTotal);
       this.CartItems.push(data);
       this.FoodModifiers = this.CartItems.FoodModifiers;
       console.log(this.CartItems);
@@ -154,10 +151,11 @@ export default {
     DeleteItem(item) {
       this.CartItems.splice(item, 1);
       this.FoodModifiers = null;
+      this.$store.commit("ShoppingCart/remove", item);
     },
     DeleteModifier(item) {
       this.FoodModifiers.splice(item, 1);
-      this.$store.dispatch("ShoppingCart/remove", item);
+      this.$store.commit("ShoppingCart/removeModifier", item);
       // this.Total.splice(item, 1);
     },
     selected(option) {
