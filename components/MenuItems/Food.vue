@@ -45,14 +45,20 @@
                       class="rounded-card"
                       dark
                       height="150"
-                      max-width="300"
                       @click="AddtoCart(item)"
                       @click.stop="dialog = true"
                     >
                       <v-card-title class="headline mb-1">
                         <h1>{{ item.name }}</h1>
                       </v-card-title>
-
+                      <v-scroll-y-transition>
+                        <div
+                          v-if="active"
+                          class="display-3 flex-grow-1 text-center"
+                        >
+                          Active
+                        </div>
+                      </v-scroll-y-transition>
                     </v-card>
                   </v-item>
                 </v-col>
@@ -197,7 +203,7 @@ export default {
 
   computed: {
     MenuItems() {
-      return this.$store.getters["menu/GetFoodMenu"];
+      return this.$store.getters["menu/getMenu"];
     },
     email() {
       return this.$store.getters["user/EmailGetter"];
