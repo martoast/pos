@@ -138,6 +138,7 @@ export default {
     this.$nuxt.$on("OrderComplete", data => {
       console.log("test");
       this.CartItems = [];
+      this.$store.commit("ShoppingCart/ClearCart");
       // this.CartTotal = null;
     });
   },
@@ -156,6 +157,7 @@ export default {
     },
     DeleteModifier(item) {
       this.FoodModifiers.splice(item, 1);
+      this.$store.dispatch("ShoppingCart/remove", item);
       // this.Total.splice(item, 1);
     },
     selected(option) {

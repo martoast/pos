@@ -32,6 +32,9 @@ export const mutations = {
   remove(state, { Order }) {
     state.Cart.splice(state.Cart.indexOf(Order), 1)
   },
+  ClearCart(state) {
+    state.Cart = []
+  }
 
 
 
