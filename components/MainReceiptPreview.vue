@@ -24,13 +24,13 @@
             <td @click="DeleteItem(item)">{{ item.name }}</td>
             <td>{{ item.price }}</td>
           </tr>
-          <tr
+          <!-- <tr
             v-for="item in CartItems"
             :key="item.id"
           >
-            <td>{{ item.size }}</td>
-            <!-- <td>{{ item.FoodModifiers.price }}</td> -->
-          </tr>
+            <td>{{ item.size }}</td> -->
+          <!-- <td>{{ item.FoodModifiers.price }}</td> -->
+          <!-- </tr> -->
 
           <!-- <tr
             v-for="item in CartItems"

@@ -60,10 +60,10 @@ export const mutations = {
     state.MenuItems.push(MenuItems)
     console.log(state.MenuItems)
   },
-  remove(state, { item }) {
+  remove(state, item) {
     state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
   },
-  edit(state, { item }) {
+  edit(state, item) {
     state.MenuItems.splice(state.MenuItems.indexOf(item), 1)
     state.MenuItems.push(item)
   },
