@@ -77,14 +77,14 @@ export default {
   },
   created() {
     // this.$nuxt.$on("order", data => {
-    //   // console.log(data.FoodModifiers);
-    //   this.FoodModifiers = data.FoodModifiers;
-    //   this.id = data.id;
-    //   this.CurrentDate = data.date;
-    //   // this.CartTotal = data.OrderTotal;
-    //   // console.log(this.CartTotal);
+    // console.log(data.FoodModifiers);
+    // this.FoodModifiers = data.FoodModifiers;
+    // this.id = data.id;
+    // this.CurrentDate = data.date;
+    // this.CartTotal = data.OrderTotal;
+    // console.log(this.CartTotal);
     //   this.CartItems.push(data);
-    //   this.FoodModifiers = this.CartItems.FoodModifiers;
+    // this.FoodModifiers = this.CartItems.FoodModifiers;
     //   console.log(this.CartItems);
     // });
 
@@ -95,6 +95,7 @@ export default {
       // this.CartTotal = null;
     });
   },
+
   computed: {
     CartTotal() {
       return this.$store.getters["ShoppingCart/GetTotal"];
@@ -105,14 +106,10 @@ export default {
   },
   methods: {
     DeleteItem(item) {
-      this.CartItems.splice(item, 1);
       this.$store.commit("ShoppingCart/remove", item);
-      this.FoodModifiers = null;
     },
     DeleteModifier(item) {
-      this.FoodModifiers.splice(item, 1);
       this.$store.commit("ShoppingCart/remove", item);
-      // this.Total.splice(item, 1);
     }
   }
 };
