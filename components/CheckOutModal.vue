@@ -30,9 +30,6 @@
                   <v-row justify="center">
                     <h2 class="center">Choose Amount</h2>
                   </v-row>
-                  <v-row justify="center">
-                    <h2 class="center">Order ID: # {{ this.id }}</h2>
-                  </v-row>
 
                   <v-row class="center">
                     <v-btn
@@ -131,7 +128,6 @@ export default {
     PayWithCard
   },
   props: {
-    id: String,
     CartTotal: Number
   },
   data() {
@@ -148,6 +144,8 @@ export default {
 
     OrderFinish() {
       this.dialog = false;
+      // const messageRef = this.$fireStore.collection("orders").doc(OrderID);
+      // messageRef.set(order);
 
       console.log("Order Complete");
 

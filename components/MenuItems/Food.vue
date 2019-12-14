@@ -72,6 +72,36 @@
                   <span class="headline">{{ this.FoodItemName }}</span>
                 </v-card-title>
               </v-row>
+              <v-row
+                align="center"
+                justify="center"
+              >
+
+                <v-btn-toggle
+                  v-model="OrderType"
+                  mandatory
+                  color="deep-purple accent-3"
+                >
+                  <!-- <v-btn @click="test()">
+                    <v-icon>mdi-food-fork-drink</v-icon>
+                  </v-btn>
+                  <v-btn @click="test()">
+                    <v-icon>mdi-walk</v-icon>
+                  </v-btn>
+                  <v-btn>
+                    <v-icon @click="test()">mdi-bike</v-icon>
+                  </v-btn> -->
+
+                  <v-btn
+                    v-for="option in options"
+                    :key="option.id"
+                    @click="test(option)"
+                  >
+                    <v-icon>{{option.icon}}</v-icon>
+                  </v-btn>
+
+                </v-btn-toggle>
+              </v-row>
               <v-card-text>
                 <v-container>
                   <v-row>
@@ -142,7 +172,6 @@ export default {
   },
   data() {
     return {
-      // MenuItems: null,
       FoodItem: null,
       FoodItemName: null,
       SelectedModifiers: [],
@@ -152,10 +181,15 @@ export default {
       KitchenNotes: "",
       selectedSize: null,
       ItemSizes: null,
-      toggle_exclusive: [],
-      OrderType: null,
 
-      // MenuItems: null,
+      SelectedOrderType: undefined,
+
+      OrderType: undefined,
+      options: [
+        { title: "Dine-In", icon: "mdi-food-fork-drink", id: 0 },
+        { title: "Take-Out", icon: "mdi-walk", id: 1 },
+        { title: "Delivery", icon: "mdi-bike", id: 2 }
+      ],
 
       Cart: null,
 
@@ -195,6 +229,9 @@ export default {
   },
 
   methods: {
+    test(option) {
+      this.SelectedOrderType = option;
+    },
     AddtoCart(item) {
       // console.log(item);
       this.FoodModifiers = item.modifier;
@@ -209,16 +246,6 @@ export default {
       this.ModifierList.push(Modifier);
     },
     SaveOrder() {
-      // if ((this.toggle_exclusive = 0)) {
-      //   let OrderType = "Dine-in";
-      // }
-      // if ((this.toggle_exclusive = 1)) {
-      //   let OrderType = "to-go";
-      // }
-      // if ((this.toggle_exclusive = 2)) {
-      //   let OrderType = "delivery";
-      // // }
-
       let ModifiersTotal = this.ModifierList.reduce(
         (acc, item) => acc + item.price,
         0
@@ -241,7 +268,7 @@ export default {
         id: OrderID,
         date: currentDateWithFormat,
         OrderTotal: OrderTotal,
-        OrderType: this.OrderType,
+        OrderType: this.SelectedOrderType,
         name: this.FoodItem.name,
         price: this.FoodItem.price,
         Foodid: this.FoodItem.id,
@@ -251,10 +278,9 @@ export default {
         ModifiersTotal: ModifiersTotal
       };
 
-      this.$nuxt.$emit("order", order);
+      // this.$nuxt.$emit("order", order);
       this.$store.dispatch("ShoppingCart/ADD_TO_CART", order);
-      // const messageRef = this.$fireStore.collection("orders").doc(OrderID);
-      // messageRef.set(order);
+
       this.ModifierList = [];
       this.ItemsList = [];
       this.dialog = false;
