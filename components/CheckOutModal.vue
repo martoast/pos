@@ -3,7 +3,7 @@
     <v-dialog
       v-model="dialog"
       persistent
-      max-width="600px"
+      max-width="650"
     >
       <template v-slot:activator="{ on }">
         <v-btn
@@ -31,7 +31,10 @@
                     <h2 class="center">Choose Amount</h2>
                   </v-row>
 
-                  <v-row class="center">
+                  <v-row
+                    justify="center"
+                    align="center"
+                  >
                     <v-btn
                       x-large
                       class="ma-2"
@@ -83,6 +86,7 @@
                         filled
                         label="Enter Amount"
                         clearable
+                        color="secondary"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -92,7 +96,7 @@
                     </v-row>
                   </div>
 
-                  <div>
+                  <div v-if="PaidAmount != null && PaidAmount >= this.CartTotal">
                     <v-card-actions>
                       <v-spacer />
 

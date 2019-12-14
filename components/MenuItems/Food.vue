@@ -95,7 +95,7 @@
                   <v-btn
                     v-for="option in options"
                     :key="option.id"
-                    @click="test(option)"
+                    @click="SaveOrderType(option)"
                   >
                     <v-icon>{{option.icon}}</v-icon>
                   </v-btn>
@@ -205,6 +205,9 @@ export default {
       }
     };
   },
+  beforeCreate() {
+    this.$store.dispatch("user/GET_EMAIL");
+  },
 
   created() {
     // fetch("http://localhost:3002/food")
@@ -215,7 +218,6 @@ export default {
     //     this.MenuItems = response;
     //   });
 
-    this.$store.dispatch("user/GET_EMAIL");
     this.$store.dispatch("menu/GET_FIREMENU", this.email);
   },
 
@@ -229,7 +231,7 @@ export default {
   },
 
   methods: {
-    test(option) {
+    SaveOrderType(option) {
       this.SelectedOrderType = option;
     },
     AddtoCart(item) {

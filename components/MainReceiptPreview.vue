@@ -32,15 +32,15 @@
             <!-- <td>{{ item.FoodModifiers.price }}</td> -->
           </tr>
 
-          <tr
-            v-for="item in FoodModifiers"
-            :key="item.price"
+          <!-- <tr
+            v-for="item in CartItems"
+            :key="item.id"
           >
-            <td @click="DeleteModifier(item)">{{ item.name }}</td>
+            <td @click="DeleteModifier(item)">{{ item.FoodModifiers }}</td>
             <td>
-              {{ item.price }}
+              {{ item.FoodModifiers.price }}
             </td>
-          </tr>
+          </tr> -->
         </tbody>
       </v-simple-table>
       <v-card-actions class="card-actions">
@@ -65,34 +65,13 @@ export default {
   data() {
     return {
       FoodModifiers: null,
-      Test: [],
-      dialog: false,
 
-      CurrentDate: null,
-      id: null,
-
-      OrderType: "Dine-In",
-      icon: "mdi-food-fork-drink"
+      dialog: false
     };
   },
   created() {
-    // this.$nuxt.$on("order", data => {
-    // console.log(data.FoodModifiers);
-    // this.FoodModifiers = data.FoodModifiers;
-    // this.id = data.id;
-    // this.CurrentDate = data.date;
-    // this.CartTotal = data.OrderTotal;
-    // console.log(this.CartTotal);
-    //   this.CartItems.push(data);
-    // this.FoodModifiers = this.CartItems.FoodModifiers;
-    //   console.log(this.CartItems);
-    // });
-
     this.$nuxt.$on("OrderComplete", data => {
-      console.log("test");
-      this.CartItems = [];
       this.$store.commit("ShoppingCart/ClearCart");
-      // this.CartTotal = null;
     });
   },
 

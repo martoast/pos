@@ -47,9 +47,7 @@ export const mutations = {
 }
 export const getters = {
   EmailGetter(state) {
-    // console.log("getter called")
-    // console.log(state.user.email)
-    // return state.user.email
+
     if (state.user.email === undefined || state.user.email == '') {
       return;
 
