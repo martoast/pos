@@ -14,8 +14,7 @@
       <tbody>
         <tr
           v-for="item in MenuItems"
-          :key="item.name"
-          :id="item.id"
+          :key="item.id"
         >
           <td>{{ item.name }}</td>
           <td>{{ item.price }}</td>
@@ -57,14 +56,14 @@
                               >
                                 <v-text-field
                                   label="Item name*"
-                                  v-model="ItemName"
+                                  v-model="item.name"
                                   :rules="nameRules"
                                   color="secondary"
                                   required
                                 ></v-text-field>
                                 <v-text-field
                                   label="Price*"
-                                  v-model="ItemPrice"
+                                  v-model="item.price"
                                   :rules="priceRules"
                                   color="secondary"
                                   required
@@ -78,11 +77,11 @@
                                 <v-select
                                   :items="['Food', 'Drink', 'Dessert']"
                                   label="Type*"
-                                  v-model="ItemType"
+                                  v-model="item.type"
                                   required
                                 ></v-select>
                                 <v-select
-                                  v-model="SelectedSizes"
+                                  v-model="item.sizes"
                                   :items="['Small', 'Medium', 'Large', 'Half', 'Full']"
                                   :rules="sizeRules"
                                   required
@@ -171,8 +170,16 @@ export default {
     // console.log(this.email);
   },
   computed: {
-    MenuItems() {
-      return this.$store.getters["menu/getMenu"];
+    // MenuItems() {
+    //   return this.$store.getters["menu/getMenu"];
+    // },
+    MenuItems: {
+      get() {
+        return this.$store.getters["menu/getMenu"];
+      },
+      set(value) {
+        this.$store.commit("menu/setMenu", value);
+      }
     },
     email() {
       return this.$store.getters["user/EmailGetter"];
