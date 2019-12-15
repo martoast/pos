@@ -90,6 +90,26 @@ export const getters = {
       return result
     }
 
-  }
+  },
+  // getDrinksMenu(state) {
+  //   if (state.MenuItems === undefined || state.MenuItems.length == 0) {
+  //     console.log("No Menu Created")
+  //     return;
+  //   } else {
+  //     var result = state.MenuItems.filter(item => item.type = "Drink");
+  //     return result
+  //   }
+
+  // },
+  // getDessertsMenu(state) {
+  //   if (state.MenuItems === undefined || state.MenuItems.length == 0) {
+  //     console.log("No Menu Created")
+  //     return;
+  //   } else {
+  //     var result = state.MenuItems.filter(item => item.type = "Dessert");
+  //     return result
+  //   }
+
+  // }
 
 }

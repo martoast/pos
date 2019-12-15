@@ -69,9 +69,14 @@ export default {
       dialog: false
     };
   },
+
   created() {
     this.$nuxt.$on("OrderComplete", data => {
-      this.$store.commit("ShoppingCart/ClearCart");
+      this.$store.dispatch(
+        "ShoppingCart/SENDORDER",
+        this.$store.state["ShoppingCart/Cart"]
+      );
+      this.email;
     });
   },
 
@@ -81,6 +86,9 @@ export default {
     },
     CartItems() {
       return this.$store.getters["ShoppingCart/getCart"];
+    },
+    email() {
+      return this.$store.getters["user/EmailGetter"];
     }
   },
   methods: {

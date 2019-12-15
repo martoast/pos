@@ -8,6 +8,22 @@ export const actions = {
 
   ADD_TO_CART({ commit }, Order) {
     commit("add", Order)
+  },
+  async SENDORDER(email) {
+    console.log(email.rootState.user.user.email)
+
+    // console.log(email)
+    let EMAIL = email.rootState.user.user.email
+    const messageRef = this.$fireStore.collection('users').doc(EMAIL)
+    try {
+      await messageRef.set({
+        orders: state.Cart
+      })
+    } catch (e) {
+      alert(e)
+      return
+    }
+    alert('Success.')
   }
 
 }
