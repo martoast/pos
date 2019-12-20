@@ -2,18 +2,11 @@
   <div>
     <div>
       <v-row>
-        <v-dialog
-          v-model="dialog2"
-          persistent
-          max-width="600px"
-        >
+        <v-dialog v-model="dialog2" persistent max-width="600px">
           <template v-slot:activator="{ on }">
             <v-btn v-on="on">Add Menu Item</v-btn>
           </template>
-          <v-form
-            v-model="valid"
-            lazy-validation
-          >
+          <v-form v-model="valid" lazy-validation>
             <v-card>
               <v-card-title>
                 <span class="headline">Create Menu Item</span>
@@ -21,11 +14,7 @@
               <v-card-text>
                 <v-container>
                   <v-row justify="center">
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
+                    <v-col cols="12" sm="6" md="4">
                       <v-text-field
                         label="Item name*"
                         v-model="ItemName"
@@ -42,10 +31,7 @@
                       ></v-text-field>
                     </v-col>
 
-                    <v-col
-                      cols="12"
-                      sm="6"
-                    >
+                    <v-col cols="12" sm="6">
                       <v-select
                         :items="['Food', 'Drink', 'Dessert']"
                         label="Type*"
@@ -62,26 +48,33 @@
                         multiple
                       ></v-select>
                     </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                    > </v-col>
-                    <v-btn
-                      color="secondary"
-                      dark
-                      @click="dialog3 = true"
-                    >Add Modifier</v-btn>
+                    <v-col cols="12" sm="6"></v-col>
                   </v-row>
                 </v-container>
+                <v-card class="mx-auto" max-width="300" tile v-if="this.ModifiersList.length > 0">
+                  <v-list rounded>
+                    <v-subheader>
+                      <v-row justify="center" align="center">
+                        <v-card-text>Item Modifiers</v-card-text>
+                      </v-row>
+                    </v-subheader>
+                    <v-list-item-group color="primary">
+                      <v-list-item v-for="(item, i) in ModifiersList" :key="i">
+                        <v-list-item-content @click="DeleteModifier(item,i)">
+                          <v-list-item-title v-text="item.name"></v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list-item-group>
+                  </v-list>
+                </v-card>
+                <v-row justify="center">
+                  <v-btn color="secondary" dark @click="dialog3 = true">Add Modifier</v-btn>
+                </v-row>
                 <small>*indicates required field</small>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="dialog2 = false"
-                >Close</v-btn>
+                <v-btn color="blue darken-1" text @click="dialog2 = false">Close</v-btn>
                 <v-btn
                   :disabled="!valid"
                   color="secondary"
@@ -96,15 +89,8 @@
     </div>
     <div>
       <v-row justify="center">
-        <v-dialog
-          v-model="dialog3"
-          persistent
-          max-width="600px"
-        >
-          <v-form
-            v-model="valid2"
-            lazy-validation
-          >
+        <v-dialog v-model="dialog3" persistent max-width="600px">
+          <v-form v-model="valid2" lazy-validation>
             <v-card>
               <v-card-title>
                 <span class="headline">Add Modifier</span>
@@ -112,43 +98,20 @@
               <v-card-text>
                 <v-container>
                   <v-row justify="center">
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        label="Item name*"
-                        v-model="ModifierName"
-                        :rules="nameRules"
-                        required
-                      ></v-text-field>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field label="Item name*" v-model="ModifierName" :rules="nameRules"></v-text-field>
                     </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                    >
-                      <v-text-field
-                        label="Price*"
-                        v-model="ModifierPrice"
-                        :rules="priceRules"
-                        required
-                      ></v-text-field>
+                    <v-col cols="12" sm="6">
+                      <v-text-field label="Price*" v-model="ModifierPrice" :rules="priceRules"></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
-                <v-btn>
-                  Add Modifier
-                </v-btn>
+
                 <small>*indicates required field</small>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="dialog3 = false"
-                >Close</v-btn>
+                <v-btn color="blue darken-1" text @click="dialog3 = false">Close</v-btn>
                 <v-btn
                   :disabled="!valid2"
                   color="secondary"
@@ -161,7 +124,7 @@
                   :loading="loading"
                   @click="SaveModifier()
                   >Save</v-btn
-                > -->
+                >-->
               </v-card-actions>
             </v-card>
           </v-form>
@@ -219,6 +182,10 @@ export default {
       console.log(this.ModifiersList);
       this.ModifierName = null;
       this.ModifierPrice = null;
+    },
+    DeleteModifier(item) {
+      this.ModifiersList.splice(item, 1);
+      console.log("Modifier Deleted");
     },
     SaveItem() {
       this.dialog2 = false;

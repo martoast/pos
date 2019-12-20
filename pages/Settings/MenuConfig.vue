@@ -7,24 +7,12 @@
       <MenuTable />
 
       <v-card-actions>
-        <v-row
-          justify="center"
-          align="center"
-        >
-          <v-col
-            cols="12"
-            sm="6"
-            class="d-flex"
-          >
+        <v-row justify="center" align="center">
+          <v-col cols="12" sm="6">
             <ItemCreateModal />
           </v-col>
 
-          <v-btn
-            class="secondary"
-            @click="writeToFirestore()"
-          >
-            Save Menu
-          </v-btn>
+          <v-btn class="secondary" @click="writeToFirestore()">Save Menu</v-btn>
         </v-row>
       </v-card-actions>
     </v-card>
@@ -71,7 +59,7 @@ export default {
         alert(e);
         return;
       }
-      alert("Success.");
+      alert("Menu Changes Saved");
     }
   }
 };
