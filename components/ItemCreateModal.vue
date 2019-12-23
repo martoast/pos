@@ -60,9 +60,11 @@
                     </v-subheader>
                     <v-list-item-group color="primary">
                       <v-list-item v-for="(item, i) in ModifiersList" :key="i">
-                        <v-list-item-content @click="DeleteModifier(item,i)">
+                        <v-list-item-content>
                           <v-list-item-title v-text="item.name"></v-list-item-title>
                         </v-list-item-content>
+                        <h5>${{item.price}}</h5>
+                        <v-icon color="pink" @click="DeleteModifier(item,i)">mdi-delete</v-icon>
                       </v-list-item>
                     </v-list-item-group>
                   </v-list>

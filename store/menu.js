@@ -1,5 +1,7 @@
 import menu from "~/services/MenuService";
 
+export const strict = false;
+
 export const state = () => ({
   MenuItems: []
 });
@@ -70,7 +72,18 @@ export const getters = {
       var result = state.MenuItems.filter(item => (item.type = "Food"));
       return result;
     }
+  },
+  // getItem: state => id => {
+  //   console.log(state.MenuItems.find(item => item.id === id));
+  //   return state.MenuItems.find(item => item.id === id);
+  // }
+
+  getItem(state, id) {
+    console.log("Geter called");
+    // console.log(id);
+    // return state.MenuItems.find(item => item.id === id);
   }
+
   // getDrinksMenu(state) {
   //   if (state.MenuItems === undefined || state.MenuItems.length == 0) {
   //     console.log("No Menu Created");

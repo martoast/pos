@@ -6,16 +6,7 @@
         <v-spacer></v-spacer>
 
         <v-toolbar-items>
-          <v-btn text @click.stop="dialog = true" class="white--text"
-            >iniciar sesión</v-btn
-          >
-          <!-- <v-btn
-            text
-            to="/users/Signup"
-          >Registrar Cuenta</v-btn> -->
-          <v-dialog v-model="dialog">
-            <LoginModal />
-          </v-dialog>
+          <LoginModal />
         </v-toolbar-items>
       </v-app-bar>
 
@@ -28,7 +19,7 @@
   </div>
 </template>
 <script>
-import LoginModal from '~/components/LoginModal'
+import LoginModal from "~/components/LoginModal";
 export default {
   components: {
     LoginModal
@@ -36,7 +27,7 @@ export default {
   data() {
     return {
       dialog: false
-    }
+    };
   }
-}
+};
 </script>

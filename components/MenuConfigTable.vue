@@ -1,119 +1,121 @@
 <template>
   <div>
-    <v-simple-table fixed-header class="mx-auto">
-      <thead>
-        <tr>
-          <th class="text-left">Name</th>
-          <th class="text-left">Price</th>
-          <th class="text-left">Options</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in MenuItems" :key="item.id">
-          <td>{{ item.name }}</td>
-          <td>{{ item.price }}</td>
-          <td>
-            <div>
-              <v-row>
-                <v-btn color="secondary" @click.stop="dialog = true" fab x-small dark>
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
+    <div>
+      <v-simple-table fixed-header class="mx-auto">
+        <thead>
+          <tr>
+            <th class="text-left">Name</th>
+            <th class="text-left">Price</th>
+            <th class="text-left">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item) of MenuItems" :key="item.id">
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>
+              <div>
+                <v-row>
+                  <v-btn color="secondary" @click="EditItem(item.id)" fab x-small dark>
+                    <v-icon>mdi-pencil</v-icon>
+                  </v-btn>
 
-                <v-btn @click="DeleteItem(item)" color="secondary" fab x-small dark>
-                  <v-icon>mdi-delete</v-icon>
-                </v-btn>
-              </v-row>
-            </div>
-            <v-dialog v-model="dialog" max-width="600px">
-              <v-row justify="center">
-                <v-form v-model="valid" lazy-validation>
-                  <v-card>
-                    <v-card-title>
-                      <span class="headline">edit {{item.name}} item</span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-container>
-                        <v-row justify="center">
-                          <v-col cols="12" sm="6" md="4">
-                            <v-text-field
-                              label="Item name*"
-                              v-model="item.name"
-                              :rules="nameRules"
-                              color="secondary"
-                              required
-                            ></v-text-field>
-                            <v-text-field
-                              label="Price*"
-                              v-model="item.price"
-                              :rules="priceRules"
-                              color="secondary"
-                              required
-                            ></v-text-field>
-                          </v-col>
+                  <v-btn @click="DeleteItem(item)" color="secondary" fab x-small dark>
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                </v-row>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </v-simple-table>
+    </div>
+    <div>
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <v-form v-model="valid" lazy-validation>
+          <v-card>
+            <v-card-title>
+              <span class="headline">edit item</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row justify="center">
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field
+                      label="Item name*"
+                      v-model="ItemName"
+                      :rules="nameRules"
+                      color="secondary"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      label="Price*"
+                      v-model="ItemPrice"
+                      :rules="priceRules"
+                      color="secondary"
+                      required
+                    ></v-text-field>
+                  </v-col>
 
-                          <v-col cols="12" sm="6">
-                            <v-select
-                              :items="['Food', 'Drink', 'Dessert']"
-                              label="Type*"
-                              v-model="item.type"
-                              required
-                            ></v-select>
-                            <v-select
-                              v-model="item.sizes"
-                              :items="['Small', 'Medium', 'Large', 'Half', 'Full']"
-                              :rules="sizeRules"
-                              required
-                              chips
-                              label="Sizes"
-                              multiple
-                            ></v-select>
-                          </v-col>
-                          <!-- <v-col cols="12" sm="6"></v-col> -->
+                  <v-col cols="12" sm="6">
+                    <v-select
+                      :items="['Food', 'Drink', 'Dessert']"
+                      label="Type*"
+                      v-model="ItemType"
+                      required
+                    ></v-select>
+                    <v-select
+                      v-model="ItemSize"
+                      :items="['Small', 'Medium', 'Large', 'Half', 'Full']"
+                      :rules="sizeRules"
+                      required
+                      chips
+                      label="Sizes"
+                      multiple
+                    ></v-select>
+                  </v-col>
+                  <!-- <v-col cols="12" sm="6"></v-col> -->
 
-                          <v-card
-                            class="mx-auto"
-                            max-width="300"
-                            tile
-                            v-if="item.modifiers.length > 0"
-                          >
-                            <v-list rounded>
-                              <v-subheader>
-                                <v-row justify="center" align="center">
-                                  <v-card-text>Item Modifiers</v-card-text>
-                                </v-row>
-                              </v-subheader>
-                              <v-list-item-group color="primary">
-                                <v-list-item v-for="(item, i) in item.modifiers" :key="i">
-                                  <v-list-item-content @click="DeleteModifier(item,i)">
-                                    <v-list-item-title v-text="item.name"></v-list-item-title>
-                                  </v-list-item-content>
-                                </v-list-item>
-                              </v-list-item-group>
-                            </v-list>
-                            <v-btn color="secondary" dark @click="dialog3 = true">Edit Modifier</v-btn>
-                          </v-card>
+                  <v-card class="mx-auto" max-width="450" tile v-if="ModifiersList.length > 0">
+                    <v-list rounded>
+                      <v-subheader>
+                        <v-row justify="center" align="center">
+                          <v-card-text>Item Modifiers</v-card-text>
                         </v-row>
-                      </v-container>
-                      <small>*indicates required field</small>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                      <v-btn
-                        :disabled="!valid"
-                        color="secondary"
-                        :loading="loading"
-                        @click="SaveItem()"
-                      >Save</v-btn>
-                    </v-card-actions>
+                      </v-subheader>
+                      <v-list-item-group color="primary">
+                        <v-list-item v-for="(item, i) in ModifiersList" :key="i">
+                          <v-row>
+                            <v-list-item-content @click="DeleteModifier(item,i)">
+                              <v-list-item-title v-text="item.name"></v-list-item-title>
+                            </v-list-item-content>
+                            <v-list-item-icon>
+                              <v-icon color="pink">mdi-pencil</v-icon>
+                              <v-icon color="pink">mdi-delete</v-icon>
+                            </v-list-item-icon>
+                          </v-row>
+                        </v-list-item>
+                      </v-list-item-group>
+                    </v-list>
                   </v-card>
-                </v-form>
-              </v-row>
-            </v-dialog>
-          </td>
-        </tr>
-      </tbody>
-    </v-simple-table>
+                </v-row>
+              </v-container>
+              <small>*indicates required field</small>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+              <v-btn
+                :disabled="!valid"
+                color="secondary"
+                :loading="loading"
+                @click="SaveEdit()"
+              >Save</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-form>
+      </v-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -134,6 +136,7 @@ export default {
       ItemName: "",
       ItemPrice: "",
       ItemType: null,
+      ItemSize: null,
       ModifiersList: [],
       loading: false
     };
@@ -189,8 +192,9 @@ export default {
       };
       this.$store.commit("menu/edit", item);
     },
-    EditItem() {
-      // this.dialog = true;
+    EditItem(id) {
+      // console.log(id);
+      this.$store.getters["menu/getItem"];
     }
   }
 };
