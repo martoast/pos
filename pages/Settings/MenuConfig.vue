@@ -4,15 +4,27 @@
       <v-card-title>Menu Configuration</v-card-title>
       <v-spacer></v-spacer>
 
-      <MenuTable />
+      <MenuTable
+        :MenuItems="MenuItems"
+        :email="email"
+      />
 
       <v-card-actions>
-        <v-row justify="center" align="center">
-          <v-col cols="12" sm="6">
+        <v-row
+          justify="center"
+          align="center"
+        >
+          <v-col
+            cols="12"
+            sm="6"
+          >
             <ItemCreateModal />
           </v-col>
 
-          <v-btn class="secondary" @click="writeToFirestore()">Save Menu</v-btn>
+          <v-btn
+            class="secondary"
+            @click="writeToFirestore()"
+          >Save Menu</v-btn>
         </v-row>
       </v-card-actions>
     </v-card>
@@ -39,15 +51,20 @@ export default {
     email() {
       return this.$store.getters["user/EmailGetter"];
     },
-    menu() {
-      return this.$store.getters["menu/getMenu"];
+    MenuItems: {
+      get() {
+        return this.$store.getters["menu/getMenu"];
+      },
+      set(value) {
+        this.$store.commit("menu/setMenu", value);
+      }
     }
   },
 
   methods: {
     async writeToFirestore() {
       let email = this.email;
-      let menu = this.menu;
+      let menu = this.MenuItems;
       // console.log(email);
       // console.log(menu);
       const messageRef = this.$fireStore.collection("users").doc(email);
