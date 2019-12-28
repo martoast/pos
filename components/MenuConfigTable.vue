@@ -18,7 +18,7 @@
             :key="item.id"
           >
             <td>{{ item.name }}</td>
-            <td>{{ item.price }}</td>
+            <td>$ {{ item.price }}</td>
             <td>
               <div>
                 <v-row>

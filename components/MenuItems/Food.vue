@@ -56,33 +56,29 @@
     </v-col>
 
     <div>
-      <v-row
-        align="center"
-        justify="center"
-      >
-        <v-container>
-          <v-dialog
-            v-model="dialog"
-            persistent
-            max-width="400px"
-          >
-            <v-card class="primary">
-              <v-row justify="center">
-                <v-card-title>
-                  <span class="headline">{{ this.FoodItemName }}</span>
-                </v-card-title>
-              </v-row>
-              <v-row
-                align="center"
-                justify="center"
-              >
 
-                <v-btn-toggle
-                  v-model="OrderType"
-                  mandatory
-                  color="deep-purple accent-3"
-                >
-                  <!-- <v-btn @click="test()">
+      <v-dialog
+        v-model="dialog"
+        persistent
+        max-width="400px"
+      >
+        <v-card class="primary">
+          <v-row justify="center">
+            <v-card-title>
+              <span class="headline">{{ this.FoodItemName }}</span>
+            </v-card-title>
+          </v-row>
+          <v-row
+            align="center"
+            justify="center"
+          >
+
+            <v-btn-toggle
+              v-model="OrderType"
+              mandatory
+              color="deep-purple accent-3"
+            >
+              <!-- <v-btn @click="test()">
                     <v-icon>mdi-food-fork-drink</v-icon>
                   </v-btn>
                   <v-btn @click="test()">
@@ -92,70 +88,69 @@
                     <v-icon @click="test()">mdi-bike</v-icon>
                   </v-btn> -->
 
-                  <v-btn
-                    v-for="option in options"
-                    :key="option.id"
-                    @click="SaveOrderType(option)"
+              <v-btn
+                v-for="option in options"
+                :key="option.id"
+                @click="SaveOrderType(option)"
+              >
+                <v-icon>{{option.icon}}</v-icon>
+              </v-btn>
+
+            </v-btn-toggle>
+          </v-row>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-select
+                  :items="this.ItemSizes"
+                  label="Size*"
+                  required
+                  v-model="this.ItemSizes"
+                ></v-select>
+                <div>
+                  <v-container
+                    v-for="Modifier in FoodModifiers"
+                    :key="Modifier.name"
                   >
-                    <v-icon>{{option.icon}}</v-icon>
-                  </v-btn>
+                    <v-checkbox
+                      v-model="ModifierList"
+                      :label="Modifier.name"
+                      :value="Modifier"
+                    ></v-checkbox>
+                  </v-container>
+                </div>
 
-                </v-btn-toggle>
+                <v-textarea
+                  filled
+                  auto-grow
+                  label="Notes for Kitchen"
+                  rows="4"
+                  row-height="30"
+                  shaped
+                  v-model="KitchenNotes"
+                ></v-textarea>
               </v-row>
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-select
-                      :items="this.ItemSizes"
-                      label="Size*"
-                      required
-                      v-model="selectedSize"
-                    ></v-select>
-                    <div>
-                      <v-container
-                        v-for="Modifier in FoodModifiers"
-                        :key="Modifier.name"
-                      >
-                        <v-checkbox
-                          v-model="ModifierList"
-                          :label="Modifier.name"
-                          :value="Modifier"
-                        ></v-checkbox>
-                      </v-container>
-                    </div>
+            </v-container>
+            <small>*indicates required field</small>
+          </v-card-text>
+          <div>
+            <v-card-actions>
+              <div class="flex-grow-1"></div>
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="dialog = false"
+              >Close</v-btn>
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="SaveOrder()"
+              >Save</v-btn>
+            </v-card-actions>
+          </div>
+        </v-card>
+      </v-dialog>
 
-                    <v-textarea
-                      filled
-                      auto-grow
-                      label="Notes for Kitchen"
-                      rows="4"
-                      row-height="30"
-                      shaped
-                      v-model="KitchenNotes"
-                    ></v-textarea>
-                  </v-row>
-                </v-container>
-                <small>*indicates required field</small>
-              </v-card-text>
-              <div>
-                <v-card-actions>
-                  <div class="flex-grow-1"></div>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="dialog = false"
-                  >Close</v-btn>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="SaveOrder()"
-                  >Save</v-btn>
-                </v-card-actions>
-              </div>
-            </v-card>
-          </v-dialog>
-        </v-container>
-      </v-row>
     </div>
   </div>
 </template>
@@ -198,7 +193,7 @@ export default {
       text: "center",
       model: null,
       tab: null,
-      items: ["FoodModifiers", "Extras", "Notes"],
+
       window: {
         width: 0,
         height: 0
@@ -236,8 +231,8 @@ export default {
     },
     AddtoCart(item) {
       // console.log(item);
-      this.FoodModifiers = item.modifier;
-      this.ItemSizes = item.size;
+      this.FoodModifiers = item.modifiers;
+      this.ItemSizes = item.sizes;
       // console.log(this.FoodModifiers);
       this.FoodItem = item;
       this.FoodItemName = item.name;
