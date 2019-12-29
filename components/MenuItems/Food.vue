@@ -62,23 +62,24 @@
         persistent
         max-width="400px"
       >
-        <v-card class="primary">
-          <v-row justify="center">
-            <v-card-title>
-              <span class="headline">{{ this.FoodItemName }}</span>
-            </v-card-title>
-          </v-row>
-          <v-row
-            align="center"
-            justify="center"
-          >
-
-            <v-btn-toggle
-              v-model="OrderType"
-              mandatory
-              color="deep-purple accent-3"
+        <v-form v-model="valid">
+          <v-card class="primary">
+            <v-row justify="center">
+              <v-card-title>
+                <span class="headline">{{ this.FoodItemName }}</span>
+              </v-card-title>
+            </v-row>
+            <v-row
+              align="center"
+              justify="center"
             >
-              <!-- <v-btn @click="test()">
+
+              <v-btn-toggle
+                v-model="OrderType"
+                mandatory
+                color="deep-purple accent-3"
+              >
+                <!-- <v-btn @click="test()">
                     <v-icon>mdi-food-fork-drink</v-icon>
                   </v-btn>
                   <v-btn @click="test()">
@@ -88,67 +89,70 @@
                     <v-icon @click="test()">mdi-bike</v-icon>
                   </v-btn> -->
 
-              <v-btn
-                v-for="option in options"
-                :key="option.id"
-                @click="SaveOrderType(option)"
-              >
-                <v-icon>{{option.icon}}</v-icon>
-              </v-btn>
+                <v-btn
+                  v-for="option in options"
+                  :key="option.id"
+                  @click="SaveOrderType(option)"
+                >
+                  <v-icon>{{option.icon}}</v-icon>
+                </v-btn>
 
-            </v-btn-toggle>
-          </v-row>
-          <v-card-text>
-            <v-container>
-              <v-row>
-                <v-select
-                  :items="this.ItemSizes"
-                  label="Size*"
-                  required
-                  v-model="this.ItemSizes"
-                ></v-select>
-                <div>
-                  <v-container
-                    v-for="Modifier in FoodModifiers"
-                    :key="Modifier.name"
-                  >
-                    <v-checkbox
-                      v-model="ModifierList"
-                      :label="Modifier.name"
-                      :value="Modifier"
-                    ></v-checkbox>
-                  </v-container>
-                </div>
+              </v-btn-toggle>
+            </v-row>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-select
+                    :items="this.ItemSizes"
+                    label="Size*"
+                    required
+                    v-model="this.ItemSizes"
+                    :rules="[v => !!v || 'size is required']"
+                  ></v-select>
+                  <div>
+                    <v-container
+                      v-for="Modifier in FoodModifiers"
+                      :key="Modifier.name"
+                    >
+                      <v-checkbox
+                        v-model="ModifierList"
+                        :label="Modifier.name"
+                        :value="Modifier"
+                      ></v-checkbox>
+                    </v-container>
+                  </div>
 
-                <v-textarea
-                  filled
-                  auto-grow
-                  label="Notes for Kitchen"
-                  rows="4"
-                  row-height="30"
-                  shaped
-                  v-model="KitchenNotes"
-                ></v-textarea>
-              </v-row>
-            </v-container>
-            <small>*indicates required field</small>
-          </v-card-text>
-          <div>
-            <v-card-actions>
-              <div class="flex-grow-1"></div>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="dialog = false"
-              >Close</v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="SaveOrder()"
-              >Save</v-btn>
-            </v-card-actions>
-          </div>
-        </v-card>
+                  <v-textarea
+                    filled
+                    auto-grow
+                    label="Notes for Kitchen"
+                    rows="4"
+                    row-height="30"
+                    shaped
+                    v-model="KitchenNotes"
+                  ></v-textarea>
+                </v-row>
+              </v-container>
+              <small>*indicates required field</small>
+            </v-card-text>
+            <div>
+              <v-card-actions>
+                <div class="flex-grow-1"></div>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="dialog = false"
+                >Close</v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="SaveOrder()"
+                >Save</v-btn>
+              </v-card-actions>
+            </div>
+          </v-card>
+        </v-form>
+
       </v-dialog>
 
     </div>
@@ -189,6 +193,8 @@ export default {
       Cart: null,
 
       dialog: false,
+
+      valid: true,
 
       text: "center",
       model: null,
@@ -239,19 +245,17 @@ export default {
       this.ItemsList.push(item);
       // console.log(this.FoodItemName);
     },
-    AddModifierToList(Modifier) {
-      this.ModifierList.push(Modifier);
-    },
+
     SaveOrder() {
       let ModifiersTotal = this.ModifierList.reduce(
-        (acc, item) => acc + item.price,
+        (acc, item) => acc + parseFloat(item.price),
         0
       );
       let ItemsTotal = this.ItemsList.reduce(
         (acc, item) => acc + item.price,
         0
       );
-      let OrderTotal = ModifiersTotal + ItemsTotal;
+      let OrderTotal = parseFloat(ModifiersTotal) + parseFloat(ItemsTotal);
       OrderTotal = parseFloat(OrderTotal).toFixed(2);
 
       let OrderID = Math.random()
@@ -272,7 +276,7 @@ export default {
         FoodModifiers: this.ModifierList,
         Notes: this.KitchenNotes,
         size: this.selectedSize,
-        ModifiersTotal: ModifiersTotal
+        ModifiersTotal: ModifiersTotal.toFixed(2)
       };
 
       // this.$nuxt.$emit("order", order);
@@ -281,6 +285,7 @@ export default {
       this.ModifierList = [];
       this.ItemsList = [];
       this.dialog = false;
+      this.KitchenNotes = "";
     },
     handleResize() {
       this.window.width = window.innerWidth;

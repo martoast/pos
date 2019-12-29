@@ -19,10 +19,11 @@
         <tbody>
           <tr
             v-for="item in CartItems"
-            :key="item.name"
+            :key="item.id"
           >
             <td @click="DeleteItem(item)">{{ item.name }}</td>
             <td>{{ item.price }}</td>
+
           </tr>
           <!-- <tr
             v-for="item in CartItems"
@@ -51,7 +52,8 @@
     </v-card>
     <CheckOutModal
       v-if="this.CartItems"
-      :CartTotal="CartTotal"
+      :CartTotal="parseFloat(CartTotal)"
+      :email="this.email"
     />
   </div>
 </template>
@@ -71,18 +73,18 @@ export default {
   },
 
   created() {
-    this.$nuxt.$on("OrderComplete", data => {
-      this.$store.dispatch(
-        "ShoppingCart/SENDORDER",
-        this.$store.state["ShoppingCart/Cart"]
-      );
-      this.email;
-    });
+    // this.$nuxt.$on("OrderComplete", data => {
+    //   this.$store.dispatch(
+    //     "ShoppingCart/SENDORDER",
+    //     this.$store.state["ShoppingCart/Cart"]
+    //   );
+    //   this.email;
+    // });
   },
 
   computed: {
     CartTotal() {
-      return this.$store.getters["ShoppingCart/GetTotal"];
+      return this.$store.getters["ShoppingCart/GetTotal"].toFixed(2);
     },
     CartItems() {
       return this.$store.getters["ShoppingCart/getCart"];

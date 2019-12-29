@@ -132,7 +132,8 @@ export default {
     PayWithCard
   },
   props: {
-    CartTotal: Number
+    CartTotal: Number,
+    email: String
   },
   data() {
     return {
@@ -154,6 +155,8 @@ export default {
       console.log("Order Complete");
 
       this.$nuxt.$emit("OrderComplete");
+      this.$store.dispatch(["ShoppingCart/PostOrder", email]);
+      this.$store.commit(["ShoppingCart/ClearCart"]);
     }
   },
   computed: {
