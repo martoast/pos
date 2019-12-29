@@ -53,7 +53,6 @@
     <CheckOutModal
       v-if="this.CartItems"
       :CartTotal="parseFloat(CartTotal)"
-      :email="this.email"
     />
   </div>
 </template>
@@ -88,9 +87,6 @@ export default {
     },
     CartItems() {
       return this.$store.getters["ShoppingCart/getCart"];
-    },
-    email() {
-      return this.$store.getters["user/EmailGetter"];
     }
   },
   methods: {

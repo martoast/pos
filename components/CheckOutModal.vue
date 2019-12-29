@@ -132,15 +132,29 @@ export default {
     PayWithCard
   },
   props: {
-    CartTotal: Number,
-    email: String
+    CartTotal: Number
   },
+
   data() {
     return {
       PaidAmount: null,
       tab: null,
       dialog: false
     };
+  },
+  computed: {
+    // email() {
+    //   this.$fireAuth.onAuthStateChanged(function(user) {
+    //     if (user) {
+    //       // console.log(user.email)
+    //       return user.email;
+    //     } else {
+    //       // No user is signed in.
+    //       console.log("No User logged in");
+    //       return;
+    //     }
+    //   });
+    // }
   },
   methods: {
     DeletePaidAmount() {
@@ -154,8 +168,18 @@ export default {
 
       console.log("Order Complete");
 
-      this.$nuxt.$emit("OrderComplete");
-      this.$store.dispatch(["ShoppingCart/PostOrder", email]);
+      this.$fireAuth.onAuthStateChanged(function(user, { store }) {
+        if (user) {
+          // console.log(user.email)
+          store.dispatch(["ShoppingCart/PostOrder", user.email]);
+        } else {
+          // No user is signed in.
+          console.log("No User logged in");
+        }
+      });
+
+      // this.$nuxt.$emit("OrderComplete");
+
       this.$store.commit(["ShoppingCart/ClearCart"]);
     }
   },

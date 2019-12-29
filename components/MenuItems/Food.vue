@@ -106,7 +106,7 @@
                     :items="this.ItemSizes"
                     label="Size*"
                     required
-                    v-model="this.ItemSizes"
+                    v-model="selectedSize"
                     :rules="[v => !!v || 'size is required']"
                   ></v-select>
                   <div>
@@ -178,7 +178,7 @@ export default {
       ModifierList: [],
       ItemsList: [],
       KitchenNotes: "",
-      selectedSize: null,
+      selectedSize: [],
       ItemSizes: null,
 
       SelectedOrderType: undefined,
