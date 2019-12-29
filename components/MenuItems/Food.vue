@@ -79,20 +79,11 @@
                 mandatory
                 color="deep-purple accent-3"
               >
-                <!-- <v-btn @click="test()">
-                    <v-icon>mdi-food-fork-drink</v-icon>
-                  </v-btn>
-                  <v-btn @click="test()">
-                    <v-icon>mdi-walk</v-icon>
-                  </v-btn>
-                  <v-btn>
-                    <v-icon @click="test()">mdi-bike</v-icon>
-                  </v-btn> -->
 
                 <v-btn
                   v-for="option in options"
                   :key="option.id"
-                  @click="SaveOrderType(option)"
+                  @click="SaveOrderType(option.title)"
                 >
                   <v-icon>{{option.icon}}</v-icon>
                 </v-btn>
@@ -101,55 +92,58 @@
             </v-row>
             <v-card-text>
               <v-container>
-                <v-row>
+
+                <v-row justify="center">
                   <v-select
-                    :items="this.ItemSizes"
-                    label="Size*"
+                    :items="ItemSizes"
+                    label="Size"
                     required
                     v-model="selectedSize"
                     :rules="[v => !!v || 'size is required']"
                   ></v-select>
-                  <div>
-                    <v-container
-                      v-for="Modifier in FoodModifiers"
-                      :key="Modifier.name"
-                    >
-                      <v-checkbox
-                        v-model="ModifierList"
-                        :label="Modifier.name"
-                        :value="Modifier"
-                      ></v-checkbox>
-                    </v-container>
-                  </div>
-
-                  <v-textarea
-                    filled
-                    auto-grow
-                    label="Notes for Kitchen"
-                    rows="4"
-                    row-height="30"
-                    shaped
-                    v-model="KitchenNotes"
-                  ></v-textarea>
                 </v-row>
+
+                <div>
+                  <v-container
+                    v-for="Modifier in FoodModifiers"
+                    :key="Modifier.name"
+                  >
+                    <v-checkbox
+                      v-model="ModifierList"
+                      :label="Modifier.name"
+                      :value="Modifier"
+                    ></v-checkbox>
+                  </v-container>
+                </div>
+
+                <v-textarea
+                  filled
+                  auto-grow
+                  label="Notes for Kitchen"
+                  rows="4"
+                  row-height="30"
+                  shaped
+                  v-model="KitchenNotes"
+                ></v-textarea>
+
               </v-container>
-              <small>*indicates required field</small>
+
             </v-card-text>
-            <div>
-              <v-card-actions>
-                <div class="flex-grow-1"></div>
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="dialog = false"
-                >Close</v-btn>
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="SaveOrder()"
-                >Save</v-btn>
-              </v-card-actions>
-            </div>
+
+            <v-card-actions>
+              <div class="flex-grow-1"></div>
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="dialog = false"
+              >Close</v-btn>
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="SaveOrder()"
+              >Save</v-btn>
+            </v-card-actions>
+
           </v-card>
         </v-form>
 
@@ -183,7 +177,7 @@ export default {
 
       SelectedOrderType: undefined,
 
-      OrderType: undefined,
+      OrderType: "Dine-in",
       options: [
         { title: "Dine-In", icon: "mdi-food-fork-drink", id: 0 },
         { title: "Take-Out", icon: "mdi-walk", id: 1 },
@@ -286,6 +280,8 @@ export default {
       this.ItemsList = [];
       this.dialog = false;
       this.KitchenNotes = "";
+      this.selectedSize = [];
+      this.ItemSizes = null;
     },
     handleResize() {
       this.window.width = window.innerWidth;

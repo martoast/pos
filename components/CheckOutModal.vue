@@ -2,7 +2,6 @@
   <div>
     <v-dialog
       v-model="dialog"
-      persistent
       max-width="650"
     >
       <template v-slot:activator="{ on }">
