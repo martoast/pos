@@ -53,6 +53,7 @@
     <CheckOutModal
       v-if="this.CartItems"
       :CartTotal="parseFloat(CartTotal)"
+      :CartItems="CartItems"
     />
   </div>
 </template>

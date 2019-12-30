@@ -42,9 +42,9 @@ export const mutations = {
     const item = state.MenuItems.find(item => item.id === id);
     item.inventory--;
   },
-  add(state, MenuItems) {
+  add(state, payload) {
     this.self = this;
-    state.MenuItems.push(MenuItems);
+    state.MenuItems.push(payload);
     console.log(state.MenuItems);
   },
   remove(state, item) {

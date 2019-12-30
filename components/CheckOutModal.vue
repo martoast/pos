@@ -131,7 +131,8 @@ export default {
     PayWithCard
   },
   props: {
-    CartTotal: Number
+    CartTotal: Number,
+    CartItems: Array
   },
 
   data() {
@@ -166,20 +167,25 @@ export default {
       // messageRef.set(order);
 
       console.log("Order Complete");
+      const vm = this;
 
-      this.$fireAuth.onAuthStateChanged(function(user, { store }) {
+      // console.log(vm.CartItems);
+      let payload = vm.CartItems;
+
+      vm.$fireAuth.onAuthStateChanged(async function(user) {
         if (user) {
-          // console.log(user.email)
-          store.dispatch(["ShoppingCart/PostOrder", user.email]);
+          // console.log(user.email);
+
+          // await vm.$store.dispatch("ShoppingCart/PostOrder", [
+          //   user.email,
+          //   payload
+          // ]);
+          vm.$store.commit("ShoppingCart/ClearCart");
         } else {
           // No user is signed in.
           console.log("No User logged in");
         }
       });
-
-      // this.$nuxt.$emit("OrderComplete");
-
-      this.$store.commit(["ShoppingCart/ClearCart"]);
     }
   },
   computed: {

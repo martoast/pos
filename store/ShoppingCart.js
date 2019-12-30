@@ -26,12 +26,15 @@ export const actions = {
   //   alert('Success.')
   // }
 
-  async PostOrder(email) {
-    const messageRef = this.$fireStore.collection('users').doc(email)
+  async PostOrder(email, payload) {
+    console.log(email.rootState.user.user.email)
+    console.log(payload)
+    let EMAIL = email.rootState.user.user.email
+    const messageRef = this.$fireStore.collection('users').doc(EMAIL)
     try {
-      await messageRef.set({
-        orders: state.Cart
-      })
+      await messageRef.set(
+        { order: "test" }
+      )
     } catch (e) {
       alert(e)
       return
@@ -67,6 +70,7 @@ export const mutations = {
   },
   ClearCart(state) {
     state.Cart = []
+    console.log("test")
   }
 
 
