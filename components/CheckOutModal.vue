@@ -177,9 +177,9 @@ export default {
 
             console.log(ORDER);
 
-            // await messageRef.update({
-            //   orders: ORDER
-            // });
+            await messageRef.update({
+              orders: ORDER
+            });
           } catch (e) {
             alert(e);
             return;
