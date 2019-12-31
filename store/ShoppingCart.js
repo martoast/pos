@@ -26,20 +26,23 @@ export const actions = {
   //   alert('Success.')
   // }
 
-  async PostOrder(email, payload) {
-    console.log(email.rootState.user.user.email)
+  async PostOrder(payload) {
+    // console.log(email.rootState.user.user.email)
+
     console.log(payload)
-    let EMAIL = email.rootState.user.user.email
-    const messageRef = this.$fireStore.collection('users').doc(EMAIL)
-    try {
-      await messageRef.set(
-        { order: "test" }
-      )
-    } catch (e) {
-      alert(e)
-      return
-    }
-    alert('Success.')
+
+    // console.log(this.$store.getters["ShoppingCart/getCart"])
+
+
+    // let EMAIL = email.rootState.user.user.email
+    // const messageRef = this.$fireStore.collection('users').doc(EMAIL)
+
+
+    // await messageRef.update(
+    //   { order: state.Cart }
+    // )
+
+    // alert('Success.')
   }
 
 
@@ -70,7 +73,7 @@ export const mutations = {
   },
   ClearCart(state) {
     state.Cart = []
-    console.log("test")
+
   }
 
 
@@ -81,7 +84,7 @@ export const getters = {
   getCart(state) {
 
     if (state.Cart === undefined || state.Cart.length == 0) {
-      console.log("No Items in cart")
+      // console.log("No Items in cart")
       return;
     } else {
       return state.Cart
@@ -90,8 +93,8 @@ export const getters = {
   },
   GetTotal(state) {
     if (state.Cart === undefined || state.Cart.length == 0) {
-      console.log("test")
-      console.log("No Items in cart")
+      // console.log("test")
+      // console.log("No Items in cart")
       return
     } else {
       return state.Cart.reduce(

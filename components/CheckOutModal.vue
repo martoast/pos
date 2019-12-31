@@ -169,17 +169,21 @@ export default {
       console.log("Order Complete");
       const vm = this;
 
-      // console.log(vm.CartItems);
-      let payload = vm.CartItems;
-
       vm.$fireAuth.onAuthStateChanged(async function(user) {
         if (user) {
-          // console.log(user.email);
+          const messageRef = vm.$fireStore.collection("users").doc(user.email);
+          try {
+            const ORDER = vm.$store.getters["ShoppingCart/getCart"];
 
-          // await vm.$store.dispatch("ShoppingCart/PostOrder", [
-          //   user.email,
-          //   payload
-          // ]);
+            console.log(ORDER);
+
+            // await messageRef.update({
+            //   orders: ORDER
+            // });
+          } catch (e) {
+            alert(e);
+            return;
+          }
           vm.$store.commit("ShoppingCart/ClearCart");
         } else {
           // No user is signed in.
