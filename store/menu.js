@@ -1,6 +1,4 @@
-import menu from "~/services/MenuService";
 
-export const strict = false;
 
 export const state = () => ({
   MenuItems: []
@@ -69,7 +67,7 @@ export const getters = {
       console.log("No Menu Created");
       return;
     } else {
-      var result = state.MenuItems.filter(item => (item.type = "Food"));
+      var result = state.MenuItems.filter(item => (item.type == "Food"));
       return result;
     }
   },
@@ -82,27 +80,26 @@ export const getters = {
     console.log("Geter called");
     // console.log(id);
     // return state.MenuItems.find(item => item.id === id);
+  },
+
+  getDrinksMenu(state) {
+    if (state.MenuItems === undefined || state.MenuItems.length == 0) {
+      console.log("No Menu Created");
+      return;
+    } else {
+      var result = state.MenuItems.filter(item => (item.type == "Drink"));
+      return result;
+    }
+  },
+
+  getDessertsMenu(state) {
+    if (state.MenuItems === undefined || state.MenuItems.length == 0) {
+      console.log("No Menu Created")
+      return;
+    } else {
+      var result = state.MenuItems.filter(item => item.type == "Dessert");
+      return result
+    }
+
   }
-
-  // getDrinksMenu(state) {
-  //   if (state.MenuItems === undefined || state.MenuItems.length == 0) {
-  //     console.log("No Menu Created");
-  //     return;
-  //   } else {
-  //     var result = state.MenuItems.filter(item => (item.type = "Drink"));
-  //     return result;
-  //   }
-  // }
-
-  // },
-  // getDessertsMenu(state) {
-  //   if (state.MenuItems === undefined || state.MenuItems.length == 0) {
-  //     console.log("No Menu Created")
-  //     return;
-  //   } else {
-  //     var result = state.MenuItems.filter(item => item.type = "Dessert");
-  //     return result
-  //   }
-
-  // }
 };

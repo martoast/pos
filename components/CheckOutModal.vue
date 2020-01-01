@@ -175,6 +175,16 @@ export default {
           try {
             const ORDER = vm.$store.getters["ShoppingCart/getCart"];
 
+            // for (item in ORDER) {
+            //   console.log(item);
+            // }
+
+            //  for (item in ORDER) {
+            //   await messageRef.update({
+            //     orders: vm.$fireStoreObj.FieldValue.arrayUnion(item)
+            //   });
+            // }
+
             console.log(ORDER);
 
             await messageRef.update({
