@@ -244,8 +244,9 @@ export default {
       this.ItemsList = [];
       this.dialog = false;
       this.KitchenNotes = "";
-      this.selectedSize = [];
-      this.ItemSizes = null;
+      this.selectedSize = null;
+      this.ItemSizes = [];
+      this.SelectedOrderType = null;
     }
   }
 };

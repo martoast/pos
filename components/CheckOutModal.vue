@@ -178,7 +178,7 @@ export default {
             console.log(ORDER);
 
             await messageRef.update({
-              orders: ORDER
+              orders: vm.$fireStoreObj.FieldValue.arrayUnion(ORDER)
             });
           } catch (e) {
             alert(e);
