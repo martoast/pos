@@ -21,8 +21,21 @@
             v-for="item in CartItems"
             :key="item.id"
           >
-            <td @click="DeleteItem(item)">{{ item.name }}</td>
-            <td>{{ item.price }}</td>
+            <td @click="DeleteItem(item)">
+              <v-list-item two-line>
+                <v-list-item-content>
+                  <v-list-item-title>{{item.name}}</v-list-item-title>
+                  <div v-if="item.FoodModifiers">
+                    <v-list-item-subtitle
+                      v-for="modifier in item.FoodModifiers"
+                      :key="modifier.id"
+                    >{{modifier.name}}</v-list-item-subtitle>
+                  </div>
+
+                </v-list-item-content>
+              </v-list-item>
+            </td>
+            <td>{{ item.OrderTotal }}</td>
 
           </tr>
           <!-- <tr
