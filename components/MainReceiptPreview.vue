@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card
-      width="450"
+      width="400"
       min-width="200"
       height="750"
       :elevation="5"
@@ -25,6 +25,8 @@
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title>{{item.name}}</v-list-item-title>
+                  <v-list-item-subtitle>{{item.size}}</v-list-item-subtitle>
+
                   <div v-if="item.FoodModifiers">
                     <v-list-item-subtitle
                       v-for="modifier in item.FoodModifiers"
