@@ -17,7 +17,21 @@
             v-for="(item) of MenuItems"
             :key="item.id"
           >
-            <td>{{ item.name }}</td>
+            <td>
+              <v-list-item two-line>
+                <v-list-item-content>
+                  <v-list-item-title>{{item.name}}</v-list-item-title>
+
+                  <div v-if="item.modifiers">
+                    <v-list-item-subtitle
+                      v-for="modifier in item.modifiers"
+                      :key="modifier.id"
+                    >{{modifier.name}}</v-list-item-subtitle>
+                  </div>
+
+                </v-list-item-content>
+              </v-list-item>
+            </td>
             <td>$ {{ item.price }}</td>
             <td>
               <div>

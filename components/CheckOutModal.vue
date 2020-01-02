@@ -142,20 +142,7 @@ export default {
       dialog: false
     };
   },
-  computed: {
-    // email() {
-    //   this.$fireAuth.onAuthStateChanged(function(user) {
-    //     if (user) {
-    //       // console.log(user.email)
-    //       return user.email;
-    //     } else {
-    //       // No user is signed in.
-    //       console.log("No User logged in");
-    //       return;
-    //     }
-    //   });
-    // }
-  },
+  computed: {},
   methods: {
     DeletePaidAmount() {
       this.PaidAmount = null;
@@ -172,23 +159,14 @@ export default {
       vm.$fireAuth.onAuthStateChanged(async function(user) {
         if (user) {
           const messageRef = vm.$fireStore.collection("users").doc(user.email);
+
           try {
             const ORDER = vm.$store.getters["ShoppingCart/getCart"];
-
-            // for (item in ORDER) {
-            //   console.log(item);
-            // }
-
-            //  for (item in ORDER) {
-            //   await messageRef.update({
-            //     orders: vm.$fireStoreObj.FieldValue.arrayUnion(item)
-            //   });
-            // }
-
-            console.log(ORDER);
+            // console.log(Object.assign({}, ORDER));
+            // console.log(ORDER);
 
             await messageRef.update({
-              orders: vm.$fireStoreObj.FieldValue.arrayUnion(ORDER)
+              orders: vm.$fireStoreObj.FieldValue.arrayUnion.apply(null, ORDER)
             });
           } catch (e) {
             alert(e);
