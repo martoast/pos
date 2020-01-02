@@ -172,17 +172,37 @@ export default {
     };
   },
   created() {
-    let ordersRef = this.$fireStore.collection("orders");
-    let allOrders = ordersRef
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          this.items.push(doc.data());
-        });
-      })
-      .catch(err => {
-        console.log("Error getting documents", err);
-      });
+    const vm = this;
+
+    vm.$fireAuth.onAuthStateChanged(async function(user) {
+      if (user) {
+        try {
+          const messageRef = vm.$fireStore.collection("users").doc(user.email);
+
+          await messageRef
+            .get()
+            .then(function(doc) {
+              if (doc.exists) {
+                console.log(doc.data().orders);
+                vm.items = doc.data().orders;
+              } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+              }
+            })
+            .catch(function(error) {
+              console.log("Error getting document:", error);
+            });
+        } catch (e) {
+          alert(e);
+          return;
+        }
+        vm.$store.commit("ShoppingCart/ClearCart");
+      } else {
+        // No user is signed in.
+        console.log("No User logged in");
+      }
+    });
   },
   computed: {
     numberOfPages() {
