@@ -186,7 +186,7 @@
 </template>
 <script>
 export default {
-  props: ["email", "MenuItems"],
+  props: ["MenuItems"],
   data() {
     return {
       dialog4: false,
@@ -207,26 +207,10 @@ export default {
       loading: false
     };
   },
-  created() {
-    this.$store.dispatch("user/GET_EMAIL");
-  },
+  created() {},
 
-  computed: {
-    // MenuItems: {
-    //   get() {
-    //     return this.$store.getters["menu/getMenu"];
-    //   },
-    //   set(value) {
-    //     this.$store.commit("menu/setMenu", value);
-    //   }
-    // },
-    // email() {
-    //   return this.$store.getters["user/EmailGetter"];
-    // }
-  },
-  mounted() {
-    this.$store.dispatch("menu/GET_FIREMENU", this.email);
-  },
+  computed: {},
+
   methods: {
     DeleteItem(item) {
       console.log("deleting item...");

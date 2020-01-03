@@ -200,6 +200,7 @@ export default {
       } else {
         // No user is signed in.
         console.log("No User logged in");
+        alert("must log in to access Register");
       }
     });
   },
