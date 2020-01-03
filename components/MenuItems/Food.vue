@@ -148,6 +148,8 @@ export default {
       selectedSize: null,
       ItemSizes: null,
 
+      // MenuItems: null,
+
       SelectedOrderType: null,
 
       options: [
@@ -169,23 +171,42 @@ export default {
   },
 
   created() {
-    // fetch("http://localhost:3002/food")
-    //   .then(response => response.json())
-    //   .then(response => {
-    //     // this.MenuItems = response.data;
-    //     console.log(response);
-    //     this.MenuItems = response;
-    //   });
+    const vm = this;
 
-    this.$store.dispatch("menu/GET_FIREMENU", this.email);
+    vm.$fireAuth.onAuthStateChanged(async function(user) {
+      if (user) {
+        try {
+          const messageRef = vm.$fireStore.collection("users").doc(user.email);
+
+          await messageRef
+            .get()
+            .then(function(doc) {
+              if (doc.exists) {
+                console.log(doc.data().menu);
+                let FullMenu = doc.data().menu;
+                vm.$store.commit("menu/setMenu", FullMenu);
+              } else {
+                // doc.data() will be undefined in this case
+                console.log("No menu has been created!");
+              }
+            })
+            .catch(function(error) {
+              console.log("Error getting document:", error);
+            });
+        } catch (e) {
+          alert(e);
+          return;
+        }
+      } else {
+        // No user is signed in.
+        console.log("No User logged in");
+      }
+    });
   },
 
   computed: {
     MenuItems() {
       return this.$store.getters["menu/getFoodMenu"];
-    },
-    email() {
-      return this.$store.getters["user/EmailGetter"];
     }
   },
 
