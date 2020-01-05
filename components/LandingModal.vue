@@ -98,9 +98,8 @@
                     @click="dialog = false"
                   >Cancel</v-btn>
                   <v-btn
-                    :disabled="!valid"
                     color="secondary"
-                    :loading="loading"
+                    v-if="valid && this.email && this.password != null || false"
                     @click="createUser();e1 = 2"
                   >Create Account</v-btn>
                 </v-card-actions>
@@ -193,22 +192,13 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <!-- <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="dialog = false"
-                  >Close</v-btn>
-                  <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="validate()"
-                    to="/Register/"
-                  >Save</v-btn>-->
+
                   <v-btn
                     text
                     @click="dialog = false"
                   >Cancel</v-btn>
                   <v-btn
+                    v-if="this.name && this.LastName && this.PhoneNumber && this.Age != null"
                     color="secondary"
                     to="/Settings/MenuConfig"
                     @click="SaveUserData(name,PhoneNumber,LastName,Age)"
@@ -234,9 +224,9 @@ export default {
     dialog: false,
     loading: false,
 
-    name: "",
-    LastName: "",
-    PhoneNumber: "",
+    name: null,
+    LastName: null,
+    PhoneNumber: null,
     Age: null,
     RestaurantType: [],
     valid: true,
@@ -245,7 +235,7 @@ export default {
     select: null,
     e1: 0,
 
-    email: "",
+    email: null,
     phoneRules: [v => !!v || "Phone is required"],
     emailRules: [
       v => !!v || "E-mail is required",

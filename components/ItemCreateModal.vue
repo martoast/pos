@@ -117,7 +117,7 @@
                   @click="dialog2 = false"
                 >Close</v-btn>
                 <v-btn
-                  v-if="valid && this.ItemName && this.ItemPrice && this.ItemType != null"
+                  v-if="valid && this.ItemName && this.ItemPrice && this.ItemType != null || false"
                   color="secondary"
                   @click="SaveItem()"
                 >Save</v-btn>
@@ -209,9 +209,7 @@ export default {
       email: null,
       uid: {},
       nameRules: [v => !!v || "Name is required"],
-      // priceRules: [
-      //   d => !!/^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/ || 'Price required'
-      // ],
+
       priceRules: [
         d => !!d || "price required",
         d => /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/.test(d) || "Invalid entry"

@@ -33,7 +33,7 @@
           </v-row>
 
           <v-divider></v-divider>
-          <v-list-item-title>Alex POS</v-list-item-title>
+
           <v-list-item
             v-for="option in options"
             :key="option.title"
