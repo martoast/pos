@@ -63,32 +63,17 @@
                           required
                         ></v-text-field>
                       </v-col>
+                      <v-row justify="center">
+                        <v-checkbox
+                          v-model="checkbox"
+                          :rules="[v => !!v || 'You must agree to continue!']"
+                          label="Agree with terms of service?*"
+                        ></v-checkbox>
 
-                      <v-checkbox
-                        v-model="checkbox"
-                        :rules="[v => !!v || 'You must agree to continue!']"
-                        label="Agree with terms of service?"
-                        required
-                      ></v-checkbox>
-                      <small>*indicates required field</small>
+                      </v-row>
 
-                      <!-- <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="createUser"
-          >
-            Validate
-          </v-btn>
-
-          <v-btn
-            color="error"
-            class="mr-4"
-            @click="reset"
-          >
-            Reset Form
-                      </v-btn>-->
                     </v-form>
+                    <small>*indicates required field</small>
                   </v-col>
                 </v-row>
                 <v-card-actions>
@@ -99,12 +84,12 @@
                   >Cancel</v-btn>
                   <v-btn
                     color="secondary"
-                    v-if="valid && this.email && this.password != null || false"
+                    v-if="valid && this.email && this.password && this.checkbox != null || false"
                     @click="createUser();e1 = 2"
                   >Create Account</v-btn>
                 </v-card-actions>
               </v-card>
-              <!-- <Signup /> -->
+
             </v-form>
           </v-stepper-content>
           <v-stepper-content step="2">
@@ -155,7 +140,6 @@
                         <v-text-field
                           label="Contact Number*"
                           persistent-hint
-                          hint="(xxx)xxx-xxxx"
                           :rules="phoneRules"
                           color="secondary"
                           required
@@ -168,12 +152,16 @@
                         cols="12"
                         sm="6"
                       >
-                        <v-select
-                          :items="['0-17', '18-29', '30-54', '54+']"
-                          label="Age*"
+
+                        <v-slider
                           v-model="Age"
-                          required
-                        ></v-select>
+                          :rules="rules.age"
+                          color="orange"
+                          label="Age*"
+                          min="1"
+                          max="100"
+                          thumb-label
+                        ></v-slider>
                       </v-col>
                       <v-col
                         cols="12"
@@ -198,7 +186,7 @@
                     @click="dialog = false"
                   >Cancel</v-btn>
                   <v-btn
-                    v-if="this.name && this.LastName && this.PhoneNumber && this.Age != null"
+                    v-if="(this.name && this.LastName && this.PhoneNumber != null) && (this.Age > 16 && this.Age <= 90) && (this.RestaurantType.length > 0)"
                     color="secondary"
                     to="/Settings/MenuConfig"
                     @click="SaveUserData(name,PhoneNumber,LastName,Age)"
@@ -227,7 +215,7 @@ export default {
     name: null,
     LastName: null,
     PhoneNumber: null,
-    Age: null,
+    Age: 16,
     RestaurantType: [],
     valid: true,
 
@@ -236,7 +224,13 @@ export default {
     e1: 0,
 
     email: null,
-    phoneRules: [v => !!v || "Phone is required"],
+    phoneRules: [
+      v => !!v || "Phone is required",
+      v =>
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(v) ||
+        "Phone must be valid"
+    ],
+
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -244,7 +238,11 @@ export default {
     select: null,
     password: null,
 
-    checkbox: false
+    checkbox: false,
+    form: Object.assign({}),
+    rules: {
+      age: [val => (val >= 14 && val <= 90) || "Be Honest"]
+    }
   }),
   computed: {
     // ...mapState({

@@ -155,6 +155,7 @@
                         v-model="ModifierName"
                         :rules="nameRules"
                         required
+                        color="secondary"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -166,6 +167,7 @@
                         v-model="ModifierPrice"
                         :rules="priceRules"
                         required
+                        color="secondary"
                       ></v-text-field>
                     </v-col>
                   </v-row>
