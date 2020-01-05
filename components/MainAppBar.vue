@@ -27,14 +27,13 @@
         app
       >
         <v-list>
-          <v-avatar>
-            <img
-              src="https://cdn.vuetifyjs.com/images/john.jpg"
-              alt="John"
-            />
-          </v-avatar>
-          <v-list-item-title class="title">Alex POS</v-list-item-title>
+          <v-row justify="space-around">
+            <v-icon dark>mdi-account-circle</v-icon>
+
+          </v-row>
+
           <v-divider></v-divider>
+          <v-list-item-title>Alex POS</v-list-item-title>
           <v-list-item
             v-for="option in options"
             :key="option.title"

@@ -117,9 +117,8 @@
                   @click="dialog2 = false"
                 >Close</v-btn>
                 <v-btn
-                  :disabled="!valid"
+                  v-if="valid && this.ItemName && this.ItemPrice && this.ItemType != null"
                   color="secondary"
-                  :loading="loading"
                   @click="SaveItem()"
                 >Save</v-btn>
               </v-card-actions>
@@ -155,6 +154,7 @@
                         label="Item name*"
                         v-model="ModifierName"
                         :rules="nameRules"
+                        required
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -165,6 +165,7 @@
                         label="Price*"
                         v-model="ModifierPrice"
                         :rules="priceRules"
+                        required
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -180,18 +181,11 @@
                   @click="dialog3 = false"
                 >Close</v-btn>
                 <v-btn
-                  :disabled="!valid2"
                   color="secondary"
-                  :loading="loading"
+                  v-if="valid2 && this.ModifierName && this.ModifierPrice != null || false"
                   @click="SaveModifier()"
                 >Save</v-btn>
-                <!-- <v-btn
-                  :disabled="!valid"
-                  color="secondary"
-                  :loading="loading"
-                  @click="SaveModifier()
-                  >Save</v-btn
-                >-->
+
               </v-card-actions>
             </v-card>
           </v-form>
@@ -206,9 +200,9 @@ export default {
     return {
       dialog2: false,
       dialog3: false,
-      ModifierName: "",
+      ModifierName: null,
       ModifierPrice: null,
-      ItemName: "",
+      ItemName: null,
       ItemType: null,
       ItemPrice: null,
       ModifiersList: [],

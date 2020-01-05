@@ -89,20 +89,28 @@ export default {
 
   methods: {
     async writeToFirestore() {
-      let email = this.email;
-      let menu = this.MenuItems;
-      // console.log(email);
-      // console.log(menu);
-      const messageRef = this.$fireStore.collection("users").doc(email);
-      try {
-        await messageRef.set({
-          menu: menu
-        });
-      } catch (e) {
-        alert(e);
-        return;
-      }
-      alert("Menu Changes Saved");
+      const vm = this;
+
+      vm.$fireAuth.onAuthStateChanged(async function(user) {
+        if (user) {
+          let menu = vm.MenuItems;
+          const messageRef = vm.$fireStore.collection("users").doc(user.email);
+          try {
+            await messageRef.set(
+              {
+                menu: menu
+              },
+              { merge: true }
+            );
+          } catch (e) {
+            alert(e);
+            return;
+          }
+          alert("Menu Changes Saved");
+        } else {
+          alert("Must be signed in to perform action.");
+        }
+      });
     }
   }
 };
