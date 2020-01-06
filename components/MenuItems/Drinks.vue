@@ -5,17 +5,12 @@
         <div>
           <!-- <v-container fluid>
             <SearchBar />
-          </v-container> -->
+          </v-container>-->
 
           <v-item-group>
             <v-container>
               <v-row>
-                <v-col
-                  v-for="item in MenuItems"
-                  :key="item.id"
-                  cols="12"
-                  md="4"
-                >
+                <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
                   <v-item v-slot:default="{ active, toggle }">
                     <v-card
                       :color="active ? 'primary' : ''"
@@ -95,19 +90,18 @@
             color="blue darken-1"
             block
             @click="SaveOrder()"
-            >Save</v-btn
-          >
+          >Save</v-btn>
         </v-card>
       </v-dialog>
     </div>
   </div>
 </template>
 <script>
-import SearchBar from '~/components/SearchBar.vue'
+import SearchBar from "~/components/SearchBar.vue";
 
-import { mapState } from 'vuex'
-import { mapGetters } from 'vuex'
-import { mapActions } from 'vuex'
+import { mapState } from "vuex";
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -121,16 +115,16 @@ export default {
       FoodModifiers: null,
       ModifierList: [],
       ItemsList: [],
-      KitchenNotes: '',
+      KitchenNotes: "",
       selectedSize: null,
       ItemSizes: null,
 
       SelectedOrderType: null,
 
       options: [
-        { title: 'Dine-In', icon: 'mdi-food-fork-drink', id: 0 },
-        { title: 'Take-Out', icon: 'mdi-walk', id: 1 },
-        { title: 'Delivery', icon: 'mdi-bike', id: 2 }
+        { title: "Dine-In", icon: "mdi-food-fork-drink", id: 0 },
+        { title: "Take-Out", icon: "mdi-walk", id: 1 },
+        { title: "Delivery", icon: "mdi-bike", id: 2 }
       ],
 
       Cart: null,
@@ -139,65 +133,65 @@ export default {
 
       model: null,
       tab: null
-    }
+    };
   },
   beforeCreate() {
-    this.$store.dispatch('user/GET_EMAIL')
+    this.$store.dispatch("user/GET_EMAIL");
   },
 
   created() {
-    const vm = this
+    const vm = this;
 
     vm.$fireAuth.onAuthStateChanged(async function(user) {
       if (user) {
         try {
-          const messageRef = vm.$fireStore.collection('users').doc(user.email)
+          const messageRef = vm.$fireStore.collection("users").doc(user.email);
 
           await messageRef
             .get()
             .then(function(doc) {
               if (doc.exists) {
-                console.log(doc.data().menu)
-                let FullMenu = doc.data().menu
-                vm.$store.commit('menu/setMenu', FullMenu)
+                console.log(doc.data().menu);
+                let FullMenu = doc.data().menu;
+                vm.$store.commit("menu/setMenu", FullMenu);
               } else {
                 // doc.data() will be undefined in this case
-                console.log('No menu has been created!')
+                console.log("No menu has been created!");
               }
             })
             .catch(function(error) {
-              console.log('Error getting document:', error)
-            })
+              console.log("Error getting document:", error);
+            });
         } catch (e) {
-          alert(e)
-          return
+          alert(e);
+          return;
         }
       } else {
         // No user is signed in.
-        console.log('No User logged in')
-        alert('must log in to access Register')
+        console.log("No User logged in");
+        alert("must log in to access Register");
       }
-    })
+    });
   },
 
   computed: {
     MenuItems() {
-      return this.$store.getters['menu/getDrinksMenu']
+      return this.$store.getters["menu/getDrinksMenu"];
     }
   },
 
   methods: {
     SaveOrderType(option) {
-      this.SelectedOrderType = option
+      this.SelectedOrderType = option;
     },
     AddtoCart(item) {
       // console.log(item);
-      this.FoodModifiers = item.modifiers
-      this.ItemSizes = item.sizes
+      this.FoodModifiers = item.modifiers;
+      this.ItemSizes = item.sizes;
       // console.log(this.FoodModifiers);
-      this.FoodItem = item
-      this.FoodItemName = item.name
-      this.ItemsList.push(item)
+      this.FoodItem = item;
+      this.FoodItemName = item.name;
+      this.ItemsList.push(item);
       // console.log(this.FoodItemName);
     },
 
@@ -205,18 +199,21 @@ export default {
       let ModifiersTotal = this.ModifierList.reduce(
         (acc, item) => acc + parseFloat(item.price),
         0
-      )
-      let ItemsTotal = this.ItemsList.reduce((acc, item) => acc + item.price, 0)
-      let OrderTotal = parseFloat(ModifiersTotal) + parseFloat(ItemsTotal)
-      OrderTotal = parseFloat(OrderTotal).toFixed(2)
+      );
+      let ItemsTotal = this.ItemsList.reduce(
+        (acc, item) => acc + item.price,
+        0
+      );
+      let OrderTotal = parseFloat(ModifiersTotal) + parseFloat(ItemsTotal);
+      OrderTotal = parseFloat(OrderTotal).toFixed(2);
 
       let OrderID = Math.random()
         .toString(36)
-        .substr(2, 9)
+        .substr(2, 9);
       var currentDateWithFormat = new Date()
         .toJSON()
         .slice(0, 10)
-        .replace(/-/g, '/')
+        .replace(/-/g, "/");
       const order = {
         id: OrderID,
         date: currentDateWithFormat,
@@ -229,21 +226,21 @@ export default {
         Notes: this.KitchenNotes,
         size: this.selectedSize,
         ModifiersTotal: ModifiersTotal.toFixed(2)
-      }
+      };
 
       // this.$nuxt.$emit("order", order);
-      this.$store.dispatch('ShoppingCart/ADD_TO_CART', order)
+      this.$store.dispatch("ShoppingCart/ADD_TO_CART", order);
 
-      this.ModifierList = []
-      this.ItemsList = []
-      this.dialog = false
-      this.KitchenNotes = ''
-      this.selectedSize = null
-      this.ItemSizes = []
-      this.SelectedOrderType = null
+      this.ModifierList = [];
+      this.ItemsList = [];
+      this.dialog = false;
+      this.KitchenNotes = "";
+      this.selectedSize = null;
+      this.ItemSizes = [];
+      this.SelectedOrderType = null;
     }
   }
-}
+};
 </script>
 <style scoped>
 .rounded-card {
@@ -252,5 +249,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 70px;
+  max-width: 250px;
 }
 </style>

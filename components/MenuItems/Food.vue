@@ -1,30 +1,16 @@
 <template>
   <div>
-
-    <v-col
-      cols="12"
-      sm="6"
-      offset-sm="2"
-    >
-      <v-row
-        justify="center"
-        align="center"
-      >
-
+    <v-col cols="12" sm="6" offset-sm="2">
+      <v-row justify="center" align="center">
         <div>
           <!-- <v-container fluid>
             <SearchBar />
-          </v-container> -->
+          </v-container>-->
 
           <v-item-group>
             <v-container>
               <v-row>
-                <v-col
-                  v-for="item in MenuItems"
-                  :key="item.id"
-                  cols="12"
-                  md="4"
-                >
+                <v-col v-for="item in MenuItems" :key="item.id" cols="12" md="4">
                   <v-item v-slot:default="{ active, toggle }">
                     <v-card
                       :color="active ? 'primary' : ''"
@@ -37,7 +23,6 @@
                       <v-card-title class="headline mb-1">
                         <h1>{{ item.name }}</h1>
                       </v-card-title>
-
                     </v-card>
                   </v-item>
                 </v-col>
@@ -49,12 +34,7 @@
     </v-col>
 
     <div>
-
-      <v-dialog
-        v-model="dialog"
-        max-width="400px"
-      >
-
+      <v-dialog v-model="dialog" max-width="400px">
         <v-card class="primary">
           <v-row justify="center">
             <v-card-title>
@@ -62,9 +42,7 @@
             </v-card-title>
           </v-row>
           <v-row justify="center">
-
             <v-btn-toggle color="deep-purple accent-3">
-
               <v-btn
                 v-for="option in options"
                 :key="option.id"
@@ -72,12 +50,10 @@
               >
                 <v-icon>{{option.icon}}</v-icon>
               </v-btn>
-
             </v-btn-toggle>
           </v-row>
           <v-card-text>
             <v-container>
-
               <v-row justify="center">
                 <v-select
                   :items="ItemSizes"
@@ -105,9 +81,7 @@
                 shaped
                 v-model="KitchenNotes"
               ></v-textarea>
-
             </v-container>
-
           </v-card-text>
 
           <v-btn
@@ -117,11 +91,8 @@
             block
             @click="SaveOrder()"
           >Save</v-btn>
-
         </v-card>
-
       </v-dialog>
-
     </div>
   </div>
 </template>
@@ -281,6 +252,6 @@ export default {
   align-items: center;
   justify-content: center;
   min-width: 70px;
-  max-width: 150px;
+  max-width: 250px;
 }
 </style>

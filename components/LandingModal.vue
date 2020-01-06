@@ -1,32 +1,15 @@
 <template>
   <v-row justify="center">
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="600px"
-    >
+    <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn
-          color="blue lighten-2"
-          dark
-          v-on="on"
-        >Empezar</v-btn>
+        <v-btn color="blue lighten-2" dark v-on="on">Empezar</v-btn>
       </template>
       <v-stepper v-model="e1">
         <v-stepper-header>
-          <v-stepper-step
-            :complete="e1 > 1"
-            step="1"
-            color="secondary"
-          >Register</v-stepper-step>
+          <v-stepper-step :complete="e1 > 1" step="1" color="secondary">Register</v-stepper-step>
 
           <v-divider></v-divider>
-          <v-stepper-step
-            :complete="e1 > 2"
-            step="2"
-            color="secondary"
-          >Basic info</v-stepper-step>
-
+          <v-stepper-step :complete="e1 > 2" step="2" color="secondary">User Info</v-stepper-step>
           <v-divider></v-divider>
         </v-stepper-header>
         <v-stepper-items>
@@ -38,11 +21,7 @@
               <v-card>
                 <v-row align="center">
                   <v-col>
-                    <v-form
-                      ref="form"
-                      v-model="valid"
-                      lazy-validation
-                    >
+                    <v-form ref="form" v-model="valid" lazy-validation>
                       <v-col cols="12">
                         <v-text-field
                           label="Email*"
@@ -62,26 +41,19 @@
                           color="secondary"
                           required
                         ></v-text-field>
-                      </v-col>
-                      <v-row justify="center">
                         <v-checkbox
                           v-model="checkbox"
                           :rules="[v => !!v || 'You must agree to continue!']"
                           label="Agree with terms of service?*"
                         ></v-checkbox>
-
-                      </v-row>
-
+                      </v-col>
                     </v-form>
                     <small>*indicates required field</small>
                   </v-col>
                 </v-row>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn
-                    text
-                    @click="dialog = false"
-                  >Cancel</v-btn>
+                  <v-btn text @click="dialog = false">Cancel</v-btn>
                   <v-btn
                     color="secondary"
                     v-if="valid && this.email && this.password && this.checkbox != null || false"
@@ -89,15 +61,10 @@
                   >Create Account</v-btn>
                 </v-card-actions>
               </v-card>
-
             </v-form>
           </v-stepper-content>
           <v-stepper-content step="2">
-            <v-form
-              ref="form"
-              v-model="valid"
-              lazy-validation
-            >
+            <v-form ref="form" v-model="valid" lazy-validation>
               <v-card>
                 <v-card-title>
                   <span class="headline">User Info</span>
@@ -106,11 +73,7 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4"
-                      >
+                      <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Legal first name*"
                           required
@@ -119,11 +82,7 @@
                           color="secondary"
                         ></v-text-field>
                       </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4"
-                      >
+                      <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Legal Last Name"
                           v-model="LastName"
@@ -132,11 +91,7 @@
                           color="secondary"
                         ></v-text-field>
                       </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                        md="4"
-                      >
+                      <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Contact Number*"
                           persistent-hint
@@ -148,11 +103,7 @@
                       </v-col>
 
                       <v-col cols="12"></v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                      >
-
+                      <v-col cols="12" sm="6">
                         <v-slider
                           v-model="Age"
                           :rules="rules.age"
@@ -163,15 +114,13 @@
                           thumb-label
                         ></v-slider>
                       </v-col>
-                      <v-col
-                        cols="12"
-                        sm="6"
-                      >
+                      <v-col cols="12" sm="6">
                         <v-autocomplete
                           :items="['Bar', 'Fast Food', 'Casual Dining','Fine Dining']"
                           label="Restaurant Type"
                           v-model="RestaurantType"
                           multiple
+                          color="secondary"
                         ></v-autocomplete>
                       </v-col>
                     </v-row>
@@ -181,10 +130,7 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
 
-                  <v-btn
-                    text
-                    @click="dialog = false"
-                  >Cancel</v-btn>
+                  <v-btn text @click="dialog = false">Cancel</v-btn>
                   <v-btn
                     v-if="(this.name && this.LastName && this.PhoneNumber != null) && (this.Age > 16 && this.Age <= 90) && (this.RestaurantType.length > 0)"
                     color="secondary"
