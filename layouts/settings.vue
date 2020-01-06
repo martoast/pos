@@ -55,14 +55,8 @@
       app
     >
       <v-list>
-        <v-list-item-avatar color="grey darken-3">
-          <v-img
-            class="elevation-6"
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-            alt="John"
-          ></v-img>
-        </v-list-item-avatar>
-        <v-list-item-title class="title">IN-N-OUT</v-list-item-title>
+
+        <v-list-item-title class="title">Eazy POS</v-list-item-title>
         <v-divider></v-divider>
         <v-list-item
           v-for="option in options"
@@ -96,54 +90,54 @@ export default {
   data() {
     return {
       clipped: true,
-      drawer: true,
+      drawer: false,
       fixed: true,
       items: [
-        {
-          icon: "mdi-weather-sunny",
-          title: "Display",
-          to: "/Settings/Display"
-        },
+        // {
+        //   icon: "mdi-weather-sunny",
+        //   title: "Display",
+        //   to: "/Settings/Display"
+        // },
         {
           icon: "mdi-book-open",
           title: "Menu Configuration",
           to: "/Settings/MenuConfig"
-        },
-        {
-          icon: "mdi-credit-card",
-          title: "Payment Option",
-          to: "/Settings/PaymentOption"
-        },
-        {
-          icon: "mdi-account",
-          title: "Users",
-          to: "/Settings/Users"
-        },
-        {
-          icon: "mdi-account-key",
-          title: "Permissions",
-          to: "/Settings/Permissions"
-        },
-        {
-          icon: "mdi-android",
-          title: "Devices",
-          to: "/Settings/Devices"
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Restaurant Profile",
-          to: "/Settings/RestaurantProfile"
-        },
-        {
-          icon: "mdi-content-copy",
-          title: "Printing",
-          to: "/Settings/Printing"
-        },
-        {
-          icon: "mdi-alarm-multiple",
-          title: "Notifications",
-          to: "/Settings/Notifications"
         }
+        // {
+        //   icon: "mdi-credit-card",
+        //   title: "Payment Option",
+        //   to: "/Settings/PaymentOption"
+        // },
+        // {
+        //   icon: "mdi-account",
+        //   title: "Users",
+        //   to: "/Settings/Users"
+        // },
+        // {
+        //   icon: "mdi-account-key",
+        //   title: "Permissions",
+        //   to: "/Settings/Permissions"
+        // },
+        // {
+        //   icon: "mdi-android",
+        //   title: "Devices",
+        //   to: "/Settings/Devices"
+        // },
+        // {
+        //   icon: "mdi-chart-bubble",
+        //   title: "Restaurant Profile",
+        //   to: "/Settings/RestaurantProfile"
+        // },
+        // {
+        //   icon: "mdi-content-copy",
+        //   title: "Printing",
+        //   to: "/Settings/Printing"
+        // },
+        // {
+        //   icon: "mdi-alarm-multiple",
+        //   title: "Notifications",
+        //   to: "/Settings/Notifications"
+        // }
       ],
       options: this.$store.state.NavOptions.options,
       left: true,

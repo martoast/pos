@@ -10,11 +10,11 @@ export const state = () => ({
     //   title: "Cash Drawer",
     //   to: "/CashDrawer"
     // },
-    // {
-    //   icon: "mdi-database",
-    //   title: "Order Queue",
-    //   to: "/OrderQueue/OnlineOrders"
-    // },
+    {
+      icon: "mdi-database",
+      title: "Order Queue",
+      to: "/OrderQueue/OnlineOrders"
+    },
     // {
     //   icon: "mdi-phone-incoming",
     //   title: "Calls",
@@ -37,8 +37,8 @@ export const state = () => ({
     // },
     {
       icon: "mdi-settings",
-      title: "Settings",
-      to: "/Settings/Display"
+      title: "Menu Configuration",
+      to: "/Settings/MenuConfig"
     }
   ],
 })

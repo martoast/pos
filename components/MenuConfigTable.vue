@@ -199,8 +199,8 @@ export default {
         d => /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/.test(d) || "Invalid entry"
       ],
       valid: true,
-      ItemName: "",
-      ItemPrice: "",
+      ItemName: null,
+      ItemPrice: null,
       ItemType: null,
       ItemSize: null,
       ModifiersList: [],

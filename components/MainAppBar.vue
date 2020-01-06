@@ -27,11 +27,7 @@
         app
       >
         <v-list>
-          <v-row justify="space-around">
-            <v-icon dark>mdi-account-circle</v-icon>
-
-          </v-row>
-
+          <v-list-item-title class="title">Eazy POS</v-list-item-title>
           <v-divider></v-divider>
 
           <v-list-item

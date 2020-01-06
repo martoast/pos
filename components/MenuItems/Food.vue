@@ -280,5 +280,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 70px;
+  max-width: 150px;
 }
 </style>

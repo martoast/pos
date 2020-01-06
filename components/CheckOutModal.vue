@@ -12,114 +12,109 @@
           v-on="on"
         >CheckOut</v-btn>
       </template>
-      <v-card>
-        <v-card flat>
-          <v-tabs
-            fixed-tabs
-            background-color="indigo"
-            dark
-            height="64"
-            v-model="tab"
-          >
-            <v-tab>Pay with Cash</v-tab>
-            <v-tab>Pay with Card</v-tab>
-            <v-tabs-items v-model="tab">
-              <v-tab-item>
-                <v-card elevation="12">
-                  <v-row justify="center">
-                    <h2 class="center">Choose Amount</h2>
-                  </v-row>
 
-                  <v-row
-                    justify="center"
-                    align="center"
-                  >
-                    <v-btn
-                      x-large
-                      class="ma-2"
-                      tile
-                      outlined
-                      color="success"
-                      v-on:click="PaidAmount += 1"
-                    >$1.00</v-btn>
-                    <v-btn
-                      x-large
-                      class="ma-2"
-                      tile
-                      outlined
-                      color="success"
-                      v-on:click="PaidAmount += 5"
-                    >$5.00</v-btn>
-                    <v-btn
-                      x-large
-                      class="ma-2"
-                      tile
-                      outlined
-                      color="success"
-                      v-on:click="PaidAmount += 10"
-                    >$10.00</v-btn>
-                    <v-btn
-                      x-large
-                      class="ma-2"
-                      tile
-                      outlined
-                      color="success"
-                      v-on:click="PaidAmount += 20"
-                    >$20.00</v-btn>
-                    <v-btn
-                      x-large
-                      class="ma-2"
-                      tile
-                      outlined
-                      color="success"
-                      v-on:click="PaidAmount += this.CartTotal"
-                    >Exact</v-btn>
-                  </v-row>
-                  <v-row justify="center">
-                    <v-col
-                      cols="12"
-                      sm="6"
-                    >
-                      <v-text-field
-                        v-model="PaidAmount"
-                        filled
-                        label="Enter Amount"
-                        clearable
-                        color="secondary"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                  <div v-if="this.PaidAmount > this.CartTotal">
-                    <v-row justify="center">
-                      <h2>Change Due: ${{ ChangeDue }}</h2>
-                    </v-row>
-                  </div>
+      <v-tabs
+        fixed-tabs
+        background-color="indigo"
+        dark
+        height="64"
+        v-model="tab"
+      >
+        <v-tab>Pay with Cash</v-tab>
+        <v-tab>Pay with Card</v-tab>
+        <v-tabs-items v-model="tab">
+          <v-tab-item>
 
-                  <div v-if="PaidAmount != null && PaidAmount >= this.CartTotal">
-                    <v-card-actions>
-                      <v-spacer />
+            <v-row justify="center">
+              <h2 class="center">Choose Amount</h2>
+            </v-row>
 
-                      <v-btn
-                        x-large
-                        right
-                        color="success"
-                        dark
-                        :to="'/Register'"
-                        @click="OrderFinish()"
-                      >Pay ${{ PaidAmount }}</v-btn>
-                    </v-card-actions>
-                  </div>
-                </v-card>
-              </v-tab-item>
-              <v-tab-item>
-                <PayWithCard />
-              </v-tab-item>
-            </v-tabs-items>
-          </v-tabs>
+            <v-row justify="center">
+              <v-btn
+                x-large
+                class="ma-2"
+                tile
+                outlined
+                color="success"
+                v-on:click="PaidAmount += 1"
+              >$1.00</v-btn>
+              <v-btn
+                x-large
+                class="ma-2"
+                tile
+                outlined
+                color="success"
+                v-on:click="PaidAmount += 5"
+              >$5.00</v-btn>
+              <v-btn
+                x-large
+                class="ma-2"
+                tile
+                outlined
+                color="success"
+                v-on:click="PaidAmount += 10"
+              >$10.00</v-btn>
+              <v-btn
+                x-large
+                class="ma-2"
+                tile
+                outlined
+                color="success"
+                v-on:click="PaidAmount += 20"
+              >$20.00</v-btn>
+              <v-btn
+                x-large
+                class="ma-2"
+                tile
+                outlined
+                color="success"
+                v-on:click="PaidAmount += this.CartTotal"
+              >Exact</v-btn>
+            </v-row>
+            <v-row justify="center">
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-text-field
+                  v-model="PaidAmount"
+                  filled
+                  label="Enter Amount"
+                  clearable
+                  color="secondary"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <div v-if="this.PaidAmount > this.CartTotal">
+              <v-row justify="center">
+                <h2>Change Due: ${{ ChangeDue }}</h2>
+              </v-row>
+            </div>
 
-          <v-divider></v-divider>
-        </v-card>
-      </v-card>
+            <div v-if="PaidAmount != null && PaidAmount >= this.CartTotal">
+              <v-card-actions>
+                <v-spacer />
+
+                <v-btn
+                  x-large
+                  right
+                  color="success"
+                  dark
+                  :to="'/Register'"
+                  @click="OrderFinish()"
+                >Pay ${{ PaidAmount }}</v-btn>
+              </v-card-actions>
+            </div>
+
+          </v-tab-item>
+          <v-tab-item>
+            <PayWithCard />
+          </v-tab-item>
+        </v-tabs-items>
+      </v-tabs>
+
+      <v-divider></v-divider>
+
     </v-dialog>
   </div>
 </template>

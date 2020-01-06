@@ -7,7 +7,7 @@
 
         <v-container fluid>
           <!-- If using vue-router -->
-          <SearchBar full-width="600" />
+
           <Desserts />
         </v-container>
       </v-content>
@@ -20,12 +20,10 @@
 </template>
 
 <script>
-import SearchBar from "~/components/SearchBar.vue";
 import Desserts from "~/components/MenuItems/Desserts.vue";
 
 export default {
   components: {
-    SearchBar,
     Desserts
   }
 };
