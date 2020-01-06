@@ -1,7 +1,7 @@
 {
   "name": "pos",
   "version": "1.0.0",
-  "description": "My impeccable Nuxt.js project",
+  "description": "My Nuxt.js project",
   "author": "Alex Martos",
   "private": true,
   "scripts": {

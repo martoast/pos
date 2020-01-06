@@ -21,13 +21,11 @@
 </template>
 
 <script>
-import SearchBar from "~/components/SearchBar.vue";
-import Drinks from "~/components/MenuItems/Drinks.vue";
+import Drinks from '~/components/MenuItems/Drinks.vue'
 
 export default {
   components: {
-    SearchBar,
     Drinks
   }
-};
+}
 </script>

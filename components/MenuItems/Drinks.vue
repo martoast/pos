@@ -1,16 +1,7 @@
 <template>
   <div>
-
-    <v-col
-      cols="12"
-      sm="6"
-      offset-sm="2"
-    >
-      <v-row
-        justify="center"
-        align="center"
-      >
-
+    <v-col cols="12" sm="6" offset-sm="2">
+      <v-row justify="center" align="center">
         <div>
           <!-- <v-container fluid>
             <SearchBar />
@@ -37,7 +28,6 @@
                       <v-card-title class="headline mb-1">
                         <h1>{{ item.name }}</h1>
                       </v-card-title>
-
                     </v-card>
                   </v-item>
                 </v-col>
@@ -49,12 +39,7 @@
     </v-col>
 
     <div>
-
-      <v-dialog
-        v-model="dialog"
-        max-width="400px"
-      >
-
+      <v-dialog v-model="dialog" max-width="400px">
         <v-card class="primary">
           <v-row justify="center">
             <v-card-title>
@@ -62,22 +47,18 @@
             </v-card-title>
           </v-row>
           <v-row justify="center">
-
             <v-btn-toggle color="deep-purple accent-3">
-
               <v-btn
                 v-for="option in options"
                 :key="option.id"
                 @click="SaveOrderType(option.title)"
               >
-                <v-icon>{{option.icon}}</v-icon>
+                <v-icon>{{ option.icon }}</v-icon>
               </v-btn>
-
             </v-btn-toggle>
           </v-row>
           <v-card-text>
             <v-container>
-
               <v-row justify="center">
                 <v-select
                   :items="ItemSizes"
@@ -105,32 +86,28 @@
                 shaped
                 v-model="KitchenNotes"
               ></v-textarea>
-
             </v-container>
-
           </v-card-text>
 
           <v-btn
             height="50"
-            v-if="selectedSize && SelectedOrderType != null "
+            v-if="selectedSize && SelectedOrderType != null"
             color="blue darken-1"
             block
             @click="SaveOrder()"
-          >Save</v-btn>
-
+            >Save</v-btn
+          >
         </v-card>
-
       </v-dialog>
-
     </div>
   </div>
 </template>
 <script>
-import SearchBar from "~/components/SearchBar.vue";
+import SearchBar from '~/components/SearchBar.vue'
 
-import { mapState } from "vuex";
-import { mapGetters } from "vuex";
-import { mapActions } from "vuex";
+import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -144,16 +121,16 @@ export default {
       FoodModifiers: null,
       ModifierList: [],
       ItemsList: [],
-      KitchenNotes: "",
+      KitchenNotes: '',
       selectedSize: null,
       ItemSizes: null,
 
       SelectedOrderType: null,
 
       options: [
-        { title: "Dine-In", icon: "mdi-food-fork-drink", id: 0 },
-        { title: "Take-Out", icon: "mdi-walk", id: 1 },
-        { title: "Delivery", icon: "mdi-bike", id: 2 }
+        { title: 'Dine-In', icon: 'mdi-food-fork-drink', id: 0 },
+        { title: 'Take-Out', icon: 'mdi-walk', id: 1 },
+        { title: 'Delivery', icon: 'mdi-bike', id: 2 }
       ],
 
       Cart: null,
@@ -162,45 +139,65 @@ export default {
 
       model: null,
       tab: null
-    };
+    }
   },
   beforeCreate() {
-    this.$store.dispatch("user/GET_EMAIL");
+    this.$store.dispatch('user/GET_EMAIL')
   },
 
   created() {
-    // fetch("http://localhost:3002/food")
-    //   .then(response => response.json())
-    //   .then(response => {
-    //     // this.MenuItems = response.data;
-    //     console.log(response);
-    //     this.MenuItems = response;
-    //   });
+    const vm = this
 
-    this.$store.dispatch("menu/GET_FIREMENU", this.email);
+    vm.$fireAuth.onAuthStateChanged(async function(user) {
+      if (user) {
+        try {
+          const messageRef = vm.$fireStore.collection('users').doc(user.email)
+
+          await messageRef
+            .get()
+            .then(function(doc) {
+              if (doc.exists) {
+                console.log(doc.data().menu)
+                let FullMenu = doc.data().menu
+                vm.$store.commit('menu/setMenu', FullMenu)
+              } else {
+                // doc.data() will be undefined in this case
+                console.log('No menu has been created!')
+              }
+            })
+            .catch(function(error) {
+              console.log('Error getting document:', error)
+            })
+        } catch (e) {
+          alert(e)
+          return
+        }
+      } else {
+        // No user is signed in.
+        console.log('No User logged in')
+        alert('must log in to access Register')
+      }
+    })
   },
 
   computed: {
     MenuItems() {
-      return this.$store.getters["menu/getDrinksMenu"];
-    },
-    email() {
-      return this.$store.getters["user/EmailGetter"];
+      return this.$store.getters['menu/getDrinksMenu']
     }
   },
 
   methods: {
     SaveOrderType(option) {
-      this.SelectedOrderType = option;
+      this.SelectedOrderType = option
     },
     AddtoCart(item) {
       // console.log(item);
-      this.FoodModifiers = item.modifiers;
-      this.ItemSizes = item.sizes;
+      this.FoodModifiers = item.modifiers
+      this.ItemSizes = item.sizes
       // console.log(this.FoodModifiers);
-      this.FoodItem = item;
-      this.FoodItemName = item.name;
-      this.ItemsList.push(item);
+      this.FoodItem = item
+      this.FoodItemName = item.name
+      this.ItemsList.push(item)
       // console.log(this.FoodItemName);
     },
 
@@ -208,21 +205,18 @@ export default {
       let ModifiersTotal = this.ModifierList.reduce(
         (acc, item) => acc + parseFloat(item.price),
         0
-      );
-      let ItemsTotal = this.ItemsList.reduce(
-        (acc, item) => acc + item.price,
-        0
-      );
-      let OrderTotal = parseFloat(ModifiersTotal) + parseFloat(ItemsTotal);
-      OrderTotal = parseFloat(OrderTotal).toFixed(2);
+      )
+      let ItemsTotal = this.ItemsList.reduce((acc, item) => acc + item.price, 0)
+      let OrderTotal = parseFloat(ModifiersTotal) + parseFloat(ItemsTotal)
+      OrderTotal = parseFloat(OrderTotal).toFixed(2)
 
       let OrderID = Math.random()
         .toString(36)
-        .substr(2, 9);
+        .substr(2, 9)
       var currentDateWithFormat = new Date()
         .toJSON()
         .slice(0, 10)
-        .replace(/-/g, "/");
+        .replace(/-/g, '/')
       const order = {
         id: OrderID,
         date: currentDateWithFormat,
@@ -235,21 +229,21 @@ export default {
         Notes: this.KitchenNotes,
         size: this.selectedSize,
         ModifiersTotal: ModifiersTotal.toFixed(2)
-      };
+      }
 
       // this.$nuxt.$emit("order", order);
-      this.$store.dispatch("ShoppingCart/ADD_TO_CART", order);
+      this.$store.dispatch('ShoppingCart/ADD_TO_CART', order)
 
-      this.ModifierList = [];
-      this.ItemsList = [];
-      this.dialog = false;
-      this.KitchenNotes = "";
-      this.selectedSize = null;
-      this.ItemSizes = [];
-      this.SelectedOrderType = null;
+      this.ModifierList = []
+      this.ItemsList = []
+      this.dialog = false
+      this.KitchenNotes = ''
+      this.selectedSize = null
+      this.ItemSizes = []
+      this.SelectedOrderType = null
     }
   }
-};
+}
 </script>
 <style scoped>
 .rounded-card {

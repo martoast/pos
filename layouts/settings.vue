@@ -9,7 +9,7 @@
     >
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in options"
           :key="i"
           :to="item.to"
           router
@@ -24,17 +24,9 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-      class="secondary"
-    >
+    <v-app-bar :clipped-left="clipped" fixed app class="secondary">
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-      <v-btn
-        icon
-        @click.stop="leftDrawer = !leftDrawer"
-      >
+      <v-btn icon @click.stop="leftDrawer = !leftDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
 
@@ -55,7 +47,6 @@
       app
     >
       <v-list>
-
         <v-list-item-title class="title">Eazy POS</v-list-item-title>
         <v-divider></v-divider>
         <v-list-item
@@ -92,74 +83,11 @@ export default {
       clipped: true,
       drawer: false,
       fixed: true,
-      items: [
-        // {
-        //   icon: "mdi-weather-sunny",
-        //   title: "Display",
-        //   to: "/Settings/Display"
-        // },
-        {
-          icon: "mdi-book-open",
-          title: "Menu Configuration",
-          to: "/Settings/MenuConfig"
-        }
-        // {
-        //   icon: "mdi-credit-card",
-        //   title: "Payment Option",
-        //   to: "/Settings/PaymentOption"
-        // },
-        // {
-        //   icon: "mdi-account",
-        //   title: "Users",
-        //   to: "/Settings/Users"
-        // },
-        // {
-        //   icon: "mdi-account-key",
-        //   title: "Permissions",
-        //   to: "/Settings/Permissions"
-        // },
-        // {
-        //   icon: "mdi-android",
-        //   title: "Devices",
-        //   to: "/Settings/Devices"
-        // },
-        // {
-        //   icon: "mdi-chart-bubble",
-        //   title: "Restaurant Profile",
-        //   to: "/Settings/RestaurantProfile"
-        // },
-        // {
-        //   icon: "mdi-content-copy",
-        //   title: "Printing",
-        //   to: "/Settings/Printing"
-        // },
-        // {
-        //   icon: "mdi-alarm-multiple",
-        //   title: "Notifications",
-        //   to: "/Settings/Notifications"
-        // }
-      ],
+
       options: this.$store.state.NavOptions.options,
       left: true,
-      leftDrawer: false,
-      title: this.$route.path
-    };
+      leftDrawer: false
+    }
   }
-  // created() {
-  //   this.$fireAuth.onAuthStateChanged(function(user) {
-  //     if (user) {
-  //       // User is signed in.
-
-  //       var email = user.email;
-
-  //       var uid = user.uid;
-  //       console.log(email);
-  //     } else {
-  //       // User is signed out.
-  //       // ...
-  //       console.log("No user  ");
-  //     }
-  //   });
-  // }
-};
+}
 </script>

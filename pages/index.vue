@@ -8,7 +8,10 @@
               height="400"
               src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
             >
-              <v-row justify="center" align="center">
+              <v-row
+                justify="center"
+                align="center"
+              >
                 <v-col>
                   <v-layout
                     column
@@ -30,8 +33,17 @@
           </section>
 
           <section>
-            <v-layout column wrap class="my-12" align-center>
-              <v-flex xs12 sm4 class="my-4">
+            <v-layout
+              column
+              wrap
+              class="my-12"
+              align-center
+            >
+              <v-flex
+                xs12
+                sm4
+                class="my-4"
+              >
                 <div class="text-center">
                   <h2 class="headline">
                     Facilita las operaciones de tu restaurante.
@@ -47,13 +59,24 @@
               </v-flex>
               <v-flex xs12>
                 <v-container grid-list-xl>
-                  <v-layout row wrap align-center>
-                    <v-flex xs12 md4>
-                      <v-card flat class="transparent">
+                  <v-layout
+                    row
+                    wrap
+                    align-center
+                  >
+                    <v-flex
+                      xs12
+                      md4
+                    >
+                      <v-card
+                        flat
+                        class="transparent"
+                      >
                         <v-card-text class="text-center">
-                          <v-icon x-large class="blue--text text--lighten-2"
-                            >mdi-food</v-icon
-                          >
+                          <v-icon
+                            x-large
+                            class="blue--text text--lighten-2"
+                          >mdi-food</v-icon>
                         </v-card-text>
                         <v-card-title
                           primary-title
@@ -71,12 +94,19 @@
                         </v-card-text>
                       </v-card>
                     </v-flex>
-                    <v-flex xs12 md4>
-                      <v-card flat class="transparent">
+                    <v-flex
+                      xs12
+                      md4
+                    >
+                      <v-card
+                        flat
+                        class="transparent"
+                      >
                         <v-card-text class="text-center">
-                          <v-icon x-large class="blue--text text--lighten-2"
-                            >mdi-flash</v-icon
-                          >
+                          <v-icon
+                            x-large
+                            class="blue--text text--lighten-2"
+                          >mdi-flash</v-icon>
                         </v-card-text>
                         <v-card-title
                           primary-title
@@ -91,12 +121,19 @@
                         </v-card-text>
                       </v-card>
                     </v-flex>
-                    <v-flex xs12 md4>
-                      <v-card flat class="transparent">
+                    <v-flex
+                      xs12
+                      md4
+                    >
+                      <v-card
+                        flat
+                        class="transparent"
+                      >
                         <v-card-text class="text-center">
-                          <v-icon x-large class="blue--text text--lighten-2"
-                            >mdi-wrench</v-icon
-                          >
+                          <v-icon
+                            x-large
+                            class="blue--text text--lighten-2"
+                          >mdi-wrench</v-icon>
                         </v-card-text>
                         <v-card-title
                           primary-title
@@ -121,10 +158,24 @@
           </section>
 
           <v-container grid-list-xl>
-            <v-layout row wrap justify-center class="my-12">
-              <v-flex xs12 sm4>
-                <v-card flat class="transparent">
-                  <v-card-title primary-title class="layout justify-center">
+            <v-layout
+              row
+              wrap
+              justify-center
+              class="my-12"
+            >
+              <v-flex
+                xs12
+                sm4
+              >
+                <v-card
+                  flat
+                  class="transparent"
+                >
+                  <v-card-title
+                    primary-title
+                    class="layout justify-center"
+                  >
                     <div class="headline">
                       Información General
                     </div>
@@ -139,9 +190,19 @@
                   </v-card-text>
                 </v-card>
               </v-flex>
-              <v-flex xs12 sm4 offset-sm1>
-                <v-card flat class="transparent">
-                  <v-card-title primary-title class="layout justify-center">
+              <v-flex
+                xs12
+                sm4
+                offset-sm1
+              >
+                <v-card
+                  flat
+                  class="transparent"
+                >
+                  <v-card-title
+                    primary-title
+                    class="layout justify-center"
+                  >
                     <div class="headline">Contact us</div>
                   </v-card-title>
                   <v-card-text>
@@ -151,9 +212,7 @@
                   <v-list class="transparent">
                     <v-list-item>
                       <v-list-item-action>
-                        <v-icon class="blue--text text--lighten-2"
-                          >mdi-phone</v-icon
-                        >
+                        <v-icon class="blue--text text--lighten-2">mdi-phone</v-icon>
                       </v-list-item-action>
                       <v-list-item-content>
                         <v-list-item-title>619-888-5248</v-list-item-title>
@@ -161,9 +220,7 @@
                     </v-list-item>
                     <v-list-item>
                       <v-list-item-action>
-                        <v-icon class="blue--text text--lighten-2"
-                          >mdi-map-marker</v-icon
-                        >
+                        <v-icon class="blue--text text--lighten-2">mdi-map-marker</v-icon>
                       </v-list-item-action>
                       <v-list-item-content>
                         <v-list-item-title>Tijuana, MX</v-list-item-title>
@@ -171,14 +228,10 @@
                     </v-list-item>
                     <v-list-item>
                       <v-list-item-action>
-                        <v-icon class="blue--text text--lighten-2"
-                          >mdi-email</v-icon
-                        >
+                        <v-icon class="blue--text text--lighten-2">mdi-email</v-icon>
                       </v-list-item-action>
                       <v-list-item-content>
-                        <v-list-item-title
-                          >alexmartos96@gmail.com</v-list-item-title
-                        >
+                        <v-list-item-title>alexmartos96@gmail.com</v-list-item-title>
                       </v-list-item-content>
                     </v-list-item>
                   </v-list>
@@ -193,26 +246,14 @@
 </template>
 
 <script>
-import LandingModal from '~/components/LandingModal.vue'
+import LandingModal from "~/components/LandingModal.vue";
 export default {
-  layout: 'landing',
+  layout: "landing",
   components: { LandingModal },
   data() {
     return {
-      colors: ['primary', 'secondary', 'yellow darken-2', 'red', 'orange'],
-      cards: [
-        {
-          title: 'Favorite road trips',
-          src: '~/assets/image.png',
-          flex: 6
-        },
-        {
-          title: 'Best airlines',
-          src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-          flex: 6
-        }
-      ]
-    }
+      colors: ["primary", "secondary", "yellow darken-2", "red", "orange"]
+    };
   }
-}
+};
 </script>

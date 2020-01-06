@@ -112,7 +112,7 @@
 </template>
 <script>
 export default {
-  layout: "OrderQueue",
+  layout: "settings",
   data() {
     return {
       itemsPerPageOptions: [4, 8, 12],
